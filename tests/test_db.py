@@ -9,9 +9,10 @@ TABLES = {"races", "candidates", "committees", "candidate_totals", "outside_spen
 
 def totals(pulled_at, receipts=1000.0):
     return {
-        "candidate_id": "H6XX00001", "pulled_at": pulled_at, "receipts": receipts,
-        "disbursements": 500.0, "cash_on_hand": 500.0,
-        "individual_itemized_contributions": 900.0, "pac_contributions": 100.0,
+        "candidate_id": "H6XX00001", "pulled_at": pulled_at, "coverage_end_date": "2026-09-30",
+        "receipts": receipts, "disbursements": 500.0, "cash_on_hand": 500.0, "debts_owed": 0.0,
+        "individual_contributions": 900.0, "pac_contributions": 100.0, "party_contributions": 0.0,
+        "candidate_self_funding": 0.0, "external_contributions": 1000.0,
     }
 
 

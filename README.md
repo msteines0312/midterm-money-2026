@@ -43,7 +43,7 @@ An analysis of campaign finance and endorsements in the 2026 U.S. House midterms
 | Table | Source | Notes |
 |---|---|---|
 | `candidates` | OpenFEC `/candidates/` | 2026 House candidates who have raised money |
-| `candidate_totals` | OpenFEC `/candidates/totals/` | FEC-computed cycle totals, one snapshot per pull date |
+| `candidate_totals` | FEC bulk summary file (`webl26.zip`) | Cycle totals per campaign, with self-funding split out. One snapshot per pull date |
 | `committees` | OpenFEC `/committees/` | Super PACs (type O) and hybrid PACs (types V and W) |
 | `outside_spending` | OpenFEC `/schedules/schedule_e/by_candidate/` | Independent expenditures summed by committee, candidate, and support or oppose |
 | `races` | Wikipedia, pinned revisions | Cook ratings and Cook PVI for all 435 districts |
@@ -51,7 +51,9 @@ An analysis of campaign finance and endorsements in the 2026 U.S. House midterms
 
 ## Data Caveats
 - FEC numbers keep changing as campaigns file new reports. Every snapshot is stamped with its pull date, and every chart says which date it uses.
-- Individual contributions only count donors who gave more than $200. The totals endpoint doesn't report small-dollar money separately.
+- Fundraising is measured as `external_contributions`: money from individuals (all donation sizes), PACs, and party committees, minus refunds. A candidate's own contributions and loans are tracked separately in `candidate_self_funding`, so someone who writes their campaign a $3M check doesn't look like a $3M fundraiser. In the October data, 309 active House candidates got more than half their money from themselves.
+- The FEC file lists every 2026 House campaign that raised money, including ones that dropped out, closed, or lost a primary. A campaign counts as active if its latest report covers through September 30, 2026 (the October quarterly). That cuts 2,553 campaigns to about 1,650. The exact set of candidates on the November ballot comes from primary results in the endorsements phase.
+- Negative cash on hand is real, not an error. It's how the FEC records a campaign that spent more than it raised and owes debts.
 - Cook ratings for safe seats are inferred. The Wikipedia ratings page only lists seats that at least one forecaster considers competitive (137 of them). The other 298 get Solid D or Solid R from the sign of their PVI, and `races.rating_source` says which is which.
 - Texas, California, and several other states redrew their maps for 2026, so PVI comes from the 2026 tables rather than older lists. Missouri's new map was struck down in September 2026, so its districts keep their 2025 PVI.
 - The schema has no foreign keys. FEC endpoints filter candidates differently, so some rows don't match across tables. The pipeline prints how many rows are unmatched on every run instead of dropping them.
@@ -60,7 +62,8 @@ An analysis of campaign finance and endorsements in the 2026 U.S. House midterms
 ## Key Features
 - Rate-limit-aware API client that backs off on HTTP 429 and pauses when the remaining-requests header hits zero
 - Snapshot design so pre-election and post-election data can be compared side by side
-- Tests built on real saved API responses, which caught that cash on hand arrives from the API as text
+- Tests built on real saved API responses and real FEC file rows, which caught that cash on hand arrives from the API as text
+- Fundraising measure that separates money raised from others from candidates funding themselves
 - Ratings parser that combines two pinned Wikipedia pages and fails loudly if the pages disagree
 
 ## What I Learned

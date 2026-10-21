@@ -22,11 +22,17 @@ Phases 2 to 4 get their own plans because their details depend on what the real 
 ## Data sources
 - **OpenFEC API** (api.open.fec.gov/v1), key in `.env` as `FEC_API_KEY`.
   - `/candidates/`: 2026 House candidates, filtered to `has_raised_funds=true`.
-  - `/candidates/totals/`: FEC-computed cycle totals per candidate.
   - `/committees/`: committee metadata, including super PACs (committee type `O`).
   - `/schedules/schedule_e/by_candidate/`: independent expenditures already aggregated by committee, candidate, and support/oppose. Used instead of raw Schedule E to avoid deduplicating amended filings.
 - **Cook ratings and PVI:** two pinned Wikipedia revisions, same method as `midterm-polling-messaging`. The ratings page gives Cook ratings for the ~137 seats any forecaster calls competitive. The main elections page gives Cook PVI for all 435 districts. Unlisted seats are Solid D or Solid R by PVI sign, marked `rating_source = "inferred"`. Missouri uses its pre-2025 map (new map struck down Sept 2026), so its PVI is the 2025 value.
 - **Hand-built CSVs** in `data/manual/` (committed, with a source URL per row): `pac_industries.csv`, later `endorsements.csv` and `primary_results.csv`.
+
+- **FEC bulk summary file** (`webl26.zip`, refreshed daily): per-campaign totals including candidate self-funding and all individual donations. Replaced `/candidates/totals/`, which reports neither.
+
+## Fundraising measure
+- `external_contributions` = individual contributions - refunds to individuals + PAC contributions + party contributions - refunds to committees.
+- `candidate_self_funding` = candidate contributions + candidate loans. Kept separate so self-funders are not counted as strong fundraisers.
+- Active candidate: latest report covers through 2026-09-30 or later. The exact general-election population comes from phase 3 primary results.
 
 ## Schema
 | Table | Grain | Key columns |
@@ -34,7 +40,7 @@ Phases 2 to 4 get their own plans because their details depend on what the real 
 | `races` | district | race_id (`ST-DD`, at-large is `00`), state, district, cook_rating, cook_pvi, rating_source |
 | `candidates` | candidate | candidate_id, name, party, race_id, incumbent_challenge (`I`/`C`/`O`), primary_result (nullable until phase 3) |
 | `committees` | committee | committee_id, name, committee_type, designation |
-| `candidate_totals` | candidate + pulled_at | receipts, disbursements, cash_on_hand, individual_itemized_contributions, pac_contributions |
+| `candidate_totals` | candidate + pulled_at | coverage_end_date, receipts, disbursements, cash_on_hand, debts_owed, individual_contributions, pac_contributions, party_contributions, candidate_self_funding, external_contributions |
 | `outside_spending` | committee + candidate + support_oppose + pulled_at | total, count |
 | `pac_industries` | committee | industry, source_url |
 | `endorsements` | endorser + candidate | endorsement date, source_url (phase 3) |

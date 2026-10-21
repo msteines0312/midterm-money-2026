@@ -36,7 +36,10 @@ def main():
 
     # Outside spending is queried by candidate ID. The top fundraisers are
     # used here because they're the likeliest to have outside money.
-    top = client.get("/candidates/totals/", {**ENDPOINTS["totals"][1], "sort": "-receipts", "per_page": 20})
+    top = client.get(
+        "/candidates/totals/",
+        {"office": "H", "election_year": CYCLE, "cycle": CYCLE, "sort": "-receipts", "per_page": 20},
+    )
     ids = [r["candidate_id"] for r in top["results"]]
     body = client.get(OUTSIDE_SPENDING_PATH, {"cycle": CYCLE, "candidate_id": ids, "per_page": 5})
     out = FIXTURE_DIR / "outside_spending.json"

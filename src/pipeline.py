@@ -1,4 +1,4 @@
-"""Build or refresh the database from OpenFEC, Cook ratings, and hand-built CSVs.
+"""Build or refresh the database from OpenFEC, FEC bulk data, Cook ratings, and hand-built CSVs.
 
 Run from the repo root:
     python -m src.pipeline            full pull
@@ -10,15 +10,15 @@ from datetime import date
 
 from src.config import CYCLE, DB_PATH, SAMPLE_DB_PATH, load_api_key
 from src.db import connect, create_schema, upsert_rows
+from src.fec.bulk import download_summary, house_totals
 from src.fec.client import FecClient
-from src.fec.transform import candidate_row, committee_row, outside_spending_row, totals_row
+from src.fec.transform import candidate_row, committee_row, outside_spending_row
 from src.manual import load_pac_industries
 from src.ratings import load_races
 
 # Endpoint path and query parameters for each FEC table
 ENDPOINTS = {
     "candidates": ("/candidates/", {"office": "H", "election_year": CYCLE, "has_raised_funds": "true"}),
-    "totals": ("/candidates/totals/", {"office": "H", "election_year": CYCLE, "cycle": CYCLE}),
     # O = super PAC, V and W = hybrid PACs that also run super PAC accounts
     "committees": ("/committees/", {"cycle": CYCLE, "committee_type": ["O", "V", "W"]}),
 }
@@ -35,7 +35,7 @@ def _batches(items, size):
         yield items[start:start + size]
 
 
-def run_pull(client, conn, pulled_at, races, pac_industries=None, max_pages=None):
+def run_pull(client, conn, pulled_at, races, summary_text, pac_industries=None, max_pages=None):
     """Pull every table and write it to the database.
 
     Parameters
@@ -48,6 +48,9 @@ def run_pull(client, conn, pulled_at, races, pac_industries=None, max_pages=None
     races : list of dict
         Rows for the `races` table, from `ratings.load_races()`. Passed in so
         this function can be tested without downloading Wikipedia pages.
+    summary_text : str
+        Contents of the FEC bulk summary file (webl26.txt), the source of
+        `candidate_totals`. Passed in for the same reason.
     pac_industries : list of dict, optional
         Industry labels. Defaults to reading data/manual/pac_industries.csv.
     max_pages : int, optional
@@ -65,12 +68,12 @@ def run_pull(client, conn, pulled_at, races, pac_industries=None, max_pages=None
         return [transform(rec) for rec in client.iter_results(path, params, max_pages=max_pages)]
 
     candidates = fetch("candidates", candidate_row)
-    totals = fetch("totals", lambda rec: totals_row(rec, pulled_at))
+    totals = house_totals(summary_text, pulled_at)
     committees = fetch("committees", committee_row)
 
-    # /candidates/ only returns candidates flagged has_raised_funds, while
-    # /candidates/totals/ returns more (about 3,800 vs 2,500). Querying spending
-    # for both sets means outside money aimed at the extra candidates isn't lost.
+    # The API candidate list and the bulk summary file don't hold exactly the
+    # same campaigns. Querying spending for both sets means outside money aimed
+    # at a candidate in only one of them isn't lost.
     candidate_ids = sorted({c["candidate_id"] for c in candidates} | {t["candidate_id"] for t in totals})
     spending = []
     for batch in _batches(candidate_ids, CANDIDATE_BATCH_SIZE):
@@ -152,7 +155,7 @@ def main(argv=None):
 
     conn = connect(database_for(args.sample))
     counts = run_pull(
-        FecClient(load_api_key()), conn, date.today().isoformat(), load_races(),
+        FecClient(load_api_key()), conn, date.today().isoformat(), load_races(), download_summary(),
         max_pages=1 if args.sample else None,
     )
     print("Rows written:", counts)

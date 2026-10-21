@@ -84,32 +84,6 @@ def committee_row(rec):
     }
 
 
-def totals_row(rec, pulled_at):
-    """Map a /candidates/totals/ record to a `candidate_totals` row.
-
-    Parameters
-    ----------
-    rec : dict
-    pulled_at : str
-        ISO date of this pull.
-
-    Returns
-    -------
-    dict
-    """
-    return {
-        "candidate_id": rec["candidate_id"],
-        "pulled_at": pulled_at,
-        "receipts": to_money(rec.get("receipts")),
-        "disbursements": to_money(rec.get("disbursements")),
-        "cash_on_hand": to_money(rec.get("cash_on_hand_end_period")),
-        # Itemized means donors who gave more than $200 this cycle. The endpoint
-        # has no total for smaller donors, so this is not all individual money.
-        "individual_itemized_contributions": to_money(rec.get("individual_itemized_contributions")),
-        "pac_contributions": to_money(rec.get("other_political_committee_contributions")),
-    }
-
-
 def outside_spending_row(rec, pulled_at):
     """Map a /schedules/schedule_e/by_candidate/ record to an `outside_spending` row.
 

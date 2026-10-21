@@ -10,6 +10,9 @@ from src.db import connect, create_schema, upsert_rows
 from src.pipeline import ENDPOINTS, OUTSIDE_SPENDING_PATH, database_for, orphan_counts, run_pull
 
 FIXTURES = Path(__file__).parent / "fixtures"
+# Real rows from the FEC bulk summary file: 3 House campaigns and 1 Senate
+SUMMARY = (FIXTURES / "webl_sample.txt").read_text(encoding="latin-1")
+SUMMARY_HOUSE_IDS = {"H6KY06259", "H6FL13239", "H2AK01083"}
 FIXTURE_FOR_PATH = {**{path: name for name, (path, _) in ENDPOINTS.items()}, OUTSIDE_SPENDING_PATH: "outside_spending"}
 
 RACES = [{
@@ -43,23 +46,27 @@ def count(conn, table):
     return conn.execute(f"SELECT COUNT(*) FROM {table}").fetchone()[0]
 
 
+def pull(client, conn, pulled_at):
+    return run_pull(client, conn, pulled_at, RACES, SUMMARY, pac_industries=[])
+
+
 def test_run_pull_fills_every_table(conn):
-    counts = run_pull(FakeClient(), conn, "2026-10-20", RACES, pac_industries=[])
+    counts = pull(FakeClient(), conn, "2026-10-20")
     assert counts["pac_industries"] == 0
     assert all(n > 0 for table, n in counts.items() if table != "pac_industries")
 
 
 def test_rerun_same_day_does_not_duplicate(conn):
-    run_pull(FakeClient(), conn, "2026-10-20", RACES, pac_industries=[])
+    pull(FakeClient(), conn, "2026-10-20")
     first = count(conn, "candidate_totals")
-    run_pull(FakeClient(), conn, "2026-10-20", RACES, pac_industries=[])
+    pull(FakeClient(), conn, "2026-10-20")
     assert count(conn, "candidate_totals") == first
 
 
 def test_new_day_appends_snapshot(conn):
-    run_pull(FakeClient(), conn, "2026-10-20", RACES, pac_industries=[])
+    pull(FakeClient(), conn, "2026-10-20")
     first_totals, first_candidates = count(conn, "candidate_totals"), count(conn, "candidates")
-    run_pull(FakeClient(), conn, "2026-10-23", RACES, pac_industries=[])
+    pull(FakeClient(), conn, "2026-10-23")
     assert count(conn, "candidate_totals") == 2 * first_totals
     assert count(conn, "candidates") == first_candidates
 
@@ -68,25 +75,24 @@ def test_outside_spending_is_requested_in_batches_of_100(conn):
     template = json.loads((FIXTURES / "candidates.json").read_text())["results"][0]
     candidates = [{**template, "candidate_id": f"H6XX{i:05d}"} for i in range(250)]
     client = FakeClient(candidates=candidates)
-    run_pull(client, conn, "2026-10-20", RACES, pac_industries=[])
+    pull(client, conn, "2026-10-20")
 
     batches = [params["candidate_id"] for path, params in client.calls if path == OUTSIDE_SPENDING_PATH]
-    # 250 from /candidates/ plus the 5 totals-fixture candidates = 255 IDs
-    assert [len(b) for b in batches] == [100, 100, 55]
+    # 250 from /candidates/ plus the 3 House campaigns in the summary fixture = 253 IDs
+    assert [len(b) for b in batches] == [100, 100, 53]
 
 
-def test_outside_spending_covers_candidates_that_only_appear_in_totals(conn):
-    # /candidates/ filters on has_raised_funds and /candidates/totals/ doesn't,
-    # so spending must be requested for the union or that money is never seen
+def test_outside_spending_covers_candidates_from_both_sources(conn):
+    # The API candidate list and the bulk summary file don't contain exactly the
+    # same campaigns, so spending is requested for both or some money is never seen
     client = FakeClient()
-    run_pull(client, conn, "2026-10-20", RACES, pac_industries=[])
+    pull(client, conn, "2026-10-20")
 
-    def fixture_ids(name):
-        return {r["candidate_id"] for r in json.loads((FIXTURES / f"{name}.json").read_text())["results"]}
+    api_ids = {r["candidate_id"] for r in json.loads((FIXTURES / "candidates.json").read_text())["results"]}
 
     requested = {cid for path, params in client.calls if path == OUTSIDE_SPENDING_PATH
                  for cid in params["candidate_id"]}
-    assert requested == fixture_ids("candidates") | fixture_ids("totals")
+    assert requested == api_ids | SUMMARY_HOUSE_IDS
 
 
 def test_sample_pull_uses_a_separate_database():

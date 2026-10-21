@@ -36,15 +36,21 @@ CREATE TABLE IF NOT EXISTS committees (
     designation    TEXT
 );
 
--- One row per candidate per pull, so earlier snapshots are kept
+-- One row per candidate per pull, so earlier snapshots are kept.
+-- Source is the FEC bulk summary file, which splits out self-funding.
 CREATE TABLE IF NOT EXISTS candidate_totals (
     candidate_id             TEXT NOT NULL,
     pulled_at                TEXT NOT NULL,   -- ISO date of the pull
-    receipts                 REAL,
+    coverage_end_date        TEXT,            -- last day covered by the latest report
+    receipts                 REAL,            -- everything, including the candidate's own money
     disbursements            REAL,
-    cash_on_hand             REAL,
-    individual_itemized_contributions REAL,
+    cash_on_hand             REAL,            -- negative when a campaign overspent
+    debts_owed               REAL,
+    individual_contributions REAL,            -- all donors, including under $200
     pac_contributions        REAL,
+    party_contributions      REAL,
+    candidate_self_funding   REAL,            -- candidate contributions plus candidate loans
+    external_contributions   REAL,            -- individuals + PACs + party, minus refunds
     PRIMARY KEY (candidate_id, pulled_at)
 );
 
