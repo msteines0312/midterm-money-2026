@@ -14,19 +14,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from src.config import CYCLE, PROJECT_ROOT, load_api_key  # noqa: E402
 from src.fec.client import FecClient  # noqa: E402
+from src.pipeline import ENDPOINTS, OUTSIDE_SPENDING_PATH  # noqa: E402
 
 FIXTURE_DIR = PROJECT_ROOT / "tests" / "fixtures"
-
-ENDPOINTS = {
-    "candidates": ("/candidates/", {"office": "H", "election_year": CYCLE, "has_raised_funds": "true"}),
-    "totals": ("/candidates/totals/", {"office": "H", "election_year": CYCLE, "cycle": CYCLE}),
-    "committees": ("/committees/", {"cycle": CYCLE, "committee_type": ["O", "V", "W"]}),
-}
-
-# The outside spending endpoint won't take office="house" without also naming
-# a state and district, so it's queried by a batch of candidate IDs instead.
-# The top fundraisers are used here because they're likely to have outside money.
-OUTSIDE_SPENDING_PATH = "/schedules/schedule_e/by_candidate/"
 
 
 def strip_api_key(value, api_key):
@@ -44,6 +34,8 @@ def main():
         out.write_text(json.dumps(strip_api_key(body, api_key), indent=2))
         print(f"{name}: {len(body.get('results', []))} results -> {out.name}")
 
+    # Outside spending is queried by candidate ID. The top fundraisers are
+    # used here because they're the likeliest to have outside money.
     top = client.get("/candidates/totals/", {**ENDPOINTS["totals"][1], "sort": "-receipts", "per_page": 20})
     ids = [r["candidate_id"] for r in top["results"]]
     body = client.get(OUTSIDE_SPENDING_PATH, {"cycle": CYCLE, "candidate_id": ids, "per_page": 5})
