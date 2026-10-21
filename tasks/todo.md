@@ -6,7 +6,7 @@ Pre-election build first (target: before Nov 3, 2026). General election update a
 - [x] Create project folder, README skeleton, .gitignore, .env.example
 - [ ] Get an OpenFEC API key from api.data.gov and add it to `.env`
 - [ ] Create a virtual environment and `requirements.txt`
-- [ ] `git init` and create the GitHub repo (private until results are in)
+- [x] `git init` and create the GitHub repo (private until results are in)
 
 ## Step 1: Data foundation
 - [ ] Design SQLite schema: candidates, committees, receipts, independent expenditures
