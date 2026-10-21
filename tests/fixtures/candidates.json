@@ -1,0 +1,176 @@
+{
+  "api_version": "1.0",
+  "pagination": {
+    "count": 2536,
+    "is_count_exact": true,
+    "page": 1,
+    "pages": 508,
+    "per_page": 5
+  },
+  "results": [
+    {
+      "active_through": 2026,
+      "candidate_id": "H6TX31136",
+      "candidate_inactive": false,
+      "candidate_status": "C",
+      "cycles": [
+        2026
+      ],
+      "district": "31",
+      "district_number": 31,
+      "election_districts": [
+        "31"
+      ],
+      "election_years": [
+        2026
+      ],
+      "federal_funds_flag": false,
+      "first_file_date": "2025-09-12",
+      "has_raised_funds": true,
+      "inactive_election_years": null,
+      "incumbent_challenge": "C",
+      "incumbent_challenge_full": "Challenger",
+      "last_f2_date": "2025-09-12",
+      "last_file_date": "2025-09-12",
+      "load_date": "2026-01-12T21:04:11",
+      "name": "ABEL, WILLIAM P",
+      "office": "H",
+      "office_full": "House",
+      "party": "REP",
+      "party_full": "REPUBLICAN PARTY",
+      "state": "TX"
+    },
+    {
+      "active_through": 2026,
+      "candidate_id": "H6NC07204",
+      "candidate_inactive": false,
+      "candidate_status": "C",
+      "cycles": [
+        2026
+      ],
+      "district": "07",
+      "district_number": 7,
+      "election_districts": [
+        "07"
+      ],
+      "election_years": [
+        2026
+      ],
+      "federal_funds_flag": false,
+      "first_file_date": "2025-10-12",
+      "has_raised_funds": true,
+      "inactive_election_years": null,
+      "incumbent_challenge": "C",
+      "incumbent_challenge_full": "Challenger",
+      "last_f2_date": "2025-10-12",
+      "last_file_date": "2025-10-12",
+      "load_date": "2026-02-20T21:03:04",
+      "name": "ABU-GHAZALAH, MAAD",
+      "office": "H",
+      "office_full": "House",
+      "party": "LIB",
+      "party_full": "LIBERTARIAN PARTY",
+      "state": "NC"
+    },
+    {
+      "active_through": 2026,
+      "candidate_id": "H6IL09178",
+      "candidate_inactive": false,
+      "candidate_status": "C",
+      "cycles": [
+        2026
+      ],
+      "district": "09",
+      "district_number": 9,
+      "election_districts": [
+        "09"
+      ],
+      "election_years": [
+        2026
+      ],
+      "federal_funds_flag": false,
+      "first_file_date": "2025-03-24",
+      "has_raised_funds": true,
+      "inactive_election_years": null,
+      "incumbent_challenge": "O",
+      "incumbent_challenge_full": "Open seat",
+      "last_f2_date": "2025-03-24",
+      "last_file_date": "2025-03-24",
+      "load_date": "2025-05-06T21:00:39",
+      "name": "ABUGHAZALEH, KATHERINE M.",
+      "office": "H",
+      "office_full": "House",
+      "party": "DEM",
+      "party_full": "DEMOCRATIC PARTY",
+      "state": "IL"
+    },
+    {
+      "active_through": 2026,
+      "candidate_id": "H2CA18171",
+      "candidate_inactive": false,
+      "candidate_status": "C",
+      "cycles": [
+        2022,
+        2024,
+        2026
+      ],
+      "district": "18",
+      "district_number": 18,
+      "election_districts": [
+        "18",
+        "18"
+      ],
+      "election_years": [
+        2022,
+        2026
+      ],
+      "federal_funds_flag": false,
+      "first_file_date": "2022-02-13",
+      "has_raised_funds": true,
+      "inactive_election_years": null,
+      "incumbent_challenge": "C",
+      "incumbent_challenge_full": "Challenger",
+      "last_f2_date": "2026-04-19",
+      "last_file_date": "2026-04-19",
+      "load_date": "2026-05-01T21:18:54",
+      "name": "ACEVEDO-ARREGUIN, LUIS ANTONIO",
+      "office": "H",
+      "office_full": "House",
+      "party": "DEM",
+      "party_full": "DEMOCRATIC PARTY",
+      "state": "CA"
+    },
+    {
+      "active_through": 2026,
+      "candidate_id": "H6OR05242",
+      "candidate_inactive": false,
+      "candidate_status": "C",
+      "cycles": [
+        2026
+      ],
+      "district": "05",
+      "district_number": 5,
+      "election_districts": [
+        "05"
+      ],
+      "election_years": [
+        2026
+      ],
+      "federal_funds_flag": false,
+      "first_file_date": "2025-11-18",
+      "has_raised_funds": true,
+      "inactive_election_years": null,
+      "incumbent_challenge": "C",
+      "incumbent_challenge_full": "Challenger",
+      "last_f2_date": "2025-11-18",
+      "last_file_date": "2025-11-18",
+      "load_date": "2026-02-09T20:58:28",
+      "name": "ADAIR, PATTI",
+      "office": "H",
+      "office_full": "House",
+      "party": "REP",
+      "party_full": "REPUBLICAN PARTY",
+      "state": "OR"
+    }
+  ]
+}

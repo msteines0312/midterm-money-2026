@@ -34,7 +34,7 @@ Phases 2 to 4 get their own plans because their details depend on what the real 
 | `races` | district | race_id (`ST-DD`, at-large is `00`), state, district, cook_rating, cook_pvi |
 | `candidates` | candidate | candidate_id, name, party, race_id, incumbent_challenge (`I`/`C`/`O`), primary_result (nullable until phase 3) |
 | `committees` | committee | committee_id, name, committee_type, designation |
-| `candidate_totals` | candidate + pulled_at | receipts, disbursements, cash_on_hand, individual_contributions, pac_contributions |
+| `candidate_totals` | candidate + pulled_at | receipts, disbursements, cash_on_hand, individual_itemized_contributions, pac_contributions |
 | `outside_spending` | committee + candidate + support_oppose + pulled_at | total, count |
 | `pac_industries` | committee | industry, source_url |
 | `endorsements` | endorser + candidate | endorsement date, source_url (phase 3) |

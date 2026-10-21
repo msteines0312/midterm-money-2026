@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS candidate_totals (
     receipts                 REAL,
     disbursements            REAL,
     cash_on_hand             REAL,
-    individual_contributions REAL,
+    individual_itemized_contributions REAL,
     pac_contributions        REAL,
     PRIMARY KEY (candidate_id, pulled_at)
 );

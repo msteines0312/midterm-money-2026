@@ -11,7 +11,7 @@ def totals(pulled_at, receipts=1000.0):
     return {
         "candidate_id": "H6XX00001", "pulled_at": pulled_at, "receipts": receipts,
         "disbursements": 500.0, "cash_on_hand": 500.0,
-        "individual_contributions": 900.0, "pac_contributions": 100.0,
+        "individual_itemized_contributions": 900.0, "pac_contributions": 100.0,
     }
 
 
