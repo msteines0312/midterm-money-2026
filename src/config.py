@@ -16,6 +16,7 @@ DATA_DIR = PROJECT_ROOT / "data"
 RAW_DIR = DATA_DIR / "raw"
 # Hand-built CSVs (PAC industry labels, endorsements). Small, sourced, and committed.
 MANUAL_DIR = DATA_DIR / "manual"
+PAC_INDUSTRIES_CSV = MANUAL_DIR / "pac_industries.csv"
 PROCESSED_DIR = DATA_DIR / "processed"
 DB_PATH = PROCESSED_DIR / "midterm_money.db"
 
