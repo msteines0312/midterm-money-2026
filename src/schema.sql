@@ -13,8 +13,9 @@ CREATE TABLE IF NOT EXISTS races (
     race_id     TEXT PRIMARY KEY,   -- "ST-DD", at-large seats are "00"
     state       TEXT NOT NULL,
     district    TEXT NOT NULL,
-    cook_rating TEXT,
-    cook_pvi    TEXT
+    cook_rating   TEXT,
+    cook_pvi      TEXT,
+    rating_source TEXT              -- "cook" if listed, "inferred" if Solid from PVI
 );
 
 CREATE TABLE IF NOT EXISTS candidates (

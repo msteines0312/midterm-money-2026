@@ -22,6 +22,14 @@ DB_PATH = PROCESSED_DIR / "midterm_money.db"
 FEC_BASE_URL = "https://api.open.fec.gov/v1"
 CYCLE = 2026
 
+# Cook ratings and PVI, read from Wikipedia because Cook's own lists are
+# paywalled and block scripts. Two pages are needed: the ratings page lists
+# only competitive seats, and the main elections page has every district's
+# PVI. Revision IDs are pinned so the exact same tables can be downloaded again.
+WIKIPEDIA_DIR = RAW_DIR / "wikipedia"
+COOK_RATINGS_PAGE = ("2026_United_States_House_of_Representatives_election_ratings", 1381240142)
+PVI_PAGE = ("2026_United_States_House_of_Representatives_elections", 1380949529)
+
 
 def load_api_key(env_path=None):
     """Read the OpenFEC API key from a .env file or the environment.
