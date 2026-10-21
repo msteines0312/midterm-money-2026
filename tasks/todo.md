@@ -4,18 +4,18 @@ Pre-election build first (target: before Nov 3, 2026). General election update a
 
 ## Setup
 - [x] Create project folder, README skeleton, .gitignore, .env.example
-- [ ] Get an OpenFEC API key from api.data.gov and add it to `.env`
-- [ ] Create a virtual environment and `requirements.txt`
+- [x] Get an OpenFEC API key from api.data.gov and add it to `.env`
+- [x] Create a virtual environment and `requirements.txt`
 - [x] `git init` and create the GitHub repo (private until results are in)
 
 ## Step 1: Data foundation
-- [ ] Design SQLite schema: candidates, committees, receipts, independent expenditures
-- [ ] Write OpenFEC client with pagination and rate-limit handling
-- [ ] Pull 2026 House candidates and their committee financial totals
-- [ ] Pull 2026 independent expenditures (Schedule E)
-- [ ] Handle committee-to-committee transfers so money is not double counted
-- [ ] Load Cook ratings / PVI (reuse cleaning code from midterm-polling-messaging)
-- [ ] Document data sources and known caveats in the README
+- [x] Design SQLite schema: candidates, committees, receipts, independent expenditures
+- [x] Write OpenFEC client with pagination and rate-limit handling
+- [x] Pull 2026 House candidates and their committee financial totals
+- [x] Pull 2026 independent expenditures (Schedule E, aggregated by committee and candidate)
+- [x] Avoid double counting by using FEC-aggregated totals instead of raw filings
+- [x] Load Cook ratings and PVI for all 435 districts (method from midterm-polling-messaging)
+- [x] Document data sources and known caveats in the README
 
 ## Step 2: Industry super PACs (Power BI page 1)
 - [ ] Define the list of industry super PACs to track (e.g. crypto, AI) with sources
@@ -34,6 +34,9 @@ Pre-election build first (target: before Nov 3, 2026). General election update a
 - [ ] Logistic regression on primary outcomes: money share, incumbency, PVI
 - [ ] Compare fundraising advantage against Cook ratings for the general
 - [ ] Build Power BI page 3
+
+## Step 4b: Full pre-election pull
+- [ ] Run `python -m src.pipeline` on or after Oct 23, 2026 (pre-general reports are due Oct 22) and record the pull date in the README
 
 ## Step 5: Post-election update (after Nov 3)
 - [ ] Load general election results
