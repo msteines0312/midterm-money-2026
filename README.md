@@ -24,7 +24,7 @@ An analysis of campaign finance and endorsements in the 2026 U.S. House midterms
    pip install -r requirements.txt
    ```
 2. Get a free API key at https://api.data.gov/signup/, copy `.env.example` to `.env`, and paste the key in.
-3. Check that everything works with a small pull (one page per endpoint):
+3. Check that everything works with a small pull (one page per endpoint). This writes to a separate `midterm_money_sample.db` so test runs never mix with real snapshots:
    ```bash
    python -m src.pipeline --sample
    ```

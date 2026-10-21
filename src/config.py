@@ -19,6 +19,8 @@ MANUAL_DIR = DATA_DIR / "manual"
 PAC_INDUSTRIES_CSV = MANUAL_DIR / "pac_industries.csv"
 PROCESSED_DIR = DATA_DIR / "processed"
 DB_PATH = PROCESSED_DIR / "midterm_money.db"
+# --sample runs write here so a partial pull never looks like a real snapshot
+SAMPLE_DB_PATH = PROCESSED_DIR / "midterm_money_sample.db"
 
 FEC_BASE_URL = "https://api.open.fec.gov/v1"
 CYCLE = 2026

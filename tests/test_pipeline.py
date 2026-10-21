@@ -5,8 +5,9 @@ from pathlib import Path
 
 import pytest
 
+from src.config import DB_PATH, SAMPLE_DB_PATH
 from src.db import connect, create_schema, upsert_rows
-from src.pipeline import ENDPOINTS, OUTSIDE_SPENDING_PATH, orphan_counts, run_pull
+from src.pipeline import ENDPOINTS, OUTSIDE_SPENDING_PATH, database_for, orphan_counts, run_pull
 
 FIXTURES = Path(__file__).parent / "fixtures"
 FIXTURE_FOR_PATH = {**{path: name for name, (path, _) in ENDPOINTS.items()}, OUTSIDE_SPENDING_PATH: "outside_spending"}
@@ -70,7 +71,28 @@ def test_outside_spending_is_requested_in_batches_of_100(conn):
     run_pull(client, conn, "2026-10-20", RACES, pac_industries=[])
 
     batches = [params["candidate_id"] for path, params in client.calls if path == OUTSIDE_SPENDING_PATH]
-    assert [len(b) for b in batches] == [100, 100, 50]
+    # 250 from /candidates/ plus the 5 totals-fixture candidates = 255 IDs
+    assert [len(b) for b in batches] == [100, 100, 55]
+
+
+def test_outside_spending_covers_candidates_that_only_appear_in_totals(conn):
+    # /candidates/ filters on has_raised_funds and /candidates/totals/ doesn't,
+    # so spending must be requested for the union or that money is never seen
+    client = FakeClient()
+    run_pull(client, conn, "2026-10-20", RACES, pac_industries=[])
+
+    def fixture_ids(name):
+        return {r["candidate_id"] for r in json.loads((FIXTURES / f"{name}.json").read_text())["results"]}
+
+    requested = {cid for path, params in client.calls if path == OUTSIDE_SPENDING_PATH
+                 for cid in params["candidate_id"]}
+    assert requested == fixture_ids("candidates") | fixture_ids("totals")
+
+
+def test_sample_pull_uses_a_separate_database():
+    assert database_for(sample=True) == SAMPLE_DB_PATH
+    assert database_for(sample=False) == DB_PATH
+    assert SAMPLE_DB_PATH != DB_PATH
 
 
 def test_orphan_counts_reports_missing_race(conn):

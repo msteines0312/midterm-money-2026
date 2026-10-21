@@ -8,7 +8,7 @@ Run from the repo root:
 import argparse
 from datetime import date
 
-from src.config import CYCLE, DB_PATH, load_api_key
+from src.config import CYCLE, DB_PATH, SAMPLE_DB_PATH, load_api_key
 from src.db import connect, create_schema, upsert_rows
 from src.fec.client import FecClient
 from src.fec.transform import candidate_row, committee_row, outside_spending_row, totals_row
@@ -68,7 +68,10 @@ def run_pull(client, conn, pulled_at, races, pac_industries=None, max_pages=None
     totals = fetch("totals", lambda rec: totals_row(rec, pulled_at))
     committees = fetch("committees", committee_row)
 
-    candidate_ids = [c["candidate_id"] for c in candidates]
+    # /candidates/ only returns candidates flagged has_raised_funds, while
+    # /candidates/totals/ returns more (about 3,800 vs 2,500). Querying spending
+    # for both sets means outside money aimed at the extra candidates isn't lost.
+    candidate_ids = sorted({c["candidate_id"] for c in candidates} | {t["candidate_id"] for t in totals})
     spending = []
     for batch in _batches(candidate_ids, CANDIDATE_BATCH_SIZE):
         params = {"cycle": CYCLE, "candidate_id": batch}
@@ -117,13 +120,37 @@ def orphan_counts(conn):
     return {name: conn.execute(sql).fetchone()[0] for name, sql in checks.items()}
 
 
+def database_for(sample):
+    """Pick the database file for a pull.
+
+    Sample pulls get their own file. Otherwise a 100-candidate sample would sit
+    in the real database looking like a full snapshot for that date.
+
+    Parameters
+    ----------
+    sample : bool
+        True for a `--sample` run.
+
+    Returns
+    -------
+    pathlib.Path
+    """
+    return SAMPLE_DB_PATH if sample else DB_PATH
+
+
 def main(argv=None):
-    """Command-line entry point."""
+    """Run the pipeline from the command line.
+
+    Parameters
+    ----------
+    argv : list of str, optional
+        Arguments to parse. Defaults to the real command line.
+    """
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--sample", action="store_true", help="pull one page per endpoint")
     args = parser.parse_args(argv)
 
-    conn = connect(DB_PATH)
+    conn = connect(database_for(args.sample))
     counts = run_pull(
         FecClient(load_api_key()), conn, date.today().isoformat(), load_races(),
         max_pages=1 if args.sample else None,
