@@ -2,7 +2,7 @@
 
 import pytest
 
-from src.manual import load_pac_industries
+from src.manual import load_nominee_matches, load_pac_industries
 
 HEADER = "committee_id,network,industry,source_url\n"
 
@@ -55,3 +55,22 @@ def test_real_label_file_loads():
     """The committed CSV must pass the same checks as the test files."""
     rows = load_pac_industries()
     assert {row["industry"] for row in rows} <= {"crypto", "ai_industry", "ai_safety"}
+
+
+def test_nominee_matches_need_a_note(tmp_path):
+    path = tmp_path / "nominee_matches.csv"
+    path.write_text("race_id,name,candidate_id,note\nTX-01,Ann Smith,H1,\n")
+    with pytest.raises(ValueError, match="note"):
+        load_nominee_matches(path)
+
+
+def test_nominee_matches_load(tmp_path):
+    path = tmp_path / "nominee_matches.csv"
+    path.write_text("race_id,name,candidate_id,note\nTX-01,Ann Smith,H1,Checked on fec.gov\n")
+    assert load_nominee_matches(path) == [
+        {"race_id": "TX-01", "name": "Ann Smith", "candidate_id": "H1", "note": "Checked on fec.gov"}
+    ]
+
+
+def test_real_nominee_matches_file_loads():
+    load_nominee_matches()

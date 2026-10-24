@@ -17,6 +17,7 @@ RAW_DIR = DATA_DIR / "raw"
 # Hand-built CSVs (PAC industry labels, endorsements). Small, sourced, and committed.
 MANUAL_DIR = DATA_DIR / "manual"
 PAC_INDUSTRIES_CSV = MANUAL_DIR / "pac_industries.csv"
+NOMINEE_MATCHES_CSV = MANUAL_DIR / "nominee_matches.csv"
 PROCESSED_DIR = DATA_DIR / "processed"
 DB_PATH = PROCESSED_DIR / "midterm_money.db"
 # --sample runs write here so a partial pull never looks like a real snapshot

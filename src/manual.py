@@ -7,7 +7,7 @@ a reader can check the call.
 
 import csv
 
-from src.config import PAC_INDUSTRIES_CSV
+from src.config import NOMINEE_MATCHES_CSV, PAC_INDUSTRIES_CSV
 
 # The only industry labels the analysis knows how to group. A typo like
 # "AI" or "ai-safety" would quietly split a network in two, so reject it.
@@ -66,3 +66,34 @@ def _check_row(row):
         raise ValueError(f"{committee_id} has unknown industry {row['industry']!r}")
     if not row["source_url"]:
         raise ValueError(f"{committee_id} has no source_url")
+
+
+def load_nominee_matches(path=NOMINEE_MATCHES_CSV):
+    """Read the hand-checked matches from nominees to FEC candidate IDs.
+
+    These override the automatic last-name match, so every row must say
+    how the match was checked.
+
+    Parameters
+    ----------
+    path : pathlib.Path, optional
+        CSV with columns race_id, name, candidate_id, note.
+
+    Returns
+    -------
+    list of dict
+        One dict per hand-checked nominee, with whitespace stripped.
+
+    Raises
+    ------
+    ValueError
+        If a row has no race_id, name, candidate_id, or note.
+    """
+    with open(path, newline="", encoding="utf-8") as f:
+        rows = [{key: (value or "").strip() for key, value in row.items()} for row in csv.DictReader(f)]
+
+    for row in rows:
+        for column in ("race_id", "name", "candidate_id", "note"):
+            if not row[column]:
+                raise ValueError(f"{row['race_id'] or '?'} {row['name'] or '?'} has no {column}")
+    return rows

@@ -1,0 +1,17 @@
+race_id,name,candidate_id,note
+AZ-07,Adelita Grijalva,H6AZ07121,Two Grijalvas filed in AZ-07; first name Adelita picks H6AZ07121
+CA-41,Mitch Clemmons,H6CA41380,Duplicate registrations (H2CA38260 and H6CA41380) with identical money; chose the one filed in CA-41
+IL-04,Patty Garcia,H6IL04153,Jesus Garcia (H8IL04134) is a different candidate; first name Patty picks H6IL04153
+KY-03,Maria Rodriquez,H6KY03223,FEC spells the surname Rodriguez; first name and party agree
+LA-05,Antonio Wilson,H6LA05333,Duplicate registrations (H6LA05325 and H6LA05333) with identical money; chose the later ID
+MS-04,Carl Boyanton,H6MS04259,"FEC stores the name as CARL, BOYANTON; H6MS04259 is the registration that reports money"
+MO-03,Bob Onder,H4MO03221,Duplicate registrations (H8MO09146 and H4MO03221) with identical money; chose the incumbent row
+NV-03,Martin O'Donnell,H6NV03204,"FEC lists him as Marty; duplicate registrations with identical money, chose the 2026-cycle H6 ID"
+NJ-08,Rob Menendez,H2NJ08232,FEC lists Robert J. Menendez as incumbent in NJ-08; H2NJ13075 is a duplicate row with identical money
+NY-01,Nick LaLota,H2NY01190,"FEC stores the name reversed as NICK, LALOTA; incumbent REP"
+NC-04,Max Ganorkar,H4NC02150,"FEC lists Mahesh Ganorkar; duplicate registrations (H4NC02150 and H2NC06106) with identical money, chose the later cycle"
+NC-08,Mark Harris,H4NC08066,Duplicate registrations (H6NC09200 and H4NC08066) with identical money; chose the incumbent row
+SC-02,Zyon Khalifa,H6SC02159,Duplicate registrations (H6SC02159 and H6SC02167) with identical money; chose the lower ID
+TX-22,Trever Nehls,H6TX22283,Troy Nehls (H0TX22302) is a different person; first name Trever picks H6TX22283
+TX-34,Eric Flores,H6TX34080,Mayra Flores (H2TX34113) is a different person; first name Eric picks H6TX34080
+MI-11,Ethan Baker,H6MI11290,Stu Baker (H6MI11258) is a different person; first name Ethan and party agree
