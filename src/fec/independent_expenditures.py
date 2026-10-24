@@ -21,6 +21,8 @@ import csv
 import io
 import urllib.request
 from collections import defaultdict
+from datetime import date
+from pathlib import Path
 
 from src.config import CYCLE, RAW_DIR
 from src.fec.bulk import USER_AGENT
@@ -52,15 +54,53 @@ def download_independent_expenditures(cycle=CYCLE):
     str
         Contents of the CSV, header row included.
     """
-    out_dir = RAW_DIR / "fec"
-    out_dir.mkdir(parents=True, exist_ok=True)
+    path = saved_file_path(cycle)
+    path.parent.mkdir(parents=True, exist_ok=True)
     url = f"https://www.fec.gov/files/bulk-downloads/{cycle}/independent_expenditure_{cycle}.csv"
     request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
     with urllib.request.urlopen(request, timeout=120) as response:
         data = response.read()
-    (out_dir / f"independent_expenditure_{cycle}.csv").write_bytes(data)
+    path.write_bytes(data)
     # Names in the file are Latin-1, not UTF-8
     return data.decode("latin-1")
+
+
+def saved_file_path(cycle=CYCLE):
+    """Where a pull saves the bulk file, data/raw/fec/independent_expenditure_{cycle}.csv."""
+    return RAW_DIR / "fec" / f"independent_expenditure_{cycle}.csv"
+
+
+def read_saved_independent_expenditures(pulled_at, path=None):
+    """Read the bulk file saved by an earlier pull, without downloading it again.
+
+    Each pull overwrites the saved file, so after a later pull it holds newer
+    filings. Rebuilding an old snapshot from it would stamp that newer data
+    with the old date, so the file's modification date (local time) has to
+    match `pulled_at`. Copying the file can change that date, in which case
+    this refuses to read it.
+
+    Parameters
+    ----------
+    pulled_at : str
+        ISO date of the snapshot the file should belong to.
+    path : pathlib.Path, optional
+        File to read. Defaults to `saved_file_path()`.
+
+    Returns
+    -------
+    str
+        Contents of the CSV, header row included.
+
+    Raises
+    ------
+    ValueError
+        If the file was saved on a different date than `pulled_at`.
+    """
+    path = Path(path or saved_file_path())
+    saved_on = date.fromtimestamp(path.stat().st_mtime).isoformat()
+    if saved_on != pulled_at:
+        raise ValueError(f"{path} was saved on {saved_on}, not {pulled_at}. It can't rebuild that snapshot.")
+    return path.read_bytes().decode("latin-1")
 
 
 def parse_independent_expenditures(text):

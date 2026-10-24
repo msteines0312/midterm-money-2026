@@ -10,6 +10,8 @@ Fixture rows (tests/fixtures/ie_sample.csv, see scripts/save_fixtures.py):
 
 import csv
 import io
+import os
+from datetime import datetime
 from pathlib import Path
 
 import pytest
@@ -18,6 +20,7 @@ from src.fec.independent_expenditures import (
     drop_superseded,
     house_outside_spending,
     parse_independent_expenditures,
+    read_saved_independent_expenditures,
 )
 from src.fec.transform import race_id
 
@@ -232,3 +235,24 @@ def test_unknown_id_kept_when_last_name_is_ambiguous():
     rows = house_outside_spending(text, [BENNETT, twin], "2026-10-23")
     (bennett,) = [r for r in rows if r["candidate_name"] == "BENNETT, REBECCA"]
     assert bennett["candidate_id"] == UNKNOWN_ID
+
+
+def saved_copy(tmp_path, saved_on):
+    """Write the fixture where a pull would save it, dated as if downloaded on `saved_on`."""
+    path = tmp_path / "independent_expenditure_2026.csv"
+    path.write_bytes(SAMPLE.encode("latin-1"))
+    stamp = datetime.fromisoformat(f"{saved_on}T21:10:00").timestamp()
+    os.utime(path, (stamp, stamp))
+    return path
+
+
+def test_read_saved_file_from_the_pull_date(tmp_path):
+    path = saved_copy(tmp_path, "2026-10-23")
+    assert read_saved_independent_expenditures("2026-10-23", path) == SAMPLE
+
+
+def test_read_saved_file_refuses_a_newer_download(tmp_path):
+    # A file saved by a later pull holds newer filings, which must not get the old date
+    path = saved_copy(tmp_path, "2026-10-24")
+    with pytest.raises(ValueError, match="2026-10-24"):
+        read_saved_independent_expenditures("2026-10-23", path)

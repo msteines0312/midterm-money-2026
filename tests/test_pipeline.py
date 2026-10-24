@@ -7,7 +7,7 @@ import pytest
 
 from src.config import DB_PATH, SAMPLE_DB_PATH
 from src.db import connect, create_schema, upsert_rows
-from src.pipeline import ENDPOINTS, database_for, orphan_counts, run_pull
+from src.pipeline import ENDPOINTS, database_for, main, orphan_counts, rebuild_outside_spending, run_pull
 
 FIXTURES = Path(__file__).parent / "fixtures"
 # Real rows from the FEC bulk summary file: 3 House campaigns and 1 Senate
@@ -118,3 +118,56 @@ def test_committee_removed_from_labels_disappears(conn):
     run_pull(FakeClient(), conn, "2026-10-20", RACES, SUMMARY, IE_SAMPLE, pac_industries=labels[:1])
     assert [row[0] for row in conn.execute("SELECT committee_id FROM pac_industries")] == ["C1"]
 
+
+# A candidates-table row for the fixture's CLF candidate, whose filings have no ID
+BAUMGARTNER = {
+    "candidate_id": "H6WA05999", "name": "BAUMGARTNER, MICHAEL", "party": "REP", "state": "WA",
+    "district": "05", "race_id": "WA-05", "incumbent_challenge": "I", "primary_result": None,
+}
+CLF = "C00504530"
+
+
+def clf_keys(conn, pulled_at):
+    sql = "SELECT candidate_key FROM outside_spending WHERE committee_id = ? AND pulled_at = ?"
+    return [row[0] for row in conn.execute(sql, (CLF, pulled_at))]
+
+
+def test_rebuild_replaces_only_that_dates_outside_spending(conn):
+    pull(FakeClient(), conn, "2026-10-20")
+    pull(FakeClient(), conn, "2026-10-23")
+    assert clf_keys(conn, "2026-10-23") == ["WA-05|BAUMGARTNER"]
+    totals_before = conn.execute("SELECT * FROM candidate_totals ORDER BY candidate_id, pulled_at").fetchall()
+    spending_rows = count(conn, "outside_spending")
+
+    # The candidate shows up in `candidates` later, so the rebuild can match the CLF rows
+    upsert_rows(conn, "candidates", [BAUMGARTNER])
+    rebuild_outside_spending(conn, IE_SAMPLE, "2026-10-23")
+
+    # The old key is deleted rather than left beside the new one, which would double count
+    assert clf_keys(conn, "2026-10-23") == ["H6WA05999"]
+    assert clf_keys(conn, "2026-10-20") == ["WA-05|BAUMGARTNER"]
+    assert count(conn, "outside_spending") == spending_rows
+    assert conn.execute("SELECT * FROM candidate_totals ORDER BY candidate_id, pulled_at").fetchall() == totals_before
+
+
+def test_rebuild_flag_uses_saved_file_and_no_api(conn, monkeypatch):
+    pull(FakeClient(), conn, "2026-10-23")
+    upsert_rows(conn, "candidates", [BAUMGARTNER])
+    read_dates = []
+
+    def fake_read(pulled_at):
+        read_dates.append(pulled_at)
+        return IE_SAMPLE
+
+    def no_api(*args, **kwargs):
+        raise AssertionError("a rebuild must not call the FEC API")
+
+    monkeypatch.setattr("src.pipeline.read_saved_independent_expenditures", fake_read)
+    monkeypatch.setattr("src.pipeline.FecClient", no_api)
+    # main() closes the connection it opens, so hand it a second one to the same file
+    db_file = conn.execute("PRAGMA database_list").fetchone()[2]
+    monkeypatch.setattr("src.pipeline.database_for", lambda sample: db_file)
+    main(["--rebuild-outside-spending", "2026-10-23"])
+
+    assert read_dates == ["2026-10-23"]
+    assert clf_keys(conn, "2026-10-23") == ["H6WA05999"]

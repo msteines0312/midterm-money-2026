@@ -5,6 +5,9 @@ Outside spending comes from the FEC bulk independent expenditure file, not the A
 Run from the repo root:
     python -m src.pipeline            full pull
     python -m src.pipeline --sample   one page per endpoint, to check things work
+    python -m src.pipeline --rebuild-outside-spending 2026-10-23
+                                      rebuild one date's outside spending from
+                                      the saved bulk file, with no downloads
 """
 
 import argparse
@@ -14,7 +17,11 @@ from src.config import CYCLE, DB_PATH, SAMPLE_DB_PATH, load_api_key
 from src.db import connect, create_schema, replace_rows, upsert_rows
 from src.fec.bulk import download_summary, house_totals
 from src.fec.client import FecClient
-from src.fec.independent_expenditures import download_independent_expenditures, house_outside_spending
+from src.fec.independent_expenditures import (
+    download_independent_expenditures,
+    house_outside_spending,
+    read_saved_independent_expenditures,
+)
 from src.fec.transform import candidate_row, committee_row
 from src.manual import load_pac_industries
 from src.ratings import load_races
@@ -66,8 +73,6 @@ def run_pull(client, conn, pulled_at, races, summary_text, ie_text, pac_industri
     totals = house_totals(summary_text, pulled_at)
     committees = fetch("committees", committee_row)
 
-    spending = house_outside_spending(ie_text, candidates, pulled_at)
-
     if pac_industries is None:
         pac_industries = load_pac_industries()
 
@@ -76,11 +81,64 @@ def run_pull(client, conn, pulled_at, races, summary_text, ie_text, pac_industri
         "candidates": upsert_rows(conn, "candidates", candidates),
         "committees": upsert_rows(conn, "committees", committees),
         "candidate_totals": upsert_rows(conn, "candidate_totals", totals),
-        "outside_spending": upsert_rows(conn, "outside_spending", spending),
+        "outside_spending": write_outside_spending(conn, ie_text, candidates, pulled_at),
         # Replaced, not upserted, so a committee taken out of the CSV stops
         # counting instead of lingering in the table from an earlier pull
         "pac_industries": replace_rows(conn, "pac_industries", pac_industries),
     }
+
+
+def write_outside_spending(conn, ie_text, candidates, pulled_at):
+    """Build one date's `outside_spending` rows and replace that date's old ones.
+
+    The old rows are deleted first rather than upserted over. A row's
+    `candidate_key` can change between builds (a filing matched to a
+    candidate ID this time was keyed by race and name last time), and an
+    upsert would keep the old row next to the new one and count it twice.
+    Other dates are not touched.
+
+    Parameters
+    ----------
+    conn : sqlite3.Connection
+    ie_text : str
+        Contents of the FEC bulk independent expenditure file.
+    candidates : list of dict
+        Rows of the `candidates` table.
+    pulled_at : str
+        ISO date of the snapshot.
+
+    Returns
+    -------
+    int
+        Rows written.
+    """
+    spending = house_outside_spending(ie_text, candidates, pulled_at)
+    return replace_rows(conn, "outside_spending", spending, pulled_at=pulled_at)
+
+
+def rebuild_outside_spending(conn, ie_text, pulled_at):
+    """Rebuild one date's `outside_spending` from a saved file and the current `candidates`.
+
+    For when the matching code changes after a pull. Nothing is downloaded
+    and no other table is written, so newer FEC data never gets the old date.
+
+    Parameters
+    ----------
+    conn : sqlite3.Connection
+    ie_text : str
+        The bulk file saved by that date's pull.
+    pulled_at : str
+        ISO date of the snapshot to rebuild.
+
+    Returns
+    -------
+    int
+        Rows written.
+    """
+    cursor = conn.execute("SELECT * FROM candidates")
+    columns = [col[0] for col in cursor.description]
+    candidates = [dict(zip(columns, row)) for row in cursor]
+    return write_outside_spending(conn, ie_text, candidates, pulled_at)
 
 
 def orphan_counts(conn):
@@ -146,9 +204,19 @@ def main(argv=None):
     """
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--sample", action="store_true", help="pull one page per endpoint")
+    parser.add_argument("--rebuild-outside-spending", metavar="YYYY-MM-DD",
+                        help="rebuild that date's outside spending from the saved bulk file instead of pulling")
     args = parser.parse_args(argv)
 
     conn = connect(database_for(args.sample))
+    if args.rebuild_outside_spending:
+        pulled_at = args.rebuild_outside_spending
+        written = rebuild_outside_spending(conn, read_saved_independent_expenditures(pulled_at), pulled_at)
+        print(f"Rebuilt outside_spending for {pulled_at}: {written} rows")
+        print("Unmatched rows:", orphan_counts(conn))
+        conn.close()
+        return
+
     counts = run_pull(
         FecClient(load_api_key()), conn, date.today().isoformat(), load_races(), download_summary(),
         download_independent_expenditures(),
