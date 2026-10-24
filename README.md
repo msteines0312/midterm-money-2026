@@ -69,29 +69,29 @@ An analysis of campaign finance and endorsements in the 2026 U.S. House midterms
 - About 41 `outside_spending` rows (one per committee, candidate, and side) have no candidate ID, either because the filing left it blank or because the name could not be matched. Blank-ID rows are matched to a candidate by race and last name. If two candidates in a race share a last name, the match is skipped and the money is kept under a `race|LASTNAME` key. Rows with a blank district use the candidate's race when the ID is known and otherwise get no race.
 - Rows with a blank amount, a blank support or oppose flag (4 real House rows), or a blank state are skipped. Party names are mapped to DEM, REP, and DFL.
 - Outside spending is stored by election type, so primary and general election money are separate rows. Totals that mix them include both.
-- The bulk file contains one individual filer ("Warren Buffet", C00946087) with about $13 billion of independent expenditures for a candidate named Bettis. It is not a registered super PAC and is not in `committees`, so analysis should restrict to committees in that table.
-- Validation against FEC committee totals (`scripts/check_outside_spending.py`, October 23 snapshot). Our figure is the bulk file for all offices through each committee's last reported coverage date, compared with `/committee/{id}/totals/`. The pass rule was every labeled network committee within 5% and the top 10 super PACs within 5% in total. The top 10 total matched (-1.27%), but two network committees missed (Jobs and Democracy PAC -10.69%, American Mission -6.20%), so the check **failed** and the report shows network spending only, with no "share of all outside spending."
+- The bulk file contains one individual filer ("Warren Buffet", C00946087) with about $13 billion of independent expenditures for a candidate named Bettis. It is not a registered super PAC and is not in `committees`, so analysis should restrict to committees in that table. Analysis totals only count committees in the `committees` table (super PACs and hybrid PACs).
+- Validation against FEC committee totals (`scripts/check_outside_spending.py`, October 23 snapshot). Our figure is the bulk file for all offices through each committee's last reported coverage date, dated by expenditure date, compared with `/committee/{id}/totals/`. The pass rule was every labeled network committee within 5% and the top 10 super PACs within 5% in total. The top 10 total matched (1.20%) and every network committee matched except Jobs and Democracy PAC (-10.69%), so the check **failed** and the verdict is fallback (a): the report shows network spending only. The share of all outside spending is left out of the report until a re-check passes.
 
 | Committee | Network | Bulk file through coverage | FEC reported | Coverage end | Difference |
 |---|---|---|---|---|---|
 | FAIRSHAKE | Fairshake | $19,274,814 | $19,412,478 | 2026-10-14 | -0.71% |
-| DEFEND AMERICAN JOBS | Fairshake | $87,079,066 | $88,319,034 | 2026-10-14 | -1.40% |
+| DEFEND AMERICAN JOBS | Fairshake | $88,281,415 | $88,319,034 | 2026-10-14 | -0.04% |
 | PROTECT PROGRESS | Fairshake | $29,181,489 | $29,197,272 | 2026-10-14 | -0.05% |
 | LEADING THE FUTURE | Leading the Future | $0 | $0 | 2026-10-14 | n/a |
-| AMERICAN MISSION | Leading the Future | $12,588,615 | $13,421,107 | 2026-09-30 | -6.20% |
+| AMERICAN MISSION | Leading the Future | $13,443,607 | $13,421,107 | 2026-09-30 | 0.17% |
 | THINK BIG | Leading the Future | $18,169,566 | $18,169,566 | 2026-09-30 | 0.00% |
 | JOBS AND DEMOCRACY PAC | Public First | $15,964,202 | $17,875,336 | 2026-09-30 | -10.69% |
 | DEFENDING OUR VALUES PAC | Public First | $7,365,832 | $7,365,832 | 2026-09-30 | 0.00% |
 | PUBLIC FIRST | Public First | $0 | $0 | 2026-09-30 | n/a |
-| CLF | none | $67,478,606 | $67,898,719 | 2026-09-30 | -0.62% |
+| CLF | none | $67,894,510 | $67,898,719 | 2026-09-30 | -0.01% |
 | HMP | none | $46,771,985 | $45,720,411 | 2026-09-30 | 2.30% |
-| NO GOING BACK PAC INC. | none | $183,766,889 | $187,807,636 | 2026-10-14 | -2.15% |
-| SAFETY & AFFORDABILITY PAC INC. | none | $12,555,808 | $16,216,833 | 2026-10-14 | -22.58% |
-| LCV VICTORY FUND | none | $28,871,096 | $26,076,915 | 2026-10-14 | 10.72% |
+| NO GOING BACK PAC INC. | none | $187,901,795 | $187,807,636 | 2026-10-14 | 0.05% |
+| SAFETY & AFFORDABILITY PAC INC. | none | $16,216,833 | $16,216,833 | 2026-10-14 | 0.00% |
+| LCV VICTORY FUND | none | $32,393,314 | $26,076,915 | 2026-10-14 | 24.22% |
 | UNITED DEMOCRACY PROJECT | none | $53,684,196 | $53,603,927 | 2026-10-14 | 0.15% |
 | YOUR COMMUNITY PAC | none | $13,053,517 | $12,961,740 | 2026-09-30 | 0.71% |
 
-  Two committees with $0 on both sides (Leading the Future, Public First) agree trivially and do not count toward pass or fail. Most gaps come from dating: the committee totals count an expenditure by its expenditure date, while our figure uses the dissemination date. Jobs and Democracy PAC's gap is mostly filings it later amended to $0, which its periodic report still counts.
+  Two committees with $0 on both sides (Leading the Future, Public First) agree trivially and do not count toward pass or fail. Jobs and Democracy PAC's gap is about $1.5M of its 24- and 48-hour filings that it amended to $0 after its periodic report, so our deduplicated figure is lower than the total in that report. HMP (2.30%) and LCV Victory Fund (24.22%) are not labeled networks and do not affect the verdict.
 
 ## Key Features
 - Rate-limit-aware API client that backs off on HTTP 429 and pauses when the remaining-requests header hits zero

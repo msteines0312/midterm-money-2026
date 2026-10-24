@@ -41,8 +41,10 @@ def bulk_sum_through(rows, committee_id, coverage_end):
     """Sum one committee's independent expenditures dated on or before a cutoff.
 
     All offices are included (House, Senate, President), because the committee
-    totals endpoint is all-office. Each row is dated by `dissem_dt`, falling
-    back to `exp_date` when that is blank.
+    totals endpoint is all-office. Each row is dated by `exp_date`, falling
+    back to `dissem_dt` when that is blank. Periodic reports date independent
+    expenditures by expenditure date, and the comparison bears that out: dating
+    by `dissem_dt` instead left several committees several percent low.
 
     Parameters
     ----------
@@ -60,7 +62,7 @@ def bulk_sum_through(rows, committee_id, coverage_end):
     for row in rows:
         if row["spe_id"] != committee_id or row["exp_amo"] is None:
             continue
-        spent_on = parse_bulk_date(row["dissem_dt"] or row["exp_date"])
+        spent_on = parse_bulk_date(row["exp_date"] or row["dissem_dt"])
         # A row with neither date can't be placed against the coverage window
         if spent_on is not None and spent_on <= coverage_end:
             total += to_money(row["exp_amo"])
