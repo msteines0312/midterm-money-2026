@@ -10,8 +10,9 @@ Two things in the file need care:
 
 * Amended filings. A report that was amended shows up once per version, and
   every version is in the file. Counting all of them would double count.
-* Missing candidate IDs. Those rows are matched to a candidate by race and
-  last name, and left unmatched (but still counted) when that is ambiguous.
+* Missing or unknown candidate IDs. Rows with a blank ID, or an ID that is
+  not in `candidates`, are matched to a candidate by race and last name, and
+  left as filed (but still counted) when that is ambiguous.
 
 Column layout: https://www.fec.gov/campaign-finance-data/independent-expenditure-file-description/
 """
@@ -145,14 +146,22 @@ def _resolve_candidate(row, race, candidates_by_id, candidates_by_name):
     Returns
     -------
     tuple of (str or None, str or None)
-        Candidate ID and party. The ID is None when the row has none and no
-        single candidate in the race shares the last name.
+        Candidate ID and party. A row whose ID is blank or not in `candidates`
+        takes the ID of the one candidate in the race with the same last name.
+        With no such candidate, a blank ID stays None and an unknown ID is kept
+        as filed.
     """
     candidate_id = row["cand_id"]
-    if candidate_id is None:
+    # An ID missing from `candidates` gets the same lookup as a blank one.
+    # Candidates who switch districts get a new FEC ID, and filings can use
+    # the new one before `candidates` has it. Colin Allred files as
+    # H6TX33082 in TX-33, but `candidates` lists him as H8TX32098, so
+    # without this his rows would have no party.
+    if candidate_id not in candidates_by_id:
         matches = candidates_by_name.get((race, _last_name(row["cand_name"])), [])
         # Two candidates with the same last name in one race: don't guess
-        candidate_id = matches[0]["candidate_id"] if len(matches) == 1 else None
+        if len(matches) == 1:
+            candidate_id = matches[0]["candidate_id"]
 
     # Prefer the party code from `candidates` (DEM, REP, ...) so it matches the
     # rest of the database. Otherwise translate the bulk file's spelled-out name.
@@ -185,7 +194,7 @@ def house_outside_spending(text, candidates, pulled_at):
         Contents of the bulk CSV.
     candidates : list of dict
         Rows of the `candidates` table, used to find a candidate ID for rows
-        that have none.
+        whose ID is blank or not in the table.
     pulled_at : str
         ISO date of this pull.
 

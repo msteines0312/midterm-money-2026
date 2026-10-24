@@ -201,3 +201,34 @@ def test_blank_district_and_id_keys_on_state_and_last_name():
     assert row["candidate_id"] is None
     assert row["candidate_key"] == "WA|BAUMGARTNER"
     assert row["total"] == CLF_TOTAL
+
+
+# Bennett as the candidates table would hold her. The tests below give her
+# fixture row a different ID, like a candidate who got a new FEC ID.
+BENNETT = {"candidate_id": "H6NJ07201", "race_id": "NJ-07", "name": "BENNETT, REBECCA", "party": "DEM"}
+UNKNOWN_ID = "H6NJ07999"
+
+
+def test_unknown_id_matched_by_race_and_last_name():
+    text = blanked(SAMPLE, "500370949", "cand_id", UNKNOWN_ID)
+    rows = house_outside_spending(text, [BENNETT], "2026-10-23")
+    (bennett,) = [r for r in rows if r["candidate_name"] == "BENNETT, REBECCA"]
+    assert bennett["candidate_id"] == "H6NJ07201"
+    assert bennett["candidate_key"] == "H6NJ07201"
+    assert bennett["party"] == "DEM"
+
+
+def test_unknown_id_kept_when_no_candidate_matches():
+    text = blanked(SAMPLE, "500370949", "cand_id", UNKNOWN_ID)
+    rows = house_outside_spending(text, [], "2026-10-23")
+    (bennett,) = [r for r in rows if r["candidate_name"] == "BENNETT, REBECCA"]
+    assert bennett["candidate_id"] == UNKNOWN_ID
+    assert bennett["candidate_key"] == UNKNOWN_ID
+
+
+def test_unknown_id_kept_when_last_name_is_ambiguous():
+    twin = {**BENNETT, "candidate_id": "H6NJ07888", "name": "BENNETT, JOHN", "party": "REP"}
+    text = blanked(SAMPLE, "500370949", "cand_id", UNKNOWN_ID)
+    rows = house_outside_spending(text, [BENNETT, twin], "2026-10-23")
+    (bennett,) = [r for r in rows if r["candidate_name"] == "BENNETT, REBECCA"]
+    assert bennett["candidate_id"] == UNKNOWN_ID
