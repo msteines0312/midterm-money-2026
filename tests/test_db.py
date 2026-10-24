@@ -62,3 +62,44 @@ def test_upsert_rejects_unknown_table(conn):
 def test_null_money_stays_null(conn):
     upsert_rows(conn, "candidate_totals", [totals("2026-10-20", receipts=None)])
     assert conn.execute("SELECT receipts FROM candidate_totals").fetchone()[0] is None
+
+
+def new_style_spending_row():
+    return {
+        "committee_id": "C00000001", "candidate_key": "XX-01|SMITH", "candidate_id": None,
+        "candidate_name": "SMITH, JANE", "party": "DEM", "race_id": "XX-01",
+        "election_type": "G", "support_oppose": "S", "pulled_at": "2026-10-23",
+        "total": 250.0, "count": 1,
+    }
+
+
+def test_create_schema_moves_old_outside_spending(tmp_path):
+    conn = connect(tmp_path / "old.db")
+    # The table as the Oct 23 pull built it, before election_type existed
+    conn.execute(
+        """CREATE TABLE outside_spending (
+            committee_id TEXT NOT NULL, candidate_id TEXT NOT NULL,
+            support_oppose TEXT NOT NULL, pulled_at TEXT NOT NULL,
+            total REAL, count INTEGER,
+            PRIMARY KEY (committee_id, candidate_id, support_oppose, pulled_at))"""
+    )
+    conn.execute(
+        "INSERT INTO outside_spending VALUES ('C00000001', 'H6XX00001', 'S', '2026-10-23', 100.0, 2)"
+    )
+    conn.commit()
+
+    create_schema(conn)
+
+    assert count(conn, "outside_spending_by_candidate_endpoint") == 1
+    assert count(conn, "outside_spending") == 0
+    columns = {row[1] for row in conn.execute("PRAGMA table_info(outside_spending)")}
+    assert "election_type" in columns
+    conn.close()
+
+
+def test_create_schema_twice_keeps_new_rows(conn):
+    upsert_rows(conn, "outside_spending", [new_style_spending_row()])
+    create_schema(conn)
+    assert count(conn, "outside_spending") == 1
+    names = {row[0] for row in conn.execute("SELECT name FROM sqlite_master WHERE type = 'table'")}
+    assert "outside_spending_by_candidate_endpoint" not in names

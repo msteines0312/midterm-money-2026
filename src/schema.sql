@@ -54,16 +54,27 @@ CREATE TABLE IF NOT EXISTS candidate_totals (
     PRIMARY KEY (candidate_id, pulled_at)
 );
 
--- Independent expenditures, already summed by the FEC per committee,
--- candidate, and support/oppose
+-- Independent expenditures from the FEC bulk file, summed per committee,
+-- candidate, support/oppose, and election type.
+-- candidate_key is the FEC candidate ID when the filing has one. Filings with
+-- no ID use race_id|LASTNAME, or state|LASTNAME when the district is blank too.
+-- The key is never NULL because SQLite treats NULLs in a primary key as
+-- distinct, so a rerun would duplicate those rows.
+-- election_type codes: P primary, G general, R runoff, S special,
+-- C convention, O other.
 CREATE TABLE IF NOT EXISTS outside_spending (
     committee_id   TEXT NOT NULL,
-    candidate_id   TEXT NOT NULL,
+    candidate_key  TEXT NOT NULL,
+    candidate_id   TEXT,                      -- NULL when the filing has no ID and no match
+    candidate_name TEXT,
+    party          TEXT,
+    race_id        TEXT,                      -- NULL when the filing has no district
+    election_type  TEXT NOT NULL,
     support_oppose TEXT NOT NULL,             -- S = support, O = oppose
     pulled_at      TEXT NOT NULL,
     total          REAL,
     count          INTEGER,
-    PRIMARY KEY (committee_id, candidate_id, support_oppose, pulled_at)
+    PRIMARY KEY (committee_id, candidate_key, support_oppose, election_type, pulled_at)
 );
 
 -- Hand-built labels. Every row cites a source because each one is a judgment call.

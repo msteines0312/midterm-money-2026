@@ -30,7 +30,27 @@ def create_schema(conn):
     ----------
     conn : sqlite3.Connection
     """
+    _move_old_outside_spending(conn)
     conn.executescript(SCHEMA_PATH.read_text())
+
+
+def _move_old_outside_spending(conn):
+    """Rename an old-style `outside_spending` table so its rows are kept.
+
+    The Oct 23 snapshot was built from the by-candidate endpoint, a different
+    method with different columns (no `election_type`). The schema script uses
+    CREATE TABLE IF NOT EXISTS, so it would leave that table in place. Renaming
+    it first lets the new table be created and keeps the old snapshot intact.
+
+    Parameters
+    ----------
+    conn : sqlite3.Connection
+    """
+    columns = {row[1] for row in conn.execute("PRAGMA table_info(outside_spending)")}
+    # An empty set means the table does not exist yet, so there is nothing to move
+    if columns and "election_type" not in columns:
+        conn.execute("ALTER TABLE outside_spending RENAME TO outside_spending_by_candidate_endpoint")
+        conn.commit()
 
 
 def upsert_rows(conn, table, rows):
