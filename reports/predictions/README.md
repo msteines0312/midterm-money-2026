@@ -14,7 +14,7 @@ The CSV is tagged `pre-election-simple` and is never edited after that. If a num
 - **Money snapshot date.** Money is from the 2026-10-24 snapshot, which includes reports through Oct 14 (the Pre-General deadline). The first build used the 2026-10-23 snapshot, but that bulk file had not yet absorbed some candidates' Pre-General reports: 176 funded nominees in Democrat-versus-Republican races still showed a Sep 30 or earlier report. A fresh pull on 2026-10-24 fixed this, so the date moved. The 2026-10-23 rows stay in the database unchanged.
 - **Races whose money leader changed between snapshots.** FL-27 (Republican to Democratic), NV-02 (Republican to Democratic), and TX-15 (Republican to Democratic). No other race changed.
 - **Nominees.** Parsed from Wikipedia's page on the 2026 House elections at a pinned revision (ID 1381568365). All 435 races have confirmed nominees at that revision. Nominees are matched to FEC candidates by race and last name, with 57 hand-checked overrides in `data/manual/nominee_matches.csv`.
-- **Cook rating.** Read from Wikipedia's Cook ratings table at a pinned revision, because Cook's own lists are paywalled.
+- **Cook rating.** Read from Wikipedia's Cook ratings table at a pinned revision, because Cook's own lists are paywalled. That table lists only competitive seats, so for the rest the rating is inferred from district partisanship (PVI) as Solid D or Solid R. The CSV does not mark which is which; see the note at the end of this file.
 - **Abstentions.** A Toss Up rating gives no Cook favorite. An exact 50% money share gives no money leader. Abstentions are not misses and are left out when the two rules are compared.
 
 ## Which races are scored
@@ -46,7 +46,7 @@ Only `D_vs_R` races (one Democratic and one Republican nominee, third parties al
 - Races: 435 (410 `D_vs_R`, 11 `other`, 9 `same_party`, 5 `unopposed`).
 - Among `D_vs_R` races, Cook abstentions (Toss Up): 21. Money abstentions: 0.
 - Both rules made a call in 389 races. They name the same party in 369 and different parties in 20.
-- Four Democratic or Republican nominees have no FEC record (LA-02 Renada Collins, LA-03 Kate Cotten, LA-03 Caleb Walker, MD-04 George McDermott) and count as $0. Independent and minor-party nominees without a match also count as $0 and were not searched one by one.
+- Four Democratic or Republican nominees have no FEC record (LA-02 Renada Collins, LA-03 Kate Cotten, LA-03 Caleb Walker, MD-04 George McDermott) and count as $0. Independent and minor-party nominees without a match also count as $0 and were not searched one by one. Because they count as $0, the other nominee leads on money by default in their races: in MD-04 (a `D_vs_R` race, so it is scored) Glenn Ivey leads because Republican George McDermott has no FEC record, and in LA-02 and LA-03 (`other` races, not scored) the missing Collins, Cotten and Walker never appear in the top two by money.
 
 ## Races where money and Cook name different parties
 
@@ -132,3 +132,15 @@ Eleven `D_vs_R` races (five competitive, five safe, and NY-21, where the Republi
 | TX-36 | Rhonda Hart (D) | 2026-09-30 | $24,315.62 |
 | UT-03 | Kent Udell (D) | 2026-09-30 | $91,265.11 |
 | WI-05 | Andrew Beck (D) | 2026-06-30 | $12,987.26 |
+
+## Note added 2026-10-24, after the tag (the CSV is unchanged)
+
+The `cook_rating` column mixes two sources, and the CSV does not say which a row uses. Seats that the Wikipedia Cook ratings table does not list get Solid D or Solid R inferred from PVI (`races.rating_source = 'inferred'` in the database). Counts, from the database:
+
+| Among | Cook's own rating | Inferred from PVI |
+|---|---|---|
+| 410 `D_vs_R` races | 136 | 274 |
+| 389 races where both rules made a call | 115 | 274 |
+| 20 races where money and Cook name different parties | 18 | 2 |
+
+The two disagreements with an inferred rating are GA-14 and VA-06 (both inferred Solid R). Read the comparison of the two rules with that in mind: most of the 389 comparisons use a PVI-based rating, not Cook's own call.
