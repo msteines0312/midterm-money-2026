@@ -32,9 +32,9 @@ Together, the three networks spent $102.99M on 2026 House races as of October 23
 | Leading the Future | $27.22M | 39 |
 | Public First | $22.86M | 15 |
 
-A candidate counts once per network, even if the network spent on them in both the primary and the general.
+Candidates are counted by FEC candidate ID, so spending on one candidate in both the primary and the general counts once. One Fairshake candidate files under two IDs: Rob Menendez (NJ-08) appears as H2NJ08232 and H2NJ13075, and Fairshake spent under both, so he counts twice in its 87.
 
-Public First's figure may be low. In a check against FEC committee totals, one of its committees came out about 11% below what it reported (see [Method and caveats](#method-and-caveats)). The same check put every Fairshake and Leading the Future committee within 1%.
+Public First's figure may differ from what it reported. In a check against FEC committee totals, our figure for one of its committees was about 11% lower than what the committee reported (see [Method and caveats](#method-and-caveats)). The same check put every Fairshake and Leading the Future committee within 1%.
 
 ### Who the money supported and opposed
 
@@ -46,13 +46,13 @@ Spending is split into four groups by the candidate's party and by whether the a
 |---|---|---|---|---|---|
 | Fairshake | $30.01M | $5.99M | $16.91M | $0 | $0 |
 | Leading the Future | $10.30M | $8.16M | $8.77M | $0 | $0 |
-| Public First | $15.56M | $0 | $5.46M | $1.44M | $0.40M |
+| Public First | $15.96M | $0 | $5.46M | $1.44M | $0 |
 
 All three networks spent on candidates in both parties. Most of each network's money supported candidates: $46.92M of Fairshake's, $19.07M of Leading the Future's, and $21.42M of Public First's. The opposition spending went one way per network. Fairshake and Leading the Future opposed only Democrats ($5.99M and $8.16M), and Public First opposed only Republicans ($1.44M).
 
 All of Leading the Future's $8.16M in opposition went to one race (see NY-12 below).
 
-The $0.40M in "Other or unknown" went to one candidate, Colin Allred in TX-33. These filings use an FEC candidate ID (H6TX33082) that is not in this project's candidate table and leave the party field blank, so the rows have no party. They are shown as their own group rather than assigned to a party by hand.
+No network spending in this snapshot lacks a party, so "Other or unknown" is $0 for all three. Some filings use a candidate ID that is not in the FEC candidate record, for example because a candidate who switched districts got a new ID. Those rows are matched to a candidate by race and last name. Colin Allred (TX-33) is one: Public First's filings use H6TX33082, and the candidate record lists him as H8TX32098.
 
 For each network, most of the money supporting Democrats and most of the money supporting Republicans was spent in primaries and runoffs. The share ranges from 54% (Fairshake, supporting Republicans) to 100% (Public First, supporting Democrats). Spending in a primary backs one candidate over others in the same party, so "supporting Democrats" does not mean spending against Republicans. The same is true of money supporting Republicans.
 
@@ -72,7 +72,7 @@ Most of the money so far went to primaries.
 
 ### Competitive versus safe seats
 
-![General election spending, competitive versus safe seats](figures/competitive_vs_safe.png)
+![General election spending in rated races, competitive versus safe](figures/competitive_vs_safe.png)
 
 This chart uses general election money only, because Cook ratings describe the November race. A primary in a safe seat can still be closely fought, so counting primary money here would misdescribe what it was for. Competitive means a Cook rating of Toss Up, Lean, or Likely. Safe means Solid.
 
@@ -109,9 +109,9 @@ The largest race is NY-12's Democratic primary, where two networks were on oppos
 
 - **Source.** Spending comes from the FEC bulk independent expenditure file, summed by committee, candidate, side, and election, with superseded filings dropped. Only House races are included. The full method is in the [README](../README.md#data-caveats).
 - **No share of all outside spending yet.** This section reports each network's own spending and does not give its share of all House outside spending. A check against FEC committee totals found one network committee, Jobs and Democracy PAC (Public First), more than 5% below its FEC-reported total (-10.69%; the README has the full table). The share will be added after a re-check passes.
-- **Public First's total may be low.** Because of that gap, Public First's figures above may understate its spending. Most of the gap appears to come from 24- and 48-hour filings that were amended to $0 after the committee's periodic report. Every Fairshake and Leading the Future committee was within 1% of its FEC-reported total.
+- **Public First's total may differ from what it reported.** Our figure for Jobs and Democracy PAC is about 11% lower than its FEC-reported total, so Public First's figures above may understate its spending. Most of the gap appears to come from 24- and 48-hour filings that were amended to $0 after the committee's periodic report. Every Fairshake and Leading the Future committee was within 1% of its FEC-reported total.
 - **The data keeps changing.** Committees file new 24- and 48-hour reports through Election Day. These figures are a snapshot as of October 23, 2026.
-- **Party** comes from the FEC candidate record, or from the filing when the candidate is not in that record. DFL (Minnesota's Democratic party) counts as Democratic.
+- **Party** comes from the FEC candidate record, or from the filing when the candidate is not in that record. A filing whose candidate ID is blank or not in that record is matched to a candidate by race and last name when exactly one candidate fits. DFL (Minnesota's Democratic party) counts as Democratic.
 - **Cook ratings** for seats that no forecaster rates as competitive are inferred as Solid D or Solid R from the district's PVI. The README explains how.
 - **Scope.** Only the three networks above are counted. Other committees with ties to the tech industry are not included, and neither are direct contributions to campaigns.
 
