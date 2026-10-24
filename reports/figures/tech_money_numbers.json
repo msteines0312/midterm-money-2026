@@ -56,11 +56,11 @@
       "total": 22858512.4,
       "n_candidates": 15,
       "party_buckets": {
-        "Supporting Democrats": 15564525.7,
+        "Supporting Democrats": 15964201.7,
         "Opposing Democrats": 0.0,
         "Supporting Republicans": 5456558.78,
         "Opposing Republicans": 1437751.92,
-        "Other or unknown": 399676.0
+        "Other or unknown": 0.0
       },
       "supporting_total": 21420760.48,
       "opposing_total": 1437751.92,
@@ -233,8 +233,8 @@
     },
     "Public First": {
       "Democrats": {
-        "Primary": 15564525.7,
-        "Runoff": 0.0,
+        "Primary": 15714451.7,
+        "Runoff": 249750.0,
         "General": 0.0,
         "Other": 0.0,
         "primary_and_runoff_pct": 100.0
@@ -248,16 +248,6 @@
       }
     }
   },
-  "no_party_rows": [
-    {
-      "network": "Public First",
-      "candidate_id": "H6TX33082",
-      "candidate_name": "ALLRED, COLIN",
-      "party": null,
-      "race_id": "TX-33",
-      "support_oppose": "S",
-      "total": 399676.0
-    }
-  ],
+  "no_party_rows": [],
   "share_included": false
 }
