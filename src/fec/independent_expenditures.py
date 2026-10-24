@@ -26,6 +26,15 @@ from src.fec.bulk import USER_AGENT
 from src.fec.transform import race_id, to_money
 
 
+# The bulk file spells parties out. These are the three major spellings in the
+# file; anything else (INDEPENDENT, LIBERTARIAN PARTY, ...) is kept as written.
+PARTY_CODES = {
+    "DEMOCRATIC PARTY": "DEM",
+    "REPUBLICAN PARTY": "REP",
+    "DEMOCRATIC-FARMER-LABOR": "DFL",
+}
+
+
 def download_independent_expenditures(cycle=CYCLE):
     """Download the bulk independent expenditure CSV and return its text.
 
@@ -70,6 +79,11 @@ def parse_independent_expenditures(text):
     return [{column: (value or "").strip() or None for column, value in row.items()} for row in reader]
 
 
+def _file_number(row):
+    """The row's filing number as an int, 0 when the file left it blank."""
+    return int(row["file_num"] or 0)
+
+
 def drop_superseded(rows):
     """Keep only the latest version of each expenditure.
 
@@ -93,15 +107,17 @@ def drop_superseded(rows):
     latest = {}
     for row in current:
         key = (row["spe_id"], row["tran_id"])
-        # file_num is a number in a text column, so compare as ints ("999" > "1000" as text)
-        if key not in latest or int(row["file_num"]) > int(latest[key]["file_num"]):
+        # file_num is a number in a text column, so compare as ints ("999" > "1000" as text).
+        # A missing one counts as 0, so any numbered version beats it.
+        if key not in latest or _file_number(row) > _file_number(latest[key]):
             latest[key] = row
     return list(latest.values())
 
 
 def _last_name(full_name):
     """Uppercased text before the first comma, e.g. "Lawler, Michael" -> "LAWLER"."""
-    return full_name.split(",")[0].strip().upper()
+    # A missing name becomes "", which matches nobody
+    return (full_name or "").split(",")[0].strip().upper()
 
 
 def _candidates_by_race_and_last_name(candidates):
@@ -139,11 +155,25 @@ def _resolve_candidate(row, race, candidates_by_id, candidates_by_name):
         candidate_id = matches[0]["candidate_id"] if len(matches) == 1 else None
 
     # Prefer the party code from `candidates` (DEM, REP, ...) so it matches the
-    # rest of the database. The bulk file spells parties out ("DEMOCRATIC PARTY").
+    # rest of the database. Otherwise translate the bulk file's spelled-out name.
     known = candidates_by_id.get(candidate_id)
     if known and known["party"]:
         return candidate_id, known["party"]
-    return candidate_id, row["cand_pty_aff"]
+    return candidate_id, PARTY_CODES.get(row["cand_pty_aff"], row["cand_pty_aff"])
+
+
+def _race_for_row(row, candidates_by_id):
+    """Find the race for a House row, or None when it can't be told.
+
+    race_id() would turn a blank district into "ST-00", which looks like an
+    at-large seat but is really "unknown", and would join to the wrong race.
+    So with no district, borrow the race of the candidate named by cand_id,
+    and give up (None) if that candidate isn't in `candidates`.
+    """
+    if row["can_office_dis"] is not None:
+        return race_id(row["can_office_state"], row["can_office_dis"])
+    known = candidates_by_id.get(row["cand_id"])
+    return known["race_id"] if known else None
 
 
 def house_outside_spending(text, candidates, pulled_at):
@@ -169,13 +199,15 @@ def house_outside_spending(text, candidates, pulled_at):
 
     groups = {}
     for row in drop_superseded(parse_independent_expenditures(text)):
-        # A House row without a state can't be placed in a race
-        if row["can_office"] != "H" or row["can_office_state"] is None:
+        # A House row without a state can't be placed in a race. A row with no
+        # amount has nothing to add (and would break the sum), so it is skipped too.
+        if row["can_office"] != "H" or row["can_office_state"] is None or row["exp_amo"] is None:
             continue
-        race = race_id(row["can_office_state"], row["can_office_dis"])
+        race = _race_for_row(row, candidates_by_id)
         candidate_id, party = _resolve_candidate(row, race, candidates_by_id, candidates_by_name)
         # Without an ID, race plus last name still keeps one candidate's money together
-        candidate_key = candidate_id or f"{race}|{_last_name(row['cand_name'])}"
+        # (a row with no district falls back to the state alone)
+        candidate_key = candidate_id or f"{race or row['can_office_state']}|{_last_name(row['cand_name'])}"
 
         key = (row["spe_id"], candidate_key, row["sup_opp"], row["ele_type"])
         if key not in groups:

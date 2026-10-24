@@ -71,7 +71,9 @@ def save_ie_sample():
     # parse_independent_expenditures turned blanks into None; write them back as blanks
     writer.writerows({k: v or "" for k, v in row.items()} for row in sample)
     out = FIXTURE_DIR / "ie_sample.csv"
-    out.write_text(buffer.getvalue(), encoding="latin-1")
+    # newline="" stops Windows from turning the LF line endings into CRLF
+    with open(out, "w", encoding="latin-1", newline="") as handle:
+        handle.write(buffer.getvalue())
     print(f"ie_sample: {len(sample)} rows -> {out.name}")
 
 

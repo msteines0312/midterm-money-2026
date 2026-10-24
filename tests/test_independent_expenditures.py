@@ -8,6 +8,8 @@ Fixture rows (tests/fixtures/ie_sample.csv, see scripts/save_fixtures.py):
 - Begich (AK at-large, district "00"), a Senate row, and a presidential row.
 """
 
+import csv
+import io
 from pathlib import Path
 
 import pytest
@@ -27,6 +29,19 @@ SENATE_ID = "S6FL00830"
 PRESIDENT_ID = "P00009423"
 # What the candidates table would hold for the CLF candidate
 BAUMGARTNER = {"candidate_id": "H6XX01234", "race_id": "WA-05", "name": "BAUMGARTNER, MICHAEL", "party": "REP"}
+
+
+def blanked(text, tran_id, field, value=""):
+    """Copy of the fixture text with one field of one real transaction changed."""
+    rows = list(csv.DictReader(io.StringIO(text)))
+    for row in rows:
+        if row["tran_id"] == tran_id:
+            row[field] = value
+    out = io.StringIO()
+    writer = csv.DictWriter(out, fieldnames=list(rows[0]), lineterminator="\n")
+    writer.writeheader()
+    writer.writerows(rows)
+    return out.getvalue()
 
 
 def clf_row(rows):
@@ -101,9 +116,16 @@ def test_party_comes_from_candidates_table_when_known():
     rows = house_outside_spending(SAMPLE, [known], "2026-10-23")
     (bennett,) = [r for r in rows if r["candidate_id"] == "H6NJ07201"]
     assert bennett["party"] == "DEM"
-    # Not in `candidates`, so the bulk file's own wording is kept
+    # Not in `candidates`, so the bulk file's wording is translated to a code
     (conley,) = [r for r in rows if r["candidate_id"] == "H6NY17171"]
-    assert conley["party"] == "DEMOCRATIC PARTY"
+    assert conley["party"] == "DEM"
+
+
+def test_unmapped_party_is_kept_as_written():
+    text = blanked(SAMPLE, "500370948", "cand_pty_aff", "INDEPENDENT")
+    rows = house_outside_spending(text, [], "2026-10-23")
+    (conley,) = [r for r in rows if r["candidate_id"] == "H6NY17171"]
+    assert conley["party"] == "INDEPENDENT"
 
 
 def test_race_id_matches_transform():
@@ -127,3 +149,47 @@ def test_parse_turns_blanks_into_none():
     clf = [r for r in rows if r["spe_id"] == CLF]
     assert all(r["cand_id"] is None for r in clf)
     assert clf[0]["exp_amo"] == "20500"
+
+
+def test_blank_amount_row_is_skipped():
+    text = blanked(SAMPLE, "SE24.6708", "exp_amo")
+    row = clf_row(house_outside_spending(text, [], "2026-10-23"))
+    assert row["total"] == 20500.0
+    assert row["count"] == 1
+
+
+def test_blank_candidate_name_does_not_crash():
+    text = blanked(SAMPLE, "SE24.6747", "cand_name")
+    rows = house_outside_spending(text, [BAUMGARTNER], "2026-10-23")
+    # The nameless row can't be matched, so it sits apart from the named one
+    assert sorted(r["candidate_id"] or "" for r in rows if r["committee_id"] == CLF) == ["", "H6XX01234"]
+
+
+def test_blank_file_number_does_not_crash():
+    text = blanked(SAMPLE, "SE24.6747", "file_num")
+    rows = drop_superseded(parse_independent_expenditures(text))
+    assert any(r["tran_id"] == "SE24.6747" for r in rows)
+
+
+def test_blank_district_uses_known_candidates_race():
+    text = blanked(SAMPLE, "500370948", "can_office_dis")
+    conley = {"candidate_id": "H6NY17171", "race_id": "NY-17", "name": "CONLEY, CAIT", "party": "DEM"}
+    rows = house_outside_spending(text, [conley], "2026-10-23")
+    (row,) = [r for r in rows if r["candidate_id"] == "H6NY17171"]
+    assert row["race_id"] == "NY-17"
+
+
+def test_blank_district_unknown_candidate_has_no_race():
+    text = blanked(SAMPLE, "500370948", "can_office_dis")
+    rows = house_outside_spending(text, [], "2026-10-23")
+    (row,) = [r for r in rows if r["candidate_id"] == "H6NY17171"]
+    assert row["race_id"] is None
+
+
+def test_blank_district_and_id_keys_on_state_and_last_name():
+    text = blanked(blanked(SAMPLE, "SE24.6747", "can_office_dis"), "SE24.6708", "can_office_dis")
+    row = clf_row(house_outside_spending(text, [BAUMGARTNER], "2026-10-23"))
+    assert row["race_id"] is None
+    assert row["candidate_id"] is None
+    assert row["candidate_key"] == "WA|BAUMGARTNER"
+    assert row["total"] == CLF_TOTAL
