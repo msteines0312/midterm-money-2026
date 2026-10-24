@@ -12,7 +12,7 @@ An analysis of campaign finance and endorsements in the 2026 U.S. House midterms
 ## Tech Stack
 - Python (requests, pandas, BeautifulSoup, pytest)
 - SQLite
-- Power BI
+- matplotlib for the write-up charts
 - Data: FEC OpenFEC API, Cook Political Report ratings and PVI (via Wikipedia), hand-collected labels
 
 ## How to Run

@@ -12,12 +12,14 @@ A portfolio project analyzing campaign finance and endorsements in the 2026 U.S.
 | Phase | Delivers | Plan |
 |---|---|---|
 | 1. Data foundation | SQLite database built from OpenFEC plus hand-built CSVs, refreshable by one command | `plans/2026-10-20-data-foundation.md` |
-| 2. Industry super PACs | Analysis + Power BI page 1 | Written after phase 1 data is inspected |
-| 3. Endorsements | Endorsement and primary result dataset, analysis, Power BI page 2 | Written after phase 1 |
-| 4. Money and winning | Logistic regression, Power BI page 3 | Written after phase 1 |
+| 2. Tech money | Analysis + write-up section 1 (House before Nov 3, Senate and billionaire donors after) | `specs/2026-10-23-tech-money-page-design.md` |
+| 3. Endorsements | Endorsement and primary result dataset, analysis, write-up section 2 | Written after phase 1 |
+| 4. Money and winning | Logistic regression, write-up section 3 | Written after phase 1 |
 | 5. Post-election update | General results, model rerun, before and after write-up | After Nov 3 |
 
 Phases 2 to 4 get their own plans because their details depend on what the real data looks like.
+
+On 2026-10-23 the MVP format changed from a Power BI dashboard to a written analysis on GitHub (markdown with PNG charts). Power BI and full Senate coverage are post-MVP work on their own branch.
 
 ## Data sources
 - **OpenFEC API** (api.open.fec.gov/v1), key in `.env` as `FEC_API_KEY`.
