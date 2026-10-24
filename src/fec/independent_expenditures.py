@@ -201,7 +201,10 @@ def house_outside_spending(text, candidates, pulled_at):
     for row in drop_superseded(parse_independent_expenditures(text)):
         # A House row without a state can't be placed in a race. A row with no
         # amount has nothing to add (and would break the sum), so it is skipped too.
-        if row["can_office"] != "H" or row["can_office_state"] is None or row["exp_amo"] is None:
+        # A few real filings leave support/oppose blank. They can't be counted as
+        # either side, and the table requires one, so they are skipped as well.
+        if (row["can_office"] != "H" or row["can_office_state"] is None
+                or row["exp_amo"] is None or row["sup_opp"] is None):
             continue
         race = _race_for_row(row, candidates_by_id)
         candidate_id, party = _resolve_candidate(row, race, candidates_by_id, candidates_by_name)

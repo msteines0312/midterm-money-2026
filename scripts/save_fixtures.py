@@ -14,13 +14,13 @@ from pathlib import Path
 # Let this script import from src/ when run directly
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from src.config import CYCLE, PROJECT_ROOT, load_api_key  # noqa: E402
+from src.config import PROJECT_ROOT, load_api_key  # noqa: E402
 from src.fec.client import FecClient  # noqa: E402
 from src.fec.independent_expenditures import (  # noqa: E402
     download_independent_expenditures,
     parse_independent_expenditures,
 )
-from src.pipeline import ENDPOINTS, OUTSIDE_SPENDING_PATH  # noqa: E402
+from src.pipeline import ENDPOINTS  # noqa: E402
 
 FIXTURE_DIR = PROJECT_ROOT / "tests" / "fixtures"
 
@@ -86,18 +86,6 @@ def main():
         out = FIXTURE_DIR / f"{name}.json"
         out.write_text(json.dumps(strip_api_key(body, api_key), indent=2))
         print(f"{name}: {len(body.get('results', []))} results -> {out.name}")
-
-    # Outside spending is queried by candidate ID. The top fundraisers are
-    # used here because they're the likeliest to have outside money.
-    top = client.get(
-        "/candidates/totals/",
-        {"office": "H", "election_year": CYCLE, "cycle": CYCLE, "sort": "-receipts", "per_page": 20},
-    )
-    ids = [r["candidate_id"] for r in top["results"]]
-    body = client.get(OUTSIDE_SPENDING_PATH, {"cycle": CYCLE, "candidate_id": ids, "per_page": 5})
-    out = FIXTURE_DIR / "outside_spending.json"
-    out.write_text(json.dumps(strip_api_key(body, api_key), indent=2))
-    print(f"outside_spending: {len(body['results'])} results -> {out.name}")
 
     save_ie_sample()
 

@@ -7,13 +7,14 @@ import pytest
 
 from src.config import DB_PATH, SAMPLE_DB_PATH
 from src.db import connect, create_schema, upsert_rows
-from src.pipeline import ENDPOINTS, OUTSIDE_SPENDING_PATH, database_for, orphan_counts, run_pull
+from src.pipeline import ENDPOINTS, database_for, orphan_counts, run_pull
 
 FIXTURES = Path(__file__).parent / "fixtures"
 # Real rows from the FEC bulk summary file: 3 House campaigns and 1 Senate
 SUMMARY = (FIXTURES / "webl_sample.txt").read_text(encoding="latin-1")
-SUMMARY_HOUSE_IDS = {"H6KY06259", "H6FL13239", "H2AK01083"}
-FIXTURE_FOR_PATH = {**{path: name for name, (path, _) in ENDPOINTS.items()}, OUTSIDE_SPENDING_PATH: "outside_spending"}
+# Real rows from the FEC bulk independent expenditure file, including CLF rows with no candidate ID
+IE_SAMPLE = (FIXTURES / "ie_sample.csv").read_text(encoding="latin-1")
+FIXTURE_FOR_PATH = {path: name for name, (path, _) in ENDPOINTS.items()}
 
 RACES = [{
     "race_id": "TX-31", "state": "TX", "district": "31",
@@ -47,7 +48,7 @@ def count(conn, table):
 
 
 def pull(client, conn, pulled_at):
-    return run_pull(client, conn, pulled_at, RACES, SUMMARY, pac_industries=[])
+    return run_pull(client, conn, pulled_at, RACES, SUMMARY, IE_SAMPLE, pac_industries=[])
 
 
 def test_run_pull_fills_every_table(conn):
@@ -71,28 +72,18 @@ def test_new_day_appends_snapshot(conn):
     assert count(conn, "candidates") == first_candidates
 
 
-def test_outside_spending_is_requested_in_batches_of_100(conn):
-    template = json.loads((FIXTURES / "candidates.json").read_text())["results"][0]
-    candidates = [{**template, "candidate_id": f"H6XX{i:05d}"} for i in range(250)]
-    client = FakeClient(candidates=candidates)
-    pull(client, conn, "2026-10-20")
-
-    batches = [params["candidate_id"] for path, params in client.calls if path == OUTSIDE_SPENDING_PATH]
-    # 250 from /candidates/ plus the 3 House campaigns in the summary fixture = 253 IDs
-    assert [len(b) for b in batches] == [100, 100, 53]
-
-
-def test_outside_spending_covers_candidates_from_both_sources(conn):
-    # The API candidate list and the bulk summary file don't contain exactly the
-    # same campaigns, so spending is requested for both or some money is never seen
+def test_no_outside_spending_api_calls(conn):
+    # Outside spending now comes from the bulk file, so the API is never asked for it
     client = FakeClient()
     pull(client, conn, "2026-10-20")
+    assert not any("/schedules/" in path for path, _ in client.calls)
 
-    api_ids = {r["candidate_id"] for r in json.loads((FIXTURES / "candidates.json").read_text())["results"]}
 
-    requested = {cid for path, params in client.calls if path == OUTSIDE_SPENDING_PATH
-                 for cid in params["candidate_id"]}
-    assert requested == api_ids | SUMMARY_HOUSE_IDS
+def test_rerun_same_day_does_not_duplicate_spending(conn):
+    pull(FakeClient(), conn, "2026-10-20")
+    first = count(conn, "outside_spending")
+    pull(FakeClient(), conn, "2026-10-20")
+    assert count(conn, "outside_spending") == first
 
 
 def test_sample_pull_uses_a_separate_database():
@@ -108,3 +99,10 @@ def test_orphan_counts_reports_missing_race(conn):
         "district": "00", "race_id": "DC-00", "incumbent_challenge": "I", "primary_result": None,
     }])
     assert orphan_counts(conn)["candidates_without_race"] == 1
+
+
+def test_orphan_counts_reports_unmatched_spending(conn):
+    # The fixture's CLF rows have no candidate ID and none of the fixture
+    # candidates are in WA-05, so they stay unmatched
+    pull(FakeClient(), conn, "2026-10-20")
+    assert orphan_counts(conn)["spending_without_candidate"] >= 1

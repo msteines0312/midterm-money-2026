@@ -158,6 +158,14 @@ def test_blank_amount_row_is_skipped():
     assert row["count"] == 1
 
 
+def test_blank_support_oppose_row_is_skipped():
+    # Real filings exist with no S or O. They can't be counted as either side.
+    text = blanked(SAMPLE, "SE24.6708", "sup_opp")
+    row = clf_row(house_outside_spending(text, [], "2026-10-23"))
+    assert row["total"] == 20500.0
+    assert row["count"] == 1
+
+
 def test_blank_candidate_name_does_not_crash():
     text = blanked(SAMPLE, "SE24.6747", "cand_name")
     rows = house_outside_spending(text, [BAUMGARTNER], "2026-10-23")

@@ -8,7 +8,6 @@ import pytest
 from src.fec.transform import (
     candidate_row,
     committee_row,
-    outside_spending_row,
     race_id,
     to_money,
 )
@@ -20,7 +19,6 @@ CANDIDATE_COLUMNS = {
     "incumbent_challenge", "primary_result",
 }
 COMMITTEE_COLUMNS = {"committee_id", "name", "committee_type", "designation"}
-SPENDING_COLUMNS = {"committee_id", "candidate_id", "support_oppose", "pulled_at", "total", "count"}
 
 
 def first_record(name):
@@ -50,10 +48,3 @@ def test_candidate_row_from_fixture():
 
 def test_committee_row_from_fixture():
     assert set(committee_row(first_record("committees"))) == COMMITTEE_COLUMNS
-
-
-def test_outside_spending_row_from_fixture():
-    row = outside_spending_row(first_record("outside_spending"), "2026-10-20")
-    assert set(row) == SPENDING_COLUMNS
-    assert row["support_oppose"] in {"S", "O"}
-    assert row["pulled_at"] == "2026-10-20"

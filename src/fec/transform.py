@@ -82,26 +82,3 @@ def committee_row(rec):
         "committee_type": rec.get("committee_type"),
         "designation": rec.get("designation"),
     }
-
-
-def outside_spending_row(rec, pulled_at):
-    """Map a /schedules/schedule_e/by_candidate/ record to an `outside_spending` row.
-
-    Parameters
-    ----------
-    rec : dict
-    pulled_at : str
-        ISO date of this pull.
-
-    Returns
-    -------
-    dict
-    """
-    return {
-        "committee_id": rec["committee_id"],
-        "candidate_id": rec["candidate_id"],
-        "support_oppose": rec.get("support_oppose_indicator"),
-        "pulled_at": pulled_at,
-        "total": to_money(rec.get("total")),
-        "count": rec.get("count"),
-    }
