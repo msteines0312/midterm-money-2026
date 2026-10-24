@@ -4,15 +4,15 @@
 
 ## The question
 
-Three super PAC networks funded by the crypto and AI industries are spending in 2026 House races. This section asks how much each network spent, which candidates it spent for or against, and which races the money went to. It reports what was spent and on whom. It does not try to measure whether the spending changed any result.
+Three super PAC networks tied to crypto and AI policy are spending in 2026 House races. This section asks how much each network spent, which candidates it spent for or against, and which races the money went to. It reports what was spent and on whom. It does not try to measure whether the spending changed any result.
 
-All figures come from `scripts/build_tech_money_report.py`, which reads the October 23 snapshot and writes the charts and [`tech_money_numbers.json`](figures/tech_money_numbers.json). Every number below can be checked against that file.
+All figures come from `scripts/build_tech_money_report.py`, which reads the October 23 snapshot and writes the charts and [`tech_money_numbers.json`](figures/tech_money_numbers.json). Every number below can be checked against that file, except the validation percentages, which come from the validation table in the [README](../README.md#data-caveats).
 
 ## The networks and how they were identified
 
 A network is a group of committees tied to the same organizers. Each committee was added to a network only if it had one of three kinds of public source: FEC evidence (a filing that names the parent group, a shared treasurer, or transfers between the committees), the group's own public statement, or a major news outlet naming the committee. The same standard was applied to all three networks. The committee list and the source for each row are in [`data/manual/pac_industries.csv`](../data/manual/pac_industries.csv).
 
-| Network | Industry | Committees (FEC ID) |
+| Network | Category | Committees (FEC ID) |
 |---|---|---|
 | Fairshake | Crypto | Fairshake (C00835959), Protect Progress (C00848440), Defend American Jobs (C00836221) |
 | Leading the Future | AI industry | Think Big (C00923417), American Mission (C00916692), Leading the Future (C00916114) |
@@ -52,9 +52,9 @@ All three networks spent on candidates in both parties. Most of each network's m
 
 All of Leading the Future's $8.16M in opposition went to one race (see NY-12 below).
 
-The $0.40M in "Other or unknown" went to one candidate, Colin Allred in TX-33. These filings use an FEC candidate ID that is not in this project's candidate table and leave the party field blank, so the rows have no party. They are shown as their own group rather than assigned to a party by hand.
+The $0.40M in "Other or unknown" went to one candidate, Colin Allred in TX-33. These filings use an FEC candidate ID (H6TX33082) that is not in this project's candidate table and leave the party field blank, so the rows have no party. They are shown as their own group rather than assigned to a party by hand.
 
-For each network, most of the money supporting Democrats and most of the money supporting Republicans was spent in primaries and runoffs. Spending in a primary backs one candidate over others in the same party, so "supporting Democrats" does not mean spending against Republicans. The same is true of money supporting Republicans.
+For each network, most of the money supporting Democrats and most of the money supporting Republicans was spent in primaries and runoffs. The share ranges from 54% (Fairshake, supporting Republicans) to 100% (Public First, supporting Democrats). Spending in a primary backs one candidate over others in the same party, so "supporting Democrats" does not mean spending against Republicans. The same is true of money supporting Republicans.
 
 ### Primary versus general election
 
@@ -76,7 +76,7 @@ Most of the money so far went to primaries.
 
 This chart uses general election money only, because Cook ratings describe the November race. A primary in a safe seat can still be closely fought, so counting primary money here would misdescribe what it was for. Competitive means a Cook rating of Toss Up, Lean, or Likely. Safe means Solid.
 
-| Network | Competitive seats | Safe seats |
+| Network | Competitive seats (rated races) | Safe seats (rated races) |
 |---|---|---|
 | Fairshake | $5.10M | $5.73M |
 | Leading the Future | $0.65M | $2.33M |
@@ -113,7 +113,7 @@ The largest race is NY-12's Democratic primary, where two networks were on oppos
 - **The data keeps changing.** Committees file new 24- and 48-hour reports through Election Day. These figures are a snapshot as of October 23, 2026.
 - **Party** comes from the FEC candidate record, or from the filing when the candidate is not in that record. DFL (Minnesota's Democratic party) counts as Democratic.
 - **Cook ratings** for seats that no forecaster rates as competitive are inferred as Solid D or Solid R from the district's PVI. The README explains how.
-- **Scope.** Only the three networks above are counted. Other committees funded by tech companies or tech executives are not included, and neither are direct contributions to campaigns.
+- **Scope.** Only the three networks above are counted. Other committees with ties to the tech industry are not included, and neither are direct contributions to campaigns.
 
 ## What's next
 

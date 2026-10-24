@@ -198,5 +198,66 @@
       "total": 8155897.68
     }
   ],
+  "support_by_party_and_stage": {
+    "Fairshake": {
+      "Democrats": {
+        "Primary": 18579923.32,
+        "Runoff": 4903861.6,
+        "General": 5508622.42,
+        "Other": 1012792.0,
+        "primary_and_runoff_pct": 78.27
+      },
+      "Republicans": {
+        "Primary": 7358445.94,
+        "Runoff": 1853042.47,
+        "General": 5469649.58,
+        "Other": 2232548.69,
+        "primary_and_runoff_pct": 54.46
+      }
+    },
+    "Leading the Future": {
+      "Democrats": {
+        "Primary": 9063220.2,
+        "Runoff": 0.0,
+        "General": 1237863.02,
+        "Other": 0.0,
+        "primary_and_runoff_pct": 87.98
+      },
+      "Republicans": {
+        "Primary": 5627181.33,
+        "Runoff": 0.0,
+        "General": 1744002.72,
+        "Other": 1394933.33,
+        "primary_and_runoff_pct": 64.19
+      }
+    },
+    "Public First": {
+      "Democrats": {
+        "Primary": 15564525.7,
+        "Runoff": 0.0,
+        "General": 0.0,
+        "Other": 0.0,
+        "primary_and_runoff_pct": 100.0
+      },
+      "Republicans": {
+        "Primary": 3493942.86,
+        "Runoff": 1926270.17,
+        "General": 0.0,
+        "Other": 36345.75,
+        "primary_and_runoff_pct": 99.33
+      }
+    }
+  },
+  "no_party_rows": [
+    {
+      "network": "Public First",
+      "candidate_id": "H6TX33082",
+      "candidate_name": "ALLRED, COLIN",
+      "party": null,
+      "race_id": "TX-33",
+      "support_oppose": "S",
+      "total": 399676.0
+    }
+  ],
   "share_included": false
 }

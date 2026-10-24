@@ -58,6 +58,7 @@ RED = "#e34948"
 GRAY = "#8a8986"
 VIOLET = "#6250d6"
 ORANGE = "#eb6834"
+AQUA = "#1baf7a"
 
 # Support is a solid fill and opposition is a hatched, lighter fill of the
 # same hue, so the two read apart in grayscale and for colorblind readers
@@ -73,8 +74,9 @@ PARTY_BUCKETS = [
     ("Other or unknown", GRAY, SOLID),
 ]
 SEAT_TYPES = [
-    ("Competitive", ORANGE, SOLID),
-    ("Safe", ORANGE, HATCHED),
+    # Aqua, not orange, because orange already means "General" in the election chart
+    ("Competitive", AQUA, SOLID),
+    ("Safe", AQUA, HATCHED),
 ]
 ELECTIONS = [
     ("Primary", VIOLET, SOLID),
@@ -160,6 +162,81 @@ def race_detail(conn, pulled_at, race_id):
     return [dict(zip(columns, row)) for row in cursor]
 
 
+def support_by_party_and_stage(conn, pulled_at):
+    """Supporting spending per network, by candidate party and election stage.
+
+    Backs the report's statement about how much support money went to
+    primaries and runoffs, where a network backs one candidate over others
+    in the same party.
+
+    Parameters
+    ----------
+    conn : sqlite3.Connection
+    pulled_at : str
+
+    Returns
+    -------
+    dict
+        {network: {"Democrats" or "Republicans": {"Primary", "Runoff",
+        "General", "Other", "primary_and_runoff_pct"}}}. Rows with no party
+        are left out here and reported by `no_party_rows`.
+    """
+    sql = f"""
+        SELECT network,
+               CASE WHEN party IN ('DEM', 'DFL') THEN 'Democrats' ELSE 'Republicans' END AS party_group,
+               CASE election_type
+                   WHEN 'P' THEN 'Primary'
+                   WHEN 'R' THEN 'Runoff'
+                   WHEN 'G' THEN 'General'
+                   ELSE 'Other'
+               END AS stage,
+               SUM(total) AS total
+        FROM ({NETWORK_SPENDING})
+        WHERE support_oppose = 'S' AND party IN ('DEM', 'DFL', 'REP')
+        GROUP BY network, party_group, stage
+    """
+    result = {}
+    for network, party_group, stage, total in conn.execute(sql, {"pulled_at": pulled_at}):
+        stages = result.setdefault(network, {}).setdefault(
+            party_group, {"Primary": 0.0, "Runoff": 0.0, "General": 0.0, "Other": 0.0})
+        stages[stage] += total
+    for parties in result.values():
+        for stages in parties.values():
+            stage_sum = sum(stages.values())
+            stages["primary_and_runoff_pct"] = (stages["Primary"] + stages["Runoff"]) / stage_sum * 100
+    return result
+
+
+def no_party_rows(conn, pulled_at):
+    """Network spending on candidates whose rows have no Democratic or Republican party code.
+
+    These rows make up the "Other or unknown" bucket. Listing them lets the
+    report name who the money went to instead of leaving the bucket opaque.
+
+    Parameters
+    ----------
+    conn : sqlite3.Connection
+    pulled_at : str
+
+    Returns
+    -------
+    list of dict
+        Keys `network`, `candidate_id`, `candidate_name`, `party`, `race_id`,
+        `support_oppose`, `total`.
+    """
+    sql = f"""
+        SELECT network, candidate_id, candidate_name, party, race_id, support_oppose,
+               SUM(total) AS total
+        FROM ({NETWORK_SPENDING})
+        WHERE party IS NULL OR party NOT IN ('DEM', 'DFL', 'REP')
+        GROUP BY network, candidate_id, candidate_name, party, race_id, support_oppose
+        ORDER BY total DESC
+    """
+    cursor = conn.execute(sql, {"pulled_at": pulled_at})
+    columns = [col[0] for col in cursor.description]
+    return [dict(zip(columns, row)) for row in cursor]
+
+
 def stage_totals(detail_rows):
     """Sum one race's network rows into Primary, General and Other."""
     stages = {"P": "Primary", "G": "General"}
@@ -227,6 +304,8 @@ def collect_numbers(conn, pulled_at):
         for race in races.to_dict(orient="records")
     ]
     numbers["top_race_detail"] = race_detail(conn, pulled_at, races["race_id"].iloc[0])
+    numbers["support_by_party_and_stage"] = support_by_party_and_stage(conn, pulled_at)
+    numbers["no_party_rows"] = no_party_rows(conn, pulled_at)
 
     frames = {"totals": totals, "buckets": buckets, "seats": seats, "elections": elections}
     return numbers, frames
@@ -365,11 +444,11 @@ def plot_party_buckets(frames, pulled_at):
 def plot_competitive_vs_safe(frames, pulled_at):
     """General election spending in competitive versus safe seats."""
     height = 4.6
-    fig, ax = new_figure("General election spending, competitive versus safe seats", pulled_at, height)
+    fig, ax = new_figure("General election spending in rated races, competitive versus safe", pulled_at, height)
     add_legend(fig, SEAT_TYPES, height)
     draw_stacked_bars(ax, frames["seats"], SEAT_TYPES, network_labels(frames["totals"]))
     add_note(fig, "General election only. Competitive = Cook Toss Up, Lean or Likely. Safe = Solid. "
-                  "Races with no Cook rating are left out.")
+                  "Rated races only.")
     save(fig, "competitive_vs_safe.png")
 
 
