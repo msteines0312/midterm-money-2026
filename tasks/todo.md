@@ -37,7 +37,8 @@ Design: `docs/superpowers/specs/2026-10-23-tech-money-page-design.md`
 ## Step 4: Money and winning, pre-election (write-up section 3)
 - [ ] Compute fundraising share per race
 - [ ] Logistic regression on primary outcomes: money share, incumbency, PVI
-- [ ] Compare fundraising advantage against Cook ratings for the general
+- [x] Compare fundraising advantage against Cook ratings for the general
+- [x] Commit simple general election predictions (tag pre-election-simple)
 - [ ] Write section 3 and commit the pre-election predictions before Nov 3
 
 ## Step 4b: Full pre-election pull

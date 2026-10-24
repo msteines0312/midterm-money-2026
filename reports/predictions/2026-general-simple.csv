@@ -1,0 +1,436 @@
+race_id,status,race_type,dem_name,dem_candidate_id,rep_name,rep_candidate_id,dem_money,rep_money,dem_money_share,money_leader_party,cook_rating,cook_favorite_party,incumbent_party,outside_support_dem,outside_oppose_dem,outside_support_rep,outside_oppose_rep,money_and_cook_agree,third_party_outraised,notes
+AK-00,confirmed,D_vs_R,Eric Hafner,H4AK00164,Nick Begich III,H2AK01083,0.0,4483882.94,0.0,REP,Likely R,REP,REP,0.0,402305.05,2098337.58,5973175.3,True,True,
+AL-01,confirmed,D_vs_R,Clyde Jones Jr.,H6AL01094,Jerry Carl,H0AL01055,194111.75,1249785.05,0.1344360275609725,REP,Solid R,REP,,0.0,0.0,0.0,0.0,True,False,
+AL-02,confirmed,D_vs_R,Shomari Figures,H4AL02170,Rhett Marques,H6AL01086,2244594.64,1696373.63,0.5695541009773215,DEM,Likely R,REP,DEM,1716493.2,2004726.4700000002,1132946.51,1902307.4500000002,False,False,
+AL-03,confirmed,D_vs_R,Lee McInnis,H6AL03199,Mike Rogers,H2AL03032,62981.54,2456604.83,0.024996777546466883,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+AL-04,confirmed,D_vs_R,Amanda Pusczek,H6AL05228,Robert Aderholt,H6AL04098,22129.32,1071883.32,0.02022766391437671,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+AL-05,confirmed,D_vs_R,Andrew Sneed,H6AL05244,Dale Strong,H2AL05102,880294.34,1586943.85,0.3567934152316279,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+AL-06,confirmed,D_vs_R,Maurice Mercer,H6AL06184,Gary Palmer,H4AL06098,28202.49,1086618.46,0.02529777539612976,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+AL-07,confirmed,D_vs_R,Terri Sewell,H0AL07086,Ammie Akin,H6AL07208,2257912.76,165462.09,0.9317224530905733,DEM,Solid D,DEM,DEM,149704.16,0.0,0.0,0.0,True,False,
+AR-01,confirmed,D_vs_R,Terri Green,H6AR01155,Rick Crawford,H0AR01083,103844.26,1083037.71,0.0874933334778015,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Steve Parsons"
+AR-02,confirmed,D_vs_R,Chris Jones,H6AR02286,French Hill,H4AR02141,1929251.2,3982836.8,0.32632315351192337,REP,Likely R,REP,REP,11928.0,2101596.78,1087629.96,1550229.25,True,False,
+AR-03,confirmed,D_vs_R,Robb Ryerse,H6AR03128,Steve Womack,H0AR03055,160403.51,2204802.65,0.0678179825136258,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Bobby Wilson"
+AR-04,confirmed,D_vs_R,James Russell,H6AR04084,Bruce Westerman,H4AR04048,21553.8,2200873.25,0.009698316081960937,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+AZ-01,confirmed,D_vs_R,Amish Shah,H4AZ01194,Jay Feely,H6AZ05190,4654061.03,2366283.48,0.6629391226271886,DEM,Lean D,DEM,,1013852.83,13162694.62,2000592.3200000005,7872099.88,True,False,
+AZ-02,confirmed,D_vs_R,Jonathan Nez,H4AZ02184,Eli Crane,H2AZ01354,5588831.130000001,10953215.57,0.33785608464036077,REP,Likely R,REP,REP,654117.54,2416824.3000000003,2360513.1399999997,1781633.32,True,False,"no FEC match, counted as $0: Curtis Goodwin"
+AZ-03,confirmed,other,Yassamin Ansari,H4AZ03109,Alan Aversa,H4AZ03174,1550529.5,250.0,0.9998387907500712,DEM,Solid D,,DEM,0.0,0.0,0.0,0.0,,False,"other race: dem and rep columns hold the top two by money (Yassamin Ansari and Alan Aversa); no Cook favorite; 3 nominees, not one Democrat against one Republican; no FEC match, counted as $0: David Redkey"
+AZ-04,confirmed,D_vs_R,Greg Stanton,H8AZ09040,Zuhdi Jasser,H4AZ04115,2655676.74,721853.49,0.7862777115691426,DEM,Solid D,DEM,DEM,327064.45,74910.15,18000.0,0.0,True,False,"no FEC match, counted as $0: Tisha Benoit"
+AZ-05,confirmed,D_vs_R,Elizabeth Lee,H6AZ05240,Mark Lamb,H6AZ05265,370128.14,1730705.83,0.17618152851936222,REP,Solid R,REP,,0.0,0.0,124.75,0.0,True,False,
+AZ-06,confirmed,D_vs_R,JoAnna Mendoza,H6AZ06099,Juan Ciscomani,H2AZ02360,10021916.34,4905394.06,0.6713812516419569,DEM,Toss Up,,REP,2743921.37,5454533.21,3263681.72,7513976.3100000005,,False,"no FEC match, counted as $0: Gary Swing"
+AZ-07,confirmed,D_vs_R,Adelita Grijalva,H6AZ07121,Daniel Butierez,H4AZ07134,2507228.85,51407.43,0.9799082697287478,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+AZ-08,confirmed,D_vs_R,Bernadette Greene-Placentia,H4AZ08082,Abraham Hamadeh,H4AZ08108,372825.77,1054869.69,0.2611381631766203,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+AZ-09,confirmed,D_vs_R,Dani Sterbinsky,H6AZ09085,Paul Gosar,H0AZ01259,461597.03,784246.2,0.37050972296088974,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+CA-01,confirmed,D_vs_R,Mike McGuire,H6CA01269,James Gallagher,H6CA01285,2212487.34,1517810.97,0.5931127100663433,DEM,Solid D,DEM,,52443.28,0.0,0.0,0.0,True,False,
+CA-02,confirmed,D_vs_R,Jared Huffman,H2CA06259,Robin Littau,H6CA02309,1130165.28,0.0,1.0,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+CA-03,confirmed,D_vs_R,Ami Bera,H0CA03078,Robb Tucker,H6CA03174,1461528.27,96414.0,0.938114523332113,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+CA-04,confirmed,same_party,Mike Thompson,H8CA01109,Eric Jones,H6CA04222,5335294.52,2918199.63,0.6464285820085061,DEM,Solid D,,DEM,1584230.22,2049773.72,0.0,1725000.0,,False,same_party race: dem and rep columns hold the top two by money (Mike Thompson and Eric Jones); no Cook favorite
+CA-05,confirmed,D_vs_R,Michael Masuda,H6CA05377,Tom McClintock,H8CA04152,570122.17,1251433.34,0.31298643761891176,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+CA-06,confirmed,other,Kevin Kiley,H2CA03157,Richard Pan,H6CA03158,2694737.9499999997,2375247.56,0.5315080180574322,,Solid D,,OTHER,1407049.88,2768607.89,464695.61000000004,498099.25,,False,"other race: dem and rep columns hold the top two by money (Kevin Kiley and Richard Pan); no Cook favorite; 2 nominees, not one Democrat against one Republican"
+CA-07,confirmed,same_party,Doris Matsui,H6CA05195,Mai Vang,H6CA07175,2337076.8,1807519.35,0.563885289523323,DEM,Solid D,,DEM,33500.0,177000.0,745504.84,1069558.84,,False,same_party race: dem and rep columns hold the top two by money (Doris Matsui and Mai Vang); no Cook favorite
+CA-08,confirmed,D_vs_R,John Garamendi,H0CA10149,Rudy Recile,H2CA00153,577500.38,10798.0,0.9816453684608141,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+CA-09,confirmed,D_vs_R,Josh Harder,H8CA10126,John McBride,H4CA09101,3763683.8699999996,55486.59,0.9854715597061882,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+CA-10,confirmed,D_vs_R,Mark DeSaulnier,H0CA10073,Jeff Frese,H6CA10187,717866.1,0.0,1.0,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+CA-11,confirmed,same_party,Scott Wiener,H8CA11116,Connie Chan,H6CA11268,5529937.149999999,2376706.9499999997,0.6994038279780419,DEM,Solid D,,,4445363.87,160599.8,1364383.73,2870398.75,,False,same_party race: dem and rep columns hold the top two by money (Scott Wiener and Connie Chan); no Cook favorite
+CA-12,confirmed,same_party,Lateefah Simon,H4CA12154,Jamie Joyce,H6CA12209,1632536.5,66221.8,0.9610175267429156,DEM,Solid D,,DEM,0.0,0.0,0.0,0.0,,False,same_party race: dem and rep columns hold the top two by money (Lateefah Simon and Jamie Joyce); no Cook favorite
+CA-13,confirmed,D_vs_R,Adam Gray,H2CA13115,Kevin Lincoln,H4CA09093,4513240.88,2008094.98,0.6920730624660697,DEM,Lean D,DEM,DEM,95788.18,5551385.79,224880.69999999998,1780190.2800000003,True,False,
+CA-14,confirmed,same_party,Melissa Hernandez,H6CA14163,Aisha Wahab,H0CA15213,2091588.03,1161582.02,0.6429384255520243,DEM,Solid D,,,24954.05,0.0,930079.6,0.0,,False,same_party race: dem and rep columns hold the top two by money (Melissa Hernandez and Aisha Wahab); no Cook favorite
+CA-15,confirmed,D_vs_R,Kevin Mullin,H2CA14162,Charles Hoelter,H6CA15194,972832.62,0.0,1.0,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+CA-16,confirmed,D_vs_R,Sam Liccardo,H4CA16197,Peter Soulé,H6CA16176,2509803.36,4172.0,0.9983404769726939,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+CA-17,confirmed,D_vs_R,Ro Khanna,H4CA12055,Ritesh Tandon,H0CA17193,13917084.69,56786.48,0.9959362384761415,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+CA-18,confirmed,D_vs_R,Zoe Lofgren,H4CA16049,Shane Lewis,H6CA18172,1753131.02,44436.35,0.9752797304058762,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+CA-19,confirmed,D_vs_R,Jimmy Panetta,H6CA20152,Peter Coe Verbica,H6CA19154,3563756.29,82389.0,0.9774038077347159,DEM,Solid D,DEM,DEM,149384.54,0.0,0.0,0.0,True,False,
+CA-20,confirmed,D_vs_R,Sandra Van Scotter,H6CA20228,Vince Fong,H4CA20181,29888.45,2210104.44,0.013343100388144536,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+CA-21,confirmed,D_vs_R,Jim Costa,H4CA20082,Kyle Kirkland,H6CA13199,1648089.32,277942.97000000003,0.8556914276862928,DEM,Likely D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+CA-22,confirmed,D_vs_R,Randy Villegas,H6CA22190,David Valadao,H2CA20094,5553292.44,4454835.53,0.5548782406306502,DEM,Toss Up,,REP,2006318.78,8956068.91,491915.52,10879174.469999999,,False,
+CA-23,confirmed,D_vs_R,Tessa Lynn Hodge,H6CA23230,Jay Obernolte,H0CA08135,117545.66,1720962.68,0.06393534227862138,REP,Solid R,REP,REP,0.0,0.0,140448.0,0.0,True,False,
+CA-24,confirmed,D_vs_R,Salud Carbajal,H6CA24303,Bob Smith,H6CA24345,1881234.76,310240.68,0.85843296514425,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+CA-25,confirmed,D_vs_R,Raul Ruiz,H2CA36439,Joe Males,H6CA25219,2434115.12,1055560.08,0.6975191043567608,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+CA-26,confirmed,D_vs_R,Jacqui Irwin,H6CA26266,Sam Gallucci,H6CA26241,1157227.51,245059.58,0.8252429322443523,DEM,Solid D,DEM,,0.0,0.0,0.0,0.0,True,False,
+CA-27,confirmed,D_vs_R,George Whitesides,H4CA27111,Jason Gibbs,H6CA27306,3868875.6399999997,409609.94,0.9042628677037634,DEM,Solid D,DEM,DEM,598649.31,0.0,0.0,0.0,True,False,
+CA-28,confirmed,D_vs_R,Judy Chu,H0CA32101,April Verlato,H4CA28127,1353264.13,700.0,0.9994829995976333,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+CA-29,confirmed,same_party,Luz Rivas,H4CA29141,Angelica Dueñas,H8CA29100,1026074.04,97450.42,0.9132636418080298,DEM,Solid D,,DEM,0.0,0.0,0.0,0.0,,False,same_party race: dem and rep columns hold the top two by money (Luz Rivas and Angelica Dueñas); no Cook favorite
+CA-30,confirmed,D_vs_R,Laura Friedman,H4CA30149,Scott Meyers,H6CA30250,968617.06,19511.41,0.9802541768683175,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+CA-31,confirmed,D_vs_R,Gil Cisneros,H8CA39174,Eric Ching,H2CA39151,834050.43,96919.8,0.8958937709533419,DEM,Solid D,DEM,,0.0,0.0,0.0,0.0,True,False,
+CA-32,confirmed,D_vs_R,Brad Sherman,H6CA24113,Larry Thompson,H4CA32137,2371583.4699999997,10379.0,0.9956426685429682,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+CA-33,confirmed,D_vs_R,Pete Aguilar,H2CA31125,Stephanie Vargas,H6CA33114,4742368.13,720.51,0.9998480926555064,DEM,Solid D,DEM,DEM,512325.0,0.0,0.0,0.0,True,False,
+CA-34,confirmed,same_party,Jimmy Gomez,H8CA34266,Angela Gonzales-Torres,H6CA34286,1331563.16,507622.3,0.7239961325053103,DEM,Solid D,,DEM,247796.72,743000.0,421006.6,200000.0,,False,same_party race: dem and rep columns hold the top two by money (Jimmy Gomez and Angela Gonzales-Torres); no Cook favorite
+CA-35,confirmed,D_vs_R,Norma Torres,H4CA35031,Mike Cargile,H0CA35146,914443.47,9799.0,0.9893978038035841,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+CA-36,confirmed,D_vs_R,Ted Lieu,H4CA33119,Houston Brignano,H6CA36208,1850244.7,7020.37,0.9962200495161414,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+CA-37,confirmed,same_party,Sydney Kamlager-Dove,H2CA37304,Samantha Mota,H6CA37339,1638931.52,5421.39,0.9967030252648138,DEM,Solid D,,DEM,0.0,0.0,0.0,0.0,,False,same_party race: dem and rep columns hold the top two by money (Sydney Kamlager-Dove and Samantha Mota); no Cook favorite
+CA-38,confirmed,D_vs_R,Hilda Solis,H6CA38139,Pedro Casas,H4CA31212,1391056.2,0.0,1.0,DEM,Solid D,DEM,,0.0,0.0,0.0,0.0,True,False,
+CA-39,confirmed,D_vs_R,Mark Takano,H2CA43245,Steve Manos,H6CA39145,1089125.92,11929.0,0.9891658446973745,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+CA-40,confirmed,same_party,Young Kim,H8CA39240,Ken Calvert,H2CA37023,8111453.99,4635619.850000001,0.6363385112390626,REP,Solid R,,REP,139868.61,2523891.34,360399.6,633558.24,,False,same_party race: dem and rep columns hold the top two by money (Young Kim and Ken Calvert); no Cook favorite
+CA-41,confirmed,D_vs_R,Linda Sánchez,H2CA39078,Mitch Clemmons,H6CA41380,1865683.46,5654.0,0.996978631529131,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+CA-42,confirmed,D_vs_R,Robert Garcia,H2CA47188,Brian Burley,H0CA48172,3356097.75,64286.64,0.98120484931812,DEM,Solid D,DEM,DEM,266421.57,0.0,0.0,0.0,True,False,
+CA-43,confirmed,D_vs_R,Maxine Waters,H4CA23011,Cristian Morales,H6CA43188,974303.5900000001,2250.0,0.9976959789784808,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+CA-44,confirmed,D_vs_R,Nanette Barragán,H6CA44103,Genevieve Angel,H6CA44210,1011039.21,18826.25,0.9817196995809531,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+CA-45,confirmed,D_vs_R,Derek Tran,H4CA45170,Chuong Vo,H6CA45191,5475478.65,921340.26,0.8559689944388312,DEM,Likely D,DEM,DEM,1488318.0,0.0,0.0,0.0,True,False,
+CA-46,confirmed,D_vs_R,Lou Correa,H6CA46116,David Pan,H4CA46137,1327957.3800000001,94086.0,0.9338374614141518,DEM,Solid D,DEM,DEM,0.0,0.0,30295.2,0.0,True,False,
+CA-47,confirmed,D_vs_R,Dave Min,H4CA47085,Jenny Le Roux,H6CA47114,3611334.24,415710.64999999997,0.8967702964940131,DEM,Solid D,DEM,DEM,589147.8500000001,0.0,0.0,0.0,True,False,
+CA-48,confirmed,D_vs_R,Marni von Wilpert,H6CA48310,Jim Desmond,H6CA49128,4653511.43,2730971.77,0.6301742862655575,DEM,Lean D,DEM,,452426.87,278334.51,242407.24,5494442.390000001,True,False,
+CA-49,confirmed,D_vs_R,Mike Levin,H8CA49058,Armen Kurdian,H6CA49169,3275617.75,172221.17,0.9500495313162716,DEM,Solid D,DEM,DEM,60444.87,0.0,0.0,0.0,True,False,
+CA-50,confirmed,D_vs_R,Scott Peters,H2CA52089,Steve Cohen,H6CA50324,1755748.55,4092.0,0.9976747893438415,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+CA-51,confirmed,D_vs_R,Sara Jacobs,H8CA49074,Ricardo Cabrera,H6CA51140,782033.13,0.0,1.0,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+CA-52,confirmed,D_vs_R,Juan Vargas,H2CA50026,Jeff Belle,H6CA52163,830015.4199999999,19538.06,0.9770019657856029,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+CO-01,confirmed,D_vs_R,Melat Kiros,H6CO01273,Christy Peterson,H6CO01331,1278098.89,9446.32,0.9926633100518466,DEM,Solid D,DEM,,0.0,0.0,0.0,0.0,True,True,"no FEC match, counted as $0: Chad Humphrey"
+CO-02,confirmed,D_vs_R,Joe Neguse,H8CO02160,Kelley Dennison,H6CO02206,3117856.13,11823.37,0.9962221786607861,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Gaylon Kent"
+CO-03,confirmed,D_vs_R,Dwayne Romero,H6CO03253,Jeff Hurd,H4CO03357,1236262.3,2954834.34,0.29497346546511516,REP,Likely R,REP,REP,4688.92,2309995.61,816665.31,0.0,True,False,"no FEC match, counted as $0: Clifton Brown, Cory Robertson"
+CO-04,confirmed,D_vs_R,Eileen Laubacher,H6CO04202,Lauren Boebert,H0CO03165,13593485.47,1143418.1400000001,0.9224112357480501,DEM,Solid R,REP,REP,50324.28999999999,79027.73,394234.88,1500000.0,False,False,"no FEC match, counted as $0: Douglas Mangeris"
+CO-05,confirmed,D_vs_R,Jessica Killin,H6CO05324,Jeff Crank,H6CO05142,4421861.47,2140358.04,0.6738362627555566,DEM,Lean R,REP,REP,115912.65999999999,3773621.96,1336152.25,1772717.52,False,False,"no FEC match, counted as $0: Mark Elworth"
+CO-06,confirmed,D_vs_R,Jason Crow,H8CO06229,Jason Clark,H6CO06165,3757642.3299999996,0.0,1.0,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,True,"no FEC match, counted as $0: Meredith Ryan"
+CO-07,confirmed,D_vs_R,Brittany Pettersen,H8CO07045,Tim Bennett,H6CO07122,2217090.66,72116.45,0.968497192899248,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Lawrence Clark, Susan Hall, Dan Sallis"
+CO-08,confirmed,D_vs_R,Manny Rutinel,H6CO08013,Gabe Evans,H4CO08034,8618092.51,4984328.5200000005,0.6335704865327197,DEM,Toss Up,,REP,1869838.3199999998,9721258.37,1984383.73,8993998.53,,False,"no FEC match, counted as $0: Dan Wood"
+CT-01,confirmed,D_vs_R,Luke Bronin,H6CT01206,Amy Chai,H2CT03102,3851810.5199999996,5214.34,0.9986480927167268,DEM,Solid D,DEM,,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Mary Sanders"
+CT-02,confirmed,D_vs_R,Joe Courtney,H2CT02112,George Austin,H6CT02196,958771.49,69777.26000000001,0.9321595014334517,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+CT-03,confirmed,D_vs_R,Rosa DeLauro,H0CT03072,Chris Lancia,H6CT03178,1449362.78,13648.55,0.9906709198212429,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Thomas Egan"
+CT-04,confirmed,D_vs_R,Jim Himes,H8CT04172,Michael Goldstein,H6CT04143,1552144.56,34216.32,0.9784309355888806,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Benjamin Wesley"
+CT-05,confirmed,D_vs_R,Jahana Hayes,H8CT05245,Chris Shea,H6CT05231,1588532.6400000001,400787.22,0.7985305289215783,DEM,Solid D,DEM,DEM,0.0,47830.0,0.0,250000.0,True,False,
+DE-00,confirmed,D_vs_R,Sarah McBride,H4DE00045,Joseph Arminio,H6DE01121,5278922.95,7431.76,0.9985941616846215,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+FL-01,confirmed,D_vs_R,Gay Valimont,H4FL01197,Jimmy Patronis,H6FL01390,294834.19,4280361.16,0.0644418800609246,REP,Solid R,REP,,0.0,0.0,179194.0,0.0,True,False,"no FEC match, counted as $0: Tyler Davis"
+FL-02,confirmed,D_vs_R,Amanda Green,H6FL02299,Austin Rogers,H6FL02331,655121.9400000001,979536.2599999999,0.4007699835965709,REP,Solid R,REP,,0.0,0.0,77896.0,0.0,True,False,
+FL-03,confirmed,D_vs_R,Seth Harp,H6FL03099,Kat Cammack,H0FL03175,171002.66,1982266.1199999999,0.07941538074034586,REP,Solid R,REP,REP,0.0,0.0,100000.0,0.0,True,False,
+FL-04,confirmed,D_vs_R,LaShonda Holloway,H6FL05193,Aaron Bean,H2FL04211,58546.29,2493831.6100000003,0.02293793955824488,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Todd Schaefer"
+FL-05,confirmed,D_vs_R,Rachel Grage,H6FL05250,John Rutherford,H6FL04105,442697.49,900491.78,0.32958682732776745,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+FL-06,confirmed,D_vs_R,Eric Yonce,H6FL06340,Randy Fine,H6FL06258,607129.28,3231456.73,0.15816482382271801,REP,Solid R,REP,,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Andrew Parrott"
+FL-07,confirmed,D_vs_R,Bale Dalton,H6FL07215,Ryan Elijah,H6FL07231,2275359.74,645008.5700000001,0.7791345126601513,DEM,Likely R,REP,,355400.0,450226.33999999997,630586.92,110000.0,False,False,
+FL-08,confirmed,D_vs_R,Jennifer Jenkins,H6FL06399,Mike Haridopolos,H4FL08168,941178.17,1758314.82,0.3486499774166852,REP,Solid R,REP,REP,0.0,0.0,509452.65,0.0,True,False,
+FL-09,confirmed,D_vs_R,Darren Soto,H6FL09179,Dan Green,H6FL09294,3611596.65,435471.32,0.8923983181829289,DEM,Likely R,REP,DEM,289754.35,405935.23,629886.2000000001,611000.0,False,False,
+FL-10,confirmed,unopposed,Maxwell Frost,H2FL10259,,,3746962.48,0.0,,,Solid D,,DEM,0.0,0.0,0.0,0.0,,False,unopposed: listed but not scored
+FL-11,confirmed,D_vs_R,James Pericola,H6FL11357,Joe Strada,H6FL11332,160403.9,512075.39,0.23852615595046797,REP,Solid R,REP,,0.0,0.0,10833.0,0.0,True,False,
+FL-12,confirmed,D_vs_R,Kimberly Overman,H6FL15200,Gus Bilirakis,H6FL09070,265996.93,2077938.2,0.11348305957597044,REP,Solid R,REP,REP,0.0,0.0,359414.0,0.0,True,False,
+FL-13,confirmed,D_vs_R,Leela Gray,H6FL13312,Anna Paulina Luna,H0FL13158,2772764.73,2942648.07,0.4851381391034432,REP,Lean R,REP,REP,169396.3,1415300.3599999999,60471.49,4303286.46,True,False,
+FL-14,confirmed,D_vs_R,Kathy Castor,H6FL11126,Mike Beltran,H6FL14237,4475836.53,504016.19,0.8987889364728039,DEM,Toss Up,,DEM,2585309.4099999997,15967099.53,1143243.34,7898572.180000001,,False,
+FL-15,confirmed,D_vs_R,Robert People,H6FL15168,Laurel Lee,H2FL15241,54815.24,1517062.96,0.03487244749625003,REP,Solid R,REP,REP,0.0,0.0,207329.45,0.0,True,False,
+FL-16,confirmed,D_vs_R,Kelly Kirschner,H6FL16158,Sydney Gruters,H6FL16141,872736.29,1554188.56,0.35960581556532334,REP,Likely R,REP,,0.0,1125429.46,195041.0,135531.0,True,False,
+FL-17,confirmed,D_vs_R,Matthew Montavon,H4FL17060,Greg Steube,H8FL17053,117344.8,1304685.96,0.08251917138557538,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+FL-18,confirmed,D_vs_R,Curtis Gibson,H6FL18212,Scott Franklin,H0FL15104,4037.0,913290.5800000001,0.004400827019721788,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,True,
+FL-19,confirmed,D_vs_R,Victor Arias,H6FL19277,Jim Schwartzel,H6FL19137,30783.08,1356366.52,0.022191607884254158,REP,Solid R,REP,,0.0,0.0,0.0,0.0,True,False,
+FL-20,confirmed,D_vs_R,Debbie Wasserman Schultz,H4FL20023,Brent Andersen,H6FL20143,3623625.1399999997,100349.66,0.9730530775879579,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+FL-21,confirmed,D_vs_R,James Martin,H6FL21075,Brian Mast,H6FL18097,660305.75,4287109.16,0.1334648017220775,REP,Solid R,REP,REP,0.0,0.0,295752.41000000003,30692.44,True,False,
+FL-22,confirmed,D_vs_R,Pia Dandiya,H6FL21059,Casey Askar,H6FL22248,3912360.12,493626.04,0.8879646866616576,DEM,Toss Up,,,1398722.93,8188234.489999999,602750.6600000001,8732770.679999998,,False,
+FL-23,confirmed,D_vs_R,Lois Frankel,H2FL14053,Deborah Adeimy,H2FL21132,2488483.6399999997,112969.45,0.9565744812257982,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+FL-24,confirmed,D_vs_R,Oliver Gilbert,H6FL24095,Te Mayonna Brown,H6FL14203,1453855.31,7390.54,0.9949423021458025,DEM,Solid D,DEM,,0.0,0.0,0.0,0.0,True,False,
+FL-25,confirmed,D_vs_R,Jared Moskowitz,H2FL22171,Scott Singer,H6FL23188,5074826.2,2142736.24,0.7031218977580469,DEM,Lean D,DEM,DEM,1742108.71,13873748.27,649039.02,12141599.390000002,True,False,
+FL-26,confirmed,D_vs_R,Nicole Locklin,H6FL26058,Mario Díaz-Balart,H2FL25018,346713.3,2753896.7,0.11182099651358926,REP,Solid R,REP,REP,55720.41,0.0,0.0,0.0,True,False,
+FL-27,confirmed,D_vs_R,Eliott Rodriguez,H6FL27098,María Elvira Salazar,H8FL27185,1558887.71,1382027.92,0.5300688309783304,DEM,Lean R,REP,REP,517133.18,202000.0,55430.75,21090.6,False,False,
+FL-28,confirmed,D_vs_R,Phil Ehr,H4FL28042,Carlos Giménez,H0FL26036,154839.54,590743.89,0.20767567219137367,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Eddy Rojas"
+GA-01,confirmed,D_vs_R,Amanda Hollowell,H6GA01158,Jim Kingston,H6GA01109,226822.3,2170633.3899999997,0.09460959005252774,REP,Solid R,REP,,5000.0,0.0,36608.0,0.0,True,False,
+GA-02,confirmed,D_vs_R,Sanford Bishop,H2GA02031,Matt Day,H6GA01182,1343037.67,10762.5,0.9920501561172059,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+GA-03,confirmed,D_vs_R,Maura Keller,H4GA03100,Brian Jack,H4GA03126,246478.17,2007446.6400000001,0.10935509867341138,REP,Solid R,REP,REP,0.0,25000.0,352906.2,0.0,True,False,
+GA-04,confirmed,D_vs_R,Hank Johnson,H6GA04129,James Duffie,H6GA04194,503236.44,0.0,1.0,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+GA-05,confirmed,D_vs_R,Nikema Williams,H0GA05301,John Oscar Salvesen,H4GA05063,751126.14,0.0,1.0,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+GA-06,confirmed,D_vs_R,Lucy McBath,H8GA06393,Kevin Martin,H6GA06181,1165760.66,0.0,1.0,DEM,Solid D,DEM,DEM,152228.02,0.0,0.0,0.0,True,False,
+GA-07,confirmed,D_vs_R,Tony Kozycki,H6GA07221,Rich McCormick,H0GA07273,200415.13,986571.34,0.16884365160455453,REP,Solid R,REP,REP,0.0,0.0,207639.86,0.0,True,False,
+GA-08,confirmed,D_vs_R,Kelly Esti,H6GA08138,Austin Scott,H0GA08099,20962.9,1369736.67,0.015073636644613333,REP,Solid R,REP,REP,0.0,0.0,150562.64,0.0,True,False,
+GA-09,confirmed,D_vs_R,Caitlyn Gegen,H6GA09284,Andrew Clyde,H0GA09246,94572.84,727161.4299999999,0.11508932200186808,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+GA-10,confirmed,D_vs_R,Pam Delancy,H6GA10183,Houston Gaines,H6GA10175,71069.71,2554432.53,0.027068996139953783,REP,Solid R,REP,,0.0,0.0,34409.0,0.0,True,False,
+GA-11,confirmed,D_vs_R,Chris Harden,H6GA11116,John Cowan,H0GA14048,139195.64,944065.2,0.12849688169287096,REP,Solid R,REP,,0.0,0.0,0.0,0.0,True,False,
+GA-12,confirmed,D_vs_R,Ceretta Smith,H6GA12080,Rick Allen,H2GA12121,45939.8,1263670.55,0.03507898360760512,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+GA-13,confirmed,D_vs_R,Jasmine Clark,H6GA13070,Jonathan Chavez,H2GA04201,2364370.64,0.0,1.0,DEM,Solid D,DEM,,0.0,0.0,0.0,0.0,True,False,
+GA-14,confirmed,D_vs_R,Shawn Harris,H4GA14057,Clay Fuller,H0GA14030,8418045.03,1625546.61,0.8381508659187183,DEM,Solid R,REP,REP,0.0,0.0,0.0,0.0,False,False,
+HI-01,confirmed,D_vs_R,Ed Case,H2HI02128,Adriel Lam,H6HI01360,1338008.35,0.0,1.0,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Nathan Berning, Jordan Conley"
+HI-02,confirmed,D_vs_R,Jill Tokuda,H2HI02581,Brenton Awa,H6HI02426,958561.65,112348.97,0.8950902457200396,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+IA-01,confirmed,D_vs_R,Christina Bohannan,H2IA02111,Mariannette Miller-Meeks,H8IA02043,8899098.08,6851014.140000001,0.5650180745188367,DEM,Lean D,DEM,REP,2426796.2,5900507.739999999,883035.7,7265894.88,True,False,
+IA-02,confirmed,D_vs_R,Lindsay James,H6IA02211,Joe Mitchell,H6IA02237,3878961.86,2603262.67,0.5983997996440892,DEM,Toss Up,,,3055690.47,5934549.34,494601.45,6003899.31,,False,"no FEC match, counted as $0: Rick Stewart"
+IA-03,confirmed,D_vs_R,Sarah Trone Garriott,H6IA03268,Zach Nunn,H2IA03119,7852966.92,3604184.2199999997,0.6854205573480808,DEM,Lean D,DEM,REP,2446399.86,6836571.87,1035744.86,3674975.51,True,False,
+IA-04,confirmed,D_vs_R,David Dawson,H6IA04217,Chris McGowan,H6IA04167,259235.69,857673.24,0.23210100934549785,REP,Solid R,REP,,0.0,0.0,35335.08,0.0,True,False,
+ID-01,confirmed,D_vs_R,Kaylee Peterson,H2ID01192,Russ Fulcher,H8ID01124,276403.54000000004,830195.1699999999,0.24977757293789005,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Brendan Gomez"
+ID-02,confirmed,D_vs_R,Ellie Gilbreath,H6ID02274,Mike Simpson,H8ID02064,169226.46,1408911.99,0.10723169440551936,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Emre Houser, Will Johanson"
+IL-01,confirmed,D_vs_R,Jonathan Jackson,H2IL01349,Christian Maxwell,H6IL01191,507982.54,94709.38,0.8428560648365753,DEM,Solid D,DEM,DEM,150454.32,0.0,0.0,0.0,True,False,
+IL-02,confirmed,D_vs_R,Donna Miller,H6IL02355,Michael Noack,H6IL02389,2666851.49,0.0,1.0,DEM,Solid D,DEM,,0.0,0.0,0.0,0.0,True,False,
+IL-03,confirmed,D_vs_R,Delia Ramirez,H2IL03162,Angel Oakley,H6IL03163,1528004.1800000002,18442.93,0.988073998857937,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+IL-04,confirmed,D_vs_R,Patty Garcia,H6IL04153,Lupe Castillo,H4IL04117,506266.6,0.0,1.0,DEM,Solid D,DEM,,0.0,0.0,0.0,0.0,True,True,
+IL-05,confirmed,D_vs_R,Mike Quigley,H0IL05096,Tommy Hanson,H8IL05073,847369.16,0.0,1.0,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+IL-06,confirmed,D_vs_R,Sean Casten,H8IL06139,Niki Conforti,H2IL06090,2433080.89,348401.97,0.8747423631436649,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+IL-07,confirmed,D_vs_R,La Shawn Ford,H6IL07354,Chad Koppie,H2IL08203,618503.3400000001,0.0,1.0,DEM,Solid D,DEM,,0.0,0.0,0.0,0.0,True,False,
+IL-08,confirmed,D_vs_R,Melissa Bean,H6IL08329,Jennifer Davis,H6IL08311,2097210.3899999997,781174.57,0.7286066384949427,DEM,Solid D,DEM,,0.0,0.0,0.0,0.0,True,False,
+IL-09,confirmed,D_vs_R,Daniel Biss,H6IL09228,John Elleson,H8IL09224,3425148.31,0.0,1.0,DEM,Solid D,DEM,,0.0,0.0,0.0,0.0,True,False,
+IL-10,confirmed,D_vs_R,Brad Schneider,H2IL10068,Carl Lambrecht,H6IL10176,3509455.53,0.0,1.0,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+IL-11,confirmed,D_vs_R,Bill Foster,H8IL14067,Jeff Walter,H6IL11166,2465425.6799999997,223108.68,0.9170147559505246,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+IL-12,confirmed,D_vs_R,Julie Fortier,H6IL12131,Mike Bost,H4IL12060,157165.74,1577828.4,0.09058574687750819,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+IL-13,confirmed,D_vs_R,Nikki Budzinski,H2IL13153,Jeff Wilson,H6IL13154,3531918.12,192594.5,0.9482900127748796,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+IL-14,confirmed,D_vs_R,Lauren Underwood,H8IL14174,James Marter,H8IL16153,2522579.85,213372.1,0.922011751704923,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+IL-15,confirmed,D_vs_R,Jennifer Todd,H6IL15092,Mary Miller,H0IL15129,203456.75,1818451.02,0.10062612796626227,REP,Solid R,REP,REP,0.0,0.0,0.0,1770.74,True,False,
+IL-16,confirmed,D_vs_R,Paul Nolley,H6IL16108,Darin LaHood,H6IL18088,636665.36,2946761.5300000003,0.17766941521164953,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+IL-17,confirmed,D_vs_R,Eric Sorensen,H2IL17147,Dillan Vancil,H6IL17247,2494065.95,374026.46,0.8695905129500343,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+IN-01,confirmed,D_vs_R,Frank Mrvan,H0IN01150,Barb Regnitz,H6IN01231,2887062.24,415713.26,0.8741321473409259,DEM,Likely D,DEM,DEM,0.0,0.0,1950.48,0.0,True,False,
+IN-02,confirmed,D_vs_R,Jamee Decio,H6IN02189,Rudy Yakym,H2IN02295,128529.76,5042117.54,0.024857576342520983,REP,Solid R,REP,REP,0.0,0.0,192463.29,0.0,True,False,"no FEC match, counted as $0: William Henry"
+IN-03,confirmed,D_vs_R,Kelly Thompson,H6IN03294,Marlin Stutzman,H0IN03198,326220.28,832673.2,0.281492894411659,REP,Solid R,REP,,0.0,0.0,0.0,0.0,True,False,
+IN-04,confirmed,D_vs_R,Drew Cox,H6IN04193,Jim Baird,H8IN04199,60058.89,482374.47,0.1107212321897016,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+IN-05,confirmed,D_vs_R,J. D. Ford,H6IN05307,Victoria Spartz,H0IN05326,1384051.76,1572248.72,0.4681701908731551,REP,Likely R,REP,REP,123072.75,0.0,0.0,3377211.67,True,False,
+IN-06,confirmed,D_vs_R,Cinde Wirth,H6IN06230,Jefferson Shreve,H4IN06185,88105.64,518955.19,0.14513477998572236,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+IN-07,confirmed,D_vs_R,André Carson,H8IN07184,Patrick McAuley,H6IN07444,1024565.8200000001,0.0,1.0,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: James Sceniak"
+IN-08,confirmed,D_vs_R,Mary Allen,H6IN08293,Mark Messmer,H4IN08249,489437.55,841721.0199999999,0.36767787176549527,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+IN-09,confirmed,D_vs_R,Brad Meyer,H6IN09242,Erin Houchin,H6IN09143,191908.08,1674410.95,0.10282704988546357,REP,Solid R,REP,REP,0.0,0.0,0.0,36951.27,True,False,
+KS-01,confirmed,D_vs_R,Lauren Reinhold,H6KS01203,Tracey Mann,H0KS01123,128724.99,1207577.83,0.09632920627975626,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Steven Jacob"
+KS-02,confirmed,D_vs_R,Don Coover,H6KS02276,Derek Schmidt,H4KS02164,1342228.34,1695851.6600000001,0.44180151279755636,REP,Likely R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: John Hauer"
+KS-03,confirmed,D_vs_R,Sharice Davids,H8KS03155,Eric Jenkins,H6KS03308,4591390.95,49945.28,0.9892390299851213,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Steven Hohe"
+KS-04,confirmed,D_vs_R,Katy Tyndell,H6KS04272,Ron Estes,H8KS04112,628085.8899999999,1715125.34,0.26804492994854756,REP,Solid R,REP,REP,0.0,365274.18,0.0,0.0,True,False,"no FEC match, counted as $0: Drew Cranmer"
+KY-01,confirmed,D_vs_R,Drew Williams,H6KY01169,James Comer,H6KY01110,219404.05,2288890.2,0.08747141608286188,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+KY-02,confirmed,D_vs_R,Megan Wingfield,H6KY02068,Brett Guthrie,H8KY02031,9584.49,5091599.13,0.0018788757108100333,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Thomas Loecken"
+KY-03,confirmed,D_vs_R,Morgan McGarvey,H2KY03206,Maria Rodriquez,H6KY03223,1755354.33,75078.7,0.9589830937436701,DEM,Solid D,DEM,DEM,2516.5,0.0,0.0,0.0,True,False,
+KY-04,confirmed,D_vs_R,Melissa Strange,H6KY04189,Ed Gallrein,H6KY04171,137330.4,4060955.81,0.03271106187874694,REP,Solid R,REP,,0.0,0.0,34886.0,0.0,True,False,
+KY-05,confirmed,D_vs_R,Ned Pillersdorf,H6KY05152,Hal Rogers,H0KY05015,182963.72,880353.5900000001,0.1720687872559885,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+KY-06,confirmed,D_vs_R,Zach Dembo,H6KY06184,Ralph Alvarado,H6KY06192,3137940.77,2092192.74,0.5999733589974838,DEM,Lean R,REP,,898209.3099999999,2486633.95,2045898.0,3216448.1,False,False,"no FEC match, counted as $0: Jay Bowman, Pete Lynch"
+LA-01,confirmed,other,Steve Scalise,H0LA01087,Lauren Jewett,H6LA01258,2006790.1,701223.15,0.7410562337536569,REP,Solid R,,REP,0.0,0.0,0.0,0.0,,False,"other race: dem and rep columns hold the top two by money (Steve Scalise and Lauren Jewett); no Cook favorite; 4 nominees, not one Democrat against one Republican; no FEC match, counted as $0: Liddy Glass"
+LA-02,confirmed,other,Troy Carter,H2LA02149,Lisa Ballay,H2LA02305,1753352.7400000002,1085.0,0.9993815682510341,DEM,Solid D,,DEM,0.0,0.0,0.0,0.0,,False,"other race: dem and rep columns hold the top two by money (Troy Carter and Lisa Ballay); no Cook favorite; 5 nominees, not one Democrat against one Republican; no FEC match, counted as $0: Walter Beach, Renada Collins"
+LA-03,confirmed,other,Clay Higgins,H6LA03148,John Day,H6LA03205,399470.82,213231.77,0.6519816082383462,REP,Solid R,,REP,0.0,0.0,0.0,0.0,,False,"other race: dem and rep columns hold the top two by money (Clay Higgins and John Day); no Cook favorite; 6 nominees, not one Democrat against one Republican; no FEC match, counted as $0: Kate Cotten, Caleb Walker"
+LA-04,confirmed,other,Mike Johnson,H6LA04138,Conrad Cable,H6LA04187,16087384.76,1836730.52,0.8975274097880048,REP,Solid R,,REP,0.0,402154.03,0.0,0.0,,False,"other race: dem and rep columns hold the top two by money (Mike Johnson and Conrad Cable); no Cook favorite; 5 nominees, not one Democrat against one Republican"
+LA-05,confirmed,other,Michael Echols,H6LA05242,Gabe Firment,H6LA05317,599230.99,453838.26,0.5690328437564766,REP,Solid R,,,60000.0,85000.0,0.0,25500.0,,False,"other race: dem and rep columns hold the top two by money (Michael Echols and Gabe Firment); no Cook favorite; 9 nominees, not one Democrat against one Republican"
+LA-06,confirmed,other,Blake Miguez,H6LA05234,Rick Edmonds,H6LA05226,3876180.46,541702.26,0.8773841918555956,REP,Solid R,,,859036.41,187968.01,0.0,1513419.42,,False,"other race: dem and rep columns hold the top two by money (Blake Miguez and Rick Edmonds); no Cook favorite; 10 nominees, not one Democrat against one Republican"
+MA-01,confirmed,other,Richard Neal,H8MA02041,Nadia Milleron,H4MA01091,2798870.85,49589.1,0.9825909084661696,DEM,Solid D,,DEM,0.0,0.0,0.0,258150.0,,False,"other race: dem and rep columns hold the top two by money (Richard Neal and Nadia Milleron); no Cook favorite; 2 nominees, not one Democrat against one Republican"
+MA-02,confirmed,unopposed,Jim McGovern,H4MA03022,,,1007976.83,0.0,,,Solid D,,DEM,0.0,0.0,0.0,0.0,,False,unopposed: listed but not scored
+MA-03,confirmed,D_vs_R,Lori Trahan,H8MA03106,Gary Grossi,H6MA03100,1841764.8399999999,5150.83,0.9972111179283025,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Dennis Conlon"
+MA-04,confirmed,D_vs_R,Jake Auchincloss,H0MA04192,Thomas Stalcup,H6MA04140,3309519.77,9343.43,0.9971847498866478,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+MA-05,confirmed,unopposed,Katherine Clark,H4MA05084,,,3361146.04,0.0,,,Solid D,,DEM,0.0,0.0,0.0,0.0,,False,unopposed: listed but not scored
+MA-06,confirmed,D_vs_R,Dan Koh,H8MA03072,Micah Jones,H6MA06202,5006280.3,619478.76,0.8898853019844757,DEM,Solid D,DEM,,0.0,34680.0,0.0,0.0,True,False,
+MA-07,confirmed,unopposed,Ayanna Pressley,H8MA07032,,,1142184.24,0.0,,,Solid D,,DEM,0.0,0.0,0.0,0.0,,False,unopposed: listed but not scored
+MA-08,confirmed,D_vs_R,Stephen Lynch,H2MA09072,Robert Burke,H2MA08090,1032977.4199999999,25.0,0.9999757987014203,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Rasheed Walters"
+MA-09,confirmed,D_vs_R,Bill Keating,H0MA10082,Tyler MacAllister,H6MA09206,553189.6799999999,212719.82,0.7222650717872019,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+MD-01,confirmed,D_vs_R,Dan Schwartz,H6MD01320,Andy Harris,H8MD01094,1133721.16,2633559.95,0.3009388274717837,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+MD-02,confirmed,D_vs_R,Johnny Olszewski,H4MD02232,Dave Wallace,H2MD06138,1233652.32,27669.45,0.9780631313451444,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+MD-03,confirmed,D_vs_R,Sarah Elfreth,H4MD03156,Berney Flowers,H4MD03149,1402689.49,32460.969999999998,0.9773814865376554,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+MD-04,confirmed,D_vs_R,Glenn Ivey,H2MD04232,George McDermott,,886352.21,0.0,1.0,DEM,Solid D,DEM,,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Sam Husseini, George McDermott"
+MD-05,confirmed,D_vs_R,Adrian Boafo,H6MD05321,Chris Chaffee,H4MD05169,1894669.38,0.0,1.0,DEM,Solid D,DEM,,0.0,0.0,0.0,0.0,True,False,
+MD-06,confirmed,D_vs_R,April McClain Delaney,H4MD06340,Robin Ficker,H6MD06287,1453549.22,2905.49,0.9980050941645827,DEM,Solid D,DEM,DEM,0.0,42387.38,0.0,0.0,True,False,"no FEC match, counted as $0: Moshe Landman"
+MD-07,confirmed,D_vs_R,Kweisi Mfume,H6MD07020,Scott Collier,H0MD02255,486363.29,0.0,1.0,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+MD-08,confirmed,D_vs_R,Jamie Raskin,H6MD08457,Cheryl Riley,H4MD08213,8667270.78,22354.21,0.9974274827710372,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+ME-01,confirmed,D_vs_R,Chellie Pingree,H8ME01120,Ronald Russell,H4ME01160,536234.14,146315.53,0.7856338718909643,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+ME-02,confirmed,D_vs_R,Matthew Dunlap,H6ME02171,Paul LePage,H6ME02148,2917863.3299999996,2288971.83,0.5603909554148435,DEM,Lean R,REP,,957352.04,9659104.26,515565.58,7137830.76,False,False,
+MI-01,confirmed,D_vs_R,Callie Barr,H4MI01155,Jack Bergman,H6MI01226,1441915.42,1610564.92,0.47237500635303026,REP,Solid R,REP,REP,11000.0,0.0,157500.0,362653.41000000003,True,False,"no FEC match, counted as $0: LaVeta Davenport, Zebulon Featherly, Liz Hakola, Doc Kovaly, Arnett Satterla"
+MI-02,confirmed,D_vs_R,Ben Ambrose,H6MI02216,John Moolenaar,H4MI04126,167550.29,1971724.2999999998,0.0783210770525723,REP,Solid R,REP,REP,0.0,0.0,17366.49,0.0,True,False,"no FEC match, counted as $0: Charlotte Magoon, Richard Sills"
+MI-03,confirmed,D_vs_R,Hillary Scholten,H0MI03316,Terri DeBoer,H6MI03198,2914261.54,762181.74,0.7926850268175496,DEM,Solid D,DEM,DEM,192540.0,609880.73,252091.44,11250.0,True,False,"no FEC match, counted as $0: Joe Jock"
+MI-04,confirmed,D_vs_R,Sean McCann,H6MI04204,Bill Huizenga,H0MI02094,4574578.0200000005,4311047.25,0.514829050404013,DEM,Toss Up,,REP,653478.64,8632434.35,1743776.6099999999,8563841.41,,False,"no FEC match, counted as $0: Shafina Che Barnett"
+MI-05,confirmed,D_vs_R,Christian Vukasovich,H6MI05227,Tim Walberg,H4MI07103,151053.92,2068716.22,0.06804935217301374,REP,Solid R,REP,REP,0.0,0.0,11759.44,0.0,True,False,"no FEC match, counted as $0: Jim Bronke"
+MI-06,confirmed,D_vs_R,Debbie Dingell,H4MI12079,Heather Smiley,H4MI06154,1397739.87,0.0,1.0,DEM,Solid D,DEM,DEM,2057.93,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Michael Mickevicius, Linda Rayburn, Clyde Shabazz, Timothy A. Tegan"
+MI-07,confirmed,D_vs_R,William Lawrence,H6MI07298,Tom Barrett,H2MI07123,4091302.87,6292325.85,0.3940147495951686,REP,Toss Up,,REP,2263706.96,15286811.22,1741657.04,11249626.609999998,,False,"no FEC match, counted as $0: Shane Dedrick"
+MI-08,confirmed,D_vs_R,Kristen McDonald Rivet,H4MI08218,Thomas Smith,H6MI08312,6239444.76,35880.09,0.9942823533669337,DEM,Likely D,DEM,DEM,886031.87,2232589.7,182850.63,13850.0,True,False,"no FEC match, counted as $0: Jim Casha, Kathy Goodwin, Mia C. Pettus"
+MI-09,confirmed,D_vs_R,Ray Pooley,H6MI09245,Lisa McClain,H0MI10287,26386.57,4782809.55,0.005486690361881104,REP,Solid R,REP,REP,0.0,0.0,162714.46,0.0,True,False,"no FEC match, counted as $0: Destiny Clayton, Kevin Vayko, John Vlahos, Jim Walkowicz"
+MI-10,confirmed,D_vs_R,Christina Hines,H6MI10276,Mike Bouchard Jr.,H6MI10359,3771300.8499999996,2310212.87,0.6201253542514412,DEM,Toss Up,,,2336486.66,12158267.500000002,719994.32,9552312.649999999,,False,"no FEC match, counted as $0: Andrea L. Kirby, Kwabena Nkromo, Mike Saliba"
+MI-11,confirmed,D_vs_R,Jeremy Moss,H6MI11191,Ethan Baker,H6MI11290,1780401.74,204268.0,0.8970770824570541,DEM,Solid D,DEM,,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Farid Ishac, Ryan Teasdale"
+MI-12,confirmed,D_vs_R,Rashida Tlaib,H8MI13250,James Hooper,H2MI12198,2772238.61,2002.05,0.9992783430691987,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Brenda K. Sanders, Marc J. Sosnowski, Gary Walkowicz"
+MI-13,confirmed,D_vs_R,Donavan McKinney,H6MI13254,T. P. Nykoriak,H6MI13312,1767629.1099999999,0.0,1.0,DEM,Solid D,DEM,,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Simone R. Coleman, Chris Dardzinski, Raelyn Light"
+MN-01,confirmed,D_vs_R,Jake Johnson,H6MN01190,Brad Finstad,H2MN01223,3410797.66,2370048.79,0.590016996559388,DEM,Lean R,REP,REP,194030.07,1784438.3,240832.76,2849899.8400000003,False,False,
+MN-02,confirmed,D_vs_R,Matt Little,H6MN02230,Eric Pratt,H6MN02263,1255895.8,601251.85,0.6762498393706069,DEM,Likely D,DEM,,271720.53,0.0,187377.96000000005,0.0,True,False,
+MN-03,confirmed,D_vs_R,Kelly Morrison,H4MN03118,Tyler Bass,H6MN03170,1823880.24,0.0,1.0,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+MN-04,confirmed,D_vs_R,Betty McCollum,H0MN04049,Paul Wikstrom,H6MN04293,1515438.02,64988.9,0.9588788958365757,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+MN-05,confirmed,D_vs_R,Ilhan Omar,H8MN05239,John Nagel,H6MN05357,8002035.64,1124163.3,0.8768202065952334,DEM,Solid D,DEM,DEM,3272.6499999999996,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: DeVelle Jackson"
+MN-06,confirmed,D_vs_R,Doug Chapin,H6MN06215,Tom Emmer,H4MN06087,690655.6599999999,5567950.5,0.11035295117531407,REP,Solid R,REP,REP,0.0,0.0,152683.02,0.0,True,False,
+MN-07,confirmed,D_vs_R,Erik Osberg,H6MN07312,Michelle Fischbach,H0MN07091,557630.08,1569813.49,0.26211274783659716,REP,Solid R,REP,REP,0.0,0.0,152226.42,0.0,True,False,
+MN-08,confirmed,D_vs_R,Trina Swanson,H6MN08179,Pete Stauber,H8MN08043,725680.07,2266086.7800000003,0.24255903163042264,REP,Solid R,REP,REP,0.0,0.0,0.0,342214.56,True,False,
+MO-01,confirmed,D_vs_R,Wesley Bell,H4MO01134,Paul Berry,H2MO02219,3909745.3,0.0,1.0,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Tom Schmitz"
+MO-02,confirmed,D_vs_R,Fred Wellman,H6MO02343,Ann Wagner,H2MO02102,2161539.42,3722282.17,0.3673699800268757,REP,Likely R,REP,REP,139269.35,673267.5,11325.0,80000.0,True,False,"no FEC match, counted as $0: Brandon Daugherty"
+MO-03,confirmed,D_vs_R,Bethany Mann,H2MO03167,Bob Onder,H4MO03221,85750.5,1049405.05,0.07554074857846574,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Jim Higgins"
+MO-04,confirmed,D_vs_R,Jordan Herrera,H6MO05254,Mark Alford,H2MO04207,32830.32,1547226.1099999999,0.020777941456179512,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Thomas Holbrook"
+MO-05,confirmed,D_vs_R,Emanuel Cleaver,H4MO05234,Rick Brattin,H2MO04199,1766849.5899999999,457276.58,0.7944016907997624,DEM,Solid D,DEM,DEM,234887.02,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Randy Langkraehr"
+MO-06,confirmed,D_vs_R,Josh Smead,H6MO06260,Chris Stigall,H6MO06310,134858.82,1043603.27,0.11443628195116569,REP,Solid R,REP,,0.0,0.0,33751.0,0.0,True,False,"no FEC match, counted as $0: Andy Maidment"
+MO-07,confirmed,D_vs_R,Missi Hesketh,H4MO07156,Eric Burlison,H2MO07143,50539.85,1644393.99,0.029818184525715764,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Kevin Craig"
+MO-08,confirmed,D_vs_R,Chris Reichard,H6MO08183,Jason Smith,H4MO08162,27848.37,5168236.11,0.005359491383789048,REP,Solid R,REP,REP,0.0,0.0,151234.16,0.0,True,False,"no FEC match, counted as $0: Rebecca Sharpe Lombard"
+MS-01,confirmed,D_vs_R,Cliff Johnson,H6MS01313,Trent Kelly,H6MS01131,806919.19,1304901.4700000002,0.38209645605039205,REP,Solid R,REP,REP,11735.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Johnny Baucom"
+MS-02,confirmed,D_vs_R,Bennie Thompson,H4MS02068,Ron Eller,H2MS02203,924821.74,67834.44,0.9316637105911133,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Bennie Foster"
+MS-03,confirmed,D_vs_R,Michael Chiaradio,H6MS03228,Michael Guest,H8MS03125,206445.01,1087137.8399999999,0.15959164115386967,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Erik Kiehle"
+MS-04,confirmed,D_vs_R,Jeffrey Hulum III,H6MS04242,Mike Ezell,H2MS04258,54378.68,1093395.38,0.04737751260905827,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+MT-01,confirmed,D_vs_R,Sam Forstag,H6MT01137,Aaron Flint,H6MT01152,3863620.57,2501216.17,0.6070258716486733,DEM,Toss Up,,,824666.06,5618920.13,2680454.79,5079778.899999999,,False,"no FEC match, counted as $0: Nick Sheedy"
+MT-02,confirmed,D_vs_R,Brian Miller,H6MT02150,Troy Downing,H4MT02098,26118.43,2443196.71,0.010577195910279802,REP,Solid R,REP,REP,0.0,0.0,149966.44,0.0,True,True,"no FEC match, counted as $0: Patrick McCracken"
+NC-01,confirmed,D_vs_R,Don Davis,H2NC02287,Laurie Buckhout,H4NC01137,5178109.2299999995,1593591.81,0.7646689065883512,DEM,Toss Up,,DEM,3916354.08,14405407.239999998,1571191.2500000002,9810647.44,,False,
+NC-02,confirmed,D_vs_R,Deborah Ross,H0NC02125,Eugene Douglass,H4NC02135,1992420.8299999998,0.0,1.0,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Matthew Laszacs"
+NC-03,confirmed,D_vs_R,Raymond Smith Jr.,H6NC03229,Greg Murphy,H0NC03172,356864.84,2400998.8000000003,0.1293990155365332,REP,Solid R,REP,REP,11938.95,0.0,844775.84,326560.3,True,False,"no FEC match, counted as $0: Daniel Cavender"
+NC-04,confirmed,D_vs_R,Valerie Foushee,H2NC06114,Max Ganorkar,H4NC02150,1037770.5800000001,13896.72,0.9867860111272834,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Guy Meilleur"
+NC-05,confirmed,D_vs_R,Chuck Hubbard,H4NC05294,Virginia Foxx,H4NC05146,856426.1000000001,2040288.25,0.2956543160702056,REP,Solid R,REP,REP,35539.0,0.0,0.0,339958.02,True,False,"no FEC match, counted as $0: Robert Luffman"
+NC-06,confirmed,D_vs_R,Cyril Jefferson,H6NC06164,Addison McDowell,H4NC06177,220914.57,1311584.56,0.1441531454572506,REP,Solid R,REP,REP,0.0,0.0,35632.0,0.0,True,False,
+NC-07,confirmed,D_vs_R,Kimberly Hardy,H6NC07196,David Rouzer,H2NC07096,388534.48000000004,2495888.95,0.13470091664038383,REP,Solid R,REP,REP,0.0,0.0,150603.42,0.0,True,False,
+NC-08,confirmed,D_vs_R,Colby Watson,H6NC08202,Mark Harris,H4NC08066,32130.37,1147505.51,0.027237531974697138,REP,Solid R,REP,REP,0.0,0.0,13362.189999999999,0.0,True,False,"no FEC match, counted as $0: Bo Whitehead"
+NC-09,confirmed,D_vs_R,Richard Ojeda,H6NC09218,Richard Hudson,H2NC08185,2894393.14,3389574.0,0.460599661888111,REP,Solid R,REP,REP,0.0,0.0,0.0,365945.4,True,False,
+NC-10,confirmed,D_vs_R,Ashley Bell,H6NC10174,Pat Harrigan,H2NC13243,128644.02,1180744.0,0.09824743928847005,REP,Solid R,REP,REP,29276.159999999996,0.0,150000.0,8311.07,True,False,
+NC-11,confirmed,D_vs_R,Jamie Ager,H6NC11248,Jennifer Balkcom,H6NC11321,5336416.26,344396.03,0.9393755659544948,DEM,Toss Up,,,1712027.33,5427022.42,837317.61,7784131.23,,False,"no FEC match, counted as $0: Travis Groo"
+NC-12,confirmed,D_vs_R,Alma Adams,H4NC12100,Jack Codiga,H6NC12113,481625.06,42348.21,0.9191786825308855,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+NC-13,confirmed,D_vs_R,Paul Barringer,H6NC13228,Brad Knott,H4NC13116,743781.02,1431994.45,0.3418464038479118,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Steven Swinton"
+NC-14,confirmed,D_vs_R,Lakesha Womack,H6NC14069,Tim Moore,H4NC14015,49544.01,1890814.03,0.025533437117615677,REP,Solid R,REP,REP,0.0,0.0,87500.0,0.0,True,False,
+ND-00,confirmed,D_vs_R,Trygve Hammer,H6ND01049,Julie Fedorchak,H4ND00061,369505.87,1671991.25,0.18099749756198527,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Helene Neville, Charles Tuttle"
+NE-01,confirmed,D_vs_R,Chris Backemeyer,H6NE01143,Mike Flood,H2NE01118,1044723.2,2556872.7199999997,0.29007229661677314,REP,Likely R,REP,REP,275428.63,0.0,29357.6,804430.4600000001,True,False,"no FEC match, counted as $0: Daniel Hartong, Nik Sandman"
+NE-02,confirmed,D_vs_R,Denise Powell,H6NE02174,Brinker Harding,H6NE02208,4557783.72,2069589.96,0.6877209495149518,DEM,Likely D,DEM,,560892.04,1637290.4000000001,243410.97999999998,1653582.93,True,False,"no FEC match, counted as $0: Eric Foreman"
+NE-03,confirmed,D_vs_R,Becky Stille,H6NE03180,Adrian Smith,H6NE03115,33290.61,2056314.2,0.01593153396311334,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,True,"no FEC match, counted as $0: David Else"
+NH-01,confirmed,D_vs_R,Stefany Shaheen,H6NH01321,Anthony DiLorenzo,H6NH01420,3156821.07,1094939.05,0.7424739357120645,DEM,Likely D,DEM,,170836.63,328434.77,240657.34999999998,1479662.59,True,False,
+NH-02,confirmed,D_vs_R,Maggie Goodlander,H4NH02399,Lily Tang Williams,H2NH02260,3846094.0500000003,1299919.03,0.7473929798095267,DEM,Solid D,DEM,DEM,0.0,1810.76,8016.23,0.0,True,False,"no FEC match, counted as $0: Robbie Mahrou"
+NJ-01,confirmed,D_vs_R,Donald Norcross,H4NJ01084,Damon Galdo,H2NJ01187,1789513.38,16095.32,0.9910859312984036,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+NJ-02,confirmed,D_vs_R,Zack Mullock,H6NJ02251,Jeff Van Drew,H8NJ02166,850838.05,2360550.3600000003,0.2649439872643745,REP,Solid R,REP,REP,402446.19,0.0,63670.08,1000000.0,True,False,
+NJ-03,confirmed,D_vs_R,Herb Conaway,H4NJ03080,Michael McGuire,H6NJ03184,1141731.01,200298.05000000002,0.8507498414378597,DEM,Solid D,DEM,DEM,0.0,14212.7,0.0,0.0,True,False,"no FEC match, counted as $0: Steven Welzer"
+NJ-04,confirmed,D_vs_R,Rachel Peace,H6NJ04257,Chris Smith,H8NJ04014,94497.25,776893.0,0.10844423609284129,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+NJ-05,confirmed,D_vs_R,Josh Gottheimer,H6NJ05171,Sean Kirrane,H6NJ05221,4722741.59,47174.520000000004,0.9901099895863787,DEM,Solid D,DEM,DEM,512385.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Adam Rueda"
+NJ-06,confirmed,D_vs_R,Frank Pallone,H8NJ03073,Hillary Herzig,H6NJ06286,2802062.62,7054.1,0.9974888547884903,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+NJ-07,confirmed,D_vs_R,Rebecca Bennett,H6NJ07201,Thomas Kean Jr.,H0NJ07261,8092024.5,4186176.78,0.6590561854675835,DEM,Lean D,DEM,REP,778106.26,6616570.25,290783.30000000005,4292556.92,True,False,"no FEC match, counted as $0: Seamus O'Toole"
+NJ-08,confirmed,other,Rob Menendez,H2NJ08232,Aristotle Eliopoulos,,2131195.14,0.0,1.0,DEM,Solid D,,DEM,0.0,0.0,0.0,0.0,,False,"other race: dem and rep columns hold the top two by money (Rob Menendez and Aristotle Eliopoulos); no Cook favorite; 4 nominees, not one Democrat against one Republican; no FEC match, counted as $0: Aristotle Eliopoulos, Craig Honts, Da'Shone Hughey"
+NJ-09,confirmed,D_vs_R,Nellie Pou,H4NJ09194,Rosie Pino,H6NJ09264,2938667.37,481609.28,0.859189963478539,DEM,Likely D,DEM,DEM,44180.0,155813.77,149142.63,0.0,True,False,"no FEC match, counted as $0: Terrisa Bukovinac"
+NJ-10,confirmed,D_vs_R,LaMonica McIver,H4NJ10176,Carmen Bucco,H4NJ10135,2506460.33,8021.0,0.9968100777268447,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+NJ-11,confirmed,D_vs_R,Analilia Mejia,H6NJ11286,Joe Hathaway,H6NJ11211,2156343.39,828199.78,0.72250366879431,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Alan Bond"
+NJ-12,confirmed,D_vs_R,Adam Hamawy,H6NJ12417,Gregg Mele,H2NJ06210,1966020.98,47419.75,0.9764484003460087,DEM,Solid D,DEM,,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Andres Jinete, Winston Jordan"
+NM-01,confirmed,D_vs_R,Melanie Stansbury,H2NM01144,Didi Okpareke,H6NM01129,1689212.8499999999,173587.41,0.9068137289179894,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+NM-02,confirmed,D_vs_R,Gabe Vasquez,H2NM02191,Greg Cunningham,H6NM02127,5050828.350000001,1864928.5,0.7303363116359419,DEM,Lean D,DEM,DEM,343542.92,6229255.87,483347.6500000001,3718484.5500000003,True,False,
+NM-03,confirmed,D_vs_R,Teresa Leger Fernández,H0NM03102,Martin Zamora,H6NM03083,1547921.16,601334.13,0.720212795195679,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+NV-01,confirmed,D_vs_R,Dina Titus,H8NV03036,Carrie Buck,H6NV01331,1934009.19,1987949.6,0.49312328189965504,REP,Likely D,DEM,DEM,11363.730000000001,0.0,754179.2200000001,0.0,False,False,"no FEC match, counted as $0: Steven St. John"
+NV-02,confirmed,D_vs_R,Teresa Benitez-Thompson,H6NV02362,David Flippo,H4NV04108,1025141.9299999999,949655.0900000001,0.519112556692029,DEM,Likely R,REP,,87365.95,1281576.31,1544454.71,1516210.0,False,False,"no FEC match, counted as $0: Lynn Chapman"
+NV-03,confirmed,D_vs_R,Susie Lee,H6NV04020,Martin O'Donnell,H6NV03204,5265804.04,1006575.8500000001,0.8395224990111368,DEM,Likely D,DEM,DEM,1455647.94,202657.27,0.0,1961.41,True,False,"no FEC match, counted as $0: Jon Kamerath"
+NV-04,confirmed,D_vs_R,Steven Horsford,H2NV04011,Cody Whipple,H6NV04111,3787148.9699999997,883126.07,0.8109049119299834,DEM,Likely D,DEM,DEM,1696622.49,0.0,731483.95,0.0,True,False,"no FEC match, counted as $0: William Johnson"
+NY-01,confirmed,D_vs_R,Chris Gallant,H6NY01159,Nick LaLota,H2NY01190,1680145.57,2539759.67,0.39814770106069963,REP,Solid R,REP,REP,5116.41,0.0,0.0,0.0,True,False,
+NY-02,confirmed,D_vs_R,Patrick Halpin,H6NY02140,Andrew Garbarino,H0NY02234,558238.53,3079343.74,0.1534641661864049,REP,Solid R,REP,REP,0.0,0.0,50000.0,0.0,True,False,
+NY-03,confirmed,D_vs_R,Tom Suozzi,H6NY03247,Mike LiPetri,H0NY02267,7099381.13,1199097.61,0.8555039245662994,DEM,Likely D,DEM,DEM,50650.0,5466050.63,1869414.78,1448560.0,True,False,
+NY-04,confirmed,D_vs_R,Laura Gillen,H2NY04244,Jeanine Driscoll,H6NY04211,5041314.350000001,343362.54,0.9362333995122964,DEM,Likely D,DEM,,258267.83,128483.20000000003,133010.24,967788.33,True,False,
+NY-05,confirmed,D_vs_R,Gregory Meeks,H8NY06048,George Marsh,H6NY05127,1961120.56,0.0,1.0,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+NY-06,confirmed,D_vs_R,Grace Meng,H2NY06116,Joseph Chou,H4NY06047,2055603.52,2578.08,0.9987473991605016,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+NY-07,confirmed,D_vs_R,Claire Valdez,H6NY07214,Melvin Rivera,H6NY07271,1815944.49,0.0,1.0,DEM,Solid D,DEM,,0.0,0.0,0.0,0.0,True,True,
+NY-08,confirmed,D_vs_R,Hakeem Jeffries,H2NY10092,Lewis Mizrahi,H6NY08188,15259055.8,0.0,1.0,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+NY-09,confirmed,D_vs_R,Yvette Clarke,H4NY11138,Joel Azumah,H6NY09145,1273284.61,0.0,1.0,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+NY-10,confirmed,D_vs_R,Brad Lander,H6NY10176,Jennifer Moore,H6NY10218,2764058.82,2693.46,0.9990264903658089,DEM,Solid D,DEM,,0.0,0.0,0.0,0.0,True,False,
+NY-11,confirmed,D_vs_R,Michael DeCillis,H6NY11265,Nicole Malliotakis,H0NY11078,183203.91,2672569.7800000003,0.06415211073675799,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+NY-12,confirmed,D_vs_R,Micah Lasher,H6NY12172,Caroline Shinkle,H6NY12404,2918558.11,246534.56,0.9221082648426847,DEM,Solid D,DEM,,0.0,0.0,0.0,0.0,True,False,
+NY-13,confirmed,D_vs_R,Darializa Avila Chevalier,H6NY13279,Jomo Williams,H6NY13303,1498401.02,0.0,1.0,DEM,Solid D,DEM,,0.0,0.0,0.0,0.0,True,False,
+NY-14,confirmed,D_vs_R,Alexandria Ocasio-Cortez,H8NY15148,Diamant Hysenaj,H6NY14251,37101742.23,437114.97,0.9883556665651505,DEM,Solid D,DEM,DEM,1500.0,0.0,0.0,0.0,True,False,
+NY-15,confirmed,D_vs_R,Ritchie Torres,H0NY15160,Stylo Sapaskis,H6NY16140,3332956.29,0.0,1.0,DEM,Solid D,DEM,DEM,5000.0,0.0,0.0,0.0,True,True,"no FEC match, counted as $0: Gonzalo Duran"
+NY-16,confirmed,D_vs_R,George Latimer,H4NY16087,Joseph Cinquemani,H4NY07052,669195.23,0.0,1.0,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+NY-17,confirmed,D_vs_R,Cait Conley,H6NY17171,Mike Lawler,H2NY17162,9849072.709999999,6287956.18,0.6103399068773682,DEM,Toss Up,,REP,1718923.5400000003,10348713.18,2115030.96,4401916.37,,False,
+NY-18,confirmed,D_vs_R,Pat Ryan,H8NY19223,Jacqueline Auringer,H6NY18252,4301123.37,153874.2,0.96546031786051,DEM,Solid D,DEM,DEM,7425.0,0.0,0.0,0.0,True,False,
+NY-19,confirmed,D_vs_R,Josh Riley,H8NY22177,Peter Oberacker,H6NY19268,5172432.64,859057.52,0.8575712639478135,DEM,Likely D,DEM,DEM,97335.97,0.0,0.0,8185.0,True,False,
+NY-20,confirmed,D_vs_R,Paul Tonko,H8NY21203,Ralph Ambrosio,H6NY20225,1244070.29,51545.17,0.9602156877627873,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+NY-21,confirmed,D_vs_R,Blake Gendebien,H6NY21199,Anthony Constantino,H6NY21157,7359009.359999999,0.0,1.0,DEM,Lean R,REP,,564047.55,140000.0,0.0,1585834.71,False,False,
+NY-22,confirmed,D_vs_R,John Mannion,H4NY22085,Kailee Buller,H6NY22213,3059820.86,442688.44,0.8736082042665811,DEM,Solid D,DEM,DEM,71376.88,0.0,0.0,0.0,True,False,
+NY-23,confirmed,D_vs_R,Aaron Gies,H6NY23559,Nick Langworthy,H2NY23228,672483.72,2225463.66,0.23205518659210436,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+NY-24,confirmed,D_vs_R,Alissa Ellman,H6NY24219,Claudia Tenney,H4NY22051,418930.21,2595097.7800000003,0.1389934703293847,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+NY-25,confirmed,D_vs_R,Joseph Morelle,H8NY25105,Virginia McIntyre,H6NY25208,2008089.8599999999,53846.5,0.9738854694817061,DEM,Solid D,DEM,DEM,252408.84,0.0,0.0,0.0,True,False,
+NY-26,confirmed,D_vs_R,Tim Kennedy,H4NY26078,Dennis Hannon,H6NY26131,2661007.85,5520.0,0.9979298922379528,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+OH-01,confirmed,D_vs_R,Greg Landsman,H2OH01194,Eric Conroy,H6OH01138,4722009.63,1335641.88,0.7795116015183251,DEM,Likely D,DEM,DEM,1122429.67,3573946.87,587404.4700000001,812923.5700000001,True,False,"no FEC match, counted as $0: Nathan Weise"
+OH-02,confirmed,D_vs_R,Jennifer Mazzuckelli,H6OH02326,David Taylor,H4OH02248,0.0,1686593.42,0.0,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+OH-03,confirmed,D_vs_R,Joyce Beatty,H2OH03125,Cleophus Dulaney,H0OH03137,1445056.89,0.0,1.0,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+OH-04,confirmed,D_vs_R,Joshua Kolasinski,H6OH04181,Jim Jordan,H6OH04082,17561.45,4489436.51,0.0038964850119435155,REP,Solid R,REP,REP,0.0,0.0,1597.8899999999996,0.0,True,False,"no FEC match, counted as $0: Tracey Tackett"
+OH-05,confirmed,D_vs_R,Brian Shaver,H6OH05154,Bob Latta,H8OH05036,24133.91,1722475.06,0.01381758047423746,REP,Solid R,REP,REP,0.0,127016.31,59422.48,0.0,True,False,"no FEC match, counted as $0: Michael Veloff"
+OH-06,confirmed,D_vs_R,Elizabeth Kirtley,H6OH06244,Michael Rulli,H4OH06165,7931.98,1129027.24,0.006976485928844484,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+OH-07,confirmed,D_vs_R,Brian Poindexter,H6OH07168,Max Miller,H2OH16051,3690034.94,1749039.48,0.6784306768135745,DEM,Toss Up,,REP,331275.19999999995,5378364.5,489746.28,9227709.969999999,,False,
+OH-08,confirmed,D_vs_R,Vanessa Enoch,H8OH08097,Warren Davidson,H6OH08315,112635.46999999999,518286.09,0.17852531462072715,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+OH-09,confirmed,D_vs_R,Marcy Kaptur,H2OH09031,Derek Merrin,H4OH09169,4912497.58,1078408.99,0.8199923538450374,DEM,Toss Up,,DEM,1617217.58,6985743.58,2648028.91,4259075.71,,False,"no FEC match, counted as $0: Matthew Althaus"
+OH-10,confirmed,D_vs_R,Kristina Knickerbocker,H6OH10121,Mike Turner,H2OH03067,982454.1499999999,1187330.77,0.45278872617475835,REP,Lean R,REP,REP,1026708.01,2637449.0,637279.1,4637046.43,True,False,
+OH-11,confirmed,D_vs_R,Shontel Brown,H2OH11169,Mike Kirchner,H6OH11210,1539228.28,0.0,1.0,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+OH-12,confirmed,D_vs_R,Jerrad Christian,H4OH12080,Troy Balderson,H8OH12180,139495.89,2084946.03,0.06271051122791285,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+OH-13,confirmed,D_vs_R,Emilia Sykes,H2OH13264,Carey Coleman,H6OH13307,3750387.69,113373.9,0.970657118106503,DEM,Likely D,DEM,DEM,773461.38,131032.41000000002,58160.520000000004,0.0,True,False,
+OH-14,confirmed,D_vs_R,Maria Jukic,H6OH14248,David Joyce,H2OH14064,118280.28,1674817.3900000001,0.06596421487737475,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+OH-15,confirmed,D_vs_R,Don Leonard,H6OH15112,Mike Carey,H2OH15228,1138930.61,3387077.11,0.25164133171209,REP,Lean R,REP,REP,1666335.5,1542483.83,1681299.99,3197044.31,True,False,"no FEC match, counted as $0: Brennan Barrington"
+OK-01,confirmed,D_vs_R,John Croisant,H6OK01201,Mark Tedford,H6OK01235,215818.86,885382.82,0.1959848626456872,REP,Solid R,REP,,0.0,0.0,34112.0,0.0,True,False,
+OK-02,confirmed,D_vs_R,Brandon Wade,H4OK02196,Josh Brecheen,H2OK02315,6547.79,247275.81,0.025796616232690733,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Ronnie Hopkins"
+OK-03,confirmed,D_vs_R,Suzie Byrd,H6OK03272,Frank Lucas,H4OK06056,18113.03,1042063.47,0.01708491935069302,REP,Solid R,REP,REP,0.0,0.0,149203.06,0.0,True,False,
+OK-04,confirmed,D_vs_R,Mitchell Jacob,H6OK04155,Tom Cole,H2OK04055,98207.23,4079996.74,0.0235046519282303,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Rocco Bonacci"
+OK-05,confirmed,D_vs_R,Jena Nelson,H6OK05293,Stephanie Bice,H0OK05205,814331.44,1903593.87,0.299615091335972,REP,Solid R,REP,REP,0.0,0.0,48265.03,0.0,True,False,"no FEC match, counted as $0: Austin Nieves"
+OR-01,confirmed,D_vs_R,Suzanne Bonamici,H2OR01133,Barbara Kahl,H6OR01308,1015054.5900000001,17728.49,0.982834255960119,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+OR-02,confirmed,D_vs_R,Chris Beck,H6OR02322,Cliff Bentz,H0OR02127,273491.17000000004,1328765.2200000002,0.17069126496041,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+OR-03,confirmed,D_vs_R,Maxine Dexter,H4OR03192,Loran Ayles,H6OR03197,1261405.53,0.0,1.0,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+OR-04,confirmed,D_vs_R,Val Hoyle,H2OR04095,Monique DeSpain,H6OR04260,1626840.59,521894.02,0.7571156449143804,DEM,Solid D,DEM,DEM,0.0,425000.0,139117.65,109000.0,True,False,"no FEC match, counted as $0: Justin Filip"
+OR-05,confirmed,D_vs_R,Janelle Bynum,H4OR05304,Patti Adair,H6OR05242,4231975.68,648843.04,0.8670626636180415,DEM,Solid D,DEM,DEM,1156493.13,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Andrea Townsend"
+OR-06,confirmed,D_vs_R,Andrea Salinas,H2OR06066,David Russ,H2OR01240,1936989.89,6165.84,0.9968268935398193,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+PA-01,confirmed,D_vs_R,Bob Harvie,H6PA01181,Brian Fitzpatrick,H6PA08277,2972462.63,4533490.41,0.39601401902722266,REP,Lean R,REP,REP,269201.58999999997,5000190.09,1219909.29,6537302.9399999995,True,False,
+PA-02,confirmed,D_vs_R,Brendan Boyle,H4PA13199,Jessica Arriaga,H6PA02205,1817100.54,0.0,1.0,DEM,Solid D,DEM,DEM,151512.28,0.0,0.0,0.0,True,False,
+PA-03,confirmed,other,Chris Rabb,H6PA03203,Dennis Mahoney,H6PA03369,1414605.1900000002,36383.63,0.9749249411859701,DEM,Solid D,,,0.0,0.0,0.0,0.0,,False,"other race: dem and rep columns hold the top two by money (Chris Rabb and Dennis Mahoney); no Cook favorite; 2 nominees, not one Democrat against one Republican"
+PA-04,confirmed,D_vs_R,Madeleine Dean,H8PA04116,Aurora Stuski,H6PA04169,1891210.1800000002,9750.0,0.9948710130266906,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+PA-05,confirmed,D_vs_R,Mary Gay Scanlon,H8PA07200,Nicholas Manganaro,H6PA05216,1329106.1400000001,11243.18,0.9916117538672681,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+PA-06,confirmed,D_vs_R,Chrissy Houlahan,H8PA06087,Marty Young,H6PA06156,1917838.5,358650.42000000004,0.8424545725441088,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+PA-07,confirmed,D_vs_R,Bob Brooks,H6PA07188,Ryan Mackenzie,H8PA15195,4781990.54,3142652.64,0.6034329157013225,DEM,Lean D,DEM,REP,969543.5599999999,8531785.21,809542.4299999999,7360380.08,True,False,
+PA-08,confirmed,D_vs_R,Paige Cognetti,H6PA08293,Rob Bresnahan,H4PA08124,6882620.82,4136546.46,0.6246044410717032,DEM,Toss Up,,REP,2962285.84,8388661.22,1115409.76,7419491.68,,False,
+PA-09,confirmed,D_vs_R,Rachel Wallace,H6PA09127,Dan Meuser,H8PA10147,1140485.66,1894398.21,0.3757921913499774,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+PA-10,confirmed,D_vs_R,Janelle Stelson,H4PA10104,Scott Perry,H2PA04135,8013002.25,5125497.430000001,0.6098871595055669,DEM,Lean D,DEM,REP,1357981.04,7833105.08,2486260.81,5732582.92,True,False,
+PA-11,confirmed,D_vs_R,Nancy Mannion,H6PA11099,Lloyd Smucker,H6PA16320,249487.44,1288349.58,0.16223269225239487,REP,Solid R,REP,REP,0.0,0.0,1000.0,0.0,True,False,
+PA-12,confirmed,D_vs_R,Summer Lee,H2PA18200,James Hayes,H4PA12068,1492404.73,80507.61,0.9488162131145845,DEM,Solid D,DEM,DEM,10269.920000000002,0.0,0.0,0.0,True,False,
+PA-13,confirmed,D_vs_R,Beth Farnham,H4PA13298,John Joyce,H8PA13125,106935.65,2113703.73,0.0481553425392285,REP,Solid R,REP,REP,0.0,0.0,240452.43,0.0,True,False,
+PA-14,confirmed,D_vs_R,Alan Bradstock,H6PA14200,Guy Reschenthaler,H8PA18199,402491.58,4306505.61,0.08547288600102138,REP,Solid R,REP,REP,12750.0,0.0,351057.18,0.0,True,False,
+PA-15,confirmed,D_vs_R,Ray Bilger,H6PA15181,Glenn Thompson,H8PA05071,227348.16,2048404.66,0.0999001991789249,REP,Solid R,REP,REP,0.0,0.0,147345.9,0.0,True,False,
+PA-16,confirmed,D_vs_R,Justin Wagner,H6PA16379,Mike Kelly,H0PA03271,245380.36,1410695.6400000001,0.1481697458329207,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+PA-17,confirmed,D_vs_R,Chris Deluzio,H2PA17103,Tony Guy,H6PA17203,3723273.08,210614.67,0.9464614438985962,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+RI-01,confirmed,D_vs_R,Gabe Amo,H4RI01265,Kellie Keenan,H6RI01153,1924699.9100000001,7310.44,0.9962161486350216,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+RI-02,confirmed,D_vs_R,Seth Magaziner,H2RI02184,Vic Mellor,H6RI02318,1501650.6800000002,56101.12,0.963985841646917,DEM,Solid D,DEM,DEM,0.0,0.0,40600.0,0.0,True,False,
+SC-01,confirmed,D_vs_R,Nancy Lacore,H6SC01359,Jenny Costa Honeycutt,H6SC01334,4799656.17,1225340.8,0.796623831331155,DEM,Lean R,REP,,245919.93,1998503.18,2170231.2199999997,2103981.73,False,False,
+SC-02,confirmed,D_vs_R,Zyon Khalifa,H6SC02159,Joe Wilson,H2SC02059,29039.07,783330.29,0.03574614138573616,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Dayna Alane Smith"
+SC-03,confirmed,D_vs_R,Eunice Lehmacher,H6SC03090,Sheri Biggs,H4SC01313,96850.08,469412.06,0.17103400202598748,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Brian Corriea"
+SC-04,confirmed,D_vs_R,Courtney McClain,H6SC04171,William Timmons,H8SC04250,130729.56,1099803.62,0.10623814304625251,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+SC-05,confirmed,D_vs_R,Mallory Dittmer,H6SC05228,Wes Climer,H6SC05202,219734.64,1116845.92,0.16440059550170324,REP,Solid R,REP,,0.0,0.0,0.0,0.0,True,False,
+SC-06,confirmed,D_vs_R,Jim Clyburn,H2SC02042,John Peterson,H6SC06184,1632854.25,0.0,1.0,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+SC-07,confirmed,D_vs_R,John Vincent,H6SC07034,Russell Fry,H2SC07280,624303.87,1686034.18,0.27022187077774185,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+SD-00,confirmed,D_vs_R,Nikki Gronli,H6SD01141,Marty Jackley,H6SD01109,418569.68,1714175.65,0.19625863159198664,REP,Solid R,REP,,0.0,0.0,118493.06,0.0,True,False,
+TN-01,confirmed,D_vs_R,Kristi Burke,H6TN01537,Diana Harshbarger,H0TN01118,222441.31,1375435.26,0.13921057118948804,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Joshua Ashburn, Richard Baker, Chris Campbell, Billy Cody, Tyler McClain"
+TN-02,confirmed,D_vs_R,Michaela Barnett,H6TN02170,Tim Burchett,H8TN02119,705623.45,3078080.53,0.18649013076334794,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Bruce Fine, Adam Heimerman"
+TN-03,confirmed,D_vs_R,Anna Golladay,H6TN03228,Chuck Fleischmann,H0TN03254,156844.1,2470441.05,0.05969816409155284,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Dean Arnold, Jean Howard-Hill, Donnie Ownby, Edward Roland"
+TN-04,confirmed,D_vs_R,Victoria Broderick,H4TN04270,Scott DesJarlais,H0TN04195,86270.46999999999,666125.0700000001,0.11466105979309764,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Clay Faircloth"
+TN-05,confirmed,D_vs_R,Chaz Molder,H6TN05397,Charlie Hatcher,H6TN05405,3412060.4099999997,1602457.11,0.6804364320976587,DEM,Solid R,REP,,22500.0,210571.08000000002,309566.04,52500.0,False,False,"no FEC match, counted as $0: James Johnson, Micheál O'Leary"
+TN-06,confirmed,D_vs_R,Mike Croley,H6TN06171,Johnny Garrett,H6TN06213,116961.93,1697071.88,0.06447615769631107,REP,Solid R,REP,,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Christopher Monday, Angus Purdy"
+TN-07,confirmed,D_vs_R,Darden Copeland,H6TN07286,Matt Van Epps,H6TN07161,865298.54,2554060.77,0.25305867607110294,REP,Solid R,REP,REP,0.0,0.0,165762.88000000003,0.0,True,False,"no FEC match, counted as $0: Lowell Reynolds"
+TN-08,confirmed,D_vs_R,Heidi Kuhn,H6TN08367,David Kustoff,H2TN07103,112243.98,2380062.15,0.04503619304583582,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Adam Austill, Wells Blankenship, Antonio Futch, Pamela Moses, Henry Ward III"
+TN-09,confirmed,D_vs_R,Justin Pearson,H6TN09449,Brent Taylor,H6TN09464,3972755.6500000004,1278076.51,0.7565954364841097,DEM,Solid R,REP,,872496.81,1203343.5,343483.85000000003,1403090.25,False,False,"no FEC match, counted as $0: Michelle Head"
+TX-01,confirmed,D_vs_R,Yolanda Prince,H6TX01352,Nathaniel Moran,H2TX01112,26143.6,2056596.77,0.012552500722881747,REP,Solid R,REP,REP,0.0,0.0,202538.6,0.0,True,False,
+TX-02,confirmed,D_vs_R,Shaun Finnie,H6TX02251,Steve Toth,H6TX08175,904793.86,928271.27,0.49359613316085504,REP,Solid R,REP,,0.0,22500.0,42817.200000000004,0.0,True,False,
+TX-03,confirmed,D_vs_R,Evan Hunt,H6TX03234,Keith Self,H2TX00064,626142.91,853816.82,0.4230810455903419,REP,Solid R,REP,,0.0,0.0,0.5,0.0,True,False,
+TX-04,confirmed,D_vs_R,Jason Pearce,H6TX04174,Pat Fallon,H0TX04219,18544.4,717190.13,0.0252052870211216,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+TX-05,confirmed,D_vs_R,Chelsey Hockett,H6TX05189,Lance Gooden,H8TX05144,56907.83,1067368.1400000001,0.0506173141813215,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+TX-06,confirmed,D_vs_R,Danny Minton,H6TX25203,Jake Ellzey,H8TX06266,130079.86,2728616.24,0.045503213860333035,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+TX-07,confirmed,D_vs_R,Lizzie Fletcher,H8TX07140,Alexander Hale,H6TX07151,1101695.5,112052.16,0.9076808436442217,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+TX-08,confirmed,D_vs_R,Laura Jones,H0TX08145,Jessica Hart Steinmann,H6TX08209,30781.89,1358845.8399999999,0.02215117713576427,REP,Solid R,REP,,0.0,0.0,0.0,0.0,True,False,
+TX-09,confirmed,D_vs_R,Leticia Gutierrez,H6TX09231,Alex Mealer,H6TX09140,214302.56,2411129.76,0.08162562727954839,REP,Likely R,REP,,310575.42,1196481.47,1142754.73,0.0,True,False,
+TX-10,confirmed,D_vs_R,Caitlin Rourk,H6TX31102,Chris Gober,H6TX10221,543263.05,1034096.52,0.34441294193942096,REP,Solid R,REP,,0.0,0.0,0.0,0.0,True,False,
+TX-11,confirmed,D_vs_R,Claire Reynolds,H6TX11112,August Pfluger,H0TX11230,128450.68000000001,1025870.53,0.11127810776343615,REP,Solid R,REP,REP,0.0,0.0,150000.0,0.0,True,False,
+TX-12,confirmed,D_vs_R,Angela Rodriguez Prilliman,H6TX12169,Craig Goldman,H4TX12065,0.0,1137112.94,0.0,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+TX-13,confirmed,D_vs_R,Mark Nair,H6TX13159,Ronny Jackson,H0TX13228,125541.91,3353610.85,0.036084046507920506,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+TX-14,confirmed,D_vs_R,Thurman Bartie,H6TX14181,Randy Weber,H2TX14149,39403.19,821864.13,0.04575024395445539,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+TX-15,confirmed,D_vs_R,Bobby Pulido,H6TX15246,Monica De La Cruz,H0TX15124,5243008.2,5237912.68,0.5002430855102497,DEM,Toss Up,,REP,2068506.06,7290800.350000001,484791.68,7993828.44,,False,
+TX-16,confirmed,D_vs_R,Veronica Escobar,H8TX16109,Adam Bauman,H6TX16152,1054418.07,1600.0,0.9984848744112873,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+TX-17,confirmed,D_vs_R,Casey Shepard,H6TX17168,Pete Sessions,H2TX03126,88228.47,1279849.38,0.06449082557692166,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+TX-18,confirmed,D_vs_R,Christian Menefee,H6TX18232,Ronald Whitfield,H6TX18497,3724664.66,0.0,1.0,DEM,Solid D,DEM,,80299.44,0.0,0.0,0.0,True,False,
+TX-19,confirmed,D_vs_R,Kyle Rable,H6TX19198,Tom Sell,H6TX19206,48829.91,2378528.4699999997,0.020116481522600715,REP,Solid R,REP,,0.0,0.0,35533.0,0.0,True,False,
+TX-20,confirmed,D_vs_R,Joaquin Castro,H2TX35011,Edgardo Rafael Baez,H6TX20113,587930.74,27078.4,0.9559707356544327,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+TX-21,confirmed,D_vs_R,Kristin Hook,H4TX21108,Mark Teixeira,H6TX21301,386195.87,1273236.96,0.23272763019880713,REP,Solid R,REP,,0.0,0.0,8815.99,0.0,True,False,
+TX-22,confirmed,D_vs_R,Marquette Greene-Scott,H4TX22197,Trever Nehls,H6TX22283,66794.76999999999,324657.89,0.17063307220852703,REP,Solid R,REP,,0.0,0.0,4856.46,0.0,True,False,
+TX-23,confirmed,D_vs_R,Katy Padilla Stout,H6TX23273,Brandon Herrera,H4TX23120,1083959.3199999998,271124.87,0.7999202765401608,DEM,Likely R,REP,,318688.68,824429.2399999999,1065581.42,2805355.9699999997,False,False,"no FEC match, counted as $0: Ben Mendoza"
+TX-24,confirmed,D_vs_R,Kevin Burge,H6TX24172,Beth Van Duyne,H0TX24209,329210.32,2081143.12,0.13658176205063105,REP,Solid R,REP,REP,0.0,0.0,16348.4,0.0,True,False,
+TX-25,confirmed,D_vs_R,Dione Sims,H6TX25237,Roger Williams,H2TX33040,491.48,670570.63,0.0007323912238168238,REP,Solid R,REP,REP,85279.51,0.0,11276.22,0.0,True,False,
+TX-26,confirmed,D_vs_R,Steven Shook,H6TX26144,Brandon Gill,H4TX26149,35820.67,7431195.069999999,0.004797186887944072,REP,Solid R,REP,REP,0.0,0.0,7720.25,0.0,True,False,
+TX-27,confirmed,D_vs_R,Tanya Lloyd,H4TX27089,Michael Cloud,H8TX27049,266749.2,1147377.18,0.18863179682709832,REP,Solid R,REP,REP,0.0,0.0,7734.41,0.0,True,False,
+TX-28,confirmed,D_vs_R,Henry Cuellar,H2TX23082,Tano Tijerina,H6TX28124,2590252.17,1158971.25,0.6908769843329315,DEM,Lean D,DEM,DEM,202713.8,4243658.61,159662.47,5227774.459999999,True,False,"no FEC match, counted as $0: Marlón Durán"
+TX-29,confirmed,D_vs_R,Sylvia Garcia,H8TX29052,Martha Fierro,H6TX29122,1192658.53,585.0,0.9995097396421667,DEM,Solid D,DEM,DEM,30406.9,0.0,0.0,0.0,True,False,
+TX-30,confirmed,D_vs_R,Frederick Haynes III,H6TX30245,Everett Jackson,H6TX30211,685088.89,24806.710000000003,0.9650558335620055,DEM,Solid D,DEM,,0.0,0.0,0.0,0.0,True,False,
+TX-31,confirmed,D_vs_R,Justin Early,H6TX31094,John Carter,H2TX31044,245775.34999999998,982108.5299999999,0.2001617205040594,REP,Solid R,REP,REP,0.0,0.0,7955.25,0.0,True,False,
+TX-32,confirmed,D_vs_R,Dan Barrios,H6TX32217,Jace Yarbrough,H6TX32225,150913.58,983371.55,0.13304730531026177,REP,Solid R,REP,,0.0,602983.2399999999,347052.56,0.0,True,False,
+TX-33,confirmed,D_vs_R,Colin Allred,H8TX32098,Patrick Gillespie,H2TX33248,3809061.5700000003,0.0,1.0,DEM,Solid D,DEM,,0.0,0.0,0.0,0.0,True,False,
+TX-34,confirmed,D_vs_R,Vicente Gonzalez,H6TX15162,Eric Flores,H6TX34080,4484756.91,2321470.2600000002,0.6589196625360362,DEM,Toss Up,,DEM,1142840.78,11054648.83,1865510.87,7938837.75,,False,"no FEC match, counted as $0: Eddie Espinoza, Chris Royal"
+TX-35,confirmed,D_vs_R,Johnny Garcia,H6TX35095,Carlos De La Cruz,H6TX35087,2155352.85,1648161.52,0.5666740388836758,DEM,Lean R,REP,,2761536.41,5818913.289999999,1549186.2799999998,3704869.11,False,False,
+TX-36,confirmed,D_vs_R,Rhonda Hart,H4TX14111,Brian Babin,H6TX02079,24315.62,796733.9500000001,0.02961528863598333,REP,Solid R,REP,REP,0.0,0.0,9112.8,0.0,True,False,
+TX-37,confirmed,D_vs_R,Greg Casar,H2TX35144,Lauren Peña,H6TX35038,1331069.71,132161.88,0.9096780845197582,DEM,Solid D,DEM,,0.0,0.0,0.0,0.0,True,False,
+TX-38,confirmed,D_vs_R,Melissa McDonough,H4TX38011,Jon Bonck,H6TX02244,76680.93,1445883.59,0.050363008590269785,REP,Solid R,REP,,0.0,0.0,5372.8099999999995,0.0,True,False,
+UT-01,confirmed,D_vs_R,Ben McAdams,H8UT04053,Riley Owen,H6UT01244,2717929.29,127019.93,0.9553524790154251,DEM,Solid D,DEM,,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Elias Montgomery, Jesse West"
+UT-02,confirmed,D_vs_R,Peter Crosby,H6UT01160,Blake Moore,H0UT01205,153742.85,2635206.35,0.05512572620541098,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Carlton Bowen, Daniel Cottam"
+UT-03,confirmed,D_vs_R,Kent Udell,H6UT03182,Celeste Maloy,H4UT02296,91265.11,1553388.35,0.05549200012019553,REP,Solid R,REP,REP,0.0,0.0,29500.0,0.0,True,False,"no FEC match, counted as $0: Cassie Easley, Ayden Scott, Michael Stoddard"
+UT-04,confirmed,D_vs_R,Jonny Larsen,H6UT02424,Mike Kennedy,H4UT03260,46517.98,1140478.53,0.03918965187184923,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Taylor Wright"
+VA-01,confirmed,D_vs_R,Shannon Taylor,H6VA01299,Rob Wittman,H8VA01147,4194651.34,3429444.53,0.5501834462110456,DEM,Toss Up,,REP,1198343.38,1541881.4300000002,877293.71,8506049.94,,False,
+VA-02,confirmed,D_vs_R,Elaine Luria,H6VA02198,Jen Kiggans,H2VA02064,6794074.64,5591508.45,0.5485470155608152,DEM,Toss Up,,REP,1330251.02,6787436.82,968912.65,5564532.23,,False,"no FEC match, counted as $0: Geral Staten"
+VA-03,confirmed,D_vs_R,Bobby Scott,H6VA01117,Edwin Rivera,H6VA03121,882179.4299999999,7810.56,0.9912239911821928,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,True,"no FEC match, counted as $0: Makiba Gaines"
+VA-04,confirmed,D_vs_R,Jennifer McClellan,H4VA04066,Robert Murray,H6VA04129,1540544.1099999999,1543.87,0.9989988444109394,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Joan Bell"
+VA-05,confirmed,D_vs_R,Tom Perriello,H8VA05106,John McGuire,H0VA07133,3624546.5100000002,2010676.15,0.64319490616188,DEM,Likely R,REP,,260669.72999999998,1995445.72,705250.31,2389080.37,False,False,"no FEC match, counted as $0: Cooke Harvey"
+VA-06,confirmed,D_vs_R,Beth Macy,H6VA06173,Ben Cline,H8VA06104,2869329.45,1759287.0899999999,0.6199108146470047,DEM,Solid R,REP,REP,0.0,0.0,150000.0,0.0,False,False,
+VA-07,confirmed,D_vs_R,Eugene Vindman,H4VA07234,Doug Ollivant,H6VA07205,15836020.139999999,388877.16,0.9760320726344444,DEM,Likely D,DEM,DEM,203989.09,0.0,179442.39999999997,0.0,True,False,"no FEC match, counted as $0: Taner Demirci Lopez, Joshua Ertle"
+VA-08,confirmed,D_vs_R,Don Beyer,H4VA08224,Tony Sabio,H6VA08252,2507404.02,39586.68,0.9844574697504784,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Shelly Arnoldi"
+VA-09,confirmed,D_vs_R,Joy Powers,H6VA09136,Morgan Griffith,H0VA09055,253600.44,2090615.51,0.10818134737117542,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+VA-10,confirmed,D_vs_R,Suhas Subramanyam,H4VA10279,Dave Beckwith,H2VA10273,1629059.07,176489.11,0.9022517859368339,DEM,Solid D,DEM,DEM,150663.84,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Ahsen Malik"
+VA-11,confirmed,D_vs_R,James Walkinshaw,H6VA11066,Arthur Purves,H6VA11249,3221039.54,29750.649999999998,0.9908481789776781,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Dianne Blais"
+VT-00,confirmed,D_vs_R,Becca Balint,H2VT01076,Gerald Malloy,H6VT01085,1161147.49,167659.61,0.8738269760900584,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Phoenix Altair, Adam Ortiz, Suz Seymour, Ryan Walton"
+WA-01,confirmed,D_vs_R,Suzan DelBene,H0WA08046,Mary Silva,H4WA01282,3921782.27,2849.67,0.9992739013381214,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+WA-02,confirmed,D_vs_R,Rick Larsen,H0WA02080,Edwin Feller,H6WA02228,2572473.12,8338.4,0.9967690782781379,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+WA-03,confirmed,D_vs_R,Marie Gluesenkamp Perez,H2WA03217,John Braun,H6WA03275,5405197.97,2668329.64,0.6694964371342504,DEM,Lean D,DEM,DEM,41562.86,11199999.32,1368767.44,5406453.99,True,False,
+WA-04,confirmed,D_vs_R,John Duresky,H6WA04190,Amanda McKinney,H6WA04216,452677.15,1268648.0699999998,0.262981768198342,REP,Solid R,REP,,0.0,0.0,65793.43,0.0,True,False,
+WA-05,confirmed,D_vs_R,Carmela Conroy,H4WA05168,Michael Baumgartner,H4WA05234,815122.57,2148541.3,0.27503880526100283,REP,Solid R,REP,REP,0.0,26761.74,120500.0,80027.19,True,False,
+WA-06,confirmed,D_vs_R,Emily Randall,H4WA06117,Teresa Fox,H6WA06286,1404850.86,61618.66,0.9579816292397267,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+WA-07,confirmed,D_vs_R,Pramila Jayapal,H6WA07458,Nirav Sheth,H4WA08147,2789181.65,65644.33,0.9770058383733778,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+WA-08,confirmed,D_vs_R,Kim Schrier,H8WA08189,Spencer Meline,H6WA08167,3651001.24,72773.63,0.9804570274679361,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+WA-09,confirmed,D_vs_R,Adam Smith,H6WA09025,Doug Basler,H4WA09061,2177335.23,43650.66,0.9803462686563937,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+WA-10,confirmed,D_vs_R,Marilyn Strickland,H0WA10034,Chris Chung,H6WA10031,1878559.32,0.0,1.0,DEM,Solid D,DEM,DEM,0.0,0.0,0.0,0.0,True,False,
+WI-01,confirmed,D_vs_R,Mitchell Berman,H6WI01283,Bryan Steil,H8WI01156,1970959.94,3685385.5,0.34845112642201004,REP,Lean R,REP,REP,1052607.9100000001,3654014.1799999997,3248253.22,4091748.81,True,False,
+WI-02,confirmed,unopposed,Mark Pocan,H2WI02124,,,974045.63,0.0,,,Solid D,,DEM,1451.3600000000001,0.0,0.0,0.0,,False,unopposed: listed but not scored
+WI-03,confirmed,D_vs_R,Rebecca Cooke,H4WI03169,Derrick Van Orden,H0WI03175,11635099.63,6338704.89,0.64733649556794,DEM,Toss Up,,REP,1659339.62,8540813.34,2214941.62,9764098.66,,False,"no FEC match, counted as $0: Alexander Kent, Rustin Provance"
+WI-04,confirmed,D_vs_R,Gwen Moore,H4WI04183,Tim Rogers,H4WI04274,1310182.1700000002,0.0,1.0,DEM,Solid D,DEM,DEM,2177.0299999999997,0.0,0.0,0.0,True,False,"no FEC match, counted as $0: Arthur Burks"
+WI-05,confirmed,D_vs_R,Andrew Beck,H6WI05136,Scott Fitzgerald,H0WI05113,12987.26,1681679.61,0.007663606476239191,REP,Solid R,REP,REP,0.0,0.0,149505.78,0.0,True,False,
+WI-06,confirmed,D_vs_R,Brad Smith,H6WI06191,Glenn Grothman,H4WI06048,309114.28,1179810.6,0.20760905009526068,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+WI-07,confirmed,D_vs_R,Fred Clark,H6WI07207,Michael Alfonso,H6WI07223,855430.96,1641904.32,0.3425374906007814,REP,Solid R,REP,,0.0,0.0,35000.0,0.0,True,False,
+WI-08,confirmed,D_vs_R,Rick Crosson,H6WI08205,Tony Wied,H4WI08119,164267.93,1305847.3199999998,0.11173813073498831,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+WV-01,confirmed,D_vs_R,Vince George,H6WV01160,Carol Miller,H8WV03097,26586.29,2000107.7000000002,0.01311805834091411,REP,Solid R,REP,REP,0.0,0.0,0.0,0.0,True,False,
+WV-02,confirmed,D_vs_R,Ace Parsi,H6WV02150,Riley Moore,H4WV02205,274640.66000000003,1231151.51,0.18238948606035058,REP,Solid R,REP,REP,0.0,0.0,97927.54,0.0,True,False,
+WY-00,confirmed,D_vs_R,Lisa Kinney,H6WY01173,Chuck Gray,H6WY00217,99131.16,375758.0,0.20874588925129392,REP,Solid R,REP,,0.0,0.0,189445.64,0.0,True,False,"no FEC match, counted as $0: Jeffrey Haggit, Shawn Johnson"
