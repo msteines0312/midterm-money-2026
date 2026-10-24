@@ -45,7 +45,7 @@ An analysis of campaign finance and endorsements in the 2026 U.S. House midterms
 | `candidates` | OpenFEC `/candidates/` | 2026 House candidates who have raised money |
 | `candidate_totals` | FEC bulk summary file (`webl26.zip`) | Cycle totals per campaign, with self-funding split out. One snapshot per pull date |
 | `committees` | OpenFEC `/committees/` | Super PACs (type O) and hybrid PACs (types V and W) |
-| `outside_spending` | OpenFEC `/schedules/schedule_e/by_candidate/` | Independent expenditures summed by committee, candidate, and support or oppose |
+| `outside_spending` | FEC bulk independent expenditure file (`independent_expenditure_2026.csv`) | House independent expenditures summed by committee, candidate, support or oppose, and primary or general. Superseded filings are dropped |
 | `races` | Wikipedia, pinned revisions | Cook ratings and Cook PVI for all 435 districts |
 | `pac_industries` | Hand-built, `data/manual/` | Industry label for each tracked super PAC, with a source for every row |
 
@@ -53,6 +53,7 @@ An analysis of campaign finance and endorsements in the 2026 U.S. House midterms
 | Pull date | Purpose | Notes |
 |---|---|---|
 | 2026-10-23 | Pre-election | Pulled the day after pre-general reports were due. 744 campaigns report through October 14 |
+| 2026-10-23 | Pre-election, outside spending | Official outside spending snapshot, built from the FEC bulk independent expenditure file (`outside_spending`). An earlier build the same day used the by-candidate endpoint and is kept in `outside_spending_by_candidate_endpoint` because it dropped filings with no candidate ID |
 
 ## Data Caveats
 - FEC numbers keep changing as campaigns file new reports. Every snapshot is stamped with its pull date, and every chart says which date it uses.
@@ -64,6 +65,33 @@ An analysis of campaign finance and endorsements in the 2026 U.S. House midterms
 - The schema has no foreign keys. FEC endpoints filter candidates differently, so some rows don't match across tables. The pipeline prints how many rows are unmatched on every run instead of dropping them.
 - Non-voting delegates (DC and the territories) file with the FEC but have no Cook rating. They stay in `candidates` and are left out of the analysis. Four other candidates also have no matching race because their FEC filings list a district that doesn't exist (GA-00, GA-23, NM-66, and one Maryland filing with no district).
 - A few FEC reports have coverage end dates after the pull date (November 3 and December 31, 2026). These look like filing errors, so don't trust `coverage_end_date` as a precise filing date for those rows.
+- Outside spending comes from the FEC bulk independent expenditure file, which is built from 24- and 48-hour reports. It can include filings that have not yet appeared in a committee's periodic report, and a committee can amend a filing to $0 that its periodic report still counts.
+- About 41 `outside_spending` rows (one per committee, candidate, and side) have no candidate ID, either because the filing left it blank or because the name could not be matched. Blank-ID rows are matched to a candidate by race and last name. If two candidates in a race share a last name, the match is skipped and the money is kept under a `race|LASTNAME` key. Rows with a blank district use the candidate's race when the ID is known and otherwise get no race.
+- Rows with a blank amount, a blank support or oppose flag (4 real House rows), or a blank state are skipped. Party names are mapped to DEM, REP, and DFL.
+- Outside spending is stored by election type, so primary and general election money are separate rows. Totals that mix them include both.
+- The bulk file contains one individual filer ("Warren Buffet", C00946087) with about $13 billion of independent expenditures for a candidate named Bettis. It is not a registered super PAC and is not in `committees`, so analysis should restrict to committees in that table.
+- Validation against FEC committee totals (`scripts/check_outside_spending.py`, October 23 snapshot). Our figure is the bulk file for all offices through each committee's last reported coverage date, compared with `/committee/{id}/totals/`. The pass rule was every labeled network committee within 5% and the top 10 super PACs within 5% in total. The top 10 total matched (-1.27%), but two network committees missed (Jobs and Democracy PAC -10.69%, American Mission -6.20%), so the check **failed** and the report shows network spending only, with no "share of all outside spending."
+
+| Committee | Network | Bulk file through coverage | FEC reported | Coverage end | Difference |
+|---|---|---|---|---|---|
+| FAIRSHAKE | Fairshake | $19,274,814 | $19,412,478 | 2026-10-14 | -0.71% |
+| DEFEND AMERICAN JOBS | Fairshake | $87,079,066 | $88,319,034 | 2026-10-14 | -1.40% |
+| PROTECT PROGRESS | Fairshake | $29,181,489 | $29,197,272 | 2026-10-14 | -0.05% |
+| LEADING THE FUTURE | Leading the Future | $0 | $0 | 2026-10-14 | n/a |
+| AMERICAN MISSION | Leading the Future | $12,588,615 | $13,421,107 | 2026-09-30 | -6.20% |
+| THINK BIG | Leading the Future | $18,169,566 | $18,169,566 | 2026-09-30 | 0.00% |
+| JOBS AND DEMOCRACY PAC | Public First | $15,964,202 | $17,875,336 | 2026-09-30 | -10.69% |
+| DEFENDING OUR VALUES PAC | Public First | $7,365,832 | $7,365,832 | 2026-09-30 | 0.00% |
+| PUBLIC FIRST | Public First | $0 | $0 | 2026-09-30 | n/a |
+| CLF | none | $67,478,606 | $67,898,719 | 2026-09-30 | -0.62% |
+| HMP | none | $46,771,985 | $45,720,411 | 2026-09-30 | 2.30% |
+| NO GOING BACK PAC INC. | none | $183,766,889 | $187,807,636 | 2026-10-14 | -2.15% |
+| SAFETY & AFFORDABILITY PAC INC. | none | $12,555,808 | $16,216,833 | 2026-10-14 | -22.58% |
+| LCV VICTORY FUND | none | $28,871,096 | $26,076,915 | 2026-10-14 | 10.72% |
+| UNITED DEMOCRACY PROJECT | none | $53,684,196 | $53,603,927 | 2026-10-14 | 0.15% |
+| YOUR COMMUNITY PAC | none | $13,053,517 | $12,961,740 | 2026-09-30 | 0.71% |
+
+  Two committees with $0 on both sides (Leading the Future, Public First) agree trivially and do not count toward pass or fail. Most gaps come from dating: the committee totals count an expenditure by its expenditure date, while our figure uses the dissemination date. Jobs and Democracy PAC's gap is mostly filings it later amended to $0, which its periodic report still counts.
 
 ## Key Features
 - Rate-limit-aware API client that backs off on HTTP 429 and pauses when the remaining-requests header hits zero
