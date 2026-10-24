@@ -32,6 +32,9 @@ CYCLE = 2026
 WIKIPEDIA_DIR = RAW_DIR / "wikipedia"
 COOK_RATINGS_PAGE = ("2026_United_States_House_of_Representatives_election_ratings", 1381240142)
 PVI_PAGE = ("2026_United_States_House_of_Representatives_elections", 1380949529)
+# Latest revision at fetch time (2026-10-24), pinned for the November nominees.
+# Separate from PVI_PAGE because nominees change as primaries and runoffs finish.
+NOMINEES_PAGE = ("2026_United_States_House_of_Representatives_elections", 1381568365)
 
 
 def load_api_key(env_path=None):
