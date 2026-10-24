@@ -100,6 +100,31 @@ def party_buckets(conn, pulled_at):
     return _query(conn, sql, pulled_at)
 
 
+def support_oppose_totals(conn, pulled_at):
+    """Network spending supporting and opposing candidates, of any party.
+
+    Unlike `party_buckets`, rows with no party are split by side too, so
+    the two totals cover all of a network's spending.
+
+    Parameters
+    ----------
+    conn : sqlite3.Connection
+    pulled_at : str
+
+    Returns
+    -------
+    pandas.DataFrame
+        Columns `network`, `support_oppose` ("S" or "O"), `total`.
+    """
+    sql = f"""
+        SELECT network, support_oppose, SUM(total) AS total
+        FROM ({NETWORK_SPENDING})
+        GROUP BY network, support_oppose
+        ORDER BY network, support_oppose
+    """
+    return _query(conn, sql, pulled_at)
+
+
 def competitiveness(conn, pulled_at):
     """General election network spending by how competitive the seat is.
 

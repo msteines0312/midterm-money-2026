@@ -8,6 +8,7 @@ from src.analysis.tech_money import (
     network_totals,
     party_buckets,
     primary_vs_general,
+    support_oppose_totals,
     top_races,
 )
 from src.db import connect, create_schema, upsert_rows
@@ -147,3 +148,18 @@ def test_party_committee_excluded_from_denominator(conn):
     # Denominator: 170 + 105 + 500 unlabeled = 775
     assert share.loc["Crypto", "share_of_super_pac_spending"] == pytest.approx(170 / 775)
     assert share.loc["AI", "share_of_super_pac_spending"] == pytest.approx(105 / 775)
+
+
+def test_support_oppose_totals_include_rows_with_no_party(conn):
+    result = support_oppose_totals(conn, PULLED_AT)
+    totals = {(r.network, r.support_oppose): r.total for r in result.itertuples()}
+    # AI's 105 includes the no-party TX|SMITH row, which supported its candidate
+    assert totals == {("Crypto", "S"): 130, ("Crypto", "O"): 40, ("AI", "S"): 105}
+
+
+def test_opposing_row_with_no_party_counts_as_opposing(conn):
+    upsert_rows(conn, "outside_spending", [{**spend("B1", "TX|JONES", None, "O", "G", None, 8), "candidate_id": None}])
+    result = support_oppose_totals(conn, PULLED_AT)
+    totals = {(r.network, r.support_oppose): r.total for r in result.itertuples()}
+    assert totals[("AI", "O")] == 8
+    assert totals[("AI", "S")] == 105

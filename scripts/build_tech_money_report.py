@@ -40,6 +40,7 @@ from src.analysis.tech_money import (  # noqa: E402
     network_totals,
     party_buckets,
     primary_vs_general,
+    support_oppose_totals,
     top_races,
 )
 from src.config import DB_PATH, PROJECT_ROOT  # noqa: E402
@@ -271,6 +272,9 @@ def collect_numbers(conn, pulled_at):
                             [name for name, _, _ in SEAT_TYPES], networks)
     elections = wide_by_network(primary_vs_general(conn, pulled_at), "election",
                                 [name for name, _, _ in ELECTIONS], networks)
+    # Taken from support_oppose directly, so a row with no party lands on
+    # the side it was filed under instead of being assumed to be support
+    sides = wide_by_network(support_oppose_totals(conn, pulled_at), "support_oppose", ["S", "O"], networks)
 
     # top_races also returns all super PAC spending in each race. It is left
     # out on purpose: next to the network figure it reads as a share of all
@@ -289,9 +293,8 @@ def collect_numbers(conn, pulled_at):
             "total": float(row.total),
             "n_candidates": int(row.n_candidates),
             "party_buckets": {name: float(v) for name, v in bucket_totals.items()},
-            "supporting_total": float(bucket_totals[["Supporting Democrats", "Supporting Republicans"]].sum()
-                                      + bucket_totals["Other or unknown"]),
-            "opposing_total": float(bucket_totals[["Opposing Democrats", "Opposing Republicans"]].sum()),
+            "supporting_total": float(sides.loc[net, "S"]),
+            "opposing_total": float(sides.loc[net, "O"]),
             "elections": {name: float(v) for name, v in elections.loc[net].items()},
             "primary_pct_of_network_total": float(elections.loc[net, "Primary"] / row.total * 100),
             "general_seat_types": {name: float(v) for name, v in seats.loc[net].items()},
