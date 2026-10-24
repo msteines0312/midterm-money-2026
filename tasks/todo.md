@@ -36,7 +36,7 @@ Pre-election build first (target: before Nov 3, 2026). General election update a
 - [ ] Build Power BI page 3
 
 ## Step 4b: Full pre-election pull
-- [ ] Run `python -m src.pipeline` on or after Oct 23, 2026 (pre-general reports are due Oct 22) and record the pull date in the README
+- [x] Run `python -m src.pipeline` on or after Oct 23, 2026 (pre-general reports are due Oct 22) and record the pull date in the README
 
 ## Step 5: Post-election update (after Nov 3)
 - [ ] Load general election results
