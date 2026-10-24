@@ -103,3 +103,26 @@ def test_create_schema_twice_keeps_new_rows(conn):
     assert count(conn, "outside_spending") == 1
     names = {row[0] for row in conn.execute("SELECT name FROM sqlite_master WHERE type = 'table'")}
     assert "outside_spending_by_candidate_endpoint" not in names
+
+
+def test_create_schema_rebuilds_pac_industries_without_network(tmp_path):
+    conn = connect(tmp_path / "old.db")
+    # The label table as it was before the network column was added
+    conn.execute(
+        """CREATE TABLE pac_industries (
+            committee_id TEXT PRIMARY KEY, industry TEXT NOT NULL, source_url TEXT NOT NULL)"""
+    )
+    conn.commit()
+
+    create_schema(conn)
+
+    columns = {row[1] for row in conn.execute("PRAGMA table_info(pac_industries)")}
+    assert "network" in columns
+    conn.close()
+
+
+def test_create_schema_twice_keeps_pac_industries_rows(conn):
+    row = {"committee_id": "C001", "network": "Fairshake", "industry": "crypto", "source_url": "https://a"}
+    upsert_rows(conn, "pac_industries", [row])
+    create_schema(conn)
+    assert count(conn, "pac_industries") == 1

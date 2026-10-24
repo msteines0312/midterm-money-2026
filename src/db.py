@@ -31,6 +31,7 @@ def create_schema(conn):
     conn : sqlite3.Connection
     """
     _move_old_outside_spending(conn)
+    _drop_old_pac_industries(conn)
     conn.executescript(SCHEMA_PATH.read_text())
 
 
@@ -50,6 +51,25 @@ def _move_old_outside_spending(conn):
     # An empty set means the table does not exist yet, so there is nothing to move
     if columns and "election_type" not in columns:
         conn.execute("ALTER TABLE outside_spending RENAME TO outside_spending_by_candidate_endpoint")
+        conn.commit()
+
+
+def _drop_old_pac_industries(conn):
+    """Drop a `pac_industries` table that predates the `network` column.
+
+    Like `outside_spending`, this table is made with CREATE TABLE IF NOT
+    EXISTS, so an old copy would block the new column. Dropping is safe here
+    because the old table was never filled: the labels live in
+    data/manual/pac_industries.csv and are reloaded on every pull.
+
+    Parameters
+    ----------
+    conn : sqlite3.Connection
+    """
+    columns = {row[1] for row in conn.execute("PRAGMA table_info(pac_industries)")}
+    # An empty set means the table does not exist yet, so there is nothing to drop
+    if columns and "network" not in columns:
+        conn.execute("DROP TABLE pac_industries")
         conn.commit()
 
 

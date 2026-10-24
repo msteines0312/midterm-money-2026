@@ -80,6 +80,7 @@ CREATE TABLE IF NOT EXISTS outside_spending (
 -- Hand-built labels. Every row cites a source because each one is a judgment call.
 CREATE TABLE IF NOT EXISTS pac_industries (
     committee_id TEXT PRIMARY KEY,
+    network      TEXT NOT NULL,
     industry     TEXT NOT NULL,
     source_url   TEXT NOT NULL
 );
