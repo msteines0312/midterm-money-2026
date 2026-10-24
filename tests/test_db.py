@@ -2,7 +2,7 @@
 
 import pytest
 
-from src.db import connect, create_schema, upsert_rows
+from src.db import connect, create_schema, replace_rows, upsert_rows
 
 TABLES = {"races", "candidates", "committees", "candidate_totals", "outside_spending", "pac_industries"}
 
@@ -126,3 +126,31 @@ def test_create_schema_twice_keeps_pac_industries_rows(conn):
     upsert_rows(conn, "pac_industries", [row])
     create_schema(conn)
     assert count(conn, "pac_industries") == 1
+
+
+def label(committee_id):
+    return {"committee_id": committee_id, "network": "Net", "industry": "crypto", "source_url": "http://example.com"}
+
+
+def test_replace_rows_drops_rows_not_in_the_new_set(conn):
+    upsert_rows(conn, "pac_industries", [label("C1"), label("C2")])
+    replace_rows(conn, "pac_industries", [label("C1")])
+    assert [row[0] for row in conn.execute("SELECT committee_id FROM pac_industries")] == ["C1"]
+
+
+def test_replace_rows_with_pulled_at_keeps_other_snapshots(conn):
+    upsert_rows(conn, "candidate_totals", [totals("2026-10-20", receipts=1.0), totals("2026-10-23", receipts=2.0)])
+    replace_rows(conn, "candidate_totals", [totals("2026-10-23", receipts=3.0)], pulled_at="2026-10-23")
+    rows = conn.execute("SELECT pulled_at, receipts FROM candidate_totals ORDER BY pulled_at").fetchall()
+    assert rows == [("2026-10-20", 1.0), ("2026-10-23", 3.0)]
+
+
+def test_replace_rows_with_no_rows_empties_the_table(conn):
+    upsert_rows(conn, "pac_industries", [label("C1")])
+    replace_rows(conn, "pac_industries", [])
+    assert count(conn, "pac_industries") == 0
+
+
+def test_replace_rows_rejects_unknown_table(conn):
+    with pytest.raises(ValueError, match="nope"):
+        replace_rows(conn, "nope", [])

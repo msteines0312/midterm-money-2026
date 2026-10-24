@@ -73,6 +73,17 @@ def _drop_old_pac_industries(conn):
         conn.commit()
 
 
+def _check_table(conn, table):
+    """Raise ValueError unless `table` is a real table in the database.
+
+    Table names can't be passed as SQL parameters, so the name is checked
+    against the real tables before it goes in a query string.
+    """
+    known = {row[0] for row in conn.execute("SELECT name FROM sqlite_master WHERE type = 'table'")}
+    if table not in known:
+        raise ValueError(f"Unknown table: {table}")
+
+
 def upsert_rows(conn, table, rows):
     """Insert rows, replacing any with the same primary key.
 
@@ -97,11 +108,7 @@ def upsert_rows(conn, table, rows):
     ValueError
         If `table` is not in the schema.
     """
-    # Table names can't be passed as SQL parameters, so check the name against
-    # the real tables before putting it in the query string
-    known = {row[0] for row in conn.execute("SELECT name FROM sqlite_master WHERE type = 'table'")}
-    if table not in known:
-        raise ValueError(f"Unknown table: {table}")
+    _check_table(conn, table)
     if not rows:
         return 0
 
@@ -112,3 +119,43 @@ def upsert_rows(conn, table, rows):
     )
     conn.commit()
     return len(rows)
+
+
+def replace_rows(conn, table, rows, pulled_at=None):
+    """Delete a table's rows, or one snapshot's rows, then insert new ones.
+
+    `upsert_rows` only adds and overwrites, so a row that is no longer in the
+    source would stay behind. This is for data where that matters: a committee
+    dropped from the label CSV, or a snapshot rebuilt with different keys.
+    Both steps run in one transaction, so a failed insert leaves the old rows.
+
+    Parameters
+    ----------
+    conn : sqlite3.Connection
+    table : str
+        Name of a table in the schema.
+    rows : list of dict
+        Rows to write. Every dict must have the same keys.
+    pulled_at : str, optional
+        Only delete rows with this `pulled_at`, leaving other snapshots alone.
+        By default every row in the table is deleted.
+
+    Returns
+    -------
+    int
+        Number of rows written.
+
+    Raises
+    ------
+    ValueError
+        If `table` is not in the schema.
+    """
+    _check_table(conn, table)
+    # `with conn` commits if everything succeeds and rolls back the DELETE if
+    # the insert fails. The commit inside upsert_rows ends the same transaction.
+    with conn:
+        if pulled_at is None:
+            conn.execute(f"DELETE FROM {table}")
+        else:
+            conn.execute(f"DELETE FROM {table} WHERE pulled_at = ?", (pulled_at,))
+        return upsert_rows(conn, table, rows)

@@ -11,7 +11,7 @@ import argparse
 from datetime import date
 
 from src.config import CYCLE, DB_PATH, SAMPLE_DB_PATH, load_api_key
-from src.db import connect, create_schema, upsert_rows
+from src.db import connect, create_schema, replace_rows, upsert_rows
 from src.fec.bulk import download_summary, house_totals
 from src.fec.client import FecClient
 from src.fec.independent_expenditures import download_independent_expenditures, house_outside_spending
@@ -77,7 +77,9 @@ def run_pull(client, conn, pulled_at, races, summary_text, ie_text, pac_industri
         "committees": upsert_rows(conn, "committees", committees),
         "candidate_totals": upsert_rows(conn, "candidate_totals", totals),
         "outside_spending": upsert_rows(conn, "outside_spending", spending),
-        "pac_industries": upsert_rows(conn, "pac_industries", pac_industries),
+        # Replaced, not upserted, so a committee taken out of the CSV stops
+        # counting instead of lingering in the table from an earlier pull
+        "pac_industries": replace_rows(conn, "pac_industries", pac_industries),
     }
 
 

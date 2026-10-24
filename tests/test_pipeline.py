@@ -106,3 +106,15 @@ def test_orphan_counts_reports_unmatched_spending(conn):
     # candidates are in WA-05, so they stay unmatched
     pull(FakeClient(), conn, "2026-10-20")
     assert orphan_counts(conn)["spending_without_candidate"] >= 1
+
+
+LABEL = {"network": "Net", "industry": "crypto", "source_url": "http://example.com"}
+
+
+def test_committee_removed_from_labels_disappears(conn):
+    # A committee taken out of pac_industries.csv must stop counting on the next pull
+    labels = [{"committee_id": "C1", **LABEL}, {"committee_id": "C2", **LABEL}]
+    run_pull(FakeClient(), conn, "2026-10-20", RACES, SUMMARY, IE_SAMPLE, pac_industries=labels)
+    run_pull(FakeClient(), conn, "2026-10-20", RACES, SUMMARY, IE_SAMPLE, pac_industries=labels[:1])
+    assert [row[0] for row in conn.execute("SELECT committee_id FROM pac_industries")] == ["C1"]
+
