@@ -1,0 +1,129 @@
+"""Tests for src/fec/independent_expenditures.py, run against real rows from the FEC's bulk file.
+
+Fixture rows (tests/fixtures/ie_sample.csv, see scripts/save_fixtures.py):
+- CLF (C00504530), blank cand_id, WA-05: two rows, $20,500 and $100,000.
+- New Leadership Now (C00900993), CA-04 primary: one transaction filed as
+  the original ($51,601), A1 ($64,246) and A2 ($64,250).
+- Bennett (NJ-07) and Conley (NY-17): ordinary House rows with a cand_id.
+- Begich (AK at-large, district "00"), a Senate row, and a presidential row.
+"""
+
+from pathlib import Path
+
+import pytest
+
+from src.fec.independent_expenditures import (
+    drop_superseded,
+    house_outside_spending,
+    parse_independent_expenditures,
+)
+from src.fec.transform import race_id
+
+SAMPLE = (Path(__file__).parent / "fixtures" / "ie_sample.csv").read_text(encoding="latin-1")
+
+CLF = "C00504530"
+CLF_TOTAL = 20500.0 + 100000.0
+SENATE_ID = "S6FL00830"
+PRESIDENT_ID = "P00009423"
+# What the candidates table would hold for the CLF candidate
+BAUMGARTNER = {"candidate_id": "H6XX01234", "race_id": "WA-05", "name": "BAUMGARTNER, MICHAEL", "party": "REP"}
+
+
+def clf_row(rows):
+    """The single output row for CLF spending, which has no candidate ID in the bulk file."""
+    (row,) = [r for r in rows if r["committee_id"] == CLF]
+    return row
+
+
+def test_drop_superseded_keeps_only_latest_amendment():
+    rows = drop_superseded(parse_independent_expenditures(SAMPLE))
+    versions = [r for r in rows if r["tran_id"] == "WFT2026441236-1"]
+    assert len(versions) == 1
+    assert versions[0]["amndt_ind"] == "A2"
+    assert versions[0]["exp_amo"] == "64250"
+
+
+def test_drop_superseded_removes_filings_listed_as_previous():
+    rows = drop_superseded(parse_independent_expenditures(SAMPLE))
+    previous = {r["prev_file_num"] for r in rows if r["prev_file_num"]}
+    assert not previous & {r["file_num"] for r in rows}
+
+
+def test_house_only():
+    rows = house_outside_spending(SAMPLE, [], "2026-10-23")
+    assert rows
+    ids = {r["candidate_id"] for r in rows}
+    assert SENATE_ID not in ids
+    assert PRESIDENT_ID not in ids
+    assert all(r["race_id"] != "FL-00" for r in rows)
+
+
+def test_aggregates_by_committee_candidate_support_election():
+    # Both CLF rows are for the same candidate, support, and general election
+    row = clf_row(house_outside_spending(SAMPLE, [], "2026-10-23"))
+    assert row["total"] == CLF_TOTAL
+    assert row["count"] == 2
+
+
+def test_blank_id_matched_by_race_and_last_name():
+    row = clf_row(house_outside_spending(SAMPLE, [BAUMGARTNER], "2026-10-23"))
+    assert row["candidate_id"] == "H6XX01234"
+    assert row["candidate_key"] == "H6XX01234"
+    assert row["party"] == "REP"
+
+
+def test_blank_id_unmatched_keeps_race_and_money():
+    row = clf_row(house_outside_spending(SAMPLE, [], "2026-10-23"))
+    assert row["candidate_id"] is None
+    assert row["race_id"] == "WA-05"
+    assert row["total"] == CLF_TOTAL
+    assert row["candidate_key"] == "WA-05|BAUMGARTNER"
+
+
+def test_blank_id_ambiguous_last_name_not_guessed():
+    twin = {**BAUMGARTNER, "candidate_id": "H6XX09999", "name": "BAUMGARTNER, JANE", "party": "DEM"}
+    row = clf_row(house_outside_spending(SAMPLE, [BAUMGARTNER, twin], "2026-10-23"))
+    assert row["candidate_id"] is None
+    assert row["candidate_key"] == "WA-05|BAUMGARTNER"
+
+
+def test_election_type_kept():
+    rows = house_outside_spending(SAMPLE, [], "2026-10-23")
+    (primary,) = [r for r in rows if r["committee_id"] == "C00900993"]
+    assert primary["election_type"] == "P"
+    # Only the A2 amount counts, not the three versions added together
+    assert primary["total"] == 64250.0
+    assert primary["count"] == 1
+
+
+def test_party_comes_from_candidates_table_when_known():
+    known = {"candidate_id": "H6NJ07201", "race_id": "NJ-07", "name": "BENNETT, REBECCA", "party": "DEM"}
+    rows = house_outside_spending(SAMPLE, [known], "2026-10-23")
+    (bennett,) = [r for r in rows if r["candidate_id"] == "H6NJ07201"]
+    assert bennett["party"] == "DEM"
+    # Not in `candidates`, so the bulk file's own wording is kept
+    (conley,) = [r for r in rows if r["candidate_id"] == "H6NY17171"]
+    assert conley["party"] == "DEMOCRATIC PARTY"
+
+
+def test_race_id_matches_transform():
+    rows = house_outside_spending(SAMPLE, [], "2026-10-23")
+    (begich,) = [r for r in rows if r["candidate_id"] == "H2AK01083"]
+    assert begich["race_id"] == race_id("AK", "00") == "AK-00"
+
+
+def test_rows_match_table_columns():
+    expected = {
+        "committee_id", "candidate_key", "candidate_id", "candidate_name", "party",
+        "race_id", "election_type", "support_oppose", "pulled_at", "total", "count",
+    }
+    rows = house_outside_spending(SAMPLE, [], "2026-10-23")
+    assert all(set(r) == expected for r in rows)
+    assert {r["pulled_at"] for r in rows} == {"2026-10-23"}
+
+
+def test_parse_turns_blanks_into_none():
+    rows = parse_independent_expenditures(SAMPLE)
+    clf = [r for r in rows if r["spe_id"] == CLF]
+    assert all(r["cand_id"] is None for r in clf)
+    assert clf[0]["exp_amo"] == "20500"
