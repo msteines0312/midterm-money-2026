@@ -35,8 +35,10 @@ Design: `docs/superpowers/specs/2026-10-23-tech-money-page-design.md`
 - [ ] Write section 2
 
 ## Step 4: Money and winning, pre-election (write-up section 3)
-- [ ] Compute fundraising share per race
-- [ ] Logistic regression on primary outcomes: money share, incumbency, PVI
+- [x] Compute fundraising share per race
+- [x] Logistic regression on 2022 and 2024 general outcomes (money share, incumbency, PVI), evaluated by held-out cycle
+- [x] Commit model-based general election predictions (tag pre-election-model)
+- [x] Paired bootstrap check of what money adds to the model (supplementary-2026-10-26.json)
 - [x] Compare fundraising advantage against Cook ratings for the general
 - [x] Commit simple general election predictions (tag pre-election-simple)
 - [ ] Write section 3 and commit the pre-election predictions before Nov 3
@@ -46,7 +48,8 @@ Design: `docs/superpowers/specs/2026-10-23-tech-money-page-design.md`
 
 ## Step 5: Post-election update (after Nov 3)
 - [ ] Load general election results
-- [ ] Rerun the money and winning model on general outcomes
+- [ ] Score both tagged prediction sets against 2026 general results
+- [ ] Test whether adding outside spending (support and oppose, by candidate) improves the model on 2022 and 2024. Planned in the spec but not done before the pre-election-model tag
 - [ ] Add a before-and-after comparison to the README
 - [ ] Link the write-up from the README
 - [ ] Fill in How to Run, Key Features, and What I Learned

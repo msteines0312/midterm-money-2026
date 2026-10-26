@@ -1,7 +1,7 @@
 # Midterm Money 2026
 An analysis of campaign finance and endorsements in the 2026 U.S. House midterms. It asks three questions: where industry super PAC money is going, whether endorsements predict primary wins, and whether a fundraising advantage predicts winning once incumbency and district partisanship are accounted for.
 
-> **Status:** In progress. The data pipeline is built, and the House version of section 1 is written: [Tech money in the 2026 House races](reports/tech-money.md). The endorsements and money and winning sections are next, and general election results will be added after November 3, 2026. Simple pre-election House predictions (money leader next to Cook rating) are committed in [reports/predictions](reports/predictions/README.md).
+> **Status:** In progress. The data pipeline is built, and the House version of section 1 is written: [Tech money in the 2026 House races](reports/tech-money.md). The endorsements and money and winning sections are next, and general election results will be added after November 3, 2026. Two sets of pre-election House predictions are committed and tagged in [reports/predictions](reports/predictions/README.md): simple predictions (money leader next to Cook rating, tag `pre-election-simple`) and a logistic regression model trained on the 2022 and 2024 generals (tag `pre-election-model`).
 
 ## Questions
 
@@ -40,8 +40,15 @@ An analysis of campaign finance and endorsements in the 2026 U.S. House midterms
    python scripts/load_history_money.py --supplement
    python -m src.pipeline --history
    ```
-   `--supplement` adds money for candidates the FEC's bulk linkage file leaves out (see the caveats below). The second `--history` run reprints the match counts with that money included.
-6. Run the tests:
+   `--supplement` adds money for candidates the FEC's bulk linkage file leaves out (see the caveats below). It needs the `history_results` rows from the first `--history` run, so the order matters. A plain `load_history_money.py` run replaces a whole cycle, so run `--supplement` again after one. The second `--history` run reprints the match counts with that money included.
+6. Build the 2026 predictions. The simple file needs the 2026-10-24 money snapshot from step 4. The model file trains on the history tables from step 5. The last script adds the paired bootstrap check of what money adds to the model (2022 and 2024 only):
+   ```bash
+   python scripts/build_simple_predictions.py
+   python scripts/build_model_predictions.py
+   python scripts/money_contribution_check.py
+   ```
+   The first two overwrite the tagged files in `reports/predictions/`, so run them only to check that a rebuild matches (`git diff` should show nothing), and never commit a changed copy.
+7. Run the tests:
    ```bash
    python -m pytest
    ```
@@ -65,6 +72,10 @@ An analysis of campaign finance and endorsements in the 2026 U.S. House midterms
 |---|---|---|
 | 2026-10-23 | Pre-election | Pulled the day after pre-general reports were due. 744 campaigns report through October 14 |
 | 2026-10-23 | Pre-election, outside spending | Official outside spending snapshot, built from the FEC bulk independent expenditure file (`outside_spending`). An earlier build the same day used the by-candidate endpoint and is kept in `outside_spending_by_candidate_endpoint` because it dropped filings with no candidate ID |
+| 2026-10-24 | Pre-election predictions | Pulled after the 10-23 bulk file lagged pre-general reports. Both tagged prediction sets use this snapshot's money |
+
+### Reproducing the tagged predictions
+The tagged prediction files (`pre-election-simple` at commit `c18c0db`, `pre-election-model` at `eb42038`) depend on the local 2026-10-24 snapshot and on pinned Wikipedia revisions. The FEC files and API keep changing as campaigns file and amend reports, so a fresh pull on a later date gives different money and will not reproduce the tagged files. The build scripts read the snapshot by its pull date, so rebuilding from the same local database gives byte-identical files.
 
 ## Data Caveats
 - FEC numbers keep changing as campaigns file new reports. Every snapshot is stamped with its pull date, and every chart says which date it uses.
