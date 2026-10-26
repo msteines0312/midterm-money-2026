@@ -25,7 +25,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from src.config import DB_PATH, PROJECT_ROOT  # noqa: E402
 from src.nominees import load_nominees  # noqa: E402
 from src.manual import load_nominee_matches  # noqa: E402
-from src.predict.simple import _load_candidates, match_nominees, simple_predictions  # noqa: E402
+from src.predict.simple import PARTY_CODES, _load_candidates, match_nominees, simple_predictions  # noqa: E402
 
 # Default money snapshot. The 2026-10-23 bulk file lagged some candidates'
 # Pre-General reports (reports through Oct 14), so 2026-10-24 is the default.
@@ -50,7 +50,8 @@ def print_counts(predictions, nominees):
     print("Races by type:\n", predictions["race_type"].value_counts().to_string(), sep="")
     print("\nRaces by status:\n", predictions["status"].value_counts().to_string(), sep="")
     unmatched = [n for n in nominees if n["candidate_id"] is None]
-    major = [n for n in unmatched if n["party"] in ("Democratic", "Republican", "DFL")]
+    # Same party labels the predictions use, so every Democratic variant counts
+    major = [n for n in unmatched if n["party"] in PARTY_CODES]
     print(f"\nUnmatched nominees: {len(unmatched)} ({len(major)} Democratic or Republican)")
     print(f"Money leader abstentions (D_vs_R): {scored['money_leader_party'].isna().sum()}")
     print(f"Cook abstentions (D_vs_R): {scored['cook_favorite_party'].isna().sum()}")

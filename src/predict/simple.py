@@ -299,6 +299,8 @@ def _build_race(race_id, nominees, ctx):
     incumbent = next((n for n in nominees if ctx["incumbents"].get(n["candidate_id"]) == "I"), None)
     # A third party counts as outraising when it beats at least one major nominee, which
     # means the Democrat and Republican are no longer the top two in the race.
+    # A third-party nominee with no FEC match or no money row counts as $0
+    # here (the 0.0 default above), so it can never outraise a major nominee.
     others = [n for n in nominees if n is not dem and n is not rep]
     outraised = race_type == "D_vs_R" and any(n["money"] > min(dem_money, rep_money) for n in others)
 

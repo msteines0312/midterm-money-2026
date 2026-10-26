@@ -92,6 +92,9 @@ CREATE TABLE IF NOT EXISTS pac_industries (
 -- never touch 2026 rows.
 -- Money is the cycle-to-date ("_ytd", Form 3 Column B) figures on the latest
 -- election-year report ending on or before that cycle's standard 12G cutoff.
+-- Some committees are the principal committee for two candidate IDs, which
+-- gives two identical rows (one per ID). Look money up by candidate ID and
+-- never sum it across candidates, or that money is counted twice.
 CREATE TABLE IF NOT EXISTS history_money (
     cycle                  INTEGER NOT NULL,
     candidate_id           TEXT NOT NULL,

@@ -116,7 +116,9 @@ def _exclusion(dem, rep, others):
     """Why a D vs R race is left out of the model, or None when it stays in.
 
     A third party counts as outraising when it beats at least one major
-    nominee, the same test as `third_party_outraised` for 2026.
+    nominee, the same test as `third_party_outraised` for 2026. A third-party
+    nominee with no history_money row counts as $0 in this test (its money
+    was filled with 0 in `_load_nominees`), so it never triggers an exclusion.
     """
     missing = [nominee["name"] for nominee in (dem, rep) if not nominee["has_money"]]
     if missing:
