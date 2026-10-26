@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-26",
+  "note": "Added after the pre-election-model tag. Uses only 2022 and 2024 held-out predictions; the tagged prediction files are unchanged.",
+  "cycles": [
+    2022,
+    2024
+  ],
+  "bootstrap": {
+    "resamples": 1000,
+    "seed": 2026,
+    "interval": "2.5th to 97.5th percentile",
+    "unit": "race"
+  },
+  "competitive": {
+    "n_races": 154,
+    "brier_with_money": 0.11939850060339914,
+    "brier_without_money": 0.13088162185264512,
+    "accuracy_with_money": 0.8376623376623377,
+    "accuracy_without_money": 0.8181818181818182,
+    "brier_without_minus_with": {
+      "estimate": 0.011483121249245984,
+      "low": -0.0023988163555704357,
+      "high": 0.02585258712840305
+    },
+    "accuracy_with_minus_without": {
+      "estimate": 0.01948051948051948,
+      "low": -0.012987012987012988,
+      "high": 0.05194805194805195
+    }
+  },
+  "all_races": {
+    "n_races": 688,
+    "brier_with_money": 0.027229212285479313,
+    "brier_without_money": 0.030789764897072944,
+    "accuracy_with_money": 0.9636627906976745,
+    "accuracy_without_money": 0.9593023255813954,
+    "brier_without_minus_with": {
+      "estimate": 0.0035605526115936315,
+      "low": 0.0003478813755683577,
+      "high": 0.007055948234311709
+    },
+    "accuracy_with_minus_without": {
+      "estimate": 0.00436046511627907,
+      "low": -0.0029069767441860465,
+      "high": 0.01308139534883721
+    }
+  }
+}
