@@ -14,6 +14,7 @@ import pytest
 
 from src.fec.history import (
     campaign_money,
+    supplemental_money,
     latest_versions,
     pre_general_money,
     principal_committees,
@@ -44,11 +45,14 @@ class FixtureClient:
         self.calls.append((path, dict(params)))
         types = params["report_type"]
         types = [types] if isinstance(types, str) else types
+        # The API also filters by committee when asked (the supplemental path)
+        committees = params.get("committee_id")
         return [
             rec for rec in REPORTS
             if rec["report_type"] in types
             and rec["committee_type"] == params["committee_type"]
             and rec["receipt_date"] >= params["min_receipt_date"]
+            and (committees is None or rec["committee_id"] in committees)
         ]
 
 
@@ -147,3 +151,21 @@ def test_query_filters_server_side(run):
     assert params["min_receipt_date"] == "2024-01-01"
     # YE and 30G reports never count, so they are never requested
     assert "YE" not in params["report_type"] and "30G" not in params["report_type"]
+
+
+def test_supplemental_money_matches_the_full_loader(run):
+    rows, _, _ = run
+    # The supplemental path is for candidates the ccl file leaves out. Given
+    # a candidate's committees from the API, it must give the same row the
+    # full loader gives, and ask only for those committees.
+    client = FixtureClient()
+    extra = supplemental_money(client, 2024, {"H4MO07156": ["C00859140"]}, cutoff="2024-10-16")
+    assert extra == [rows["H4MO07156"]]
+    assert client.calls[0][1]["committee_id"] == ["C00859140"]
+
+
+def test_supplemental_money_skips_candidates_without_reports():
+    # C00886770's only report ends after the cutoff, and a candidate with no
+    # committee has nothing to look up
+    extra = supplemental_money(FixtureClient(), 2024, {"H4TX38045": ["C00886770"], "H0XX00000": []}, cutoff="2024-10-16")
+    assert extra == []

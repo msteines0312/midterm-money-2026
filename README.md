@@ -37,7 +37,10 @@ An analysis of campaign finance and endorsements in the 2026 U.S. House midterms
    ```bash
    python scripts/load_history_money.py
    python -m src.pipeline --history
+   python scripts/load_history_money.py --supplement
+   python -m src.pipeline --history
    ```
+   `--supplement` adds money for candidates the FEC's bulk linkage file leaves out (see the caveats below). The second `--history` run reprints the match counts with that money included.
 6. Run the tests:
    ```bash
    python -m pytest
@@ -104,10 +107,10 @@ An analysis of campaign finance and endorsements in the 2026 U.S. House midterms
 
 ### Training data caveats (2022 and 2024)
 - The FEC has not published its 2024 results volume, and the MIT Election Lab file needs a personal sign-in form to download. So 2024 results come from the certified tables on the [2024 House elections page](https://en.wikipedia.org/w/index.php?title=2024_United_States_House_of_Representatives_elections&oldid=1267103610) (first revision on or after January 3, 2025). Those tables give vote shares, not counts, so `votes` is empty for 2024. Indiana and Kansas list no shares at all. Winners come from the page's check marks, which matter in CA-13, where both candidates round to 50.0%.
-- Candidates are matched to FEC IDs by race and last name against that cycle's FEC summary file, with a few hand-checked overrides in `data/manual/history_matches.csv`. About 50 IDs in the 2022 FEC sheet are older registrations that never meet the candidate's money, so those are matched by name too. Some candidates have two FEC IDs that share one committee. These are folded into one, so their money is never counted twice.
+- Candidates are matched to FEC IDs by race and last name against that cycle's FEC summary file. If that fails, a second pass looks for both the first and last name anywhere in the FEC name, which catches swapped names ("NICK, LALOTA") and married or hyphenated ones ("ARENHOLZ, ASHLEY HINSON"). Hand-checked overrides, each with a note, are in `data/manual/history_matches.csv`. About 50 IDs in the 2022 FEC sheet are older registrations that never meet the candidate's money, so those are matched by name too. Some candidates have two FEC IDs that share one committee. These are folded into one, so their money is never counted twice.
 - Louisiana held November jungle elections in both years. A Louisiana race counts as Democrat versus Republican only if exactly one of each was on the ballot. That is LA-01 and LA-02 in 2022 and none in 2024. Neither year had a House runoff in Georgia or Louisiana.
 - Ranked-choice races (Alaska, Maine) use first-round votes and the final winner.
-- About 5% (2022) and 8% (2024) of Democrat-versus-Republican candidates have no pre-general money. Most are small campaigns under the FEC filing threshold. A few winners, including Glenn Ivey (MD-04) and Keith Self (TX-03), are missing because the FEC's own linkage file doesn't list them for the cycle.
+- The FEC's bulk files for past cycles (webl22, webl24, ccl22, ccl24) leave out some candidates whose FEC record has since rolled forward to 2026. Glenn Ivey (MD-04) lists 2012, 2016, and 2026, for example. Those candidates were found with the OpenFEC candidate search and recorded as hand-checked overrides, and `--supplement` pulls their pre-general money through the API with the same report rules. After that, every 2022 and 2024 winner has pre-general money. About 5% (2022) and 6% (2024) of Democrat-versus-Republican candidates still have none, nearly all small campaigns with no qualifying report.
 - New York's 2024 map was redrawn in February 2024, after Cook's last PVI release. The 2024 page's state tables show PVIs recalculated for the new map (NY-19 R+1, NY-22 D+3), while Cook's published list still shows the 2022-map values (NY-19 EVEN). The new-map values are used because that map was on the ballot.
 
 ## Key Features

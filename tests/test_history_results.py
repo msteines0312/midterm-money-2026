@@ -198,7 +198,7 @@ def test_wiki_race_without_shares(wiki_results):
 
 def test_wiki_one_winner_per_race(wiki_results):
     race_ids = {row["race_id"] for row in wiki_results}
-    assert race_ids == {"AL-01", "AK-00", "CA-13", "GA-02", "GA-11", "IN-01", "LA-06", "NJ-07"}
+    assert race_ids == {"AL-01", "AK-00", "CA-13", "GA-02", "GA-11", "IA-02", "IN-01", "LA-06", "NJ-07", "NY-01", "OR-03"}
     for race_id in race_ids:
         assert sum(row["won"] for row in wiki_results if row["race_id"] == race_id) == 1
 
@@ -234,3 +234,18 @@ def test_wiki_parties_and_notes(wiki_results):
     # Louisiana's November jungle election: four Democrats, so not D versus R
     assert _race(wiki_results, "LA-06")["Cleo Fields"]["won"] == 1
     assert "LA-06" not in dem_vs_rep_races(wiki_results)
+
+
+def test_wiki_first_and_last_name_anywhere_in_fec_name(wiki_results):
+    # No FEC last name matches, but the FEC name holds both the nominee's
+    # first and last names: swapped (NICK, LALOTA), a married name
+    # (ARENHOLZ, ASHLEY HINSON), or a hyphenated one (ALBERTSON-CORKERY, SARAH)
+    assert _race(wiki_results, "NY-01")["Nick LaLota"]["candidate_id"] == "H2NY01190"
+    assert _race(wiki_results, "IA-02")["Ashley Hinson"]["candidate_id"] == "H0IA01174"
+    assert _race(wiki_results, "IA-02")["Sarah Corkery"]["candidate_id"] == "H4IA02067"
+
+
+def test_duplicate_registrations_fold_on_receipts(wiki_results):
+    # Harbour's two IDs report the same receipts but slightly different
+    # spending and cash, which is still one campaign
+    assert _race(wiki_results, "OR-03")["Joanna Harbour"]["candidate_id"] == "H0OR03174"

@@ -266,6 +266,9 @@ RESULTS_2024_LABELS = (
     "Indiana 1",        # no vote shares listed
     "Louisiana 6",      # November jungle election with four Democrats
     "New Jersey 7",     # incumbent listed as "Thomas Kean Jr.", nominee as "Tom Kean Jr."
+    "New York 1",       # FEC files LaLota with first and last names swapped (NICK, LALOTA)
+    "Iowa 2",           # FEC files Hinson under her married name (ARENHOLZ, ASHLEY HINSON)
+    "Oregon 3",         # two FEC IDs for Harbour, same committee and receipts, different cash
 )
 
 

@@ -270,7 +270,7 @@ def latest_before_cutoff(reports, cutoff):
     return chosen, excluded
 
 
-def fetch_reports(client, cycle):
+def fetch_reports(client, cycle, committee_ids=None):
     """Download a cycle's House reports that can count toward pre-general money.
 
     Only election-year reports are needed, because each one already holds
@@ -281,6 +281,9 @@ def fetch_reports(client, cycle):
     client : FecClient
     cycle : int
         Election year, e.g. 2024.
+    committee_ids : list of str, optional
+        Only these committees' reports (the supplemental path). By default
+        every House committee's reports are downloaded.
 
     Returns
     -------
@@ -301,6 +304,8 @@ def fetch_reports(client, cycle):
         # one, pages overlap and some filings are never returned.
         "sort": "beginning_image_number",
     }
+    if committee_ids is not None:
+        params["committee_id"] = committee_ids
     # Each record has about 100 fields and a cycle has over 13,000 reports, so
     # only the fields the loader uses are kept as pages stream in
     return [
@@ -368,6 +373,88 @@ def pre_general_money(client, cycle, ccl_text):
         if not candidate_id.startswith("H"):
             continue
         row = _candidate_row(cycle, candidate_id, committee_ids, chosen)
+        if row is not None:
+            rows.append(row)
+    return rows
+
+
+# Supplemental path: candidates the linkage file leaves out
+
+def api_principal_committees(client, candidate_id, cycle):
+    """A candidate's principal committees for one cycle, from the OpenFEC API.
+
+    Parameters
+    ----------
+    client : FecClient
+    candidate_id : str
+    cycle : int
+
+    Returns
+    -------
+    list of str
+        Sorted committee IDs (CMTE_DSGN "P").
+    """
+    params = {"cycle": cycle, "designation": "P"}
+    return sorted({rec["committee_id"] for rec in client.iter_results(f"/candidate/{candidate_id}/committees/", params)})
+
+
+def api_pre_general_cutoff(client, cycle):
+    """The cycle's standard 12G coverage end date, from one page of 12G reports.
+
+    Same rule as `pre_general_cutoff` (the most common 12G end date), so the
+    supplemental rows use the cutoff the full load used.
+
+    Parameters
+    ----------
+    client : FecClient
+    cycle : int
+
+    Returns
+    -------
+    str
+        YYYY-MM-DD.
+    """
+    params = {
+        "cycle": cycle, "committee_type": "H", "report_type": "12G",
+        "is_amended": "false", "min_receipt_date": f"{cycle}-01-01",
+        "sort": "beginning_image_number",
+    }
+    reports = list(client.iter_results("/reports/house-senate/", params, max_pages=1))
+    return pre_general_cutoff([rec for rec in reports if rec["report_year"] == cycle])
+
+
+def supplemental_money(client, cycle, candidate_committees, cutoff):
+    """`history_money` rows for candidates the ccl{yy} linkage file leaves out.
+
+    The bulk linkage file drops some candidates whose FEC record has rolled
+    forward to a later cycle (Glenn Ivey, MD-04, lists 2012, 2016, and 2026),
+    so `pre_general_money` never sees their committees. This runs the same
+    report rules for just the candidates and committees passed in. It doesn't
+    change the rows `pre_general_money` builds for anyone else.
+
+    Parameters
+    ----------
+    client : FecClient
+    cycle : int
+    candidate_committees : dict of str to list of str
+        Candidate ID to principal committee IDs (from `api_principal_committees`).
+    cutoff : str
+        The cycle's pre-general cutoff, YYYY-MM-DD (from `api_pre_general_cutoff`).
+
+    Returns
+    -------
+    list of dict
+        One row per candidate with at least one qualifying report.
+    """
+    committee_ids = sorted({cid for ids in candidate_committees.values() for cid in ids})
+    if not committee_ids:
+        return []
+    reports = latest_versions(fetch_reports(client, cycle, committee_ids))
+    election_year = [rec for rec in reports if rec["report_year"] == cycle]
+    chosen, _ = latest_before_cutoff(election_year, cutoff)
+    rows = []
+    for candidate_id, ids in candidate_committees.items():
+        row = _candidate_row(cycle, candidate_id, sorted(ids), chosen)
         if row is not None:
             rows.append(row)
     return rows

@@ -34,7 +34,7 @@ from src.fec.bulk import USER_AGENT, download_summary, parse_summary
 from src.fec.transform import race_id
 from src.manual import load_nominee_matches
 from src.nominees import NOTE, PARTY_BAR, _candidates_header_present
-from src.predict.simple import PARTY_CODES, _fec_last_name_words, _nominee_name_words, match_nominees
+from src.predict.simple import PARTY_CODES, _fec_last_name_words, _nominee_name_words, _normalize, match_nominees
 from src.ratings import (
     DISTRICT_LABEL,
     PVI_HEADER,
@@ -164,10 +164,12 @@ def house_filings(summary_records):
     so the webl file shows two identical campaigns (Rebecca Cooke, WI-03 in
     2024, is H2WI03130 and H4WI03169) and `history_money` holds the same
     money under both IDs. A last-name match would see two hits and give up.
-    Records in the same race with the same last name and identical receipts,
-    spending, and cash on hand are one campaign, so only the first ID (in
-    sorted order) is kept. Either ID finds the same money row, and nothing
-    is added across them.
+    Records in the same race with the same last name and identical, nonzero
+    total receipts are one campaign, so only the first ID (in sorted order)
+    is kept. Receipts are the test because they come from the shared
+    committee's reports. Spending and cash can differ by a few dollars
+    (Joanna Harbour, OR-03 in 2024), so they aren't compared. Either ID finds
+    the same money row, and nothing is added across them.
 
     Parameters
     ----------
@@ -182,10 +184,13 @@ def house_filings(summary_records):
     for rec in sorted(summary_records, key=lambda r: r["CAND_ID"]):
         if not rec["CAND_ID"].startswith("H"):
             continue
+        receipts = float(rec["TTL_RECEIPTS"] or 0)
+        # Two $0 campaigns with one last name could be two different people,
+        # so they keep their own IDs
         key = (
             race_id(rec["CAND_OFFICE_ST"], rec["CAND_OFFICE_DISTRICT"]),
             tuple(_fec_last_name_words(rec["CAND_NAME"])),
-            rec["TTL_RECEIPTS"], rec["TTL_DISB"], rec["COH_COP"],
+            receipts if receipts > 0 else rec["CAND_ID"],
         )
         kept.setdefault(key, rec)
     return list(kept.values())
@@ -547,6 +552,46 @@ def _split_on_bar(text):
     return [part.strip() for part in text.split(PARTY_BAR) if part.strip()]
 
 
+def full_name_match(nominee, race_nominees, filed):
+    """Second try for a nominee the last-name match missed.
+
+    Takes the one filed candidate in the same race and party whose FEC name
+    contains both the nominee's first and last names, in any order. That
+    covers FEC names with the two swapped ("NICK, LALOTA" for Nick LaLota),
+    married or hyphenated names ("ARENHOLZ, ASHLEY HINSON" for Ashley Hinson,
+    "ALBERTSON-CORKERY, SARAH ELAINE" for Sarah Corkery), and races where two
+    nominees share a last name (SD-00's Dusty and Sheryl Johnson in 2024),
+    which the last-name match skips on purpose.
+
+    Parameters
+    ----------
+    nominee : dict
+        One candidate from `wiki_candidates`, with `race_id`.
+    race_nominees : list of dict
+        Every candidate in the same race, to rule out a shared first and last name.
+    filed : list of dict
+        Output of `house_filings`.
+
+    Returns
+    -------
+    str or None
+        The candidate ID, or None unless exactly one filing matches.
+    """
+    words = _nominee_name_words(nominee["name"])
+    if len(words) < 2:
+        return None
+    first, last = words[0], words[-1]
+    twins = [n for n in race_nominees if {first, last} <= set(_nominee_name_words(n["name"]))]
+    party = PARTY_CODES.get(nominee["party"])
+    hits = [
+        rec["CAND_ID"] for rec in filed
+        if race_id(rec["CAND_OFFICE_ST"], rec["CAND_OFFICE_DISTRICT"]) == nominee["race_id"]
+        and rec["CAND_PTY_AFFILIATION"] == party
+        and {first, last} <= set(_normalize(rec["CAND_NAME"]))
+    ]
+    return hits[0] if len(hits) == 1 and len(twins) == 1 else None
+
+
 def _same_person(nominee_name, member_name):
     """True when a nominee is the district's incumbent.
 
@@ -651,6 +696,8 @@ def parse_wiki_results(html, cycle, summary_records, overrides=()):
         if sum(c["won"] for c in candidates) != 1 or len(set(names)) != len(names):
             raise ValueError(f"{rid} needs one winner and distinct names: {candidates}")
         for c in match_nominees(candidates, fec_candidates, cycle_overrides):
+            if c["candidate_id"] is None:
+                c["candidate_id"] = full_name_match(c, candidates, filed)
             rows.append({
                 "cycle": cycle,
                 "race_id": rid,
