@@ -84,3 +84,20 @@ CREATE TABLE IF NOT EXISTS pac_industries (
     industry     TEXT NOT NULL,
     source_url   TEXT NOT NULL
 );
+
+-- 2022 and 2024 House money for training the model, as of each campaign's
+-- pre-general report, so it matches the mid-October 2026 snapshot instead of
+-- including money raised after election day. Built by src/fec/history.py from
+-- the OpenFEC reports API. Separate from candidate_totals so historical loads
+-- never touch 2026 rows.
+-- Money is the cycle-to-date ("_ytd", Form 3 Column B) figures on the latest
+-- election-year report ending on or before that cycle's standard 12G cutoff.
+CREATE TABLE IF NOT EXISTS history_money (
+    cycle                  INTEGER NOT NULL,
+    candidate_id           TEXT NOT NULL,
+    committee_id           TEXT,             -- principal committees used, comma-separated when more than one
+    external_contributions REAL,             -- individuals + PACs + party, minus refunds
+    candidate_self_funding REAL,             -- candidate contributions plus candidate loans
+    coverage_end_date      TEXT,             -- end of the latest report used (12G, or an earlier one)
+    PRIMARY KEY (cycle, candidate_id)
+);

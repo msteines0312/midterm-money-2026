@@ -39,6 +39,8 @@ class FecClient:
         self.sleep = sleep
         self.max_retries = max_retries
         self.cooldown_seconds = cooldown_seconds
+        # Every HTTP request sent, retries included, so a pull can report its cost
+        self.request_count = 0
 
     def get(self, path, params=None):
         """Request one endpoint and return the parsed JSON.
@@ -64,6 +66,7 @@ class FecClient:
         params = {**(params or {}), "api_key": self.api_key}
         for attempt in range(1, self.max_retries + 2):
             response = self.session.get(FEC_BASE_URL + path, params=params, timeout=30)
+            self.request_count += 1
 
             # A 429 means "too many requests, try later", so waiting fixes it.
             # Anything else (a 403 bad key, a 400 bad parameter) fails the same

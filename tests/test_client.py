@@ -85,3 +85,9 @@ def test_cools_down_when_remaining_hits_zero():
     client, _, sleeps = make_client([response], cooldown_seconds=60)
     client.get("/candidates/")
     assert sleeps == [60]
+
+
+def test_request_count_includes_retries():
+    client, _, _ = make_client([FakeResponse(status_code=429), page(1, 2, [1]), page(2, 2, [2])])
+    list(client.iter_results("/reports/house-senate/"))
+    assert client.request_count == 3
