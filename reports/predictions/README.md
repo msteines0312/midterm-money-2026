@@ -1,6 +1,6 @@
 # 2026 House general election predictions, simple version
 
-This folder holds the first of two sets of pre-election predictions for the 2026 U.S. House general elections. Each race gets two plain rules and no model: which nominee has raised more outside money (the **money leader**), and which party the Cook Political Report rates ahead (the **Cook favorite**). The file puts them side by side so a reader can see where they agree and where they do not. It is committed before election day so it can be scored against results afterward.
+This folder holds the first of two sets of pre-election predictions for the 2026 U.S. House general elections. Each race gets two plain rules and no model: which nominee has raised more money from donors, PACs, and parties, not counting the candidate's own money (the **money leader**), and which party the Cook Political Report rates ahead (the **Cook favorite**). The file puts them side by side so a reader can see where they agree and where they do not. It is committed before election day so it can be scored against results afterward.
 
 File: [`2026-general-simple.csv`](2026-general-simple.csv). Built by [`scripts/build_simple_predictions.py`](../../scripts/build_simple_predictions.py).
 
@@ -9,6 +9,8 @@ The second set, a model trained on the 2022 and 2024 House generals, is describe
 ## Frozen after the tag
 
 The CSV is tagged `pre-election-simple` and is never edited after that. If a number turns out to be wrong, the fix goes in a new dated file next to this one.
+
+*Note added 2026-10-26, after the model tag.* The tags point at these commits: `pre-election-simple` at `c18c0db` and `pre-election-model` at `eb42038`. Git commit and tag dates are set by the committer's own clock, so they do not prove when a file existed. GitHub's record of when each commit and tag was pushed is an independent witness that the files were public before election day.
 
 ## What goes into each prediction
 
@@ -247,9 +249,18 @@ In plain words:
 - **Money share** multiplies the odds by about 1.52 for every 10 points of share. In an open seat with an EVEN PVI, going from 45% to 55% of the money moves the Democrat's chance from 39.8% to 50.2%, about 10 points. At the training medians (open seat, R+1) the same change moves it from 33.9% to 43.9%.
 - Adding money to a model that already knows incumbency and PVI lowered the held-out Brier score on competitive races from 0.131 to 0.119.
 
+*Note added 2026-10-26, after the model tag.* The line above gives no interval, so a paired bootstrap was run afterward on the same held-out 2022 and 2024 predictions ([`scripts/money_contribution_check.py`](../../scripts/money_contribution_check.py), results in [`supplementary-2026-10-26.json`](supplementary-2026-10-26.json)). Each of 1,000 draws (seed 2026) resamples races and scores both models on the same races. No 2026 data is used and the tagged files are unchanged.
+
+| Held-out races | Brier gain from money (without minus with) | Accuracy gain from money (with minus without) |
+|---|---|---|
+| Competitive (154) | 0.011 [-0.002, 0.026] | +1.9 points [-1.3, +5.2] |
+| All (688) | 0.0036 [0.0003, 0.0071] | +0.4 points [-0.3, +1.3] |
+
+On competitive races both intervals include 0, so money's added contribution is not distinguishable from noise in this sample. Over all races the Brier interval sits just above 0, but most of those races are safe seats, the accuracy interval includes 0, and the bootstrap treats races as independent (see the limitations), so the true interval is probably wider. The fair reading is that money share may add a little beyond incumbency and PVI, and two cycles are not enough to show it clearly.
+
 ### This is prediction, not cause
 
-Money flows to candidates who were already likely to win: donors back strong candidates and incumbents, and strong candidates raise more. A positive money coefficient says that money share carries information about the result beyond incumbency and PVI. It does not say that spending moved votes, and the model cannot tell how much it would.
+Money flows to candidates who were already likely to win: donors back strong candidates and incumbents, and strong candidates raise more. A positive money coefficient means the fitted model leans on money share in addition to incumbency and PVI. It does not say that spending moved votes, and the model cannot tell how much it would. *Corrected 2026-10-26, after the model tag:* this paragraph first said that the coefficient shows money share carries information beyond incumbency and PVI. The held-out gain from adding money is within noise on competitive races (see the table above), so this sample does not firmly support that claim.
 
 ### The 2026 predictions
 
@@ -277,8 +288,8 @@ The model is fit on all 688 training races and applied to every 2026 race in the
 - No probability is exactly 0 or 1. The range is 0.000008 to 0.999998.
 - Seats rated Solid R (162) all get a Democratic probability of 0.20 or less. Seats rated Solid D (160) all get 0.67 or more, and all but CA-01 get 0.88 or more. CA-01 (0.67) is a D+7 seat where the Republican, James Gallagher, is the sitting member.
 - All three coefficients are positive.
-- 38 races have `money_record_missing = True`. In every one the missing nominee is the underdog in a Solid seat (36 Republicans in Solid D seats and 2 Democrats, OH-02 and TX-12, in Solid R seats), and the predictions sit at the expected extreme.
-- The model calls the Democrat in 191 of 400 races. The probabilities add up to 193.4 expected Democratic seats among these 400.
+- 38 races have `money_record_missing = True`. In every one the missing nominee is the underdog in a Solid seat (36 Republicans in Solid D seats and 2 Democrats, OH-02 and TX-12, in Solid R seats), and the predictions sit at the expected extreme. *Note added 2026-10-26, after the model tag:* 37 of the 38 missing nominees are registered FEC candidates with no 2026 financial totals on OpenFEC (checked on 2026-10-26), so their true figure is likely $0 or close to it. The other one, MD-04 Republican George McDermott, has no FEC record at all.
+- The model calls the Democrat in 191 of 400 races. The probabilities add up to 193.4 expected Democratic seats among these 400. *Note added 2026-10-26, after the model tag:* this is not a forecast of House control. The other 35 of the 435 races are outside the model (the 25 races that are not `D_vs_R`, plus the 10 where a third party outraised a major nominee), and the sum treats races as independent with no shared national swing.
 
 **How the model's calls compare with Cook:**
 
@@ -304,6 +315,8 @@ The model is fit on all 688 training races and applied to every 2026 race in the
 | PA-10 | Janelle Stelson (D) vs. Scott Perry (R) | 0.15 | Lean D |
 
 In each of these the model sides with the incumbent's party. Cook does not call Toss Ups, so they are not in this table, but the model's 21 Toss Up calls follow the same pattern: in every Toss Up with an incumbent, the model favors the incumbent's party.
+
+*Note added 2026-10-26, after the model tag.* Several Toss Up probabilities are far more confident than a Toss Up rating implies: TX-15 at 0.04, and MI-04, VA-01, OH-07, and PA-08 at 0.11 to 0.13. They come from incumbency and PVI (each has a Republican incumbent in an R-leaning seat), and the model has no term for the national environment. Both training years, 2022 and 2024, were close national years, so the model has never seen a wave. The held-out calibration on competitive races also shows the low end is too confident: the 0.0 to 0.2 bin had 37 races and Democrats won 5.4% of them, and the 0.2 to 0.4 bin had 16 races with an average prediction of 0.28 while Democrats won 0.44 of them (`evaluation.pooled.competitive.model.calibration` in the JSON). Read these Toss Up numbers as the model's lean, not as a confident call.
 
 **Races where the model and the money rule name different parties (38):**
 
@@ -369,8 +382,9 @@ In 37 of the 38, Democrats lead on money and the model still favors the Republic
 ### Known limitations
 
 - **No term for the national mood.** The model learns from two cycles and has no input for the national environment of a given year. Its intercept reflects 2022 and 2024, so if 2026 favors one party more than those years did, the model will not see it. This may explain why it sides with Republican incumbents in Lean D seats where Cook does not.
-- **Money windows differ slightly.** Training money is cycle-to-date, and FEC cycles restart the day after the previous general election, so 2022 and 2024 money includes the November and December after the prior election. The 2026 bulk file starts on Jan 1, 2025, so 2026 money leaves out November and December 2024. Both nominees in a race are measured the same way, so the effect on money share should be small.
+- **Money windows differ slightly, and the difference likely favors incumbents in training.** Training money is cycle-to-date, and FEC cycles restart the day after the previous general election, so 2022 and 2024 money includes the November and December after the prior election. The 2026 bulk file starts on Jan 1, 2025, so 2026 money leaves out November and December 2024. *Corrected 2026-10-26, after the model tag:* this item first said the effect on money share should be small because both nominees are measured the same way. That missed the direction. Money raised in those two months goes mostly to sitting members, since most challengers have not started campaigning yet, so training money shares tilt slightly toward incumbents compared with 2026. Part of the money coefficient may therefore reflect incumbency rather than money. The size of this effect was not measured.
 - **2024 results come from Wikipedia**, at a pinned revision from after certification, not from an official FEC publication.
 - **Cook's coverage includes PVI-inferred Solid seats.** Seats the Wikipedia Cook table does not list are rated Solid D or Solid R from PVI, in training and in 2026. Inferred Solid ratings are almost always right, which lifts Cook's overall accuracy. The competitive comparisons use only Cook's own ratings.
 - **The bootstrap pools both cycles.** Intervals resample races from 2022 and 2024 together and treat races as independent. Races in the same year share a national mood, so the true uncertainty is probably wider than shown.
 - **Races outside the training rules.** The 38 races with `money_record_missing = True` count the missing nominee as $0, a case training never included.
+- **Outside spending was not tested as an input.** *Note added 2026-10-26, after the model tag:* the design spec planned to test whether adding super PAC spending (support and oppose, by candidate) improves prediction on 2022 and 2024. That test was not done before the tag, so the model uses candidate money only, and outside spending appears only as context columns in the simple file. It is listed for the post-election step in `tasks/todo.md`.
