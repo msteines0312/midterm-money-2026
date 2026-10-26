@@ -15,6 +15,8 @@ reverse) and compares the model with the two simple rules from
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
 
 from src.history_results import dem_vs_rep_races
 from src.predict.simple import PARTY_CODES, _cook_favorite, _money_share
@@ -33,6 +35,11 @@ FRAME_COLUMNS = [
 COMPETITIVE_RATINGS = {"Toss Up", "Lean D", "Lean R", "Likely D", "Likely R"}
 
 CALIBRATION_BINS = 5
+
+# Bootstrap settings for the competitive accuracy intervals. The seed is fixed
+# so the published intervals can be reproduced exactly.
+BOOTSTRAP_RESAMPLES = 1000
+BOOTSTRAP_SEED = 2026
 
 
 # Building the race table
@@ -204,10 +211,16 @@ def training_frame(conn, cycles):
 # Fitting
 
 def fit(frame, features=FEATURES):
-    """Fit a logistic regression with scikit-learn's default settings.
+    """Fit a standardized logistic regression with scikit-learn's default settings.
 
     The defaults include a mild L2 penalty (C=1.0). No tuning is done, so the
     held-out scores are not flattered by choices made after seeing them.
+
+    Each input is standardized first. This is not tuning: the L2 penalty
+    charges every coefficient the same, so on raw inputs it punishes money
+    share (which runs 0 to 1 and needs a large coefficient) far more than PVI
+    (which runs about -40 to +40 and needs a small one). Putting every input
+    in standard deviations removes that scale artifact.
 
     Parameters
     ----------
@@ -217,11 +230,13 @@ def fit(frame, features=FEATURES):
 
     Returns
     -------
-    sklearn.linear_model.LogisticRegression
+    sklearn.pipeline.Pipeline
+        Steps "scale" (StandardScaler) and "logit" (LogisticRegression).
         Fitted on a DataFrame, so `feature_names_in_` records the inputs.
     """
     usable = frame.dropna(subset=features)
-    return LogisticRegression().fit(usable[features], usable["dem_won"])
+    pipeline = Pipeline([("scale", StandardScaler()), ("logit", LogisticRegression())])
+    return pipeline.fit(usable[features], usable["dem_won"])
 
 
 def _predict(model, frame):
@@ -235,30 +250,54 @@ def _predict(model, frame):
 
 
 def coefficients(model):
-    """Intercept and one coefficient per input, in log-odds of a Democratic win.
+    """Intercept and coefficients in log-odds of a Democratic win.
+
+    The fitted coefficients are per standard deviation of each input. They
+    are converted back to original units (per unit of money share as a 0 to 1
+    fraction, per incumbency step, per PVI point) by dividing by each input's
+    standard deviation. The intercept absorbs the centering:
+    b0 - sum(b_j * mean_j / sd_j).
+
+    Parameters
+    ----------
+    model : sklearn.pipeline.Pipeline
+        Output of `fit`.
 
     Returns
     -------
     dict
+        `intercept` and one key per input on the original scale, plus
+        `standardized` with the same keys as fitted (per standard deviation).
     """
-    named = dict(zip(model.feature_names_in_, (float(c) for c in model.coef_[0])))
-    return {"intercept": float(model.intercept_[0]), **named}
+    scaler, logit = model.named_steps["scale"], model.named_steps["logit"]
+    standardized = logit.coef_[0]
+    original = standardized / scaler.scale_
+    intercept = logit.intercept_[0] - float(np.sum(original * scaler.mean_))
+    names = list(model.feature_names_in_)
+    return {
+        "intercept": float(intercept),
+        **{name: float(c) for name, c in zip(names, original)},
+        "standardized": {
+            "intercept": float(logit.intercept_[0]),
+            **{name: float(c) for name, c in zip(names, standardized)},
+        },
+    }
 
 
 def money_share_effect(model, frame):
     """The money share coefficient in plain numbers.
 
     Reports the odds ratio for a 10-point rise in money share, each input's
-    coefficient times its standard deviation (a standardized effect, so the
-    three inputs can be compared), and the change in win probability when
-    money share rises from 45% to 55% with the other inputs held fixed.
+    coefficient per standard deviation (so the three inputs can be
+    compared), and the change in win probability when money share rises from
+    45% to 55% with the other inputs held fixed.
 
     Parameters
     ----------
-    model : sklearn.linear_model.LogisticRegression
-        Fitted with FEATURES.
+    model : sklearn.pipeline.Pipeline
+        Output of `fit` with FEATURES.
     frame : pandas.DataFrame
-        The training rows, used for standard deviations and typical values.
+        The training rows, used for typical values.
 
     Returns
     -------
@@ -279,7 +318,7 @@ def money_share_effect(model, frame):
                          "change": float(high - low)}
     return {
         "odds_ratio_per_10_points": float(np.exp(0.1 * coefs["dem_money_share"])),
-        "standardized_coefficients": {f: float(coefs[f] * usable[f].std()) for f in FEATURES},
+        "standardized_coefficients": {f: coefs["standardized"][f] for f in FEATURES},
         "probability_shift_45_to_55": shifts,
     }
 
@@ -336,6 +375,61 @@ def _model_metrics(probabilities, outcomes, actual):
     return metrics
 
 
+def _calls(predictions):
+    """The actual winner and each predictor's call (None for an abstention)."""
+    actual = predictions["dem_won"].map({1: "DEM", 0: "REP"})
+    calls = {
+        "model": _party_call(predictions["p_model"]),
+        "money_rule": _party_call(predictions["dem_money_share"]),
+        "cook": predictions["cook_favorite_party"].where(predictions["cook_favorite_party"].notna(), None),
+    }
+    return actual, calls
+
+
+def _resample_indices(n_races, rng):
+    """BOOTSTRAP_RESAMPLES rows of race indices, drawn with replacement."""
+    return rng.integers(0, n_races, size=(BOOTSTRAP_RESAMPLES, n_races))
+
+
+def _percentile_interval(correct, resamples):
+    """2.5th and 97.5th percentiles of accuracy across the resamples."""
+    if correct.shape[0] == 0:
+        return {"low": None, "high": None}
+    accuracies = correct[resamples].mean(axis=1)
+    low, high = np.percentile(accuracies, [2.5, 97.5])
+    return {"low": float(low), "high": float(high)}
+
+
+def _bootstrap_intervals(predictions):
+    """Bootstrap 95% intervals for accuracy, resampling races.
+
+    Each predictor gets an interval on the races it called. The shared set
+    resamples the same races for all three at once, so their intervals come
+    from the same draws and can be compared side by side.
+
+    Returns
+    -------
+    dict
+        `model`, `money_rule`, `cook` (each on its own called races) and
+        `shared` (n_races plus one interval per predictor).
+    """
+    rng = np.random.default_rng(BOOTSTRAP_SEED)
+    actual, calls = _calls(predictions)
+    intervals = {}
+    for name, call in calls.items():
+        called = call.notna()
+        correct = (call[called] == actual[called]).to_numpy(dtype=float)
+        intervals[name] = _percentile_interval(correct, _resample_indices(len(correct), rng))
+
+    shared = calls["model"].notna() & calls["money_rule"].notna() & calls["cook"].notna()
+    resamples = _resample_indices(int(shared.sum()), rng)
+    intervals["shared"] = {"n_races": int(shared.sum())}
+    for name, call in calls.items():
+        correct = (call[shared] == actual[shared]).to_numpy(dtype=float)
+        intervals["shared"][name] = _percentile_interval(correct, resamples)
+    return intervals
+
+
 def _score(predictions):
     """All metrics for one set of held-out races.
 
@@ -348,12 +442,7 @@ def _score(predictions):
     -------
     dict
     """
-    actual = predictions["dem_won"].map({1: "DEM", 0: "REP"})
-    calls = {
-        "model": _party_call(predictions["p_model"]),
-        "money_rule": _party_call(predictions["dem_money_share"]),
-        "cook": predictions["cook_favorite_party"].where(predictions["cook_favorite_party"].notna(), None),
-    }
+    actual, calls = _calls(predictions)
     listed = predictions["rating_source"] == "cook"
     shared = calls["model"].notna() & calls["money_rule"].notna() & calls["cook"].notna()
     return {
@@ -396,7 +485,8 @@ def evaluate(frame):
     dict
         `folds`: one entry per held-out cycle with `train_cycles`,
         `test_cycle`, `n_train`, and `overall` and `competitive` scores.
-        `pooled`: the same scores over both held-out cycles together.
+        `pooled`: the same scores over both held-out cycles together, with
+        `bootstrap_95` accuracy intervals added to the competitive scores.
     """
     folds, held_out = [], []
     for test_cycle in sorted(frame["cycle"].unique(), reverse=True):
@@ -413,4 +503,10 @@ def evaluate(frame):
             **_score_with_subsets(test),
         })
         held_out.append(test)
-    return {"folds": folds, "pooled": _score_with_subsets(pd.concat(held_out))}
+    pooled_predictions = pd.concat(held_out)
+    pooled = _score_with_subsets(pooled_predictions)
+    # Competitive samples are small, so the pooled competitive scores carry
+    # bootstrap intervals that show which differences are within noise
+    competitive = pooled_predictions["cook_rating"].isin(COMPETITIVE_RATINGS)
+    pooled["competitive"]["bootstrap_95"] = _bootstrap_intervals(pooled_predictions[competitive])
+    return {"folds": folds, "pooled": pooled}

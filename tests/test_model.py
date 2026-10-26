@@ -11,7 +11,7 @@ import pytest
 
 import src.predict.model as model_module
 from src.db import connect, create_schema, upsert_rows
-from src.predict.model import evaluate, training_frame
+from src.predict.model import coefficients, evaluate, fit, training_frame
 
 
 @pytest.fixture
@@ -189,3 +189,32 @@ def test_competitive_subset_excludes_solid_seats():
 
     assert competitive["n_races"] == (frame["cook_rating"] == "Toss Up").sum()
     assert competitive["cook"]["n_called"] == 0
+
+
+# Coefficients and noise
+
+def test_original_scale_coefficients_reproduce_predictions():
+    frame = synthetic_frame()
+    model = fit(frame)
+    coefs = coefficients(model)
+    row = frame.iloc[[3]]
+
+    log_odds = coefs["intercept"] + sum(coefs[f] * row[f].iloc[0] for f in model_module.FEATURES)
+    by_hand = 1 / (1 + np.exp(-log_odds))
+
+    assert by_hand == pytest.approx(model.predict_proba(row[model_module.FEATURES])[0, 1])
+    assert set(coefs["standardized"]) == {"intercept", *model_module.FEATURES}
+
+
+def test_bootstrap_interval_brackets_competitive_accuracy():
+    frame = synthetic_frame()
+    first = evaluate(frame)["pooled"]["competitive"]
+    second = evaluate(frame)["pooled"]["competitive"]
+
+    intervals = first["bootstrap_95"]
+    # A fixed seed makes the intervals repeatable
+    assert intervals == second["bootstrap_95"]
+    for name in ("model", "money_rule"):
+        interval = intervals[name]
+        assert interval["low"] <= first[name]["accuracy"] <= interval["high"]
+    assert set(intervals["shared"]) == {"n_races", "model", "money_rule", "cook"}
