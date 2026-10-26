@@ -186,6 +186,6 @@
   - Limitations: untraceable dark money, pass-throughs not followed, the proportional House-share assumption, contested primaries unknown, and the Forbes April snapshot.
   - What's next: the general election after Nov 3.
   - Neutral wording. Run the `humanizer` skill.
-- [ ] **Step 3: Write `test_billionaire_report_numbers.py`** in the style of `tests/test_money_winning_report_numbers.py` (or whatever section 3's test file is named). The committed JSON must equal a fresh build, every cited number must appear in the prose, and there must be no em dashes.
+- [ ] **Step 3: Write `test_billionaire_report_numbers.py`** in the style of `tests/test_money_winning_report.py`. The committed JSON must equal a fresh build, every cited number must appear in the prose, and there must be no em dashes.
 - [ ] **Step 4: Open each PNG, run the full suite, and confirm no frozen file changed:** `git diff --stat money-and-winning -- reports/predictions/` must be empty.
 - [ ] **Step 5: Commit** with message "Write section 2 on billionaire money in 2026 House races".
