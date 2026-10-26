@@ -10,7 +10,7 @@ from pathlib import Path
 
 import pytest
 
-from src.nominees import parse_nominees
+from src.nominees import parse_incumbents, parse_nominees
 
 FIXTURE = Path(__file__).parent / "fixtures" / "nominees_sample.html"
 
@@ -74,3 +74,16 @@ def test_only_candidate_tables_are_read(nominees):
     assert {n["race_id"] for n in nominees} == {
         "AL-01", "AL-02", "CA-01", "CA-04", "CA-40", "AK-00", "WI-02", "TN-04"
     }
+
+
+def test_incumbents_read_from_member_column():
+    incumbents = parse_incumbents(FIXTURE.read_text(encoding="utf-8"))
+    # Same districts as the nominees
+    assert set(incumbents) == {"AL-01", "AL-02", "CA-01", "CA-04", "CA-40", "AK-00", "WI-02", "TN-04"}
+    assert incumbents["AK-00"] == ["Nick Begich III"]
+    # A redistricted member sits on a continuation row; the hCard name drops
+    # the "Redistricted from the 1st district" note
+    assert incumbents["AL-02"] == ["Shomari Figures", "Barry Moore"]
+    assert incumbents["CA-40"] == ["Young Kim", "Ken Calvert"]
+    # "None (new seat)" is not a member
+    assert incumbents["AL-01"] == []

@@ -218,3 +218,21 @@ def test_bootstrap_interval_brackets_competitive_accuracy():
         interval = intervals[name]
         assert interval["low"] <= first[name]["accuracy"] <= interval["high"]
     assert set(intervals["shared"]) == {"n_races", "model", "money_rule", "cook"}
+
+
+def test_paired_difference_matches_shared_accuracies():
+    frame = synthetic_frame()
+    # Relabel Solid seats as Lean so the competitive shared set is not empty
+    # (Toss Ups never reach it, because Cook abstains on them)
+    frame["cook_rating"] = frame["cook_rating"].str.replace("Solid", "Lean")
+    competitive = evaluate(frame)["pooled"]["competitive"]
+    paired = competitive["bootstrap_95"]["paired_difference"]
+    shared = competitive["shared"]
+
+    assert paired["n_races"] == shared["n_races"]
+    for other in ("money_rule", "cook"):
+        difference = paired[f"model_minus_{other}"]
+        # The point estimate is the plain accuracy gap on the shared races
+        assert difference["estimate"] == pytest.approx(
+            shared["model_accuracy"] - shared[f"{other}_accuracy"])
+        assert difference["low"] <= difference["estimate"] <= difference["high"]

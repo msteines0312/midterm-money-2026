@@ -1,0 +1,2367 @@
+{
+  "cycles": [
+    2022,
+    2024
+  ],
+  "counts": {
+    "2022": {
+      "d_vs_r_races": 395,
+      "excluded_missing_money": 37,
+      "excluded_third_party_outraised": 8,
+      "in_frame": 350,
+      "undefined_money_share": 0,
+      "trainable": 350,
+      "both_incumbents_set_to_0": 2
+    },
+    "2024": {
+      "d_vs_r_races": 392,
+      "excluded_missing_money": 49,
+      "excluded_third_party_outraised": 5,
+      "in_frame": 338,
+      "undefined_money_share": 0,
+      "trainable": 338,
+      "both_incumbents_set_to_0": 0
+    }
+  },
+  "exclusions": [
+    {
+      "cycle": 2022,
+      "race_id": "AL-04",
+      "dem_name": "Neighbors, Rick",
+      "rep_name": "Alderholt, Robert",
+      "dem_money": 2939.8,
+      "rep_money": 1394966.34,
+      "exclusion": "third_party_outraised"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "AR-04",
+      "dem_name": "White, John",
+      "rep_name": "Westerman, Bruce",
+      "dem_money": 0.0,
+      "rep_money": 1657359.88,
+      "exclusion": "missing_money: White, John"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "AZ-05",
+      "dem_name": "Ramos, Javier",
+      "rep_name": "Biggs, Andy",
+      "dem_money": 2544.0,
+      "rep_money": 1906052.84,
+      "exclusion": "third_party_outraised"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "CA-12",
+      "dem_name": "Lee, Barbara",
+      "rep_name": "Slauson, Stephen",
+      "dem_money": 2003391.3499999999,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Slauson, Stephen"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "CA-14",
+      "dem_name": "Swalwell, Eric",
+      "rep_name": "Hayden, Alison",
+      "dem_money": 3595646.2300000004,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Hayden, Alison"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "CA-31",
+      "dem_name": "Napolitano, Grace F.",
+      "rep_name": "Martinez, Daniel Bocic",
+      "dem_money": 330062.23,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Martinez, Daniel Bocic"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "CA-44",
+      "dem_name": "Barragan, Nanette Diaz",
+      "rep_name": "Jones, Paul",
+      "dem_money": 1148557.54,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Jones, Paul"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "CO-01",
+      "dem_name": "DeGette, Diana",
+      "rep_name": "Qualteri, Jennifer",
+      "dem_money": 1083565.79,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Qualteri, Jennifer"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "GA-04",
+      "dem_name": "Johnson, Harry C. \"Hank,\" Jr.",
+      "rep_name": "Chavez, Jonathan",
+      "dem_money": 523623.30000000005,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Chavez, Jonathan"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "IL-02",
+      "dem_name": "Kelly, Robin",
+      "rep_name": "Lynch, Thomas",
+      "dem_money": 1639183.04,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Lynch, Thomas"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "IL-04",
+      "dem_name": "Garcia, Jesus \"Chuy\"",
+      "rep_name": "Falakos, James",
+      "dem_money": 840721.9299999999,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Falakos, James"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "IN-04",
+      "dem_name": "Day, Roger D.",
+      "rep_name": "Baird, Jim",
+      "dem_money": 0.0,
+      "rep_money": 390206.02,
+      "exclusion": "missing_money: Day, Roger D."
+    },
+    {
+      "cycle": 2022,
+      "race_id": "MA-06",
+      "dem_name": "Moulton, Seth",
+      "rep_name": "May, Bob",
+      "dem_money": 1722508.8199999998,
+      "rep_money": 25468.0,
+      "exclusion": "third_party_outraised"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "MA-07",
+      "dem_name": "Pressley, Ayanna S.",
+      "rep_name": "Palmer, Donnie Dionicio, Jr.",
+      "dem_money": 1224707.2799999998,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Palmer, Donnie Dionicio, Jr."
+    },
+    {
+      "cycle": 2022,
+      "race_id": "MA-08",
+      "dem_name": "Lynch, Stephen F.",
+      "rep_name": "Burke, Robert G.",
+      "dem_money": 734789.0,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Burke, Robert G."
+    },
+    {
+      "cycle": 2022,
+      "race_id": "MD-07",
+      "dem_name": "Mfume, Kweisi",
+      "rep_name": "Collier, Scott M.",
+      "dem_money": 494992.27,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Collier, Scott M."
+    },
+    {
+      "cycle": 2022,
+      "race_id": "MO-04",
+      "dem_name": "Truman, Jack",
+      "rep_name": "Alford, Mark",
+      "dem_money": 0.0,
+      "rep_money": 763453.3699999999,
+      "exclusion": "missing_money: Truman, Jack"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "MT-02",
+      "dem_name": "Ronning, Penny",
+      "rep_name": "Rosendale, Matt",
+      "dem_money": 151651.45,
+      "rep_money": 1402779.58,
+      "exclusion": "third_party_outraised"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "NE-03",
+      "dem_name": "Else, David J.",
+      "rep_name": "Smith, Adrian",
+      "dem_money": 0.0,
+      "rep_money": 1587821.3599999999,
+      "exclusion": "missing_money: Else, David J."
+    },
+    {
+      "cycle": 2022,
+      "race_id": "NJ-08",
+      "dem_name": "Menendez, Robert J.",
+      "rep_name": "Arroyo, Marcos",
+      "dem_money": 1573912.73,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Arroyo, Marcos"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "NJ-10",
+      "dem_name": "Payne, Donald M., Jr.",
+      "rep_name": "Pinckney, David H.",
+      "dem_money": 1297342.2999999998,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Pinckney, David H."
+    },
+    {
+      "cycle": 2022,
+      "race_id": "NY-07",
+      "dem_name": "Velazquez, Nydia M.",
+      "rep_name": "Pagan, Juan",
+      "dem_money": 557676.47,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Pagan, Juan"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "NY-15",
+      "dem_name": "Torres, Ritchie",
+      "rep_name": "Sapaskis, Stylo A.",
+      "dem_money": 3711837.42,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Sapaskis, Stylo A."
+    },
+    {
+      "cycle": 2022,
+      "race_id": "OH-03",
+      "dem_name": "Beatty, Joyce",
+      "rep_name": "Stahley, Lee R.",
+      "dem_money": 2049221.55,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Stahley, Lee R."
+    },
+    {
+      "cycle": 2022,
+      "race_id": "OH-11",
+      "dem_name": "Brown, Shontel",
+      "rep_name": "Brewer, Eric J.",
+      "dem_money": 2090470.7000000002,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Brewer, Eric J."
+    },
+    {
+      "cycle": 2022,
+      "race_id": "OH-12",
+      "dem_name": "Rippel-Elton, Amy",
+      "rep_name": "Balderson, Troy",
+      "dem_money": 0.0,
+      "rep_money": 1689956.18,
+      "exclusion": "missing_money: Rippel-Elton, Amy"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "OK-03",
+      "dem_name": "Ross, Jeremiah A.",
+      "rep_name": "Lucas, Frank D.",
+      "dem_money": 0.0,
+      "rep_money": 1451129.94,
+      "exclusion": "missing_money: Ross, Jeremiah A."
+    },
+    {
+      "cycle": 2022,
+      "race_id": "OR-01",
+      "dem_name": "Bonamici, Suzanne",
+      "rep_name": "Mann, Christopher A.",
+      "dem_money": 968248.13,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Mann, Christopher A."
+    },
+    {
+      "cycle": 2022,
+      "race_id": "PA-02",
+      "dem_name": "Boyle, Brendan F.",
+      "rep_name": "Bashir, Aaron",
+      "dem_money": 1697447.2000000002,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Bashir, Aaron"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "RI-01",
+      "dem_name": "Cicilline, David N.",
+      "rep_name": "Waters, Allen R.",
+      "dem_money": 1792546.95,
+      "rep_money": 18657.16,
+      "exclusion": "third_party_outraised"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "SC-07",
+      "dem_name": "Scott, Daryl W.",
+      "rep_name": "Fry, Russell",
+      "dem_money": 0.0,
+      "rep_money": 1160478.49,
+      "exclusion": "missing_money: Scott, Daryl W."
+    },
+    {
+      "cycle": 2022,
+      "race_id": "TN-01",
+      "dem_name": "Parsons, Cameron",
+      "rep_name": "Harshbarger, Diana Lynn",
+      "dem_money": 0.0,
+      "rep_money": 1664796.42,
+      "exclusion": "missing_money: Parsons, Cameron"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "TN-07",
+      "dem_name": "Kelly, Odessa",
+      "rep_name": "Green, Mark E.",
+      "dem_money": 0.0,
+      "rep_money": 1302806.36,
+      "exclusion": "missing_money: Kelly, Odessa"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "TN-08",
+      "dem_name": "Williams, Lynnette P.",
+      "rep_name": "Kustoff, David",
+      "dem_money": 250.0,
+      "rep_money": 1826023.69,
+      "exclusion": "third_party_outraised"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "TX-05",
+      "dem_name": "Hill, Tartisha",
+      "rep_name": "Gooden, Lance",
+      "dem_money": 7904.94,
+      "rep_money": 759457.78,
+      "exclusion": "third_party_outraised"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "TX-10",
+      "dem_name": "Nuno, Linda",
+      "rep_name": "McCaul, Michael",
+      "dem_money": 0.0,
+      "rep_money": 1477156.83,
+      "exclusion": "missing_money: Nuno, Linda"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "TX-17",
+      "dem_name": "Woods, Mary Jo",
+      "rep_name": "Sessions, Pete",
+      "dem_money": 0.0,
+      "rep_money": 992999.74,
+      "exclusion": "missing_money: Woods, Mary Jo"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "TX-22",
+      "dem_name": "Jordan, Jamie Kaye",
+      "rep_name": "Nehls, Troy E.",
+      "dem_money": 0.0,
+      "rep_money": 943579.71,
+      "exclusion": "missing_money: Jordan, Jamie Kaye"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "TX-29",
+      "dem_name": "Garcia, Sylvia",
+      "rep_name": "Schafranek, Robert",
+      "dem_money": 877746.1599999999,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Schafranek, Robert"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "TX-33",
+      "dem_name": "Veasey, Marc",
+      "rep_name": "Gillespie, Patrick David",
+      "dem_money": 1756198.4300000002,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Gillespie, Patrick David"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "TX-35",
+      "dem_name": "Casar, Greg",
+      "rep_name": "McQueen, Dan",
+      "dem_money": 1557467.46,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: McQueen, Dan"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "UT-01",
+      "dem_name": "Jones, Rick Edwin",
+      "rep_name": "Moore, Blake D.",
+      "dem_money": 0.0,
+      "rep_money": 1650845.43,
+      "exclusion": "missing_money: Jones, Rick Edwin"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "UT-02",
+      "dem_name": "Mitchell, Nick",
+      "rep_name": "Stewart, Chris",
+      "dem_money": 2178.0,
+      "rep_money": 922639.54,
+      "exclusion": "third_party_outraised"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "WI-04",
+      "dem_name": "Moore, Gwen",
+      "rep_name": "Rogers, Tim",
+      "dem_money": 1107041.8900000001,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Rogers, Tim"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "WV-01",
+      "dem_name": "Watson, Mr. Lacy",
+      "rep_name": "Miller, Carol",
+      "dem_money": 0.0,
+      "rep_money": 1120938.05,
+      "exclusion": "missing_money: Watson, Mr. Lacy"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "CA-29",
+      "dem_name": "Luz Rivas",
+      "rep_name": "Benito Bernal",
+      "dem_money": 857468.73,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Benito Bernal"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "CA-31",
+      "dem_name": "Gil Cisneros",
+      "rep_name": "Daniel Martinez",
+      "dem_money": 838003.2,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Daniel Martinez"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "CA-43",
+      "dem_name": "Maxine Waters",
+      "rep_name": "Steve Williams",
+      "dem_money": 391699.81999999995,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Steve Williams"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "CA-44",
+      "dem_name": "Nanette Barragán",
+      "rep_name": "Roger Groh",
+      "dem_money": 1177498.65,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Roger Groh"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "CA-50",
+      "dem_name": "Scott Peters",
+      "rep_name": "Peter Bono",
+      "dem_money": 1690047.37,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Peter Bono"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "CA-52",
+      "dem_name": "Juan Vargas",
+      "rep_name": "Justin Lee",
+      "dem_money": 762030.0,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Justin Lee"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "GA-05",
+      "dem_name": "Nikema Williams",
+      "rep_name": "John Salvesen",
+      "dem_money": 876571.5299999999,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: John Salvesen"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "GA-13",
+      "dem_name": "David Scott",
+      "rep_name": "Jonathan Chavez",
+      "dem_money": 1100142.18,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Jonathan Chavez"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "HI-01",
+      "dem_name": "Ed Case",
+      "rep_name": "Patrick Largey",
+      "dem_money": 669924.53,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Patrick Largey"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "HI-02",
+      "dem_name": "Jill Tokuda",
+      "rep_name": "Steve Bond",
+      "dem_money": 906316.27,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Steve Bond"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "IL-01",
+      "dem_name": "Jonathan Jackson",
+      "rep_name": "Marcus Lewis",
+      "dem_money": 590061.69,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Marcus Lewis"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "IL-02",
+      "dem_name": "Robin Kelly",
+      "rep_name": "Ashley Ramos",
+      "dem_money": 1770899.9300000002,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Ashley Ramos"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "IL-04",
+      "dem_name": "Chuy García",
+      "rep_name": "Lupe Castillo",
+      "dem_money": 742185.5800000001,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Lupe Castillo"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "IL-07",
+      "dem_name": "Danny Davis",
+      "rep_name": "Chad Koppie",
+      "dem_money": 861420.04,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Chad Koppie"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "IL-12",
+      "dem_name": "Brian Roberts",
+      "rep_name": "Mike Bost",
+      "dem_money": 0.0,
+      "rep_money": 2933311.91,
+      "exclusion": "missing_money: Brian Roberts"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "KY-03",
+      "dem_name": "Morgan McGarvey",
+      "rep_name": "Mike Craven",
+      "dem_money": 1753781.61,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Mike Craven"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "MA-09",
+      "dem_name": "Bill Keating",
+      "rep_name": "Dan Sullivan",
+      "dem_money": 653251.89,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Dan Sullivan"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "MD-01",
+      "dem_name": "Blane Miller",
+      "rep_name": "Andy Harris",
+      "dem_money": 0.0,
+      "rep_money": 1173088.3199999998,
+      "exclusion": "missing_money: Blane Miller"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "MD-04",
+      "dem_name": "Glenn Ivey",
+      "rep_name": "George McDermott",
+      "dem_money": 871511.03,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: George McDermott"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "MD-07",
+      "dem_name": "Kweisi Mfume",
+      "rep_name": "Scott Collier",
+      "dem_money": 402325.64,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Scott Collier"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "MS-04",
+      "dem_name": "Craig Raybon",
+      "rep_name": "Mike Ezell",
+      "dem_money": 0.0,
+      "rep_money": 1153514.0499999998,
+      "exclusion": "missing_money: Craig Raybon"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "MT-02",
+      "dem_name": "John Driscoll",
+      "rep_name": "Troy Downing",
+      "dem_money": 0.0,
+      "rep_money": 1558282.61,
+      "exclusion": "missing_money: John Driscoll"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "NC-04",
+      "dem_name": "Valerie Foushee",
+      "rep_name": "Eric Blankenburg",
+      "dem_money": 638579.29,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Eric Blankenburg"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "NC-07",
+      "dem_name": "Marlando Pridgen",
+      "rep_name": "David Rouzer",
+      "dem_money": 0.0,
+      "rep_money": 1689819.84,
+      "exclusion": "missing_money: Marlando Pridgen"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "NC-08",
+      "dem_name": "Justin Dues",
+      "rep_name": "Mark Harris",
+      "dem_money": 0.0,
+      "rep_money": 725168.93,
+      "exclusion": "missing_money: Justin Dues"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "NC-09",
+      "dem_name": "Nigel Bristow",
+      "rep_name": "Richard Hudson",
+      "dem_money": 5003.6,
+      "rep_money": 3073325.9,
+      "exclusion": "third_party_outraised"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "NC-10",
+      "dem_name": "Ralph Scott Jr.",
+      "rep_name": "Pat Harrigan",
+      "dem_money": 0.0,
+      "rep_money": 1079981.8099999998,
+      "exclusion": "missing_money: Ralph Scott Jr."
+    },
+    {
+      "cycle": 2024,
+      "race_id": "NE-03",
+      "dem_name": "Daniel Ebers",
+      "rep_name": "Adrian Smith",
+      "dem_money": 0.0,
+      "rep_money": 1850827.69,
+      "exclusion": "missing_money: Daniel Ebers"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "NY-06",
+      "dem_name": "Grace Meng",
+      "rep_name": "Thomas Zmich",
+      "dem_money": 1929083.0,
+      "rep_money": 7142.44,
+      "exclusion": "third_party_outraised"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "NY-08",
+      "dem_name": "Hakeem Jeffries",
+      "rep_name": "John Delaney",
+      "dem_money": 17435368.849999998,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: John Delaney"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "NY-09",
+      "dem_name": "Yvette Clarke",
+      "rep_name": "Menachem Raitport",
+      "dem_money": 897082.22,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Menachem Raitport"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "NY-13",
+      "dem_name": "Adriano Espaillat",
+      "rep_name": "Ruben Vargas",
+      "dem_money": 1324767.96,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Ruben Vargas"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "NY-15",
+      "dem_name": "Ritchie Torres",
+      "rep_name": "Gonzalo Duran",
+      "dem_money": 6671792.76,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Gonzalo Duran"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "NY-20",
+      "dem_name": "Paul Tonko",
+      "rep_name": "Kevin Waltz",
+      "dem_money": 1487667.1600000001,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Kevin Waltz"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "NY-26",
+      "dem_name": "Tim Kennedy",
+      "rep_name": "Anthony Marecki",
+      "dem_money": 537272.3200000001,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Anthony Marecki"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "OH-01",
+      "dem_name": "Greg Landsman",
+      "rep_name": "Orlando Sonza",
+      "dem_money": 3462686.04,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Orlando Sonza"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "OH-03",
+      "dem_name": "Joyce Beatty",
+      "rep_name": "Michael Young",
+      "dem_money": 1688730.16,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Michael Young"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "OH-07",
+      "dem_name": "Matt Diemer",
+      "rep_name": "Max Miller",
+      "dem_money": 79141.06,
+      "rep_money": 1269507.7999999998,
+      "exclusion": "third_party_outraised"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "OH-08",
+      "dem_name": "Vanessa Enoch",
+      "rep_name": "Warren Davidson",
+      "dem_money": 0.0,
+      "rep_money": 1011972.8,
+      "exclusion": "missing_money: Vanessa Enoch"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "OH-14",
+      "dem_name": "Brian Kenderes",
+      "rep_name": "David Joyce",
+      "dem_money": 0.0,
+      "rep_money": 2232271.94,
+      "exclusion": "missing_money: Brian Kenderes"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "OR-01",
+      "dem_name": "Suzanne Bonamici",
+      "rep_name": "Bob Todd",
+      "dem_money": 894375.0700000001,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Bob Todd"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "PA-04",
+      "dem_name": "Madeleine Dean",
+      "rep_name": "David Winkler",
+      "dem_money": 1626948.9500000002,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: David Winkler"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "TN-01",
+      "dem_name": "Kevin Jenkins",
+      "rep_name": "Diana Harshbarger",
+      "dem_money": 0.0,
+      "rep_money": 1752097.88,
+      "exclusion": "missing_money: Kevin Jenkins"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "TX-33",
+      "dem_name": "Marc Veasey",
+      "rep_name": "Patrick Gillespie",
+      "dem_money": 1744665.44,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Patrick Gillespie"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "TX-36",
+      "dem_name": "Dayna Steele",
+      "rep_name": "Brian Babin",
+      "dem_money": 0.0,
+      "rep_money": 768183.6000000001,
+      "exclusion": "missing_money: Dayna Steele"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "TX-37",
+      "dem_name": "Lloyd Doggett",
+      "rep_name": "Jenny Garcia Sharon",
+      "dem_money": 1026910.56,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Jenny Garcia Sharon"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "UT-02",
+      "dem_name": "Nathaniel Woodward",
+      "rep_name": "Celeste Maloy",
+      "dem_money": 0.0,
+      "rep_money": 1043642.1799999999,
+      "exclusion": "missing_money: Nathaniel Woodward"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "UT-04",
+      "dem_name": "Katrina Fallick-Wang",
+      "rep_name": "Burgess Owens",
+      "dem_money": 10380.31,
+      "rep_money": 1336989.38,
+      "exclusion": "third_party_outraised"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "VA-08",
+      "dem_name": "Don Beyer",
+      "rep_name": "Jerry Torres",
+      "dem_money": 1821582.42,
+      "rep_money": 0.0,
+      "exclusion": "third_party_outraised"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "WA-02",
+      "dem_name": "Rick Larsen",
+      "rep_name": "Cody Hart",
+      "dem_money": 2317711.86,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Cody Hart"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "WA-07",
+      "dem_name": "Pramila Jayapal",
+      "rep_name": "Dan Alexander",
+      "dem_money": 2677653.58,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Dan Alexander"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "WA-10",
+      "dem_name": "Marilyn Strickland",
+      "rep_name": "Don Hewett",
+      "dem_money": 1947233.77,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Don Hewett"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "WI-04",
+      "dem_name": "Gwen Moore",
+      "rep_name": "Tim Rogers",
+      "dem_money": 1235827.0899999999,
+      "rep_money": 0.0,
+      "exclusion": "missing_money: Tim Rogers"
+    },
+    {
+      "cycle": 2024,
+      "race_id": "WV-01",
+      "dem_name": "Chris Reed",
+      "rep_name": "Carol Miller",
+      "dem_money": 0.0,
+      "rep_money": 1589519.44,
+      "exclusion": "missing_money: Chris Reed"
+    }
+  ],
+  "both_incumbents": [
+    {
+      "cycle": 2022,
+      "race_id": "FL-02",
+      "dem_name": "Lawson, Al",
+      "rep_name": "Dunn, Neal"
+    },
+    {
+      "cycle": 2022,
+      "race_id": "TX-34",
+      "dem_name": "Gonzalez, Vicente",
+      "rep_name": "Flores, Mayra"
+    }
+  ],
+  "evaluation": {
+    "folds": [
+      {
+        "train_cycles": [
+          2022
+        ],
+        "test_cycle": 2024,
+        "n_train": 350,
+        "coefficients": {
+          "intercept": -2.083115394315761,
+          "dem_money_share": 3.6455651127192956,
+          "incumbency": 1.428276934588989,
+          "dem_pvi": 0.18945284621792502,
+          "standardized": {
+            "intercept": -0.24768150147883447,
+            "dem_money_share": 1.4118071901037261,
+            "incumbency": 1.2951996829400314,
+            "dem_pvi": 2.769876087159922
+          }
+        },
+        "overall": {
+          "n_races": 338,
+          "model": {
+            "n_races": 338,
+            "n_called": 338,
+            "coverage": 1.0,
+            "accuracy": 0.9704142011834319,
+            "n_scored": 338,
+            "brier": 0.022100298911998665,
+            "calibration": [
+              {
+                "bin": "0.0-0.2",
+                "count": 172,
+                "mean_predicted": 0.019978708998330222,
+                "observed_rate": 0.005813953488372093
+              },
+              {
+                "bin": "0.2-0.4",
+                "count": 7,
+                "mean_predicted": 0.29559298041833054,
+                "observed_rate": 0.5714285714285714
+              },
+              {
+                "bin": "0.4-0.6",
+                "count": 4,
+                "mean_predicted": 0.4386574491233215,
+                "observed_rate": 0.5
+              },
+              {
+                "bin": "0.6-0.8",
+                "count": 6,
+                "mean_predicted": 0.7110641939846678,
+                "observed_rate": 1.0
+              },
+              {
+                "bin": "0.8-1.0",
+                "count": 149,
+                "mean_predicted": 0.972718259235283,
+                "observed_rate": 0.9798657718120806
+              }
+            ]
+          },
+          "model_without_money": {
+            "n_races": 338,
+            "n_called": 338,
+            "coverage": 1.0,
+            "accuracy": 0.9674556213017751,
+            "n_scored": 338,
+            "brier": 0.02585383658580838,
+            "calibration": [
+              {
+                "bin": "0.0-0.2",
+                "count": 176,
+                "mean_predicted": 0.026203546020312215,
+                "observed_rate": 0.017045454545454544
+              },
+              {
+                "bin": "0.2-0.4",
+                "count": 7,
+                "mean_predicted": 0.277843077309449,
+                "observed_rate": 0.5714285714285714
+              },
+              {
+                "bin": "0.4-0.6",
+                "count": 4,
+                "mean_predicted": 0.5418820374313335,
+                "observed_rate": 1.0
+              },
+              {
+                "bin": "0.6-0.8",
+                "count": 10,
+                "mean_predicted": 0.7241341688762589,
+                "observed_rate": 0.8
+              },
+              {
+                "bin": "0.8-1.0",
+                "count": 141,
+                "mean_predicted": 0.9668695695358516,
+                "observed_rate": 0.9929078014184397
+              }
+            ]
+          },
+          "money_rule": {
+            "n_races": 338,
+            "n_called": 338,
+            "coverage": 1.0,
+            "accuracy": 0.9378698224852071
+          },
+          "cook": {
+            "n_races": 338,
+            "n_called": 317,
+            "coverage": 0.9378698224852071,
+            "accuracy": 0.9968454258675079
+          },
+          "cook_listed_only": {
+            "n_races": 89,
+            "n_called": 68,
+            "coverage": 0.7640449438202247,
+            "accuracy": 0.9852941176470589
+          },
+          "shared": {
+            "n_races": 317,
+            "model_accuracy": 0.9936908517350158,
+            "money_rule_accuracy": 0.9652996845425867,
+            "cook_accuracy": 0.9968454258675079
+          }
+        },
+        "competitive": {
+          "n_races": 67,
+          "model": {
+            "n_races": 67,
+            "n_called": 67,
+            "coverage": 1.0,
+            "accuracy": 0.8507462686567164,
+            "n_scored": 67,
+            "brier": 0.10815550852487218,
+            "calibration": [
+              {
+                "bin": "0.0-0.2",
+                "count": 22,
+                "mean_predicted": 0.09490386291828391,
+                "observed_rate": 0.045454545454545456
+              },
+              {
+                "bin": "0.2-0.4",
+                "count": 6,
+                "mean_predicted": 0.3015569471734814,
+                "observed_rate": 0.6666666666666666
+              },
+              {
+                "bin": "0.4-0.6",
+                "count": 4,
+                "mean_predicted": 0.4386574491233215,
+                "observed_rate": 0.5
+              },
+              {
+                "bin": "0.6-0.8",
+                "count": 6,
+                "mean_predicted": 0.7110641939846678,
+                "observed_rate": 1.0
+              },
+              {
+                "bin": "0.8-1.0",
+                "count": 29,
+                "mean_predicted": 0.9190022952911773,
+                "observed_rate": 0.896551724137931
+              }
+            ]
+          },
+          "model_without_money": {
+            "n_races": 67,
+            "n_called": 67,
+            "coverage": 1.0,
+            "accuracy": 0.835820895522388,
+            "n_scored": 67,
+            "brier": 0.12128821993556166,
+            "calibration": [
+              {
+                "bin": "0.0-0.2",
+                "count": 25,
+                "mean_predicted": 0.08345159806999222,
+                "observed_rate": 0.12
+              },
+              {
+                "bin": "0.2-0.4",
+                "count": 7,
+                "mean_predicted": 0.277843077309449,
+                "observed_rate": 0.5714285714285714
+              },
+              {
+                "bin": "0.4-0.6",
+                "count": 3,
+                "mean_predicted": 0.5225674047064819,
+                "observed_rate": 1.0
+              },
+              {
+                "bin": "0.6-0.8",
+                "count": 7,
+                "mean_predicted": 0.7004025461943663,
+                "observed_rate": 0.7142857142857143
+              },
+              {
+                "bin": "0.8-1.0",
+                "count": 25,
+                "mean_predicted": 0.906223417030051,
+                "observed_rate": 0.96
+              }
+            ]
+          },
+          "money_rule": {
+            "n_races": 67,
+            "n_called": 67,
+            "coverage": 1.0,
+            "accuracy": 0.7313432835820896
+          },
+          "cook": {
+            "n_races": 67,
+            "n_called": 46,
+            "coverage": 0.6865671641791045,
+            "accuracy": 0.9782608695652174
+          },
+          "cook_listed_only": {
+            "n_races": 67,
+            "n_called": 46,
+            "coverage": 0.6865671641791045,
+            "accuracy": 0.9782608695652174
+          },
+          "shared": {
+            "n_races": 46,
+            "model_accuracy": 0.9565217391304348,
+            "money_rule_accuracy": 0.8260869565217391,
+            "cook_accuracy": 0.9782608695652174
+          }
+        }
+      },
+      {
+        "train_cycles": [
+          2024
+        ],
+        "test_cycle": 2022,
+        "n_train": 338,
+        "coefficients": {
+          "intercept": -2.309436366987597,
+          "dem_money_share": 4.3091049823311804,
+          "incumbency": 1.1274599561077707,
+          "dem_pvi": 0.21263336366870772,
+          "standardized": {
+            "intercept": -0.35922987465708545,
+            "dem_money_share": 1.739800066186327,
+            "incumbency": 1.0464098885782096,
+            "dem_pvi": 3.053683804774163
+          }
+        },
+        "overall": {
+          "n_races": 350,
+          "model": {
+            "n_races": 350,
+            "n_called": 350,
+            "coverage": 1.0,
+            "accuracy": 0.9571428571428572,
+            "n_scored": 350,
+            "brier": 0.032182277200440625,
+            "calibration": [
+              {
+                "bin": "0.0-0.2",
+                "count": 157,
+                "mean_predicted": 0.01788580512702484,
+                "observed_rate": 0.006369426751592357
+              },
+              {
+                "bin": "0.2-0.4",
+                "count": 11,
+                "mean_predicted": 0.26171722453774593,
+                "observed_rate": 0.2727272727272727
+              },
+              {
+                "bin": "0.4-0.6",
+                "count": 10,
+                "mean_predicted": 0.49293608226705316,
+                "observed_rate": 0.5
+              },
+              {
+                "bin": "0.6-0.8",
+                "count": 11,
+                "mean_predicted": 0.7093867461041414,
+                "observed_rate": 0.7272727272727273
+              },
+              {
+                "bin": "0.8-1.0",
+                "count": 161,
+                "mean_predicted": 0.9694800990646911,
+                "observed_rate": 0.968944099378882
+              }
+            ]
+          },
+          "model_without_money": {
+            "n_races": 350,
+            "n_called": 350,
+            "coverage": 1.0,
+            "accuracy": 0.9514285714285714,
+            "n_scored": 350,
+            "brier": 0.035556461380522715,
+            "calibration": [
+              {
+                "bin": "0.0-0.2",
+                "count": 149,
+                "mean_predicted": 0.024192004591132736,
+                "observed_rate": 0.0
+              },
+              {
+                "bin": "0.2-0.4",
+                "count": 15,
+                "mean_predicted": 0.2725221909429459,
+                "observed_rate": 0.2
+              },
+              {
+                "bin": "0.4-0.6",
+                "count": 9,
+                "mean_predicted": 0.49897744022712004,
+                "observed_rate": 0.3333333333333333
+              },
+              {
+                "bin": "0.6-0.8",
+                "count": 12,
+                "mean_predicted": 0.6810254029932721,
+                "observed_rate": 0.6666666666666666
+              },
+              {
+                "bin": "0.8-1.0",
+                "count": 165,
+                "mean_predicted": 0.972969981119562,
+                "observed_rate": 0.9636363636363636
+              }
+            ]
+          },
+          "money_rule": {
+            "n_races": 350,
+            "n_called": 350,
+            "coverage": 1.0,
+            "accuracy": 0.9114285714285715
+          },
+          "cook": {
+            "n_races": 350,
+            "n_called": 314,
+            "coverage": 0.8971428571428571,
+            "accuracy": 0.9968152866242038
+          },
+          "cook_listed_only": {
+            "n_races": 142,
+            "n_called": 106,
+            "coverage": 0.7464788732394366,
+            "accuracy": 0.9905660377358491
+          },
+          "shared": {
+            "n_races": 314,
+            "model_accuracy": 0.9872611464968153,
+            "money_rule_accuracy": 0.9363057324840764,
+            "cook_accuracy": 0.9968152866242038
+          }
+        },
+        "competitive": {
+          "n_races": 87,
+          "model": {
+            "n_races": 87,
+            "n_called": 87,
+            "coverage": 1.0,
+            "accuracy": 0.8275862068965517,
+            "n_scored": 87,
+            "brier": 0.12805689680180493,
+            "calibration": [
+              {
+                "bin": "0.0-0.2",
+                "count": 15,
+                "mean_predicted": 0.11388179914688586,
+                "observed_rate": 0.06666666666666667
+              },
+              {
+                "bin": "0.2-0.4",
+                "count": 10,
+                "mean_predicted": 0.2643120335926398,
+                "observed_rate": 0.3
+              },
+              {
+                "bin": "0.4-0.6",
+                "count": 10,
+                "mean_predicted": 0.49293608226705316,
+                "observed_rate": 0.5
+              },
+              {
+                "bin": "0.6-0.8",
+                "count": 11,
+                "mean_predicted": 0.7093867461041414,
+                "observed_rate": 0.7272727272727273
+              },
+              {
+                "bin": "0.8-1.0",
+                "count": 41,
+                "mean_predicted": 0.9067761387864591,
+                "observed_rate": 0.8780487804878049
+              }
+            ]
+          },
+          "model_without_money": {
+            "n_races": 87,
+            "n_called": 87,
+            "coverage": 1.0,
+            "accuracy": 0.8045977011494253,
+            "n_scored": 87,
+            "brier": 0.1382696440186749,
+            "calibration": [
+              {
+                "bin": "0.0-0.2",
+                "count": 9,
+                "mean_predicted": 0.09676819309415685,
+                "observed_rate": 0.0
+              },
+              {
+                "bin": "0.2-0.4",
+                "count": 12,
+                "mean_predicted": 0.2787374112121306,
+                "observed_rate": 0.25
+              },
+              {
+                "bin": "0.4-0.6",
+                "count": 9,
+                "mean_predicted": 0.49897744022712004,
+                "observed_rate": 0.3333333333333333
+              },
+              {
+                "bin": "0.6-0.8",
+                "count": 12,
+                "mean_predicted": 0.6810254029932721,
+                "observed_rate": 0.6666666666666666
+              },
+              {
+                "bin": "0.8-1.0",
+                "count": 45,
+                "mean_predicted": 0.9200886913136964,
+                "observed_rate": 0.8666666666666667
+              }
+            ]
+          },
+          "money_rule": {
+            "n_races": 87,
+            "n_called": 87,
+            "coverage": 1.0,
+            "accuracy": 0.735632183908046
+          },
+          "cook": {
+            "n_races": 87,
+            "n_called": 51,
+            "coverage": 0.5862068965517241,
+            "accuracy": 0.9803921568627451
+          },
+          "cook_listed_only": {
+            "n_races": 87,
+            "n_called": 51,
+            "coverage": 0.5862068965517241,
+            "accuracy": 0.9803921568627451
+          },
+          "shared": {
+            "n_races": 51,
+            "model_accuracy": 0.9215686274509803,
+            "money_rule_accuracy": 0.7647058823529411,
+            "cook_accuracy": 0.9803921568627451
+          }
+        }
+      }
+    ],
+    "pooled": {
+      "overall": {
+        "n_races": 688,
+        "model": {
+          "n_races": 688,
+          "n_called": 688,
+          "coverage": 1.0,
+          "accuracy": 0.9636627906976745,
+          "n_scored": 688,
+          "brier": 0.027229212285479313,
+          "calibration": [
+            {
+              "bin": "0.0-0.2",
+              "count": 329,
+              "mean_predicted": 0.01897996763725136,
+              "observed_rate": 0.0060790273556231
+            },
+            {
+              "bin": "0.2-0.4",
+              "count": 18,
+              "mean_predicted": 0.2748911296024177,
+              "observed_rate": 0.3888888888888889
+            },
+            {
+              "bin": "0.4-0.6",
+              "count": 14,
+              "mean_predicted": 0.47742790136884405,
+              "observed_rate": 0.5
+            },
+            {
+              "bin": "0.6-0.8",
+              "count": 17,
+              "mean_predicted": 0.7099787865325625,
+              "observed_rate": 0.8235294117647058
+            },
+            {
+              "bin": "0.8-1.0",
+              "count": 310,
+              "mean_predicted": 0.9710365050821693,
+              "observed_rate": 0.9741935483870968
+            }
+          ]
+        },
+        "model_without_money": {
+          "n_races": 688,
+          "n_called": 688,
+          "coverage": 1.0,
+          "accuracy": 0.9593023255813954,
+          "n_scored": 688,
+          "brier": 0.030789764897072944,
+          "calibration": [
+            {
+              "bin": "0.0-0.2",
+              "count": 325,
+              "mean_predicted": 0.02528133164201147,
+              "observed_rate": 0.009230769230769232
+            },
+            {
+              "bin": "0.2-0.4",
+              "count": 22,
+              "mean_predicted": 0.27421520024137874,
+              "observed_rate": 0.3181818181818182
+            },
+            {
+              "bin": "0.4-0.6",
+              "count": 13,
+              "mean_predicted": 0.5121788547514936,
+              "observed_rate": 0.5384615384615384
+            },
+            {
+              "bin": "0.6-0.8",
+              "count": 22,
+              "mean_predicted": 0.700620296576448,
+              "observed_rate": 0.7272727272727273
+            },
+            {
+              "bin": "0.8-1.0",
+              "count": 306,
+              "mean_predicted": 0.9701590071545189,
+              "observed_rate": 0.9771241830065359
+            }
+          ]
+        },
+        "money_rule": {
+          "n_races": 688,
+          "n_called": 688,
+          "coverage": 1.0,
+          "accuracy": 0.9244186046511628
+        },
+        "cook": {
+          "n_races": 688,
+          "n_called": 631,
+          "coverage": 0.9171511627906976,
+          "accuracy": 0.9968304278922345
+        },
+        "cook_listed_only": {
+          "n_races": 231,
+          "n_called": 174,
+          "coverage": 0.7532467532467533,
+          "accuracy": 0.9885057471264368
+        },
+        "shared": {
+          "n_races": 631,
+          "model_accuracy": 0.9904912836767037,
+          "money_rule_accuracy": 0.9508716323296355,
+          "cook_accuracy": 0.9968304278922345
+        }
+      },
+      "competitive": {
+        "n_races": 154,
+        "model": {
+          "n_races": 154,
+          "n_called": 154,
+          "coverage": 1.0,
+          "accuracy": 0.8376623376623377,
+          "n_scored": 154,
+          "brier": 0.11939850060339914,
+          "calibration": [
+            {
+              "bin": "0.0-0.2",
+              "count": 37,
+              "mean_predicted": 0.1025976208487982,
+              "observed_rate": 0.05405405405405406
+            },
+            {
+              "bin": "0.2-0.4",
+              "count": 16,
+              "mean_predicted": 0.2782788761854553,
+              "observed_rate": 0.4375
+            },
+            {
+              "bin": "0.4-0.6",
+              "count": 14,
+              "mean_predicted": 0.47742790136884405,
+              "observed_rate": 0.5
+            },
+            {
+              "bin": "0.6-0.8",
+              "count": 17,
+              "mean_predicted": 0.7099787865325625,
+              "observed_rate": 0.8235294117647058
+            },
+            {
+              "bin": "0.8-1.0",
+              "count": 70,
+              "mean_predicted": 0.9118412607669852,
+              "observed_rate": 0.8857142857142857
+            }
+          ]
+        },
+        "model_without_money": {
+          "n_races": 154,
+          "n_called": 154,
+          "coverage": 1.0,
+          "accuracy": 0.8181818181818182,
+          "n_scored": 154,
+          "brier": 0.13088162185264512,
+          "calibration": [
+            {
+              "bin": "0.0-0.2",
+              "count": 34,
+              "mean_predicted": 0.08697657910580049,
+              "observed_rate": 0.08823529411764706
+            },
+            {
+              "bin": "0.2-0.4",
+              "count": 19,
+              "mean_predicted": 0.27840791977430057,
+              "observed_rate": 0.3684210526315789
+            },
+            {
+              "bin": "0.4-0.6",
+              "count": 12,
+              "mean_predicted": 0.5048749313469606,
+              "observed_rate": 0.5
+            },
+            {
+              "bin": "0.6-0.8",
+              "count": 19,
+              "mean_predicted": 0.6881643504884121,
+              "observed_rate": 0.6842105263157895
+            },
+            {
+              "bin": "0.8-1.0",
+              "count": 70,
+              "mean_predicted": 0.9151368076409659,
+              "observed_rate": 0.9
+            }
+          ]
+        },
+        "money_rule": {
+          "n_races": 154,
+          "n_called": 154,
+          "coverage": 1.0,
+          "accuracy": 0.7337662337662337
+        },
+        "cook": {
+          "n_races": 154,
+          "n_called": 97,
+          "coverage": 0.6298701298701299,
+          "accuracy": 0.979381443298969
+        },
+        "cook_listed_only": {
+          "n_races": 154,
+          "n_called": 97,
+          "coverage": 0.6298701298701299,
+          "accuracy": 0.979381443298969
+        },
+        "shared": {
+          "n_races": 97,
+          "model_accuracy": 0.9381443298969072,
+          "money_rule_accuracy": 0.7938144329896907,
+          "cook_accuracy": 0.979381443298969
+        },
+        "bootstrap_95": {
+          "model": {
+            "low": 0.7792207792207793,
+            "high": 0.8961038961038961
+          },
+          "money_rule": {
+            "low": 0.6623376623376623,
+            "high": 0.8051948051948052
+          },
+          "cook": {
+            "low": 0.9484536082474226,
+            "high": 1.0
+          },
+          "shared": {
+            "n_races": 97,
+            "model": {
+              "low": 0.8865979381443299,
+              "high": 0.979381443298969
+            },
+            "money_rule": {
+              "low": 0.711340206185567,
+              "high": 0.8662371134020617
+            },
+            "cook": {
+              "low": 0.9484536082474226,
+              "high": 1.0
+            }
+          },
+          "paired_difference": {
+            "n_races": 97,
+            "model_minus_money_rule": {
+              "estimate": 0.14432989690721648,
+              "low": 0.061855670103092786,
+              "high": 0.23711340206185566
+            },
+            "model_minus_cook": {
+              "estimate": -0.041237113402061855,
+              "low": -0.09278350515463918,
+              "high": 0.0
+            }
+          }
+        }
+      }
+    }
+  },
+  "full_fit": {
+    "n_train": 688,
+    "coefficients": {
+      "intercept": -2.307761115079205,
+      "dem_money_share": 4.210095384332593,
+      "incumbency": 1.2304781249469074,
+      "dem_pvi": 0.25282310500023714,
+      "standardized": {
+        "intercept": -0.32183029220069725,
+        "dem_money_share": 1.6651398506376662,
+        "incumbency": 1.1303441526486826,
+        "dem_pvi": 3.665534151771221
+      }
+    },
+    "money_share_effect": {
+      "odds_ratio_per_10_points": 1.52349881013117,
+      "standardized_coefficients": {
+        "dem_money_share": 1.6651398506376662,
+        "incumbency": 1.1303441526486826,
+        "dem_pvi": 3.665534151771221
+      },
+      "probability_shift_45_to_55": {
+        "open seat, EVEN PVI": {
+          "incumbency": 0,
+          "dem_pvi": 0,
+          "p_at_45_pct": 0.3981407106710381,
+          "p_at_55_pct": 0.5019478267223593,
+          "change": 0.10380711605132115
+        },
+        "training medians": {
+          "incumbency": 0.0,
+          "dem_pvi": -1.0,
+          "p_at_45_pct": 0.3393838265268593,
+          "p_at_55_pct": 0.43904672797914296,
+          "change": 0.09966290145228368
+        }
+      }
+    }
+  },
+  "predictions_2026": {
+    "money_pulled_at": "2026-10-24",
+    "nominees_page_revision": 1381568365,
+    "sanity_checks": {
+      "rows": 400,
+      "missing_probability": 0,
+      "exactly_0_or_1": 0,
+      "min_probability": 7.532761552524165e-06,
+      "max_probability": 0.9999977236010366,
+      "solid_d": {
+        "count": 160,
+        "min": 0.6744943716008706,
+        "max": 0.9999977236010366
+      },
+      "solid_r": {
+        "count": 162,
+        "min": 7.532761552524165e-06,
+        "max": 0.19816066677829167
+      },
+      "coefficient_signs_positive": true,
+      "money_record_missing": 38,
+      "incumbency_counts": {
+        "dem_incumbent": 164,
+        "rep_incumbent": 168,
+        "neither_or_both": 68
+      },
+      "both_incumbents": 0
+    },
+    "money_record_missing": [
+      {
+        "race_id": "CA-02",
+        "dem_name": "Jared Huffman",
+        "rep_name": "Robin Littau"
+      },
+      {
+        "race_id": "CA-10",
+        "dem_name": "Mark DeSaulnier",
+        "rep_name": "Jeff Frese"
+      },
+      {
+        "race_id": "CA-15",
+        "dem_name": "Kevin Mullin",
+        "rep_name": "Charles Hoelter"
+      },
+      {
+        "race_id": "CA-38",
+        "dem_name": "Hilda Solis",
+        "rep_name": "Pedro Casas"
+      },
+      {
+        "race_id": "CA-51",
+        "dem_name": "Sara Jacobs",
+        "rep_name": "Ricardo Cabrera"
+      },
+      {
+        "race_id": "GA-04",
+        "dem_name": "Hank Johnson",
+        "rep_name": "James Duffie"
+      },
+      {
+        "race_id": "GA-05",
+        "dem_name": "Nikema Williams",
+        "rep_name": "John Oscar Salvesen"
+      },
+      {
+        "race_id": "GA-13",
+        "dem_name": "Jasmine Clark",
+        "rep_name": "Jonathan Chavez"
+      },
+      {
+        "race_id": "HI-01",
+        "dem_name": "Ed Case",
+        "rep_name": "Adriel Lam"
+      },
+      {
+        "race_id": "IL-02",
+        "dem_name": "Donna Miller",
+        "rep_name": "Michael Noack"
+      },
+      {
+        "race_id": "IL-05",
+        "dem_name": "Mike Quigley",
+        "rep_name": "Tommy Hanson"
+      },
+      {
+        "race_id": "IL-09",
+        "dem_name": "Daniel Biss",
+        "rep_name": "John Elleson"
+      },
+      {
+        "race_id": "IL-10",
+        "dem_name": "Brad Schneider",
+        "rep_name": "Carl Lambrecht"
+      },
+      {
+        "race_id": "IN-07",
+        "dem_name": "André Carson",
+        "rep_name": "Patrick McAuley"
+      },
+      {
+        "race_id": "MD-04",
+        "dem_name": "Glenn Ivey",
+        "rep_name": "George McDermott"
+      },
+      {
+        "race_id": "MD-05",
+        "dem_name": "Adrian Boafo",
+        "rep_name": "Chris Chaffee"
+      },
+      {
+        "race_id": "MD-07",
+        "dem_name": "Kweisi Mfume",
+        "rep_name": "Scott Collier"
+      },
+      {
+        "race_id": "MI-06",
+        "dem_name": "Debbie Dingell",
+        "rep_name": "Heather Smiley"
+      },
+      {
+        "race_id": "MI-13",
+        "dem_name": "Donavan McKinney",
+        "rep_name": "T. P. Nykoriak"
+      },
+      {
+        "race_id": "MN-03",
+        "dem_name": "Kelly Morrison",
+        "rep_name": "Tyler Bass"
+      },
+      {
+        "race_id": "MO-01",
+        "dem_name": "Wesley Bell",
+        "rep_name": "Paul Berry"
+      },
+      {
+        "race_id": "NC-02",
+        "dem_name": "Deborah Ross",
+        "rep_name": "Eugene Douglass"
+      },
+      {
+        "race_id": "NY-05",
+        "dem_name": "Gregory Meeks",
+        "rep_name": "George Marsh"
+      },
+      {
+        "race_id": "NY-08",
+        "dem_name": "Hakeem Jeffries",
+        "rep_name": "Lewis Mizrahi"
+      },
+      {
+        "race_id": "NY-09",
+        "dem_name": "Yvette Clarke",
+        "rep_name": "Joel Azumah"
+      },
+      {
+        "race_id": "NY-13",
+        "dem_name": "Darializa Avila Chevalier",
+        "rep_name": "Jomo Williams"
+      },
+      {
+        "race_id": "NY-16",
+        "dem_name": "George Latimer",
+        "rep_name": "Joseph Cinquemani"
+      },
+      {
+        "race_id": "OH-02",
+        "dem_name": "Jennifer Mazzuckelli",
+        "rep_name": "David Taylor"
+      },
+      {
+        "race_id": "OH-03",
+        "dem_name": "Joyce Beatty",
+        "rep_name": "Cleophus Dulaney"
+      },
+      {
+        "race_id": "OH-11",
+        "dem_name": "Shontel Brown",
+        "rep_name": "Mike Kirchner"
+      },
+      {
+        "race_id": "OR-03",
+        "dem_name": "Maxine Dexter",
+        "rep_name": "Loran Ayles"
+      },
+      {
+        "race_id": "PA-02",
+        "dem_name": "Brendan Boyle",
+        "rep_name": "Jessica Arriaga"
+      },
+      {
+        "race_id": "SC-06",
+        "dem_name": "Jim Clyburn",
+        "rep_name": "John Peterson"
+      },
+      {
+        "race_id": "TX-12",
+        "dem_name": "Angela Rodriguez Prilliman",
+        "rep_name": "Craig Goldman"
+      },
+      {
+        "race_id": "TX-18",
+        "dem_name": "Christian Menefee",
+        "rep_name": "Ronald Whitfield"
+      },
+      {
+        "race_id": "TX-33",
+        "dem_name": "Colin Allred",
+        "rep_name": "Patrick Gillespie"
+      },
+      {
+        "race_id": "WA-10",
+        "dem_name": "Marilyn Strickland",
+        "rep_name": "Chris Chung"
+      },
+      {
+        "race_id": "WI-04",
+        "dem_name": "Gwen Moore",
+        "rep_name": "Tim Rogers"
+      }
+    ],
+    "incumbency_differs_from_fec_flag": [
+      {
+        "race_id": "CA-01",
+        "dem_name": "Mike McGuire",
+        "rep_name": "James Gallagher",
+        "page_incumbency": -1,
+        "fec_incumbent_party": null,
+        "both_listed_as_members": false
+      },
+      {
+        "race_id": "CA-31",
+        "dem_name": "Gil Cisneros",
+        "rep_name": "Eric Ching",
+        "page_incumbency": 1,
+        "fec_incumbent_party": null,
+        "both_listed_as_members": false
+      },
+      {
+        "race_id": "FL-01",
+        "dem_name": "Gay Valimont",
+        "rep_name": "Jimmy Patronis",
+        "page_incumbency": -1,
+        "fec_incumbent_party": null,
+        "both_listed_as_members": false
+      },
+      {
+        "race_id": "FL-06",
+        "dem_name": "Eric Yonce",
+        "rep_name": "Randy Fine",
+        "page_incumbency": -1,
+        "fec_incumbent_party": null,
+        "both_listed_as_members": false
+      },
+      {
+        "race_id": "IN-03",
+        "dem_name": "Kelly Thompson",
+        "rep_name": "Marlin Stutzman",
+        "page_incumbency": -1,
+        "fec_incumbent_party": null,
+        "both_listed_as_members": false
+      },
+      {
+        "race_id": "MD-04",
+        "dem_name": "Glenn Ivey",
+        "rep_name": "George McDermott",
+        "page_incumbency": 1,
+        "fec_incumbent_party": null,
+        "both_listed_as_members": false
+      },
+      {
+        "race_id": "NY-04",
+        "dem_name": "Laura Gillen",
+        "rep_name": "Jeanine Driscoll",
+        "page_incumbency": 1,
+        "fec_incumbent_party": null,
+        "both_listed_as_members": false
+      },
+      {
+        "race_id": "TX-03",
+        "dem_name": "Evan Hunt",
+        "rep_name": "Keith Self",
+        "page_incumbency": -1,
+        "fec_incumbent_party": null,
+        "both_listed_as_members": false
+      },
+      {
+        "race_id": "TX-18",
+        "dem_name": "Christian Menefee",
+        "rep_name": "Ronald Whitfield",
+        "page_incumbency": 1,
+        "fec_incumbent_party": null,
+        "both_listed_as_members": false
+      },
+      {
+        "race_id": "TX-37",
+        "dem_name": "Greg Casar",
+        "rep_name": "Lauren Peña",
+        "page_incumbency": 1,
+        "fec_incumbent_party": null,
+        "both_listed_as_members": false
+      },
+      {
+        "race_id": "VA-05",
+        "dem_name": "Tom Perriello",
+        "rep_name": "John McGuire",
+        "page_incumbency": -1,
+        "fec_incumbent_party": null,
+        "both_listed_as_members": false
+      }
+    ],
+    "model_vs_money_rule": [
+      {
+        "race_id": "AL-02",
+        "dem_name": "Shomari Figures",
+        "rep_name": "Rhett Marques",
+        "dem_win_probability": 0.3895586868640232,
+        "rule_call": "DEM",
+        "cook_rating": "Likely R"
+      },
+      {
+        "race_id": "AZ-06",
+        "dem_name": "JoAnna Mendoza",
+        "rep_name": "Juan Ciscomani",
+        "dem_win_probability": 0.32923211567322386,
+        "rule_call": "DEM",
+        "cook_rating": "Toss Up"
+      },
+      {
+        "race_id": "CA-22",
+        "dem_name": "Randy Villegas",
+        "rep_name": "David Valadao",
+        "dem_win_probability": 0.27902042618010586,
+        "rule_call": "DEM",
+        "cook_rating": "Toss Up"
+      },
+      {
+        "race_id": "CO-04",
+        "dem_name": "Eileen Laubacher",
+        "rep_name": "Lauren Boebert",
+        "dem_win_probability": 0.12672757063947315,
+        "rule_call": "DEM",
+        "cook_rating": "Solid R"
+      },
+      {
+        "race_id": "CO-05",
+        "dem_name": "Jessica Killin",
+        "rep_name": "Jeff Crank",
+        "dem_win_probability": 0.12287953851812419,
+        "rule_call": "DEM",
+        "cook_rating": "Lean R"
+      },
+      {
+        "race_id": "CO-08",
+        "dem_name": "Manny Rutinel",
+        "rep_name": "Gabe Evans",
+        "dem_win_probability": 0.29507807721177975,
+        "rule_call": "DEM",
+        "cook_rating": "Toss Up"
+      },
+      {
+        "race_id": "FL-07",
+        "dem_name": "Bale Dalton",
+        "rep_name": "Ryan Elijah",
+        "dem_win_probability": 0.42760094084499917,
+        "rule_call": "DEM",
+        "cook_rating": "Likely R"
+      },
+      {
+        "race_id": "FL-27",
+        "dem_name": "Eliott Rodriguez",
+        "rep_name": "María Elvira Salazar",
+        "dem_win_probability": 0.056065425734638574,
+        "rule_call": "DEM",
+        "cook_rating": "Lean R"
+      },
+      {
+        "race_id": "GA-14",
+        "dem_name": "Shawn Harris",
+        "rep_name": "Clay Fuller",
+        "dem_win_probability": 0.008056530271685186,
+        "rule_call": "DEM",
+        "cook_rating": "Solid R"
+      },
+      {
+        "race_id": "IA-01",
+        "dem_name": "Christina Bohannan",
+        "rep_name": "Mariannette Miller-Meeks",
+        "dem_win_probability": 0.10240791865839595,
+        "rule_call": "DEM",
+        "cook_rating": "Lean D"
+      },
+      {
+        "race_id": "IA-02",
+        "dem_name": "Lindsay James",
+        "rep_name": "Joe Mitchell",
+        "dem_win_probability": 0.3100825713476044,
+        "rule_call": "DEM",
+        "cook_rating": "Toss Up"
+      },
+      {
+        "race_id": "IA-03",
+        "dem_name": "Sarah Trone Garriott",
+        "rep_name": "Zach Nunn",
+        "dem_win_probability": 0.23899459472925821,
+        "rule_call": "DEM",
+        "cook_rating": "Lean D"
+      },
+      {
+        "race_id": "KY-06",
+        "dem_name": "Zach Dembo",
+        "rep_name": "Ralph Alvarado",
+        "dem_win_probability": 0.17485850443112888,
+        "rule_call": "DEM",
+        "cook_rating": "Lean R"
+      },
+      {
+        "race_id": "ME-02",
+        "dem_name": "Matthew Dunlap",
+        "rep_name": "Paul LePage",
+        "dem_win_probability": 0.2769274187857803,
+        "rule_call": "DEM",
+        "cook_rating": "Lean R"
+      },
+      {
+        "race_id": "MI-04",
+        "dem_name": "Sean McCann",
+        "rep_name": "Bill Huizenga",
+        "dem_win_probability": 0.10628819363887025,
+        "rule_call": "DEM",
+        "cook_rating": "Toss Up"
+      },
+      {
+        "race_id": "MI-10",
+        "dem_name": "Christina Hines",
+        "rep_name": "Mike Bouchard Jr.",
+        "dem_win_probability": 0.3880672982229381,
+        "rule_call": "DEM",
+        "cook_rating": "Toss Up"
+      },
+      {
+        "race_id": "MN-01",
+        "dem_name": "Jake Johnson",
+        "rep_name": "Brad Finstad",
+        "dem_win_probability": 0.07101839326023301,
+        "rule_call": "DEM",
+        "cook_rating": "Lean R"
+      },
+      {
+        "race_id": "MT-01",
+        "dem_name": "Sam Forstag",
+        "rep_name": "Aaron Flint",
+        "dem_win_probability": 0.2657604849218178,
+        "rule_call": "DEM",
+        "cook_rating": "Toss Up"
+      },
+      {
+        "race_id": "NJ-07",
+        "dem_name": "Rebecca Bennett",
+        "rep_name": "Thomas Kean Jr.",
+        "dem_win_probability": 0.31787605513946904,
+        "rule_call": "DEM",
+        "cook_rating": "Lean D"
+      },
+      {
+        "race_id": "NV-01",
+        "dem_name": "Dina Titus",
+        "rep_name": "Carrie Buck",
+        "dem_win_probability": 0.8182386192979818,
+        "rule_call": "REP",
+        "cook_rating": "Likely D"
+      },
+      {
+        "race_id": "NV-02",
+        "dem_name": "Teresa Benitez-Thompson",
+        "rep_name": "David Flippo",
+        "dem_win_probability": 0.1310155205497053,
+        "rule_call": "DEM",
+        "cook_rating": "Likely R"
+      },
+      {
+        "race_id": "NY-17",
+        "dem_name": "Cait Conley",
+        "rep_name": "Mike Lawler",
+        "dem_win_probability": 0.3283125868155946,
+        "rule_call": "DEM",
+        "cook_rating": "Toss Up"
+      },
+      {
+        "race_id": "NY-21",
+        "dem_name": "Blake Gendebien",
+        "rep_name": "Anthony Constantino",
+        "dem_win_probability": 0.3484415115166408,
+        "rule_call": "DEM",
+        "cook_rating": "Lean R"
+      },
+      {
+        "race_id": "OH-07",
+        "dem_name": "Brian Poindexter",
+        "rep_name": "Max Miller",
+        "dem_win_probability": 0.12497957511006168,
+        "rule_call": "DEM",
+        "cook_rating": "Toss Up"
+      },
+      {
+        "race_id": "PA-07",
+        "dem_name": "Bob Brooks",
+        "rep_name": "Ryan Mackenzie",
+        "dem_win_probability": 0.22260456294361713,
+        "rule_call": "DEM",
+        "cook_rating": "Lean D"
+      },
+      {
+        "race_id": "PA-08",
+        "dem_name": "Paige Cognetti",
+        "rep_name": "Rob Bresnahan",
+        "dem_win_probability": 0.127874124809226,
+        "rule_call": "DEM",
+        "cook_rating": "Toss Up"
+      },
+      {
+        "race_id": "PA-10",
+        "dem_name": "Janelle Stelson",
+        "rep_name": "Scott Perry",
+        "dem_win_probability": 0.15071227912667867,
+        "rule_call": "DEM",
+        "cook_rating": "Lean D"
+      },
+      {
+        "race_id": "SC-01",
+        "dem_name": "Nancy Lacore",
+        "rep_name": "Jenny Costa Honeycutt",
+        "dem_win_probability": 0.3844180543811596,
+        "rule_call": "DEM",
+        "cook_rating": "Lean R"
+      },
+      {
+        "race_id": "TN-05",
+        "dem_name": "Chaz Molder",
+        "rep_name": "Charlie Hatcher",
+        "dem_win_probability": 0.12225040815831673,
+        "rule_call": "DEM",
+        "cook_rating": "Solid R"
+      },
+      {
+        "race_id": "TN-09",
+        "dem_name": "Justin Pearson",
+        "rep_name": "Brent Taylor",
+        "dem_win_probability": 0.19816066677829167,
+        "rule_call": "DEM",
+        "cook_rating": "Solid R"
+      },
+      {
+        "race_id": "TX-15",
+        "dem_name": "Bobby Pulido",
+        "rep_name": "Monica De La Cruz",
+        "dem_win_probability": 0.03909316294061078,
+        "rule_call": "DEM",
+        "cook_rating": "Toss Up"
+      },
+      {
+        "race_id": "TX-23",
+        "dem_name": "Katy Padilla Stout",
+        "rep_name": "Brandon Herrera",
+        "dem_win_probability": 0.3296469709123973,
+        "rule_call": "DEM",
+        "cook_rating": "Likely R"
+      },
+      {
+        "race_id": "TX-35",
+        "dem_name": "Johnny Garcia",
+        "rep_name": "Carlos De La Cruz",
+        "dem_win_probability": 0.28225533539189157,
+        "rule_call": "DEM",
+        "cook_rating": "Lean R"
+      },
+      {
+        "race_id": "VA-01",
+        "dem_name": "Shannon Taylor",
+        "rep_name": "Rob Wittman",
+        "dem_win_probability": 0.12127793398911567,
+        "rule_call": "DEM",
+        "cook_rating": "Toss Up"
+      },
+      {
+        "race_id": "VA-02",
+        "dem_name": "Elaine Luria",
+        "rep_name": "Jen Kiggans",
+        "dem_win_probability": 0.22639082545354028,
+        "rule_call": "DEM",
+        "cook_rating": "Toss Up"
+      },
+      {
+        "race_id": "VA-05",
+        "dem_name": "Tom Perriello",
+        "rep_name": "John McGuire",
+        "dem_win_probability": 0.08728333363345954,
+        "rule_call": "DEM",
+        "cook_rating": "Likely R"
+      },
+      {
+        "race_id": "VA-06",
+        "dem_name": "Beth Macy",
+        "rep_name": "Ben Cline",
+        "dem_win_probability": 0.018665566662251165,
+        "rule_call": "DEM",
+        "cook_rating": "Solid R"
+      },
+      {
+        "race_id": "WI-03",
+        "dem_name": "Rebecca Cooke",
+        "rep_name": "Derrick Van Orden",
+        "dem_win_probability": 0.17202257619552064,
+        "rule_call": "DEM",
+        "cook_rating": "Toss Up"
+      }
+    ],
+    "model_vs_cook": [
+      {
+        "race_id": "FL-09",
+        "dem_name": "Darren Soto",
+        "rep_name": "Dan Green",
+        "dem_win_probability": 0.6586343220635881,
+        "rule_call": "REP",
+        "cook_rating": "Likely R"
+      },
+      {
+        "race_id": "IA-01",
+        "dem_name": "Christina Bohannan",
+        "rep_name": "Mariannette Miller-Meeks",
+        "dem_win_probability": 0.10240791865839595,
+        "rule_call": "DEM",
+        "cook_rating": "Lean D"
+      },
+      {
+        "race_id": "IA-03",
+        "dem_name": "Sarah Trone Garriott",
+        "rep_name": "Zach Nunn",
+        "dem_win_probability": 0.23899459472925821,
+        "rule_call": "DEM",
+        "cook_rating": "Lean D"
+      },
+      {
+        "race_id": "NJ-07",
+        "dem_name": "Rebecca Bennett",
+        "rep_name": "Thomas Kean Jr.",
+        "dem_win_probability": 0.31787605513946904,
+        "rule_call": "DEM",
+        "cook_rating": "Lean D"
+      },
+      {
+        "race_id": "PA-07",
+        "dem_name": "Bob Brooks",
+        "rep_name": "Ryan Mackenzie",
+        "dem_win_probability": 0.22260456294361713,
+        "rule_call": "DEM",
+        "cook_rating": "Lean D"
+      },
+      {
+        "race_id": "PA-10",
+        "dem_name": "Janelle Stelson",
+        "rep_name": "Scott Perry",
+        "dem_win_probability": 0.15071227912667867,
+        "rule_call": "DEM",
+        "cook_rating": "Lean D"
+      }
+    ]
+  }
+}

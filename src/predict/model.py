@@ -400,6 +400,21 @@ def _percentile_interval(correct, resamples):
     return {"low": float(low), "high": float(high)}
 
 
+def _paired_difference(correct_a, correct_b, resamples):
+    """Accuracy of A minus accuracy of B, with a paired bootstrap 95% interval.
+
+    Both predictors are scored on the same resampled races in every draw, so
+    the interval reflects how often the two disagree on the same race. That
+    is stricter than checking whether two separate intervals overlap: a
+    difference counts as clear only when this interval excludes 0.
+    """
+    if correct_a.shape[0] == 0:
+        return {"estimate": None, "low": None, "high": None}
+    differences = correct_a - correct_b
+    low, high = np.percentile(differences[resamples].mean(axis=1), [2.5, 97.5])
+    return {"estimate": float(differences.mean()), "low": float(low), "high": float(high)}
+
+
 def _bootstrap_intervals(predictions):
     """Bootstrap 95% intervals for accuracy, resampling races.
 
@@ -410,8 +425,10 @@ def _bootstrap_intervals(predictions):
     Returns
     -------
     dict
-        `model`, `money_rule`, `cook` (each on its own called races) and
-        `shared` (n_races plus one interval per predictor).
+        `model`, `money_rule`, `cook` (each on its own called races),
+        `shared` (n_races plus one interval per predictor), and
+        `paired_difference` (model minus money rule and model minus Cook on
+        the shared races, from the same draws as `shared`).
     """
     rng = np.random.default_rng(BOOTSTRAP_SEED)
     actual, calls = _calls(predictions)
@@ -424,9 +441,15 @@ def _bootstrap_intervals(predictions):
     shared = calls["model"].notna() & calls["money_rule"].notna() & calls["cook"].notna()
     resamples = _resample_indices(int(shared.sum()), rng)
     intervals["shared"] = {"n_races": int(shared.sum())}
+    correct_shared = {}
     for name, call in calls.items():
-        correct = (call[shared] == actual[shared]).to_numpy(dtype=float)
-        intervals["shared"][name] = _percentile_interval(correct, resamples)
+        correct_shared[name] = (call[shared] == actual[shared]).to_numpy(dtype=float)
+        intervals["shared"][name] = _percentile_interval(correct_shared[name], resamples)
+    intervals["paired_difference"] = {
+        "n_races": int(shared.sum()),
+        "model_minus_money_rule": _paired_difference(correct_shared["model"], correct_shared["money_rule"], resamples),
+        "model_minus_cook": _paired_difference(correct_shared["model"], correct_shared["cook"], resamples),
+    }
     return intervals
 
 

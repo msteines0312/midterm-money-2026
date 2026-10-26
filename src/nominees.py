@@ -130,6 +130,63 @@ def parse_nominees(html):
     return nominees
 
 
+def _member_name(cell):
+    """A sitting member's name from the Member cell, or None for an empty seat.
+
+    The hCard name is used when there is one, so a note such as "Redistricted
+    from the 1st district" is left out. A new or vacant seat has no member.
+    """
+    card = cell.find(class_="fn")
+    if card:
+        return cell_text(card)
+    text = cell_text(cell)
+    return None if not text or text.startswith(("None", "Vacant")) else text
+
+
+def parse_incumbents(html):
+    """Read each district's sitting members from the per-state tables.
+
+    This is the 2026 counterpart of the Member column that
+    `history_results.wiki_districts` reads for 2024, so the model's incumbency
+    input is built the same way in training and prediction.
+
+    Parameters
+    ----------
+    html : str
+        Elections page HTML.
+
+    Returns
+    -------
+    dict of str to list of str
+        race_id to the members listed for that district. Usually one name,
+        two when redistricting put two members in one seat, and an empty list
+        for a new seat.
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    incumbents = {}
+    current = None
+    for table in soup.find_all("table", class_="wikitable"):
+        rows = _rows(table)
+        # Same test as parse_nominees: PVI plus Candidates marks a state table
+        if _find_column(rows[:2], PVI_HEADER) is None or not _candidates_header_present(rows):
+            continue
+        for row in table.find_all("tr"):
+            cells = row.find_all(["th", "td"])
+            if not cells or row.find("th", colspan=True) or cell_text(cells[0]) in ("Location", ""):
+                continue
+            if DISTRICT_LABEL.match(cell_text(cells[0])):
+                # District, PVI, then Member
+                current = incumbents.setdefault(label_to_race_id(cell_text(cells[0])), [])
+                cells = cells[2:]
+            elif current is None:
+                continue
+            # A second member's continuation row starts with their Member cell
+            name = _member_name(cells[0])
+            if name:
+                current.append(name)
+    return incumbents
+
+
 def load_nominees():
     """Download (if needed) the pinned page and parse its nominees.
 
