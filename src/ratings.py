@@ -130,13 +130,18 @@ def parse_cook_ratings(html):
     raise ValueError("No table with a Cook column found")
 
 
-def parse_pvi_tables(html):
+def parse_pvi_tables(html, required_header=None):
     """Read every district's PVI from the per-state tables on the elections page.
 
     Parameters
     ----------
     html : str
         Elections page HTML.
+    required_header : str, optional
+        Only read tables that also have a header starting with this text.
+        Past pages need it: the 2024 page's crossover-seat summary tables
+        repeat a PVI column, and one lists NY-19 with its
+        pre-redraw value. Passing "Candidates" keeps just the per-state tables.
 
     Returns
     -------
@@ -149,6 +154,8 @@ def parse_pvi_tables(html):
         rows = _rows(table)
         found = _find_column(rows[:2], PVI_HEADER)
         if found is None:
+            continue
+        if required_header and _find_column(rows[:2], re.compile("^" + re.escape(required_header))) is None:
             continue
         header_pos, pvi_col = found
         for cells in rows[header_pos + 1:]:

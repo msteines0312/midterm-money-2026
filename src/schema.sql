@@ -101,3 +101,36 @@ CREATE TABLE IF NOT EXISTS history_money (
     coverage_end_date      TEXT,             -- end of the latest report used (12G, or an earlier one)
     PRIMARY KEY (cycle, candidate_id)
 );
+
+-- 2022 and 2024 House general election results, for training the model.
+-- One row per candidate on the November ballot in the 50 states
+-- (src/history_results.py). 2022 comes from the FEC's "Federal Elections"
+-- results publication. The FEC has not published 2024, so 2024 comes from the
+-- certified results on Wikipedia, which give vote shares but not counts.
+-- A fusion candidate (NY, CT) gets one row with combined votes across lines.
+-- Joined to history_money on (cycle, candidate_id).
+CREATE TABLE IF NOT EXISTS history_results (
+    cycle               INTEGER NOT NULL,
+    race_id             TEXT NOT NULL,
+    candidate_id        TEXT,             -- FEC candidate ID from the results sheet
+    name                TEXT NOT NULL,    -- 2022 "Last, First" (FEC); 2024 "First Last" (Wikipedia)
+    party               TEXT,             -- DEM, REP, or the source's label for anyone else
+    votes               INTEGER,          -- November votes (first round for ranked choice); NULL if unopposed, and always NULL for 2024
+    vote_share          REAL,             -- percent of the November vote, same first-round rule; NULL if not listed
+    won                 INTEGER NOT NULL, -- 1 for the final general winner, after any runoff
+    incumbent_challenge TEXT,             -- I/C/O from that cycle's webl file; NULL if the ID isn't in it
+    is_incumbent        INTEGER NOT NULL, -- 1 if the results source marks them the incumbent (FEC "(I)" in 2022, Wikipedia's incumbent column in 2024)
+    PRIMARY KEY (cycle, race_id, name)
+);
+
+-- Cook PVI and Cook rating for every district in 2022 and 2024, from each
+-- cycle's own Wikipedia pages pinned to the last revision before election day.
+-- Same method as `races`, which holds 2026 and is never touched by history loads.
+CREATE TABLE IF NOT EXISTS history_races (
+    cycle         INTEGER NOT NULL,
+    race_id       TEXT NOT NULL,
+    cook_pvi      TEXT,
+    cook_rating   TEXT,
+    rating_source TEXT,               -- "cook" if listed, "inferred" if Solid from PVI
+    PRIMARY KEY (cycle, race_id)
+);

@@ -1,0 +1,5 @@
+cycle,race_id,name,candidate_id,note
+2022,NY-01,"LaLota, Nicholas J.",H2NY01190,"The results sheet uses H0NY02200, which is not in webl22. webl22 files H2NY01190 (NY-01, REP) with first and last names swapped (NICK, LALOTA), so the last-name match misses it. Same race, party, and committee C00806018 (LaLota for Congress). H0NY02200 is his 2020 registration for NY-02."
+2024,SD-00,Dusty Johnson,H8SD01055,"Both nominees are named Johnson, so the automatic match skips the race. webl24 has one Republican JOHNSON, DUSTY in SD-00, and Dusty Johnson is the Republican nominee."
+2024,SD-00,Sheryl Johnson,H4SD00064,"Both nominees are named Johnson, so the automatic match skips the race. webl24 has one Democrat JOHNSON, SHERYL in SD-00, and Sheryl Johnson is the Democratic nominee."
+2024,IA-02,Sarah Corkery,H4IA02067,"Wikipedia lists her as Sarah Corkery; webl24 files ALBERTSON-CORKERY, SARAH ELAINE (IA-02, DEM). Same race, party, and first name."

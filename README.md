@@ -33,7 +33,12 @@ An analysis of campaign finance and endorsements in the 2026 U.S. House midterms
    python -m src.pipeline
    ```
    Running it again on a later date adds a new snapshot of the money data without overwriting the old one.
-5. Run the tests:
+5. Build the 2022 and 2024 training data for the money model. The first command pulls each campaign's pre-general money from the API (it takes a while). The second loads results, PVI, and ratings, and prints how many Democrat-versus-Republican candidates matched to money:
+   ```bash
+   python scripts/load_history_money.py
+   python -m src.pipeline --history
+   ```
+6. Run the tests:
    ```bash
    python -m pytest
    ```
@@ -48,6 +53,9 @@ An analysis of campaign finance and endorsements in the 2026 U.S. House midterms
 | `outside_spending` | FEC bulk independent expenditure file (`independent_expenditure_2026.csv`) | House independent expenditures summed by committee, candidate, support or oppose, and primary or general. Superseded filings are dropped |
 | `races` | Wikipedia, pinned revisions | Cook ratings and Cook PVI for all 435 districts |
 | `pac_industries` | Hand-built, `data/manual/` | Industry label for each tracked super PAC, with a source for every row |
+| `history_money` | OpenFEC `/reports/house-senate/` | 2022 and 2024 House money as of each campaign's pre-general report |
+| `history_results` | 2022: FEC [Federal Elections 2022](https://www.fec.gov/documents/5676/federalelections2022.xlsx). 2024: Wikipedia, pinned post-certification revision | One row per November general candidate, with the winner, vote share, and incumbency |
+| `history_races` | Wikipedia, each cycle's pages pinned to the last revision before election day | Cook PVI and Cook rating for every district in 2022 and 2024 |
 
 ### Snapshots
 | Pull date | Purpose | Notes |
@@ -93,6 +101,14 @@ An analysis of campaign finance and endorsements in the 2026 U.S. House midterms
 | YOUR COMMUNITY PAC | none | $13,053,517 | $12,961,740 | 2026-09-30 | 0.71% |
 
   Two committees with $0 on both sides (Leading the Future, Public First) agree trivially and do not count toward pass or fail. Jobs and Democracy PAC's gap is $1,911,134 ($17,875,336 reported versus $15,964,202 from our deduplicated figure). About $1.5M of it appears to come from 24- and 48-hour filings amended to $0 after its periodic report. The rest is unexplained. HMP (2.30%) and LCV Victory Fund (24.22%) are not labeled networks and do not affect the verdict.
+
+### Training data caveats (2022 and 2024)
+- The FEC has not published its 2024 results volume, and the MIT Election Lab file needs a personal sign-in form to download. So 2024 results come from the certified tables on the [2024 House elections page](https://en.wikipedia.org/w/index.php?title=2024_United_States_House_of_Representatives_elections&oldid=1267103610) (first revision on or after January 3, 2025). Those tables give vote shares, not counts, so `votes` is empty for 2024. Indiana and Kansas list no shares at all. Winners come from the page's check marks, which matter in CA-13, where both candidates round to 50.0%.
+- Candidates are matched to FEC IDs by race and last name against that cycle's FEC summary file, with a few hand-checked overrides in `data/manual/history_matches.csv`. About 50 IDs in the 2022 FEC sheet are older registrations that never meet the candidate's money, so those are matched by name too. Some candidates have two FEC IDs that share one committee. These are folded into one, so their money is never counted twice.
+- Louisiana held November jungle elections in both years. A Louisiana race counts as Democrat versus Republican only if exactly one of each was on the ballot. That is LA-01 and LA-02 in 2022 and none in 2024. Neither year had a House runoff in Georgia or Louisiana.
+- Ranked-choice races (Alaska, Maine) use first-round votes and the final winner.
+- About 5% (2022) and 8% (2024) of Democrat-versus-Republican candidates have no pre-general money. Most are small campaigns under the FEC filing threshold. A few winners, including Glenn Ivey (MD-04) and Keith Self (TX-03), are missing because the FEC's own linkage file doesn't list them for the cycle.
+- New York's 2024 map was redrawn in February 2024, after Cook's last PVI release. The 2024 page's state tables show PVIs recalculated for the new map (NY-19 R+1, NY-22 D+3), while Cook's published list still shows the 2022-map values (NY-19 EVEN). The new-map values are used because that map was on the ballot.
 
 ## Key Features
 - Rate-limit-aware API client that backs off on HTTP 429 and pauses when the remaining-requests header hits zero
