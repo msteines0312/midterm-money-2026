@@ -1,7 +1,7 @@
 # Midterm Money 2026
 An analysis of campaign finance and endorsements in the 2026 U.S. House midterms. It asks three questions: where industry super PAC money is going, whether endorsements predict primary wins, and whether a fundraising advantage predicts winning once incumbency and district partisanship are accounted for.
 
-> **Status:** In progress. The data pipeline is built, and the House version of section 1 is written: [Tech money in the 2026 House races](reports/tech-money.md). The endorsements and money and winning sections are next, and general election results will be added after November 3, 2026. Two sets of pre-election House predictions are committed and tagged in [reports/predictions](reports/predictions/README.md): simple predictions (money leader next to Cook rating, tag `pre-election-simple`) and a logistic regression model trained on the 2022 and 2024 generals (tag `pre-election-model`).
+> **Status:** In progress. The data pipeline is built, and the House version of section 1 is written: [Tech money in the 2026 House races](reports/tech-money.md). The pre-election version of section 3 is also written: [Money and winning in the 2026 House races](reports/money-and-winning.md). Its scoring against results will be added after November 3, 2026, and the endorsements section is next. Two sets of pre-election House predictions are committed and tagged in [reports/predictions](reports/predictions/README.md): simple predictions (money leader next to Cook rating, tag `pre-election-simple`) and a logistic regression model trained on the 2022 and 2024 generals (tag `pre-election-model`).
 
 ## Questions
 

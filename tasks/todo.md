@@ -41,7 +41,7 @@ Design: `docs/superpowers/specs/2026-10-23-tech-money-page-design.md`
 - [x] Paired bootstrap check of what money adds to the model (supplementary-2026-10-26.json)
 - [x] Compare fundraising advantage against Cook ratings for the general
 - [x] Commit simple general election predictions (tag pre-election-simple)
-- [ ] Write section 3 and commit the pre-election predictions before Nov 3
+- [x] Write section 3 and commit the pre-election predictions before Nov 3 (pre-election version: `reports/money-and-winning.md`. Scoring is added after Nov 3)
 
 ## Step 4b: Full pre-election pull
 - [x] Run `python -m src.pipeline` on or after Oct 23, 2026 (pre-general reports are due Oct 22) and record the pull date in the README
