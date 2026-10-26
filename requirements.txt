@@ -1,5 +1,6 @@
 requests
 pandas
+scikit-learn
 matplotlib
 beautifulsoup4
 openpyxl
