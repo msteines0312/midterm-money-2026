@@ -79,7 +79,7 @@ A paired bootstrap resamples those 97 races and scores every predictor on the sa
 | Model minus money rule | +14.4 points | [+6.2, +23.7] |
 | Model minus Cook | -4.1 points | [-9.3, 0.0] |
 
-The first interval excludes 0, so the model's edge over the money rule is a real difference in this sample. The second reaches 0 at its upper end, so the model and Cook can't be told apart here.
+The first interval excludes 0, so the model's edge over the money rule is larger than chance would explain in this sample. The second reaches 0 at its upper end, so the model and Cook can't be told apart here.
 
 The model beating the money rule does not mean money is what helps. The model already includes money, so this gap measures what incumbency and PVI add on top of money. The question this section asks runs the other way: what does money add on top of incumbency and PVI?
 
@@ -120,7 +120,7 @@ Refit on all 688 training races, the model's inputs all point in the expected di
 - **Incumbency** multiplies the odds by about 3.4 for the incumbent's party, compared with an open seat.
 - **Money share** multiplies the odds by about 1.52 for each 10 points of share. In an open seat with an even PVI, going from 45% to 55% of the money moves the Democrat's chance from 39.8% to 50.2%, about 10 points. At the training medians (an open seat at R+1), the same change moves it from 33.9% to 43.9%. By symmetry, the same shift in a Republican's money share moves the Republican's chance by the same amount.
 
-The money coefficient describes what the fitted model leans on. It doesn't say what an extra dollar of spending would do, and the previous section shows that its added value on held-out competitive races is within noise.
+The money coefficient describes what the fitted model leans on. It doesn't say what an extra dollar of spending would do, and [What money adds beyond incumbency and PVI](#what-money-adds-beyond-incumbency-and-pvi) shows that its added value on held-out competitive races is within noise.
 
 ### The 2026 model predictions
 

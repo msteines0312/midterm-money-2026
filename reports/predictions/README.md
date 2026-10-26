@@ -318,6 +318,8 @@ In each of these the model sides with the incumbent's party. Cook does not call 
 
 *Note added 2026-10-26, after the model tag.* Several Toss Up probabilities are far more confident than a Toss Up rating implies: TX-15 at 0.04, and MI-04, VA-01, OH-07, and PA-08 at 0.11 to 0.13. They come from incumbency and PVI (each has a Republican incumbent in an R-leaning seat), and the model has no term for the national environment. Both training years, 2022 and 2024, were close national years, so the model has never seen a wave. The held-out calibration on competitive races also shows the low end is too confident: the 0.0 to 0.2 bin had 37 races and Democrats won 5.4% of them, and the 0.2 to 0.4 bin had 16 races with an average prediction of 0.28 while Democrats won 0.44 of them (`evaluation.pooled.competitive.model.calibration` in the JSON). Read these Toss Up numbers as the model's lean, not as a confident call.
 
+*Note added 2026-10-26.* MI-07 (0.13) also falls in that range, so 6 Toss Ups are below 0.15, matching [section 3](../money-and-winning.md).
+
 **Races where the model and the money rule name different parties (38):**
 
 | Race | Nominees | Model's Democratic probability | Money leader | Cook rating |

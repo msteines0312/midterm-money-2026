@@ -4,7 +4,8 @@ These run on the real frozen prediction files, not fixtures, because the
 point is to prove the committed report matches them:
 
 - the committed numbers file equals a fresh build from the frozen files
-- every number the JSON lists under `cited` appears in the report as written
+- every number the JSON lists under `cited` appears in the report as written,
+  with one test case per cited number so a failure names the number
 - the report and its builder contain no em dashes
 """
 

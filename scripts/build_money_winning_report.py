@@ -630,7 +630,7 @@ def plot_competitive_accuracy(numbers, figures_dir):
     style_axes(ax)
     ax.spines["bottom"].set_bounds(55, 100)
     add_note(fig, "Competitive = Cook Toss Up, Lean or Likely in that cycle. "
-                  "Model trained on one cycle and scored on the other.")
+                  "Model trained on one cycle and scored on the other. Axis starts at 55%.")
     save(fig, figures_dir, "competitive_accuracy.png")
 
 
