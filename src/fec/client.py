@@ -112,3 +112,41 @@ class FecClient:
             if page >= total_pages or (max_pages and page >= max_pages):
                 return
             page += 1
+
+    def iter_keyset(self, path, params=None, max_pages=None):
+        """Yield every result from an endpoint that pages with a cursor.
+
+        Schedule A has too many rows for page numbers, so the API returns
+        `pagination.last_indexes` (a position in the sort order) with each
+        page. Sending those values back with the next request asks for the
+        rows after that position. Page numbers do not work on this endpoint.
+
+        Parameters
+        ----------
+        path : str
+            Endpoint path, e.g. "/schedules/schedule_a/".
+        params : dict, optional
+            Query parameters. `per_page` defaults to 100.
+        max_pages : int, optional
+            Stop after this many pages.
+
+        Yields
+        ------
+        dict
+            One record from the endpoint's `results` list.
+        """
+        query = {"per_page": 100, **(params or {})}
+        pages_read = 0
+        while True:
+            body = self.get(path, query)
+            results = body.get("results", [])
+            yield from results
+            pages_read += 1
+
+            # No rows or no cursor means the last page was reached
+            cursor = (body.get("pagination") or {}).get("last_indexes")
+            if not results or not cursor or (max_pages and pages_read >= max_pages):
+                return
+            # The cursor is merged into the same filters, so the next page
+            # continues the same query
+            query = {**query, **cursor}

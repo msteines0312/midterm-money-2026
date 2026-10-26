@@ -91,3 +91,37 @@ def test_request_count_includes_retries():
     client, _, _ = make_client([FakeResponse(status_code=429), page(1, 2, [1]), page(2, 2, [2])])
     list(client.iter_results("/reports/house-senate/"))
     assert client.request_count == 3
+
+
+def keyset_page(items, last_indexes):
+    """A Schedule A style response: results plus the cursor for the next page."""
+    return FakeResponse(payload={"results": items, "pagination": {"last_indexes": last_indexes}})
+
+
+def test_iter_keyset_follows_last_indexes():
+    cursor = {"last_index": "99", "last_contribution_receipt_amount": "500.00"}
+    client, session, _ = make_client([
+        keyset_page([1, 2], cursor),
+        keyset_page([3], {"last_index": "50", "last_contribution_receipt_amount": "100.00"}),
+        keyset_page([], None),
+    ])
+    assert list(client.iter_keyset("/schedules/schedule_a/", {"min_amount": 250000})) == [1, 2, 3]
+    first, second, third = (call[1] for call in session.calls)
+    # The first request has no cursor, the next ones carry the previous response's
+    assert "last_index" not in first
+    assert second["last_index"] == "99" and second["last_contribution_receipt_amount"] == "500.00"
+    assert third["last_index"] == "50"
+    # Original filters ride along on every request
+    assert all(call["min_amount"] == 250000 for call in (first, second, third))
+
+
+def test_iter_keyset_stops_when_last_indexes_missing():
+    client, session, _ = make_client([keyset_page([1, 2], None)])
+    assert list(client.iter_keyset("/schedules/schedule_a/")) == [1, 2]
+    assert len(session.calls) == 1
+
+
+def test_iter_keyset_respects_max_pages():
+    client, session, _ = make_client([keyset_page([1], {"last_index": "9"})])
+    assert list(client.iter_keyset("/schedules/schedule_a/", max_pages=1)) == [1]
+    assert len(session.calls) == 1

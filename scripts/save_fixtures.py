@@ -5,7 +5,8 @@ they check come from the API itself rather than from documentation.
 Run from the repo root: python scripts/save_fixtures.py
 (or `python scripts/save_fixtures.py history` for just the history money
 samples, or `python scripts/save_fixtures.py results` for the 2022 results and
-past Wikipedia samples, which need no API key)
+past Wikipedia samples, which need no API key, or `python scripts/save_fixtures.py donors`
+for the Schedule A and PAC totals samples)
 """
 
 import csv
@@ -149,6 +150,60 @@ def save_history_samples(client, api_key):
     with open(out, "w", encoding="latin-1", newline="") as handle:
         handle.write("\n".join(lines) + "\n")
     print(f"ccl_sample.txt: {len(lines)} lines")
+
+
+# Super PAC committees whose 2026 totals are saved by save_donor_samples
+DONOR_SAMPLE_TOTALS = [
+    "C00879510",  # America PAC
+    "C00693382",  # the committee receiving the largest 2026 contribution on Oct 26
+]
+
+
+def save_donor_samples(client, api_key):
+    """Save real Schedule A rows and PAC totals for the donor loader tests.
+
+    One page of $250K+ 2026 contributions to super PACs supplies the IND, ORG,
+    PAC, and COM entity types and the memo rows. Refunds (negative amounts) are
+    rare in that sort order, so they come from a second query. Whole records
+    run to about 100 fields, so only a handful are kept.
+
+    Parameters
+    ----------
+    client : FecClient
+    api_key : str
+        Stripped from the saved responses.
+    """
+    base = {
+        "two_year_transaction_period": 2026,
+        "recipient_committee_type": ["O", "V", "W"],
+        "per_page": 100,
+    }
+    page = client.get("/schedules/schedule_a/", {
+        **base, "min_amount": 250000, "sort": "-contribution_receipt_amount"})["results"]
+    sample, seen_types = [], set()
+    for rec in page:
+        # First non-memo row of each entity type
+        if rec["memo_code"] != "X" and rec["entity_type"] not in seen_types:
+            seen_types.add(rec["entity_type"])
+            sample.append(rec)
+    sample.append(next(rec for rec in page if rec["memo_code"] == "X"))
+
+    refunds = client.get("/schedules/schedule_a/", {
+        **base, "max_amount": -1000, "sort": "contribution_receipt_amount"})["results"]
+    # The largest refunds are all memo rows, so also keep two ordinary ones
+    # (negative amount, no memo code) for the net-amount tests
+    sample.extend([rec for rec in refunds if rec["memo_code"] != "X"][:2])
+    out = FIXTURE_DIR / "schedule_a_sample.json"
+    out.write_text(json.dumps(strip_api_key({"results": sample}, api_key), indent=2))
+    print(f"schedule_a_sample.json: {len(sample)} rows, entity types {sorted(seen_types)}")
+
+    totals = {
+        cid: client.get(f"/committee/{cid}/totals/", {"cycle": 2026})
+        for cid in DONOR_SAMPLE_TOTALS
+    }
+    out = FIXTURE_DIR / "pac_totals_sample.json"
+    out.write_text(json.dumps(strip_api_key(totals, api_key), indent=2))
+    print(f"pac_totals_sample.json: {len(totals)} committees")
 
 
 # 2022 House races saved by save_results_samples, with the test each serves
@@ -299,6 +354,11 @@ def main():
         save_history_samples(client, api_key)
         return
 
+    # "donors" saves only the Schedule A and PAC totals samples
+    if sys.argv[1:] == ["donors"]:
+        save_donor_samples(client, api_key)
+        return
+
     for name, (path, params) in ENDPOINTS.items():
         body = client.get(path, {**params, "per_page": 5})
         out = FIXTURE_DIR / f"{name}.json"
@@ -307,6 +367,7 @@ def main():
 
     save_ie_sample()
     save_history_samples(client, api_key)
+    save_donor_samples(client, api_key)
 
 
 if __name__ == "__main__":

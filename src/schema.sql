@@ -137,3 +137,30 @@ CREATE TABLE IF NOT EXISTS history_races (
     rating_source TEXT,               -- "cook" if listed, "inferred" if Solid from PVI
     PRIMARY KEY (cycle, race_id)
 );
+
+-- Contributions to super PACs (committee types O, V, W), from FEC Schedule A
+-- (src/fec/donors.py). Refunds are negative amounts, and memo rows
+-- (memo_code X) repeat a transaction counted elsewhere, so totals must skip them.
+CREATE TABLE IF NOT EXISTS donor_contributions (
+    sub_id           TEXT PRIMARY KEY,
+    cycle            INTEGER,
+    committee_id     TEXT,              -- the receiving super PAC
+    contributor_name TEXT,
+    entity_type      TEXT,              -- IND, ORG, PAC, COM, ...; is_individual does not separate organizations
+    amount           REAL,
+    receipt_date     TEXT,
+    memo_code        TEXT,
+    pulled_at        TEXT
+);
+
+-- Super PAC receipts and independent spending for a cycle, from
+-- /committee/{id}/totals/. One snapshot per pull date.
+CREATE TABLE IF NOT EXISTS pac_totals (
+    committee_id             TEXT,
+    cycle                    INTEGER,
+    receipts                 REAL,
+    independent_expenditures REAL,
+    coverage_end_date        TEXT,
+    pulled_at                TEXT,
+    PRIMARY KEY (committee_id, cycle, pulled_at)
+);
