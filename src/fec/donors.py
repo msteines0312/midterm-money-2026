@@ -13,13 +13,25 @@ Two things about the data that matter when adding it up:
 
 `is_individual=true` does not filter out organizations in this endpoint, so
 each row keeps its own `entity_type` (IND, ORG, PAC, COM, ...) instead.
+
+One more thing about timing: the processed Schedule A lags the newest
+filings. Reports filed on Oct 15 and Oct 22, 2026 were in the committee
+totals but had no itemized rows yet (America PAC's two reports hold about
+$166M). The raw e-filing endpoint has those rows, so the e-file functions at
+the bottom fill the gap. They are raw, so amendments and rows that Schedule A
+later processes have to be handled (see `drop_superseded_efile` and
+`drop_already_processed`).
 """
+
+import re
+from collections import Counter
 
 # Super PAC committee types: O (independent expenditure only), V and W
 # (hybrid PACs with non-contribution accounts)
 SUPER_PAC_TYPES = ["O", "V", "W"]
 
 SCHEDULE_A_PATH = "/schedules/schedule_a/"
+EFILE_PATH = "/schedules/schedule_a/efile/"
 
 
 def _schedule_a_params(cycle, **filters):
@@ -164,3 +176,130 @@ def net_amount(rows):
     float
     """
     return sum(row["amount"] for row in rows if row["memo_code"] != "X")
+
+
+def clean_efile_name(name):
+    """Make a raw e-filing name match the spelling Schedule A uses.
+
+    Raw names keep the filer's typing: a doubled space after the comma
+    ("MUSK,  ELON"), a trailing comma ("ACME INC,"), and often mixed case
+    ("Yass, Jeff") where Schedule A is uppercase. Without the case fix, a
+    gift filed in both places would not be recognized as the same one.
+
+    Parameters
+    ----------
+    name : str or None
+
+    Returns
+    -------
+    str
+    """
+    return re.sub(r"\s+", " ", (name or "")).strip().rstrip(",").strip().upper()
+
+
+def efile_contributions(client, committee_id, min_date):
+    """Raw e-filed contributions to one committee since a date.
+
+    Parameters
+    ----------
+    client : FecClient
+    committee_id : str
+    min_date : str
+        YYYY-MM-DD. Earlier rows are left to the processed Schedule A.
+
+    Returns
+    -------
+    list of dict
+        Raw records, which may include amended versions of a transaction.
+    """
+    params = {"committee_id": committee_id, "min_date": min_date}
+    return list(client.iter_results(EFILE_PATH, params))
+
+
+def drop_superseded_efile(records):
+    """Keep the latest version of each transaction.
+
+    An amended filing repeats its transactions under a higher file number.
+    Counting both would double the gift.
+
+    Parameters
+    ----------
+    records : list of dict
+        Raw e-filing records.
+
+    Returns
+    -------
+    list of dict
+    """
+    latest = {}
+    for rec in records:
+        key = (rec["committee_id"], rec["transaction_id"])
+        if key not in latest or rec["file_number"] > latest[key]["file_number"]:
+            latest[key] = rec
+    return list(latest.values())
+
+
+def efile_contribution_row(rec, pulled_at):
+    """Turn one raw e-filing record into a `donor_contributions` row.
+
+    The row gets a made-up `sub_id` (`efile-<file number>-<transaction id>`)
+    because raw records have none, and a name cleaned to the Schedule A style.
+
+    Parameters
+    ----------
+    rec : dict
+        One /schedules/schedule_a/efile/ record.
+    pulled_at : str
+        Date of the pull, YYYY-MM-DD.
+
+    Returns
+    -------
+    dict
+    """
+    year = int(rec["contribution_receipt_date"][:4])
+    return {
+        "sub_id": f"efile-{rec['file_number']}-{rec['transaction_id']}",
+        # A two-year cycle is named for its even year
+        "cycle": year + year % 2,
+        "committee_id": rec["committee_id"],
+        "contributor_name": clean_efile_name(rec["contributor_name"]),
+        "entity_type": rec["entity_type"],
+        "amount": rec["contribution_receipt_amount"],
+        "receipt_date": rec["contribution_receipt_date"],
+        "memo_code": rec["memo_code"],
+        "pulled_at": pulled_at,
+    }
+
+
+def drop_already_processed(rows, processed_counts):
+    """Remove e-filed rows that the processed Schedule A already has.
+
+    Once the API processes a filing, its gifts show up in Schedule A under a
+    different ID. Counting the raw copy as well would double them. Names are
+    not used to match, because the two sources spell them differently
+    ("YASS, JEFF MR." against "YASS, MR. JEFF"). A raw row is dropped when a
+    processed row has the same committee, date, amount, and memo code. Each
+    processed row cancels only one raw row, so two real gifts of the same size
+    on the same day are not merged into one.
+
+    Parameters
+    ----------
+    rows : list of dict
+        Output of `efile_contribution_row`.
+    processed_counts : collections.Counter
+        For rows already in `donor_contributions` from Schedule A, how many
+        share each (committee_id, receipt_date, amount, memo_code).
+
+    Returns
+    -------
+    list of dict
+    """
+    remaining = Counter(processed_counts)
+    kept = []
+    for row in rows:
+        key = (row["committee_id"], row["receipt_date"], row["amount"], row["memo_code"])
+        if remaining[key] > 0:
+            remaining[key] -= 1
+        else:
+            kept.append(row)
+    return kept

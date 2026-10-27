@@ -5,6 +5,7 @@ The rows come from real Schedule A and committee totals responses saved by
 """
 
 import json
+from collections import Counter
 
 import pytest
 
@@ -13,6 +14,10 @@ from src.fec.donors import (
     contribution_row,
     contributions_by_name,
     contributions_to_committee,
+    drop_already_processed,
+    drop_superseded_efile,
+    efile_contribution_row,
+    efile_contributions,
     large_contributions,
     net_amount,
     pac_totals_rows,
@@ -39,6 +44,10 @@ class RecordingClient:
         self.rows, self.totals, self.calls = rows or [], totals or {}, []
 
     def iter_keyset(self, path, params=None, max_pages=None):
+        self.calls.append((path, dict(params)))
+        yield from self.rows
+
+    def iter_results(self, path, params=None, max_pages=None):
         self.calls.append((path, dict(params)))
         yield from self.rows
 
@@ -120,3 +129,86 @@ def test_by_name_and_by_committee_queries():
     assert by_name["recipient_committee_type"] == ["O", "V", "W"]
     assert "min_amount" not in by_name
     assert by_committee["committee_id"] == "C00879510"
+
+
+# ---- Raw e-filings, for reports the processed Schedule A does not have yet ----
+
+
+@pytest.fixture(scope="module")
+def efile():
+    return json.loads((FIXTURES / "efile_schedule_a_sample.json").read_text())["results"]
+
+
+def test_efile_row_fields_and_cleaned_name(efile):
+    """The raw name has a doubled space, which is collapsed so it matches Schedule A spellings."""
+    gift = next(r for r in efile if r["contribution_receipt_amount"] == 43_200_000)
+    assert efile_contribution_row(gift, PULLED_AT) == {
+        "sub_id": "efile-2038959-SA11A.1249",
+        "cycle": 2026,
+        "committee_id": "C00879510",
+        "contributor_name": "MUSK, ELON",
+        "entity_type": "IND",
+        "amount": 43_200_000.0,
+        "receipt_date": "2026-10-14",
+        "memo_code": None,
+        "pulled_at": PULLED_AT,
+    }
+
+
+def test_efile_trailing_comma_removed(efile):
+    org = next(r for r in efile if r["entity_type"] == "ORG")
+    assert efile_contribution_row(org, PULLED_AT)["contributor_name"] == "UNITED STATES OF AMERICA INC"
+
+
+def test_efile_keeps_memo_code(efile):
+    """Memo rows are kept as filed. The totals leave them out, the same as for Schedule A."""
+    memo = next(r for r in efile if r["memo_code"] == "X")
+    assert efile_contribution_row(memo, PULLED_AT)["memo_code"] == "X"
+
+
+def test_efile_contributions_queries_the_efile_endpoint(efile):
+    client = RecordingClient(rows=efile)
+    assert efile_contributions(client, "C00879510", "2026-07-01") == efile
+    path, params = client.calls[0]
+    assert path == "/schedules/schedule_a/efile/"
+    assert params["committee_id"] == "C00879510" and params["min_date"] == "2026-07-01"
+
+
+def test_amended_filing_replaces_the_original(efile):
+    """An amendment repeats the transaction under a higher file number. Only it counts."""
+    original = efile[2]
+    amended = {**original, "file_number": original["file_number"] + 1, "contribution_receipt_amount": 40_000_000.0}
+    kept = drop_superseded_efile([original, amended, efile[3]])
+    assert amended in kept and original not in kept and efile[3] in kept
+
+
+def processed_counts(*rows):
+    """How many processed Schedule A rows share each (committee, date, amount, memo) key."""
+    return Counter((r["committee_id"], r["receipt_date"], r["amount"], r["memo_code"]) for r in rows)
+
+
+def test_rows_schedule_a_already_has_are_dropped(efile):
+    """Once the API processes a filing the same gift appears there, so it must not count twice."""
+    row = efile_contribution_row(efile[2], PULLED_AT)
+    other = efile_contribution_row(efile[3], PULLED_AT)
+    assert drop_already_processed([row, other], processed_counts(row)) == [other]
+
+
+def test_efile_mixed_case_name_is_uppercased(efile):
+    """Raw filings often say "Yass, Jeff" where Schedule A says "YASS, JEFF"."""
+    gift = {**efile[2], "contributor_name": "Yass,  Jeff"}
+    assert efile_contribution_row(gift, PULLED_AT)["contributor_name"] == "YASS, JEFF"
+
+
+def test_same_gift_spelled_differently_is_recognized_as_already_processed(efile):
+    """Schedule A says "YASS, JEFF MR." where the raw filing says "YASS, MR. JEFF". The name is not the key."""
+    raw = efile_contribution_row({**efile[2], "contributor_name": "Musk, Mr. Elon"}, PULLED_AT)
+    processed = {**raw, "contributor_name": "MUSK, ELON MR."}
+    assert drop_already_processed([raw], processed_counts(processed)) == []
+
+
+def test_two_equal_gifts_on_one_day_are_not_merged(efile):
+    """Two real $43.2M gifts on one day are two gifts. One processed copy cancels only one raw copy."""
+    raw = efile_contribution_row(efile[2], PULLED_AT)
+    second = {**raw, "sub_id": "efile-2038959-SA11A.9999"}
+    assert drop_already_processed([raw, second], processed_counts(raw)) == [second]

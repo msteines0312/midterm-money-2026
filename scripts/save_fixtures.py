@@ -6,7 +6,8 @@ Run from the repo root: python scripts/save_fixtures.py
 (or `python scripts/save_fixtures.py history` for just the history money
 samples, or `python scripts/save_fixtures.py results` for the 2022 results and
 past Wikipedia samples, which need no API key, or `python scripts/save_fixtures.py donors`
-for the Schedule A and PAC totals samples)
+for the Schedule A and PAC totals samples, or `python scripts/save_fixtures.py efile`
+for the raw e-filing Schedule A sample)
 """
 
 import csv
@@ -206,6 +207,31 @@ def save_donor_samples(client, api_key):
     print(f"pac_totals_sample.json: {len(totals)} committees")
 
 
+def save_efile_sample(client, api_key):
+    """Save real raw e-filing Schedule A rows for the e-file loader tests.
+
+    America PAC's October 2026 reports were filed but not yet in the processed
+    Schedule A, so its raw e-filings hold the newest gifts. Its rows include
+    an in-kind gift with a memo row naming the person behind it, and names
+    with the doubled spaces and trailing commas the raw data has.
+
+    Parameters
+    ----------
+    client : FecClient
+    api_key : str
+        Stripped from the saved response.
+    """
+    page = client.get("/schedules/schedule_a/efile/", {
+        "committee_id": "C00879510", "min_date": "2026-10-01", "per_page": 100})["results"]
+    # The first memo row, its matching ordinary row, and two more ordinary rows
+    memo = next(rec for rec in page if rec["memo_code"] == "X")
+    ordinary = [rec for rec in page if rec["memo_code"] != "X"]
+    sample = [memo] + ordinary[:3]
+    out = FIXTURE_DIR / "efile_schedule_a_sample.json"
+    out.write_text(json.dumps(strip_api_key({"results": sample}, api_key), indent=2))
+    print(f"efile_schedule_a_sample.json: {len(sample)} rows")
+
+
 # 2022 House races saved by save_results_samples, with the test each serves
 RESULTS_SAMPLE_RACES = [
     ("AK", "00"),  # at-large seat, ranked choice general
@@ -357,6 +383,11 @@ def main():
     # "donors" saves only the Schedule A and PAC totals samples
     if sys.argv[1:] == ["donors"]:
         save_donor_samples(client, api_key)
+        return
+
+    # "efile" saves only the raw e-filing Schedule A sample
+    if sys.argv[1:] == ["efile"]:
+        save_efile_sample(client, api_key)
         return
 
     for name, (path, params) in ENDPOINTS.items():
