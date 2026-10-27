@@ -27,6 +27,18 @@ Design: `docs/superpowers/specs/2026-10-23-tech-money-page-design.md`
 - [ ] After Nov 3: add Senate spending for the same networks
 - [ ] After Nov 3: settle the billionaire rule and add the donor layer
 
+## Step 2b: Billionaire money (write-up section 2, before Nov 3)
+Design: `docs/superpowers/specs/2026-10-26-billionaire-money-design.md`. Plan: `docs/superpowers/plans/2026-10-26-billionaire-money.md`
+- [x] Task 1: Load Schedule A contributions and PAC committee totals
+- [x] Task 2: Research billionaires and entities (sourced CSVs, loaders, tests)
+- [x] Task 3: Giving, concentration, and the billionaire-backed PAC list (27 PACs backed, 6 near, 2 unreconciled, 1 could not be tested)
+- [x] Task 4: House share and lean
+- [x] Task 5: Primary outcomes for billionaire-backed PACs (7 candidates, no review items)
+- [x] Task 6: Charts, numbers JSON, write-up (`reports/billionaire-money.md`), and its number-matching test
+- [x] Added raw e-filing loader after finding that Schedule A lacked reports filed Oct 15 and 22
+- [ ] Optional: finish loading 314 Action Fund's small gifts so Bloomberg's share there can be tested
+- [ ] After Nov 3: add Senate spending and general election outcomes for billionaire-backed PACs
+
 ## Step 3: Endorsements (write-up section 2)
 - [ ] Decide which endorsers to track and document the sourcing method
 - [ ] Build the endorsement dataset (endorser, candidate, race, date, primary result)

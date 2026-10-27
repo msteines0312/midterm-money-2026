@@ -1,0 +1,653 @@
+{
+  "data_dates": {
+    "donors": "2026-10-26",
+    "spending": "2026-10-24"
+  },
+  "giving": {
+    "households": 68,
+    "total": 1170500135.78,
+    "direct": 1007248270.11,
+    "via_entities": 163251865.67,
+    "top": [
+      {
+        "person": "Elon Musk",
+        "total": 257541940.29,
+        "direct": 219304800.0,
+        "via_entities": 38237140.29,
+        "house_dollars": 19159626.39,
+        "house_pct": 0.07,
+        "other_or_unspent": 169663056.33,
+        "dem_helping": 0.0,
+        "rep_helping": 19125268.39,
+        "dem_share": 0.0,
+        "lean": "leaned Republican"
+      },
+      {
+        "person": "Richard Uihlein",
+        "total": 145758415.0,
+        "direct": 145758415.0,
+        "via_entities": 0.0,
+        "house_dollars": 6616813.96,
+        "house_pct": 0.05,
+        "other_or_unspent": 137497636.38,
+        "dem_helping": 0.0,
+        "rep_helping": 6613378.16,
+        "dem_share": 0.0,
+        "lean": "leaned Republican"
+      },
+      {
+        "person": "Jeff Yass",
+        "total": 108000000.0,
+        "direct": 108000000.0,
+        "via_entities": 0.0,
+        "house_dollars": 12393256.44,
+        "house_pct": 0.11,
+        "other_or_unspent": 87741299.88,
+        "dem_helping": 2071347.01,
+        "rep_helping": 9892669.52,
+        "dem_share": 0.17,
+        "lean": "leaned Republican"
+      },
+      {
+        "person": "Miriam Adelson",
+        "total": 66092500.0,
+        "direct": 66092500.0,
+        "via_entities": 0.0,
+        "house_dollars": 7072041.21,
+        "house_pct": 0.11,
+        "other_or_unspent": 54926379.79,
+        "dem_helping": 0.0,
+        "rep_helping": 7037683.21,
+        "dem_share": 0.0,
+        "lean": "leaned Republican"
+      },
+      {
+        "person": "George Soros",
+        "total": 52000000.0,
+        "direct": 0.0,
+        "via_entities": 52000000.0,
+        "house_dollars": 0.0,
+        "house_pct": 0.0,
+        "other_or_unspent": 52000000.0,
+        "dem_helping": 0.0,
+        "rep_helping": 0.0,
+        "dem_share": NaN,
+        "lean": "no House spending"
+      },
+      {
+        "person": "Marc Andreessen",
+        "total": 43775000.0,
+        "direct": 3000000.0,
+        "via_entities": 40775000.0,
+        "house_dollars": 868157.53,
+        "house_pct": 0.02,
+        "other_or_unspent": 41503616.56,
+        "dem_helping": 262624.9,
+        "rep_helping": 605532.63,
+        "dem_share": 0.3,
+        "lean": "leaned Republican"
+      },
+      {
+        "person": "Paul Singer",
+        "total": 40954813.02,
+        "direct": 40954813.02,
+        "via_entities": 0.0,
+        "house_dollars": 9306049.99,
+        "house_pct": 0.23,
+        "other_or_unspent": 27726511.77,
+        "dem_helping": 1938482.65,
+        "rep_helping": 7340080.93,
+        "dem_share": 0.21,
+        "lean": "leaned Republican"
+      },
+      {
+        "person": "Ken Griffin",
+        "total": 32220985.8,
+        "direct": 32220985.8,
+        "via_entities": 0.0,
+        "house_dollars": 9908019.52,
+        "house_pct": 0.31,
+        "other_or_unspent": 15734081.22,
+        "dem_helping": 698949.6,
+        "rep_helping": 9191890.92,
+        "dem_share": 0.07,
+        "lean": "leaned Republican"
+      },
+      {
+        "person": "Michael Bloomberg",
+        "total": 30622989.64,
+        "direct": 30622989.64,
+        "via_entities": 0.0,
+        "house_dollars": 17344332.92,
+        "house_pct": 0.57,
+        "other_or_unspent": 10799487.91,
+        "dem_helping": 16439480.06,
+        "rep_helping": 139461.06,
+        "dem_share": 0.99,
+        "lean": "leaned Democratic"
+      },
+      {
+        "person": "Stephen Mandel Jr.",
+        "total": 30194284.0,
+        "direct": 30194284.0,
+        "via_entities": 0.0,
+        "house_dollars": 2727923.58,
+        "house_pct": 0.09,
+        "other_or_unspent": 25677191.9,
+        "dem_helping": 2687383.6,
+        "rep_helping": 40539.98,
+        "dem_share": 0.99,
+        "lean": "leaned Democratic"
+      },
+      {
+        "person": "Stephen Schwarzman",
+        "total": 29019400.0,
+        "direct": 29019400.0,
+        "via_entities": 0.0,
+        "house_dollars": 723827.42,
+        "house_pct": 0.02,
+        "other_or_unspent": 22977749.36,
+        "dem_helping": 0.0,
+        "rep_helping": 720391.62,
+        "dem_share": 0.0,
+        "lean": "leaned Republican"
+      },
+      {
+        "person": "Reid Hoffman",
+        "total": 27359223.86,
+        "direct": 27359223.86,
+        "via_entities": 0.0,
+        "house_dollars": 5538944.13,
+        "house_pct": 0.2,
+        "other_or_unspent": 8087418.78,
+        "dem_helping": 5532890.98,
+        "rep_helping": 6053.14,
+        "dem_share": 1.0,
+        "lean": "leaned Democratic"
+      },
+      {
+        "person": "Tyler Winklevoss",
+        "total": 25803957.92,
+        "direct": 15159095.23,
+        "via_entities": 10644862.69,
+        "house_dollars": 780489.05,
+        "house_pct": 0.03,
+        "other_or_unspent": 21528596.11,
+        "dem_helping": 2847.08,
+        "rep_helping": 774206.17,
+        "dem_share": 0.0,
+        "lean": "leaned Republican"
+      },
+      {
+        "person": "Cameron Winklevoss",
+        "total": 25768117.05,
+        "direct": 15123254.36,
+        "via_entities": 10644862.69,
+        "house_dollars": 780079.8,
+        "house_pct": 0.03,
+        "other_or_unspent": 21497024.32,
+        "dem_helping": 2847.08,
+        "rep_helping": 773796.92,
+        "dem_share": 0.0,
+        "lean": "leaned Republican"
+      },
+      {
+        "person": "Diane Hendricks",
+        "total": 25500352.63,
+        "direct": 25500352.63,
+        "via_entities": 0.0,
+        "house_dollars": 242740.56,
+        "house_pct": 0.01,
+        "other_or_unspent": 23069967.0,
+        "dem_helping": 0.0,
+        "rep_helping": 242740.56,
+        "dem_share": 0.0,
+        "lean": "leaned Republican"
+      }
+    ]
+  },
+  "democracy_pac_ie": 0.0,
+  "house": {
+    "dollars": 139772437.87,
+    "pct_of_giving": 0.12
+  },
+  "lean_money": {
+    "leaned Democratic": 173869603.61,
+    "leaned Republican": 934619957.17,
+    "no House spending": 62010575.0
+  },
+  "unattributed_org_money": {
+    "corporation": 448281456.02,
+    "other_nonprofit": 506454230.46,
+    "party_aligned_nonprofit": 430804900.23,
+    "trade_group": 35534219.87,
+    "union": 51555039.88,
+    "unknown": 148628454.96
+  },
+  "reconciliation": {
+    "tested": 46,
+    "reconciled": 42
+  },
+  "pacs": {
+    "counts": {
+      "backed": 27,
+      "near": 6,
+      "unreconciled": 2
+    },
+    "backed_donors": 28,
+    "could_not_test": [
+      {
+        "pac": "314 ACTION FUND",
+        "committee_id": "C00633248",
+        "person": "Michael Bloomberg",
+        "share": 0.34,
+        "shortfall": 0.21,
+        "upper_bound": 0.56
+      }
+    ],
+    "list": [
+      {
+        "pac": "AMERICAN PATRIOTS PAC",
+        "committee_id": "C00668905",
+        "person": "Ken Griffin",
+        "share": 1.0,
+        "status": "backed",
+        "diff_pct": 0.0,
+        "receipts": 2500000.0
+      },
+      {
+        "pac": "INDEPENDENCE USA PAC",
+        "committee_id": "C00532705",
+        "person": "Michael Bloomberg",
+        "share": 1.0,
+        "status": "backed",
+        "diff_pct": 0.0,
+        "receipts": 271830.0
+      },
+      {
+        "pac": "NORTHWOODS PAC",
+        "committee_id": "C00920199",
+        "person": "Richard Uihlein",
+        "share": 1.0,
+        "status": "backed",
+        "diff_pct": -0.0,
+        "receipts": 1750110.73
+      },
+      {
+        "pac": "AMERICA PAC",
+        "committee_id": "C00879510",
+        "person": "Elon Musk",
+        "share": 1.0,
+        "status": "backed",
+        "diff_pct": -0.0,
+        "receipts": 215977673.63
+      },
+      {
+        "pac": "YOU CAN PUSH BACK",
+        "committee_id": "C00946830",
+        "person": "Chris Larsen",
+        "share": 1.0,
+        "status": "backed",
+        "diff_pct": 0.0,
+        "receipts": 4515911.93
+      },
+      {
+        "pac": "STAND FOR NEW YORK PAC",
+        "committee_id": "C00936591",
+        "person": "Michael Bloomberg",
+        "share": 0.99,
+        "status": "backed",
+        "diff_pct": -0.0,
+        "receipts": 11150090.0
+      },
+      {
+        "pac": "STW PAC, INC.",
+        "committee_id": "C00934653",
+        "person": "Paul Singer",
+        "share": 0.99,
+        "status": "backed",
+        "diff_pct": 0.0,
+        "receipts": 5122087.27
+      },
+      {
+        "pac": "RESTORATION OF AMERICA PAC",
+        "committee_id": "C00571588",
+        "person": "Richard Uihlein",
+        "share": 0.97,
+        "status": "backed",
+        "diff_pct": -0.0,
+        "receipts": 140898823.76
+      },
+      {
+        "pac": "SCHOOL FREEDOM FUND",
+        "committee_id": "C00794396",
+        "person": "Jeff Yass",
+        "share": 0.97,
+        "status": "backed",
+        "diff_pct": -0.0,
+        "receipts": 18444882.38
+      },
+      {
+        "pac": "MOMSRISING PAC",
+        "committee_id": "C00878025",
+        "person": "Melinda French Gates",
+        "share": 0.97,
+        "status": "backed",
+        "diff_pct": 0.0,
+        "receipts": 1035251.12
+      },
+      {
+        "pac": "PROTECT FREEDOM POLITICAL ACTION COMMITTEE",
+        "committee_id": "C00657866",
+        "person": "Jeff Yass",
+        "share": 0.96,
+        "status": "backed",
+        "diff_pct": -0.0,
+        "receipts": 12982145.53
+      },
+      {
+        "pac": "FIGHTING FOR WYOMING",
+        "committee_id": "C00944322",
+        "person": "Ken Griffin",
+        "share": 0.96,
+        "status": "backed",
+        "diff_pct": -0.0,
+        "receipts": 2600025.0
+      },
+      {
+        "pac": "JEFFERSON RISING",
+        "committee_id": "C00769232",
+        "person": "Timothy Dunn",
+        "share": 0.93,
+        "status": "backed",
+        "diff_pct": -0.0,
+        "receipts": 3231806.88
+      },
+      {
+        "pac": "FAIR COURTS AMERICA",
+        "committee_id": "C00805283",
+        "person": "Richard Uihlein",
+        "share": 0.92,
+        "status": "backed",
+        "diff_pct": -0.0,
+        "receipts": 4330742.08
+      },
+      {
+        "pac": "NEW JERSEY VOICES AND FAMILIES",
+        "committee_id": "C00912444",
+        "person": "Reid Hoffman",
+        "share": 0.83,
+        "status": "backed",
+        "diff_pct": -0.0,
+        "receipts": 600075.0
+      },
+      {
+        "pac": "ILLINOIS FUTURE PAC",
+        "committee_id": "C00902320",
+        "person": "J.B. Pritzker",
+        "share": 0.79,
+        "status": "backed",
+        "diff_pct": 0.0,
+        "receipts": 12728000.0
+      },
+      {
+        "pac": "CITIZENS FOR FREE ENTERPRISE",
+        "committee_id": "C00749671",
+        "person": "J. Joe Ricketts",
+        "share": 0.77,
+        "status": "backed",
+        "diff_pct": -0.0,
+        "receipts": 17972759.18
+      },
+      {
+        "pac": "MD PAC",
+        "committee_id": "C00911321",
+        "person": "Stephen Mandel Jr.",
+        "share": 0.76,
+        "status": "backed",
+        "diff_pct": -0.0,
+        "receipts": 17493414.37
+      },
+      {
+        "pac": "STRONG AS GRANITE PAC",
+        "committee_id": "C00909135",
+        "person": "Jim Davis",
+        "share": 0.71,
+        "status": "backed",
+        "diff_pct": 0.0,
+        "receipts": 700600.0
+      },
+      {
+        "pac": "FIGHT FOR KENTUCKY",
+        "committee_id": "C00898130",
+        "person": "Elon Musk",
+        "share": 0.66,
+        "status": "backed",
+        "diff_pct": 0.0,
+        "receipts": 15070679.42
+      },
+      {
+        "pac": "WOMENCOUNT PAC",
+        "committee_id": "C00450098",
+        "person": "Melinda French Gates",
+        "share": 0.62,
+        "status": "backed",
+        "diff_pct": -0.01,
+        "receipts": 3243584.98
+      },
+      {
+        "pac": "OPERATION EARNED TRUST PAC",
+        "committee_id": "C00944066",
+        "person": "Amos Hostetter Jr.",
+        "share": 0.6,
+        "status": "backed",
+        "diff_pct": -0.0,
+        "receipts": 83368.0
+      },
+      {
+        "pac": "BLUEPRINT TEXAS PAC",
+        "committee_id": "C00948984",
+        "person": "Tench Coxe",
+        "share": 0.56,
+        "status": "backed",
+        "diff_pct": -0.03,
+        "receipts": 2075341.56
+      },
+      {
+        "pac": "AFC VICTORY FUND",
+        "committee_id": "C00846683",
+        "person": "Jeff Yass",
+        "share": 0.56,
+        "status": "backed",
+        "diff_pct": -0.0,
+        "receipts": 7170314.57
+      },
+      {
+        "pac": "DEMOCRACY PAC",
+        "committee_id": "C00693382",
+        "person": "George Soros",
+        "share": 0.51,
+        "status": "backed",
+        "diff_pct": -0.0,
+        "receipts": 102766684.76
+      },
+      {
+        "pac": "V-PAC: VICTORS, NOT VICTIMS",
+        "committee_id": "C00892919",
+        "person": "Jeff Yass",
+        "share": 0.5,
+        "status": "backed",
+        "diff_pct": -0.0,
+        "receipts": 59704674.63
+      },
+      {
+        "pac": "51 PERCENT PAC",
+        "committee_id": "C00881284",
+        "person": "Cameron Winklevoss",
+        "share": 0.5,
+        "status": "backed",
+        "diff_pct": 0.0,
+        "receipts": 20000.0
+      },
+      {
+        "pac": "51 PERCENT PAC",
+        "committee_id": "C00881284",
+        "person": "Tyler Winklevoss",
+        "share": 0.5,
+        "status": "backed",
+        "diff_pct": 0.0,
+        "receipts": 20000.0
+      },
+      {
+        "pac": "GREAT OPPORTUNITY PAC, INC.",
+        "committee_id": "C00862094",
+        "person": "Jeff Yass",
+        "share": 0.49,
+        "status": "near",
+        "diff_pct": 0.0,
+        "receipts": 2554217.56
+      },
+      {
+        "pac": "AURORA ACTION NETWORK",
+        "committee_id": "C00907584",
+        "person": "Elon Musk",
+        "share": 0.47,
+        "status": "near",
+        "diff_pct": 0.0,
+        "receipts": 3220250.0
+      },
+      {
+        "pac": "INVEST IN TOMORROW COALITION PAC",
+        "committee_id": "C00936997",
+        "person": "Chris Larsen",
+        "share": 0.46,
+        "status": "near",
+        "diff_pct": -0.0,
+        "receipts": 12926143.0
+      },
+      {
+        "pac": "AMERICA 21 PAC",
+        "committee_id": "C00804690",
+        "person": "Paul Singer",
+        "share": 0.42,
+        "status": "near",
+        "diff_pct": 0.0,
+        "receipts": 7100632.93
+      },
+      {
+        "pac": "TURNOUT FOR AMERICA",
+        "committee_id": "C00883520",
+        "person": "Andrew Beal",
+        "share": 0.41,
+        "status": "near",
+        "diff_pct": -0.0,
+        "receipts": 4916173.19
+      },
+      {
+        "pac": "LONE STAR RISING PAC",
+        "committee_id": "C00918268",
+        "person": "Reid Hoffman",
+        "share": 0.38,
+        "status": "near",
+        "diff_pct": -0.0,
+        "receipts": 43017580.0
+      },
+      {
+        "pac": "PROTECT OUR DEMOCRACY FUND",
+        "committee_id": "C00889717",
+        "person": "Miriam Adelson",
+        "share": 0.65,
+        "status": "unreconciled",
+        "diff_pct": -0.25,
+        "receipts": 77129.36
+      },
+      {
+        "pac": "THE BENCH",
+        "committee_id": "C00845271",
+        "person": "Stephen Mandel Jr.",
+        "share": 0.58,
+        "status": "unreconciled",
+        "diff_pct": -0.13,
+        "receipts": 12886762.1
+      }
+    ]
+  },
+  "primary": {
+    "pooled": {
+      "won": 3,
+      "lost": 4,
+      "review": 0,
+      "rate": 0.43
+    },
+    "by_pac": {
+      "C00657866": {
+        "won": 0,
+        "lost": 1,
+        "review": 0,
+        "rate": 0.0
+      },
+      "C00794396": {
+        "won": 1,
+        "lost": 0,
+        "review": 0,
+        "rate": 1.0
+      },
+      "C00920199": {
+        "won": 0,
+        "lost": 1,
+        "review": 0,
+        "rate": 0.0
+      },
+      "C00936591": {
+        "won": 1,
+        "lost": 0,
+        "review": 0,
+        "rate": 1.0
+      },
+      "C00944322": {
+        "won": 0,
+        "lost": 1,
+        "review": 0,
+        "rate": 0.0
+      },
+      "C00946830": {
+        "won": 1,
+        "lost": 1,
+        "review": 0,
+        "rate": 0.5
+      }
+    },
+    "opposed": {
+      "wanted": 3,
+      "unwanted": 1,
+      "review": 0
+    },
+    "review": [],
+    "matched_by_name": []
+  },
+  "cited": {
+    "households": "68",
+    "total_giving": "$1.17B",
+    "direct_giving": "$1.01B",
+    "entity_giving": "$163.3M",
+    "house_dollars": "$139.8M",
+    "house_pct": "12%",
+    "backed_count": "27",
+    "near_count": "6",
+    "unreconciled_count": "2",
+    "could_not_test_count": "1",
+    "other_nonprofit_money": "$506.5M",
+    "party_nonprofit_money": "$430.8M",
+    "pacs_tested": "46",
+    "pacs_reconciled": "42",
+    "primary_won": "3",
+    "primary_lost": "4",
+    "primary_review": "0",
+    "primary_rate": "43%",
+    "top_Elon Musk": "Elon Musk ($257.5M",
+    "top_Richard Uihlein": "Richard Uihlein ($145.8M",
+    "top_Jeff Yass": "Jeff Yass ($108.0M",
+    "top_Miriam Adelson": "Miriam Adelson ($66.1M",
+    "top_George Soros": "George Soros ($52.0M"
+  }
+}
