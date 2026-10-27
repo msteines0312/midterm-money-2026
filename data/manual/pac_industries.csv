@@ -1,1 +1,10 @@
-committee_id,industry,source_url
+committee_id,network,industry,source_url
+C00835959,Fairshake,crypto,https://www.factcheck.org/2026/08/fairshake-2/
+C00848440,Fairshake,crypto,https://www.fec.gov/data/receipts/?committee_id=C00848440&contributor_name=FAIRSHAKE&two_year_transaction_period=2026
+C00836221,Fairshake,crypto,https://news.bgov.com/bloomberg-government-news/gop-crypto-super-pac-drops-5-million-in-alabama-senate-primary
+C00916114,Leading the Future,ai_industry,https://www.nbcnews.com/politics/2026-election/ads-ai-industry-are-flooding-2026-election-artificial-intelligence-rcna260782
+C00923417,Leading the Future,ai_industry,https://www.nbcnews.com/politics/2026-election/ads-ai-industry-are-flooding-2026-election-artificial-intelligence-rcna260782
+C00916692,Leading the Future,ai_industry,https://www.nbcnews.com/politics/2026-election/ads-ai-industry-are-flooding-2026-election-artificial-intelligence-rcna260782
+C00930503,Public First,ai_safety,https://www.fec.gov/data/disbursements/?committee_id=C00930503&two_year_transaction_period=2026
+C00928374,Public First,ai_safety,https://www.nbcnews.com/politics/2026-election/ads-ai-industry-are-flooding-2026-election-artificial-intelligence-rcna260782
+C00928390,Public First,ai_safety,https://www.nbcnews.com/politics/2026-election/ads-ai-industry-are-flooding-2026-election-artificial-intelligence-rcna260782

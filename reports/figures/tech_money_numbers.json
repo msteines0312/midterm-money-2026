@@ -1,0 +1,253 @@
+{
+  "pulled_at": "2026-10-23",
+  "networks": {
+    "Fairshake": {
+      "industry": "crypto",
+      "total": 52911298.92,
+      "n_candidates": 87,
+      "party_buckets": {
+        "Supporting Democrats": 30005199.34,
+        "Opposing Democrats": 5992412.9,
+        "Supporting Republicans": 16913686.68,
+        "Opposing Republicans": 0.0,
+        "Other or unknown": 0.0
+      },
+      "supporting_total": 46918886.02,
+      "opposing_total": 5992412.9,
+      "elections": {
+        "Primary": 31883619.96,
+        "General": 10978272.0,
+        "Other": 10049406.96
+      },
+      "primary_pct_of_network_total": 60.26,
+      "general_seat_types": {
+        "Competitive": 5095693.36,
+        "Safe": 5732612.2
+      },
+      "general_without_rating": 149966.44
+    },
+    "Leading the Future": {
+      "industry": "ai_industry",
+      "total": 27223098.28,
+      "n_candidates": 39,
+      "party_buckets": {
+        "Supporting Democrats": 10301083.22,
+        "Opposing Democrats": 8155897.68,
+        "Supporting Republicans": 8766117.38,
+        "Opposing Republicans": 0.0,
+        "Other or unknown": 0.0
+      },
+      "supporting_total": 19067200.6,
+      "opposing_total": 8155897.68,
+      "elections": {
+        "Primary": 22846299.21,
+        "General": 2981865.74,
+        "Other": 1394933.33
+      },
+      "primary_pct_of_network_total": 83.92,
+      "general_seat_types": {
+        "Competitive": 653389.73,
+        "Safe": 2328476.01
+      },
+      "general_without_rating": 0.0
+    },
+    "Public First": {
+      "industry": "ai_safety",
+      "total": 22858512.4,
+      "n_candidates": 15,
+      "party_buckets": {
+        "Supporting Democrats": 15964201.7,
+        "Opposing Democrats": 0.0,
+        "Supporting Republicans": 5456558.78,
+        "Opposing Republicans": 1437751.92,
+        "Other or unknown": 0.0
+      },
+      "supporting_total": 21420760.48,
+      "opposing_total": 1437751.92,
+      "elections": {
+        "Primary": 19988819.89,
+        "General": 599445.0,
+        "Other": 2270247.51
+      },
+      "primary_pct_of_network_total": 87.45,
+      "general_seat_types": {
+        "Competitive": 599445.0,
+        "Safe": 0.0
+      },
+      "general_without_rating": 0.0
+    }
+  },
+  "combined_total": 102992909.6,
+  "top_races": [
+    {
+      "race_id": "NY-12",
+      "cook_rating": "Solid D",
+      "network_total": 21323031.13,
+      "by_election": {
+        "Primary": 21323031.13,
+        "General": 0.0,
+        "Other": 0.0
+      }
+    },
+    {
+      "race_id": "TX-18",
+      "cook_rating": "Solid D",
+      "network_total": 6515238.41,
+      "by_election": {
+        "Primary": 1564214.61,
+        "General": 0.0,
+        "Other": 4951023.8
+      }
+    },
+    {
+      "race_id": "MD-05",
+      "cook_rating": "Solid D",
+      "network_total": 5530265.57,
+      "by_election": {
+        "Primary": 5530265.57,
+        "General": 0.0,
+        "Other": 0.0
+      }
+    },
+    {
+      "race_id": "GA-13",
+      "cook_rating": "Solid D",
+      "network_total": 4266438.34,
+      "by_election": {
+        "Primary": 4266438.34,
+        "General": 0.0,
+        "Other": 0.0
+      }
+    },
+    {
+      "race_id": "NY-15",
+      "cook_rating": "Solid D",
+      "network_total": 2535727.78,
+      "by_election": {
+        "Primary": 2530727.78,
+        "General": 5000.0,
+        "Other": 0.0
+      }
+    },
+    {
+      "race_id": "IL-07",
+      "cook_rating": "Solid D",
+      "network_total": 2475786.22,
+      "by_election": {
+        "Primary": 2475786.22,
+        "General": 0.0,
+        "Other": 0.0
+      }
+    },
+    {
+      "race_id": "IL-02",
+      "cook_rating": "Solid D",
+      "network_total": 2247103.5,
+      "by_election": {
+        "Primary": 2247103.5,
+        "General": 0.0,
+        "Other": 0.0
+      }
+    },
+    {
+      "race_id": "TX-35",
+      "cook_rating": "Lean R",
+      "network_total": 2108706.85,
+      "by_election": {
+        "Primary": 479730.49,
+        "General": 0.0,
+        "Other": 1628976.36
+      }
+    },
+    {
+      "race_id": "FL-24",
+      "cook_rating": "Solid D",
+      "network_total": 2056912.22,
+      "by_election": {
+        "Primary": 2056912.22,
+        "General": 0.0,
+        "Other": 0.0
+      }
+    },
+    {
+      "race_id": "MI-13",
+      "cook_rating": "Solid D",
+      "network_total": 2030843.0,
+      "by_election": {
+        "Primary": 2030843.0,
+        "General": 0.0,
+        "Other": 0.0
+      }
+    }
+  ],
+  "top_race_detail": [
+    {
+      "network": "Public First",
+      "candidate_name": "BORES, ALEXANDER",
+      "party": "DEM",
+      "election_type": "P",
+      "support_oppose": "S",
+      "total": 13167133.45
+    },
+    {
+      "network": "Leading the Future",
+      "candidate_name": "BORES, ALEXANDER",
+      "party": "DEM",
+      "election_type": "P",
+      "support_oppose": "O",
+      "total": 8155897.68
+    }
+  ],
+  "support_by_party_and_stage": {
+    "Fairshake": {
+      "Democrats": {
+        "Primary": 18579923.32,
+        "Runoff": 4903861.6,
+        "General": 5508622.42,
+        "Other": 1012792.0,
+        "primary_and_runoff_pct": 78.27
+      },
+      "Republicans": {
+        "Primary": 7358445.94,
+        "Runoff": 1853042.47,
+        "General": 5469649.58,
+        "Other": 2232548.69,
+        "primary_and_runoff_pct": 54.46
+      }
+    },
+    "Leading the Future": {
+      "Democrats": {
+        "Primary": 9063220.2,
+        "Runoff": 0.0,
+        "General": 1237863.02,
+        "Other": 0.0,
+        "primary_and_runoff_pct": 87.98
+      },
+      "Republicans": {
+        "Primary": 5627181.33,
+        "Runoff": 0.0,
+        "General": 1744002.72,
+        "Other": 1394933.33,
+        "primary_and_runoff_pct": 64.19
+      }
+    },
+    "Public First": {
+      "Democrats": {
+        "Primary": 15714451.7,
+        "Runoff": 249750.0,
+        "General": 0.0,
+        "Other": 0.0,
+        "primary_and_runoff_pct": 100.0
+      },
+      "Republicans": {
+        "Primary": 3493942.86,
+        "Runoff": 1926270.17,
+        "General": 0.0,
+        "Other": 36345.75,
+        "primary_and_runoff_pct": 99.33
+      }
+    }
+  },
+  "no_party_rows": [],
+  "share_included": false
+}

@@ -20,10 +20,10 @@ Pre-election build first (target: before Nov 3, 2026). General election update a
 ## Step 2: Tech money (write-up section 1)
 Design: `docs/superpowers/specs/2026-10-23-tech-money-page-design.md`
 - [x] Decide what to track: crypto and AI super PAC networks, plus tech billionaire donors on both sides
-- [ ] Confirm whether outside spending is missing recent 24/48-hour reports, and fix it if so
-- [ ] Label network committees in `pac_industries.csv` with sources
-- [ ] Aggregate House spending by network, party supported or opposed, election, and race
-- [ ] Write section 1, House version (before Nov 3)
+- [x] Confirm whether outside spending is missing recent 24/48-hour reports, and fix it if so
+- [x] Label network committees in `pac_industries.csv` with sources
+- [x] Aggregate House spending by network, party supported or opposed, election, and race
+- [x] Write section 1, House version (before Nov 3)
 - [ ] After Nov 3: add Senate spending for the same networks
 - [ ] After Nov 3: settle the billionaire rule and add the donor layer
 

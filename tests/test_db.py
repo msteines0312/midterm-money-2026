@@ -2,7 +2,7 @@
 
 import pytest
 
-from src.db import connect, create_schema, upsert_rows
+from src.db import connect, create_schema, replace_rows, upsert_rows
 
 TABLES = {"races", "candidates", "committees", "candidate_totals", "outside_spending", "pac_industries"}
 
@@ -62,3 +62,95 @@ def test_upsert_rejects_unknown_table(conn):
 def test_null_money_stays_null(conn):
     upsert_rows(conn, "candidate_totals", [totals("2026-10-20", receipts=None)])
     assert conn.execute("SELECT receipts FROM candidate_totals").fetchone()[0] is None
+
+
+def new_style_spending_row():
+    return {
+        "committee_id": "C00000001", "candidate_key": "XX-01|SMITH", "candidate_id": None,
+        "candidate_name": "SMITH, JANE", "party": "DEM", "race_id": "XX-01",
+        "election_type": "G", "support_oppose": "S", "pulled_at": "2026-10-23",
+        "total": 250.0, "count": 1,
+    }
+
+
+def test_create_schema_moves_old_outside_spending(tmp_path):
+    conn = connect(tmp_path / "old.db")
+    # The table as the Oct 23 pull built it, before election_type existed
+    conn.execute(
+        """CREATE TABLE outside_spending (
+            committee_id TEXT NOT NULL, candidate_id TEXT NOT NULL,
+            support_oppose TEXT NOT NULL, pulled_at TEXT NOT NULL,
+            total REAL, count INTEGER,
+            PRIMARY KEY (committee_id, candidate_id, support_oppose, pulled_at))"""
+    )
+    conn.execute(
+        "INSERT INTO outside_spending VALUES ('C00000001', 'H6XX00001', 'S', '2026-10-23', 100.0, 2)"
+    )
+    conn.commit()
+
+    create_schema(conn)
+
+    assert count(conn, "outside_spending_by_candidate_endpoint") == 1
+    assert count(conn, "outside_spending") == 0
+    columns = {row[1] for row in conn.execute("PRAGMA table_info(outside_spending)")}
+    assert "election_type" in columns
+    conn.close()
+
+
+def test_create_schema_twice_keeps_new_rows(conn):
+    upsert_rows(conn, "outside_spending", [new_style_spending_row()])
+    create_schema(conn)
+    assert count(conn, "outside_spending") == 1
+    names = {row[0] for row in conn.execute("SELECT name FROM sqlite_master WHERE type = 'table'")}
+    assert "outside_spending_by_candidate_endpoint" not in names
+
+
+def test_create_schema_rebuilds_pac_industries_without_network(tmp_path):
+    conn = connect(tmp_path / "old.db")
+    # The label table as it was before the network column was added
+    conn.execute(
+        """CREATE TABLE pac_industries (
+            committee_id TEXT PRIMARY KEY, industry TEXT NOT NULL, source_url TEXT NOT NULL)"""
+    )
+    conn.commit()
+
+    create_schema(conn)
+
+    columns = {row[1] for row in conn.execute("PRAGMA table_info(pac_industries)")}
+    assert "network" in columns
+    conn.close()
+
+
+def test_create_schema_twice_keeps_pac_industries_rows(conn):
+    row = {"committee_id": "C001", "network": "Fairshake", "industry": "crypto", "source_url": "https://a"}
+    upsert_rows(conn, "pac_industries", [row])
+    create_schema(conn)
+    assert count(conn, "pac_industries") == 1
+
+
+def label(committee_id):
+    return {"committee_id": committee_id, "network": "Net", "industry": "crypto", "source_url": "http://example.com"}
+
+
+def test_replace_rows_drops_rows_not_in_the_new_set(conn):
+    upsert_rows(conn, "pac_industries", [label("C1"), label("C2")])
+    replace_rows(conn, "pac_industries", [label("C1")])
+    assert [row[0] for row in conn.execute("SELECT committee_id FROM pac_industries")] == ["C1"]
+
+
+def test_replace_rows_with_pulled_at_keeps_other_snapshots(conn):
+    upsert_rows(conn, "candidate_totals", [totals("2026-10-20", receipts=1.0), totals("2026-10-23", receipts=2.0)])
+    replace_rows(conn, "candidate_totals", [totals("2026-10-23", receipts=3.0)], pulled_at="2026-10-23")
+    rows = conn.execute("SELECT pulled_at, receipts FROM candidate_totals ORDER BY pulled_at").fetchall()
+    assert rows == [("2026-10-20", 1.0), ("2026-10-23", 3.0)]
+
+
+def test_replace_rows_with_no_rows_empties_the_table(conn):
+    upsert_rows(conn, "pac_industries", [label("C1")])
+    replace_rows(conn, "pac_industries", [])
+    assert count(conn, "pac_industries") == 0
+
+
+def test_replace_rows_rejects_unknown_table(conn):
+    with pytest.raises(ValueError, match="nope"):
+        replace_rows(conn, "nope", [])
