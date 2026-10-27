@@ -18,6 +18,12 @@ RAW_DIR = DATA_DIR / "raw"
 MANUAL_DIR = DATA_DIR / "manual"
 PAC_INDUSTRIES_CSV = MANUAL_DIR / "pac_industries.csv"
 NOMINEE_MATCHES_CSV = MANUAL_DIR / "nominee_matches.csv"
+# Billionaire money (section 2): who is on Forbes, which organizations are
+# theirs, and how every large organization donor was classified
+BILLIONAIRES_CSV = MANUAL_DIR / "billionaires.csv"
+DONOR_ENTITIES_CSV = MANUAL_DIR / "donor_entities.csv"
+ORG_DONORS_REVIEWED_CSV = MANUAL_DIR / "org_donors_reviewed.csv"
+NOT_ON_FORBES_CSV = MANUAL_DIR / "large_donors_not_on_forbes.csv"
 # Hand-checked FEC IDs for 2022 and 2024 results rows the automatic match misses
 HISTORY_MATCHES_CSV = MANUAL_DIR / "history_matches.csv"
 PROCESSED_DIR = DATA_DIR / "processed"
