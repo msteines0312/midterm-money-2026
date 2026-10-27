@@ -39,6 +39,8 @@ class FecClient:
         self.sleep = sleep
         self.max_retries = max_retries
         self.cooldown_seconds = cooldown_seconds
+        # Every HTTP request sent, retries included, so a pull can report its cost
+        self.request_count = 0
 
     def get(self, path, params=None):
         """Request one endpoint and return the parsed JSON.
@@ -64,6 +66,7 @@ class FecClient:
         params = {**(params or {}), "api_key": self.api_key}
         for attempt in range(1, self.max_retries + 2):
             response = self.session.get(FEC_BASE_URL + path, params=params, timeout=30)
+            self.request_count += 1
 
             # A 429 means "too many requests, try later", so waiting fixes it.
             # Anything else (a 403 bad key, a 400 bad parameter) fails the same
@@ -109,3 +112,41 @@ class FecClient:
             if page >= total_pages or (max_pages and page >= max_pages):
                 return
             page += 1
+
+    def iter_keyset(self, path, params=None, max_pages=None):
+        """Yield every result from an endpoint that pages with a cursor.
+
+        Schedule A has too many rows for page numbers, so the API returns
+        `pagination.last_indexes` (a position in the sort order) with each
+        page. Sending those values back with the next request asks for the
+        rows after that position. Page numbers do not work on this endpoint.
+
+        Parameters
+        ----------
+        path : str
+            Endpoint path, e.g. "/schedules/schedule_a/".
+        params : dict, optional
+            Query parameters. `per_page` defaults to 100.
+        max_pages : int, optional
+            Stop after this many pages.
+
+        Yields
+        ------
+        dict
+            One record from the endpoint's `results` list.
+        """
+        query = {"per_page": 100, **(params or {})}
+        pages_read = 0
+        while True:
+            body = self.get(path, query)
+            results = body.get("results", [])
+            yield from results
+            pages_read += 1
+
+            # No rows or no cursor means the last page was reached
+            cursor = (body.get("pagination") or {}).get("last_indexes")
+            if not results or not cursor or (max_pages and pages_read >= max_pages):
+                return
+            # The cursor is merged into the same filters, so the next page
+            # continues the same query
+            query = {**query, **cursor}

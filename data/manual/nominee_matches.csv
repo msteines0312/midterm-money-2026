@@ -1,0 +1,58 @@
+race_id,name,candidate_id,note
+AZ-07,Adelita Grijalva,H6AZ07121,Two Grijalvas filed in AZ-07; first name Adelita picks H6AZ07121
+CA-41,Mitch Clemmons,H6CA41380,Duplicate registrations (H2CA38260 and H6CA41380) with identical money; chose the one filed in CA-41
+IL-04,Patty Garcia,H6IL04153,Jesus Garcia (H8IL04134) is a different candidate; first name Patty picks H6IL04153
+KY-03,Maria Rodriquez,H6KY03223,FEC spells the surname Rodriguez; first name and party agree
+LA-05,Antonio Wilson,H6LA05333,Duplicate registrations (H6LA05325 and H6LA05333) with identical money; chose the later ID
+MS-04,Carl Boyanton,H6MS04259,"FEC stores the name as CARL, BOYANTON; H6MS04259 is the registration that reports money"
+MO-03,Bob Onder,H4MO03221,Duplicate registrations (H8MO09146 and H4MO03221) with identical money; chose the incumbent row
+NV-03,Martin O'Donnell,H6NV03204,"FEC lists him as Marty; duplicate registrations with identical money, chose the 2026-cycle H6 ID"
+NJ-08,Rob Menendez,H2NJ08232,FEC lists Robert J. Menendez as incumbent in NJ-08; H2NJ13075 is a duplicate row with identical money
+NY-01,Nick LaLota,H2NY01190,"FEC stores the name reversed as NICK, LALOTA; incumbent REP"
+NC-04,Max Ganorkar,H4NC02150,"FEC lists Mahesh Ganorkar; duplicate registrations (H4NC02150 and H2NC06106) with identical money, chose the later cycle"
+NC-08,Mark Harris,H4NC08066,Duplicate registrations (H6NC09200 and H4NC08066) with identical money; chose the incumbent row
+SC-02,Zyon Khalifa,H6SC02159,Duplicate registrations (H6SC02159 and H6SC02167) with identical money; chose the lower ID
+TX-22,Trever Nehls,H6TX22283,Troy Nehls (H0TX22302) is a different person; first name Trever picks H6TX22283
+TX-34,Eric Flores,H6TX34080,Mayra Flores (H2TX34113) is a different person; first name Eric picks H6TX34080
+MI-11,Ethan Baker,H6MI11290,Stu Baker (H6MI11258) is a different person; first name Ethan and party agree
+AK-00,Eric Hafner,H4AK00164,"fec.gov candidate page, filed for AK-00; FEC lists the name as ERIC, HAFNER; no 2026 financial totals on fec.gov, so $0"
+CA-02,Robin Littau,H6CA02309,"fec.gov candidate page, filed for CA-02; no 2026 financial totals on fec.gov, so $0"
+CA-10,Jeff Frese,H6CA10187,"fec.gov candidate page, filed for CA-10; FEC spells the first name Jeffrey; no 2026 financial totals on fec.gov, so $0"
+CA-15,Charles Hoelter,H6CA15194,"fec.gov candidate page, filed for CA-15; no 2026 financial totals on fec.gov, so $0"
+CA-38,Pedro Casas,H4CA31212,"fec.gov candidate page, filed for CA-38; FEC lists Pedro Antonio Casas; the ID was issued in an earlier cycle in CA-31 but is filed for CA-38; no 2026 financial totals on fec.gov, so $0"
+CA-51,Ricardo Cabrera,H6CA51140,"fec.gov candidate page, filed for CA-51; no 2026 financial totals on fec.gov, so $0"
+CO-02,Kelley Dennison,H6CO02206,"fec.gov candidate page. FEC lists Kelley Anne Dennison; her external money through Oct 14 is $11,823.37 in the 2026-10-24 snapshot; the Democrat has far more"
+CO-06,Jason Clark,H6CO06165,"fec.gov candidate page, filed for CO-06; no 2026 financial totals on fec.gov, so $0"
+GA-04,James Duffie,H6GA04194,"fec.gov candidate page, filed for GA-04; FEC lists the first name as Jim; no 2026 financial totals on fec.gov, so $0"
+GA-05,John Oscar Salvesen,H4GA05063,"fec.gov candidate page, filed for GA-05; FEC lists O SALVESEN, JOHN; no 2026 financial totals on fec.gov, so $0"
+GA-13,Jonathan Chavez,H2GA04201,"fec.gov candidate page, filed for GA-13; ID was issued in an earlier cycle in GA-04 but is filed for GA-13; no 2026 financial totals on fec.gov, so $0"
+HI-01,Adriel Lam,H6HI01360,"fec.gov candidate page, filed for HI-01; FEC lists Adriel C Lam; no 2026 financial totals on fec.gov, so $0"
+IL-02,Michael Noack,H6IL02389,"fec.gov candidate page, filed for IL-02; FEC lists Michael Scott Noack; no 2026 financial totals on fec.gov, so $0"
+IL-04,Lupe Castillo,H4IL04117,"fec.gov candidate page, filed for IL-04; no 2026 financial totals on fec.gov, so $0"
+IL-10,Carl Lambrecht,H6IL10176,"fec.gov candidate page, filed for IL-10; no 2026 financial totals on fec.gov, so $0"
+IN-07,Patrick McAuley,H6IN07444,"fec.gov candidate page, filed for IN-07; no 2026 financial totals on fec.gov, so $0"
+LA-01,Randall Arrington,H4LA01162,"fec.gov candidate page, filed for LA-01; no 2026 financial totals on fec.gov, so $0"
+LA-03,Priscilla Gonzalez,H4LA03135,"fec.gov candidate page, filed for LA-03; no 2026 financial totals on fec.gov, so $0"
+LA-05,Omar Dantzler,H2LA05282,"fec.gov candidate page, filed for LA-05; FEC lists Oscar ""Omar"" Dantzler; no 2026 financial totals on fec.gov, so $0"
+LA-06,Chris Johnson,H6LA06141,"fec.gov candidate page, filed for LA-06; FEC lists Christian Rashad Johnson; the only Republican of that surname filed in LA-06; no 2026 financial totals on fec.gov, so $0"
+MD-07,Scott Collier,H0MD02255,"fec.gov candidate page, filed for MD-07; FEC lists Scott M Collier; ID was issued in an earlier cycle in MD-02 but is filed for MD-07; no 2026 financial totals on fec.gov, so $0"
+MI-13,T. P. Nykoriak,H6MI13312,"fec.gov candidate page, filed for MI-13; FEC lists NYKORIAK, T.P.; no 2026 financial totals on fec.gov, so $0"
+MN-03,Tyler Bass,H6MN03170,"fec.gov candidate page, filed for MN-03; FEC lists Tyler Michael Bass; no 2026 financial totals on fec.gov, so $0"
+NY-05,George Marsh,H6NY05127,"fec.gov candidate page, filed for NY-05; no 2026 financial totals on fec.gov, so $0"
+NY-07,Melvin Rivera,H6NY07271,"fec.gov candidate page, filed for NY-07; no 2026 financial totals on fec.gov, so $0"
+NY-08,Lewis Mizrahi,H6NY08188,"fec.gov candidate page, filed for NY-08; no 2026 financial totals on fec.gov, so $0"
+NY-09,Joel Azumah,H6NY09145,"fec.gov candidate page, filed for NY-09; Two registrations (H6NY09145 and H4NY09090) for Joel Azumah in NY-09; chose the one registered for 2026 under the name Anabilah-Azumah; no 2026 financial totals on fec.gov, so $0"
+NY-13,Jomo Williams,H6NY13303,"fec.gov candidate page, filed for NY-13; no 2026 financial totals on fec.gov, so $0"
+NY-15,Stylo Sapaskis,H6NY16140,"fec.gov candidate page, filed for NY-15; FEC lists Stylo Adonis Sapaskis; ID carries a NY-16 code but is filed for NY-15; no 2026 financial totals on fec.gov, so $0"
+NC-02,Eugene Douglass,H4NC02135,"fec.gov candidate page, filed for NC-02; FEC lists Eugene Farley Douglass; no 2026 financial totals on fec.gov, so $0"
+OH-02,Jennifer Mazzuckelli,H6OH02326,"fec.gov candidate page, filed for OH-02; FEC lists the first name as Jen; no 2026 financial totals on fec.gov, so $0"
+OH-03,Cleophus Dulaney,H0OH03137,"fec.gov candidate page, filed for OH-03; no 2026 financial totals on fec.gov, so $0"
+OH-11,Mike Kirchner,H6OH11210,"fec.gov candidate page, filed for OH-11; no 2026 financial totals on fec.gov, so $0"
+OR-03,Loran Ayles,H6OR03197,"fec.gov candidate page, filed for OR-03; no 2026 financial totals on fec.gov, so $0"
+PA-02,Jessica Arriaga,H6PA02205,"fec.gov candidate page, filed for PA-02; no 2026 financial totals on fec.gov, so $0"
+SC-06,John Peterson,H6SC06184,"fec.gov candidate page, filed for SC-06; no 2026 financial totals on fec.gov, so $0"
+TX-12,Angela Rodriguez Prilliman,H6TX12169,"fec.gov candidate page, filed for TX-12; FEC lists RODRIGUEZ PRILLIMAN, ANGELA; no 2026 financial totals on fec.gov, so $0"
+TX-18,Ronald Whitfield,H6TX18497,"fec.gov candidate page, filed for TX-18; FEC lists Ronald Dwayne Whitfield; no 2026 financial totals on fec.gov, so $0"
+TX-33,Patrick Gillespie,H2TX33248,"fec.gov candidate page, filed for TX-33; FEC lists Patrick David Gillespie; no 2026 financial totals on fec.gov, so $0"
+WA-10,Chris Chung,H6WA10031,"fec.gov candidate page, filed for WA-10; FEC lists Chris D. Chung; no 2026 financial totals on fec.gov, so $0"
+WI-04,Tim Rogers,H4WI04274,"fec.gov candidate page, filed for WI-04; Two registrations (H4WI04274 and H8WI04069) for Tim Rogers in WI-04; chose the one with 2026 election years; no 2026 financial totals on fec.gov, so $0"

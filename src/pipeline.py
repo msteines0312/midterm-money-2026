@@ -8,12 +8,15 @@ Run from the repo root:
     python -m src.pipeline --rebuild-outside-spending 2026-10-23
                                       rebuild one date's outside spending from
                                       the saved bulk file, with no downloads
+    python -m src.pipeline --history  load 2022 and 2024 results, PVI, and
+                                      ratings for the model (history_money is
+                                      loaded by scripts/load_history_money.py)
 """
 
 import argparse
 from datetime import date
 
-from src.config import CYCLE, DB_PATH, SAMPLE_DB_PATH, load_api_key
+from src.config import CYCLE, DB_PATH, HISTORY_CYCLES, SAMPLE_DB_PATH, load_api_key
 from src.db import connect, create_schema, replace_rows, upsert_rows
 from src.fec.bulk import download_summary, house_totals
 from src.fec.client import FecClient
@@ -23,6 +26,7 @@ from src.fec.independent_expenditures import (
     read_saved_independent_expenditures,
 )
 from src.fec.transform import candidate_row, committee_row
+from src.history_results import dem_vs_rep_races, load_history_races, load_history_results
 from src.manual import load_pac_industries
 from src.ratings import load_races
 
@@ -176,6 +180,97 @@ def orphan_counts(conn):
     return {name: conn.execute(sql).fetchone()[0] for name, sql in checks.items()}
 
 
+def write_history(conn, cycle, results, races):
+    """Replace one cycle's `history_results` and `history_races` rows.
+
+    Other cycles and every 2026 table are left alone. Deleting first means a
+    candidate dropped by a parser fix doesn't linger from an earlier load.
+
+    Parameters
+    ----------
+    conn : sqlite3.Connection
+    cycle : int
+    results : list of dict
+        `history_results` rows for that cycle.
+    races : list of dict
+        `history_races` rows for that cycle.
+
+    Returns
+    -------
+    dict
+        Rows written per table.
+    """
+    create_schema(conn)
+    written = {}
+    for table, rows in (("history_results", results), ("history_races", races)):
+        # `with conn` rolls back the DELETE if the insert fails, as in replace_rows
+        with conn:
+            conn.execute(f"DELETE FROM {table} WHERE cycle = ?", (cycle,))
+            written[table] = upsert_rows(conn, table, rows)
+    return written
+
+
+def _rows(conn, sql, params):
+    """Run a query and return each row as a dict."""
+    cursor = conn.execute(sql, params)
+    columns = [col[0] for col in cursor.description]
+    return [dict(zip(columns, row)) for row in cursor]
+
+
+def history_summary(conn, cycle):
+    """Count one cycle's history rows and how many D versus R candidates have money.
+
+    A candidate counts as matched when their FEC ID has a `history_money` row
+    for the same cycle. Some committees are principal for two candidate IDs,
+    so `history_money` can hold the same money under both. Matching is by the
+    results sheet's own ID, so nothing is added across them.
+
+    Parameters
+    ----------
+    conn : sqlite3.Connection
+    cycle : int
+
+    Returns
+    -------
+    dict
+        Counts, plus `unmatched` as (race_id, name, candidate_id) tuples.
+    """
+    results = _rows(conn, "SELECT * FROM history_results WHERE cycle = ?", (cycle,))
+    money_ids = {row[0] for row in conn.execute("SELECT candidate_id FROM history_money WHERE cycle = ?", (cycle,))}
+    dvr = dem_vs_rep_races(results)
+    candidates = [r for r in results if r["race_id"] in dvr and r["party"] in ("DEM", "REP")]
+    unmatched = [r for r in candidates if r["candidate_id"] not in money_ids]
+    return {
+        "races": conn.execute("SELECT COUNT(*) FROM history_races WHERE cycle = ?", (cycle,)).fetchone()[0],
+        "result_races": len({r["race_id"] for r in results}),
+        "dem_vs_rep_races": len(dvr),
+        "winners": sum(r["won"] for r in results),
+        "dem_vs_rep_candidates": len(candidates),
+        "matched_to_money": len(candidates) - len(unmatched),
+        "unmatched": sorted((r["race_id"], r["name"], r["candidate_id"]) for r in unmatched),
+    }
+
+
+def load_history(conn, cycles=HISTORY_CYCLES):
+    """Fill the history tables for each cycle and print what was loaded.
+
+    Parameters
+    ----------
+    conn : sqlite3.Connection
+    cycles : iterable of int, optional
+    """
+    for cycle in cycles:
+        written = write_history(conn, cycle, load_history_results(cycle), load_history_races(cycle))
+        summary = history_summary(conn, cycle)
+        unmatched = summary.pop("unmatched")
+        if summary["matched_to_money"] == 0:
+            print(f"{cycle}: history_money is empty for this cycle. Run scripts/load_history_money.py first.")
+        print(f"{cycle}: rows written {written}")
+        print(f"{cycle}: {summary}")
+        for race_id, name, candidate_id in unmatched:
+            print(f"  no pre-general money: {race_id} {name} ({candidate_id})")
+
+
 def database_for(sample):
     """Pick the database file for a pull.
 
@@ -206,9 +301,16 @@ def main(argv=None):
     parser.add_argument("--sample", action="store_true", help="pull one page per endpoint")
     parser.add_argument("--rebuild-outside-spending", metavar="YYYY-MM-DD",
                         help="rebuild that date's outside spending from the saved bulk file instead of pulling")
+    parser.add_argument("--history", action="store_true",
+                        help="load 2022 and 2024 House results, PVI, and ratings for the model")
     args = parser.parse_args(argv)
 
     conn = connect(database_for(args.sample))
+    if args.history:
+        load_history(conn)
+        conn.close()
+        return
+
     if args.rebuild_outside_spending:
         pulled_at = args.rebuild_outside_spending
         written = rebuild_outside_spending(conn, read_saved_independent_expenditures(pulled_at), pulled_at)

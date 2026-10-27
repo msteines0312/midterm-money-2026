@@ -7,7 +7,16 @@ import pytest
 
 from src.config import DB_PATH, SAMPLE_DB_PATH
 from src.db import connect, create_schema, upsert_rows
-from src.pipeline import ENDPOINTS, database_for, main, orphan_counts, rebuild_outside_spending, run_pull
+from src.pipeline import (
+    ENDPOINTS,
+    database_for,
+    history_summary,
+    main,
+    orphan_counts,
+    rebuild_outside_spending,
+    run_pull,
+    write_history,
+)
 
 FIXTURES = Path(__file__).parent / "fixtures"
 # Real rows from the FEC bulk summary file: 3 House campaigns and 1 Senate
@@ -171,3 +180,66 @@ def test_rebuild_flag_uses_saved_file_and_no_api(conn, monkeypatch):
 
     assert read_dates == ["2026-10-23"]
     assert clf_keys(conn, "2026-10-23") == ["H6WA05999"]
+
+
+# History tables. Rows below are copied from the real 2022 results parse
+# (tests/fixtures/fec_results_2022_sample.xlsx, vote_share left out) and the
+# 2022 pinned pages.
+HISTORY_RESULTS = [
+    {"cycle": 2022, "race_id": "GA-02", "candidate_id": "H2GA02031", "name": "Bishop, Sanford",
+     "party": "DEM", "votes": 132675, "won": 1, "incumbent_challenge": "I",
+     "vote_share": None, "is_incumbent": 1},
+    {"cycle": 2022, "race_id": "GA-02", "candidate_id": "H2GA02155", "name": "West, Chris",
+     "party": "REP", "votes": 108665, "won": 0, "incumbent_challenge": "C",
+     "vote_share": None, "is_incumbent": 0},
+    # AK-00 has two Republicans, so it is not a D versus R race
+    {"cycle": 2022, "race_id": "AK-00", "candidate_id": "H2AK01158", "name": "Peltola, Mary S.",
+     "party": "DEM", "votes": 128553, "won": 1, "incumbent_challenge": "I",
+     "vote_share": None, "is_incumbent": 1},
+    {"cycle": 2022, "race_id": "AK-00", "candidate_id": "H2AK00226", "name": "Palin, Sarah",
+     "party": "REP", "votes": 67866, "won": 0, "incumbent_challenge": "O",
+     "vote_share": None, "is_incumbent": 0},
+    {"cycle": 2022, "race_id": "AK-00", "candidate_id": "H2AK01083", "name": "Begich, Nick",
+     "party": "REP", "votes": 61513, "won": 0, "incumbent_challenge": "C",
+     "vote_share": None, "is_incumbent": 0},
+]
+HISTORY_RACES = [
+    {"cycle": 2022, "race_id": "AK-00", "cook_pvi": "R+8", "cook_rating": "Lean D", "rating_source": "cook"},
+    {"cycle": 2022, "race_id": "GA-02", "cook_pvi": "D+3", "cook_rating": "Likely D", "rating_source": "cook"},
+]
+
+
+def test_write_history_replaces_only_that_cycle(conn):
+    pull(FakeClient(), conn, "2026-10-20")
+    races_before = conn.execute("SELECT * FROM races").fetchall()
+    other_cycle = [{**HISTORY_RACES[0], "cycle": 2024}]
+    write_history(conn, 2024, [], other_cycle)
+
+    write_history(conn, 2022, HISTORY_RESULTS, HISTORY_RACES)
+    write_history(conn, 2022, HISTORY_RESULTS[:2], HISTORY_RACES)
+
+    # A rerun replaces the cycle's rows, so a dropped row doesn't linger
+    assert count(conn, "history_results") == 2
+    assert count(conn, "history_races") == 3
+    # 2026 tables are never touched
+    assert conn.execute("SELECT * FROM races").fetchall() == races_before
+
+
+def test_history_summary_counts_money_matches(conn):
+    create_schema(conn)
+    write_history(conn, 2022, HISTORY_RESULTS, HISTORY_RACES)
+    upsert_rows(conn, "history_money", [
+        {"cycle": 2022, "candidate_id": "H2GA02031", "committee_id": "C00000001",
+         "external_contributions": 1.0, "candidate_self_funding": 0.0, "coverage_end_date": "2022-10-19"},
+        # Same candidate in another cycle must not count as a 2022 match
+        {"cycle": 2024, "candidate_id": "H2GA02155", "committee_id": "C00000002",
+         "external_contributions": 1.0, "candidate_self_funding": 0.0, "coverage_end_date": "2024-10-16"},
+    ])
+    summary = history_summary(conn, 2022)
+    assert summary["races"] == 2
+    assert summary["result_races"] == 2
+    assert summary["dem_vs_rep_races"] == 1
+    assert summary["winners"] == 2
+    assert summary["dem_vs_rep_candidates"] == 2
+    assert summary["matched_to_money"] == 1
+    assert summary["unmatched"] == [("GA-02", "West, Chris", "H2GA02155")]

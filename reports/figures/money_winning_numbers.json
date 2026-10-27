@@ -1,0 +1,637 @@
+{
+  "sources": {
+    "simple": "reports/predictions/2026-general-simple.csv",
+    "model": "reports/predictions/2026-general-model.csv",
+    "evaluation": "reports/predictions/model-evaluation.json",
+    "supplementary": "reports/predictions/supplementary-2026-10-26.json"
+  },
+  "money_pulled_at": "2026-10-24",
+  "tags": {
+    "pre-election-simple": "c18c0db",
+    "pre-election-model": "eb42038"
+  },
+  "simple": {
+    "n_races": 435,
+    "race_types": {
+      "D_vs_R": 410,
+      "other": 11,
+      "same_party": 9,
+      "unopposed": 5
+    },
+    "n_d_vs_r": 410,
+    "cook_toss_ups": 21,
+    "money_abstentions": 0,
+    "both_called": 389,
+    "agree": 369,
+    "disagree": 20,
+    "disagree_money_leader": {
+      "DEM": 19,
+      "REP": 1
+    },
+    "disagreements": [
+      {
+        "race_id": "AL-02",
+        "nominees": "Shomari Figures (D) vs. Rhett Marques (R)",
+        "money_leader": "Democratic",
+        "dem_money_share": 0.569554,
+        "cook_rating": "Likely R"
+      },
+      {
+        "race_id": "CO-04",
+        "nominees": "Eileen Laubacher (D) vs. Lauren Boebert (R)",
+        "money_leader": "Democratic",
+        "dem_money_share": 0.922411,
+        "cook_rating": "Solid R"
+      },
+      {
+        "race_id": "CO-05",
+        "nominees": "Jessica Killin (D) vs. Jeff Crank (R)",
+        "money_leader": "Democratic",
+        "dem_money_share": 0.673836,
+        "cook_rating": "Lean R"
+      },
+      {
+        "race_id": "FL-07",
+        "nominees": "Bale Dalton (D) vs. Ryan Elijah (R)",
+        "money_leader": "Democratic",
+        "dem_money_share": 0.779135,
+        "cook_rating": "Likely R"
+      },
+      {
+        "race_id": "FL-09",
+        "nominees": "Darren Soto (D) vs. Dan Green (R)",
+        "money_leader": "Democratic",
+        "dem_money_share": 0.892398,
+        "cook_rating": "Likely R"
+      },
+      {
+        "race_id": "FL-27",
+        "nominees": "Eliott Rodriguez (D) vs. María Elvira Salazar (R)",
+        "money_leader": "Democratic",
+        "dem_money_share": 0.530069,
+        "cook_rating": "Lean R"
+      },
+      {
+        "race_id": "GA-14",
+        "nominees": "Shawn Harris (D) vs. Clay Fuller (R)",
+        "money_leader": "Democratic",
+        "dem_money_share": 0.838151,
+        "cook_rating": "Solid R"
+      },
+      {
+        "race_id": "KY-06",
+        "nominees": "Zach Dembo (D) vs. Ralph Alvarado (R)",
+        "money_leader": "Democratic",
+        "dem_money_share": 0.599973,
+        "cook_rating": "Lean R"
+      },
+      {
+        "race_id": "ME-02",
+        "nominees": "Matthew Dunlap (D) vs. Paul LePage (R)",
+        "money_leader": "Democratic",
+        "dem_money_share": 0.560391,
+        "cook_rating": "Lean R"
+      },
+      {
+        "race_id": "MN-01",
+        "nominees": "Jake Johnson (D) vs. Brad Finstad (R)",
+        "money_leader": "Democratic",
+        "dem_money_share": 0.590017,
+        "cook_rating": "Lean R"
+      },
+      {
+        "race_id": "NV-01",
+        "nominees": "Dina Titus (D) vs. Carrie Buck (R)",
+        "money_leader": "Republican",
+        "dem_money_share": 0.493123,
+        "cook_rating": "Likely D"
+      },
+      {
+        "race_id": "NV-02",
+        "nominees": "Teresa Benitez-Thompson (D) vs. David Flippo (R)",
+        "money_leader": "Democratic",
+        "dem_money_share": 0.519113,
+        "cook_rating": "Likely R"
+      },
+      {
+        "race_id": "NY-21",
+        "nominees": "Blake Gendebien (D) vs. Anthony Constantino (R)",
+        "money_leader": "Democratic",
+        "dem_money_share": 1.0,
+        "cook_rating": "Lean R"
+      },
+      {
+        "race_id": "SC-01",
+        "nominees": "Nancy Lacore (D) vs. Jenny Costa Honeycutt (R)",
+        "money_leader": "Democratic",
+        "dem_money_share": 0.796624,
+        "cook_rating": "Lean R"
+      },
+      {
+        "race_id": "TN-05",
+        "nominees": "Chaz Molder (D) vs. Charlie Hatcher (R)",
+        "money_leader": "Democratic",
+        "dem_money_share": 0.680436,
+        "cook_rating": "Solid R"
+      },
+      {
+        "race_id": "TN-09",
+        "nominees": "Justin Pearson (D) vs. Brent Taylor (R)",
+        "money_leader": "Democratic",
+        "dem_money_share": 0.756595,
+        "cook_rating": "Solid R"
+      },
+      {
+        "race_id": "TX-23",
+        "nominees": "Katy Padilla Stout (D) vs. Brandon Herrera (R)",
+        "money_leader": "Democratic",
+        "dem_money_share": 0.79992,
+        "cook_rating": "Likely R"
+      },
+      {
+        "race_id": "TX-35",
+        "nominees": "Johnny Garcia (D) vs. Carlos De La Cruz (R)",
+        "money_leader": "Democratic",
+        "dem_money_share": 0.566674,
+        "cook_rating": "Lean R"
+      },
+      {
+        "race_id": "VA-05",
+        "nominees": "Tom Perriello (D) vs. John McGuire (R)",
+        "money_leader": "Democratic",
+        "dem_money_share": 0.643195,
+        "cook_rating": "Likely R"
+      },
+      {
+        "race_id": "VA-06",
+        "nominees": "Beth Macy (D) vs. Ben Cline (R)",
+        "money_leader": "Democratic",
+        "dem_money_share": 0.619911,
+        "cook_rating": "Solid R"
+      }
+    ]
+  },
+  "evaluation": {
+    "overall": {
+      "model": {
+        "n_called": 688,
+        "n_races": 688,
+        "coverage": 1.0,
+        "accuracy": 0.963663,
+        "brier": 0.027229
+      },
+      "model_without_money": {
+        "n_called": 688,
+        "n_races": 688,
+        "coverage": 1.0,
+        "accuracy": 0.959302,
+        "brier": 0.03079
+      },
+      "money_rule": {
+        "n_called": 688,
+        "n_races": 688,
+        "coverage": 1.0,
+        "accuracy": 0.924419
+      },
+      "cook": {
+        "n_called": 631,
+        "n_races": 688,
+        "coverage": 0.917151,
+        "accuracy": 0.99683
+      }
+    },
+    "competitive": {
+      "model": {
+        "n_called": 154,
+        "n_races": 154,
+        "coverage": 1.0,
+        "accuracy": 0.837662,
+        "brier": 0.119399,
+        "interval": {
+          "low": 0.779221,
+          "high": 0.896104
+        }
+      },
+      "model_without_money": {
+        "n_called": 154,
+        "n_races": 154,
+        "coverage": 1.0,
+        "accuracy": 0.818182,
+        "brier": 0.130882
+      },
+      "money_rule": {
+        "n_called": 154,
+        "n_races": 154,
+        "coverage": 1.0,
+        "accuracy": 0.733766,
+        "interval": {
+          "low": 0.662338,
+          "high": 0.805195
+        }
+      },
+      "cook": {
+        "n_called": 97,
+        "n_races": 154,
+        "coverage": 0.62987,
+        "accuracy": 0.979381,
+        "interval": {
+          "low": 0.948454,
+          "high": 1.0
+        }
+      }
+    },
+    "competitive_by_cycle": {
+      "2022": {
+        "n_races": 87,
+        "model_accuracy": 0.827586
+      },
+      "2024": {
+        "n_races": 67,
+        "model_accuracy": 0.850746
+      }
+    },
+    "shared": {
+      "n_races": 97,
+      "model": {
+        "accuracy": 0.938144,
+        "interval": {
+          "low": 0.886598,
+          "high": 0.979381
+        }
+      },
+      "money_rule": {
+        "accuracy": 0.793814,
+        "interval": {
+          "low": 0.71134,
+          "high": 0.866237
+        }
+      },
+      "cook": {
+        "accuracy": 0.979381,
+        "interval": {
+          "low": 0.948454,
+          "high": 1.0
+        }
+      }
+    },
+    "paired_difference": {
+      "model_minus_money_rule": {
+        "estimate": 0.14433,
+        "low": 0.061856,
+        "high": 0.237113
+      },
+      "model_minus_cook": {
+        "estimate": -0.041237,
+        "low": -0.092784,
+        "high": 0.0
+      }
+    },
+    "calibration_competitive": [
+      {
+        "bin": "0.0-0.2",
+        "count": 37,
+        "mean_predicted": 0.102598,
+        "observed_rate": 0.054054
+      },
+      {
+        "bin": "0.2-0.4",
+        "count": 16,
+        "mean_predicted": 0.278279,
+        "observed_rate": 0.4375
+      },
+      {
+        "bin": "0.4-0.6",
+        "count": 14,
+        "mean_predicted": 0.477428,
+        "observed_rate": 0.5
+      },
+      {
+        "bin": "0.6-0.8",
+        "count": 17,
+        "mean_predicted": 0.709979,
+        "observed_rate": 0.823529
+      },
+      {
+        "bin": "0.8-1.0",
+        "count": 70,
+        "mean_predicted": 0.911841,
+        "observed_rate": 0.885714
+      }
+    ],
+    "money_contribution": {
+      "resamples": 1000,
+      "seed": 2026,
+      "competitive": {
+        "n_races": 154,
+        "brier_with_money": 0.119399,
+        "brier_without_money": 0.130882,
+        "accuracy_with_money": 0.837662,
+        "accuracy_without_money": 0.818182,
+        "brier_without_minus_with": {
+          "estimate": 0.011483,
+          "low": -0.002399,
+          "high": 0.025853
+        },
+        "accuracy_with_minus_without": {
+          "estimate": 0.019481,
+          "low": -0.012987,
+          "high": 0.051948
+        }
+      },
+      "all_races": {
+        "n_races": 688,
+        "brier_with_money": 0.027229,
+        "brier_without_money": 0.03079,
+        "accuracy_with_money": 0.963663,
+        "accuracy_without_money": 0.959302,
+        "brier_without_minus_with": {
+          "estimate": 0.003561,
+          "low": 0.000348,
+          "high": 0.007056
+        },
+        "accuracy_with_minus_without": {
+          "estimate": 0.00436,
+          "low": -0.002907,
+          "high": 0.013081
+        }
+      }
+    }
+  },
+  "coefficients": {
+    "n_train": 688,
+    "raw": {
+      "intercept": -2.307761,
+      "dem_money_share": 4.210095,
+      "incumbency": 1.230478,
+      "dem_pvi": 0.252823
+    },
+    "standardized": {
+      "intercept": -0.32183,
+      "dem_money_share": 1.66514,
+      "incumbency": 1.130344,
+      "dem_pvi": 3.665534
+    },
+    "odds_per_pvi_point": 1.287655,
+    "odds_incumbency": 3.422866,
+    "odds_per_10_points_money": 1.523499,
+    "pvi_vs_money_sd_ratio": 2.201337,
+    "shift_open_even": {
+      "incumbency": 0,
+      "dem_pvi": 0,
+      "p_at_45_pct": 0.398141,
+      "p_at_55_pct": 0.501948,
+      "change": 0.103807
+    },
+    "shift_training_medians": {
+      "incumbency": 0.0,
+      "dem_pvi": -1.0,
+      "p_at_45_pct": 0.339384,
+      "p_at_55_pct": 0.439047,
+      "change": 0.099663
+    }
+  },
+  "predictions_2026": {
+    "n_races": 400,
+    "excluded_third_party": 10,
+    "dem_called": 191,
+    "rep_called": 209,
+    "incumbency": {
+      "dem": 164,
+      "rep": 168,
+      "open": 68
+    },
+    "between_40_and_60": 3,
+    "closest": [
+      {
+        "race_id": "AZ-01",
+        "nominees": "Amish Shah (D) vs. Jay Feely (R)",
+        "dem_win_probability": 0.55736,
+        "dem_money_share": 0.662939,
+        "incumbency": 0,
+        "dem_pvi": -1,
+        "cook_rating": "Lean D"
+      },
+      {
+        "race_id": "FL-07",
+        "nominees": "Bale Dalton (D) vs. Ryan Elijah (R)",
+        "dem_win_probability": 0.427601,
+        "dem_money_share": 0.779135,
+        "incumbency": 0,
+        "dem_pvi": -5,
+        "cook_rating": "Likely R"
+      },
+      {
+        "race_id": "NC-11",
+        "nominees": "Jamie Ager (D) vs. Jennifer Balkcom (R)",
+        "dem_win_probability": 0.594593,
+        "dem_money_share": 0.939376,
+        "incumbency": 0,
+        "dem_pvi": -5,
+        "cook_rating": "Toss Up"
+      },
+      {
+        "race_id": "FL-22",
+        "nominees": "Pia Dandiya (D) vs. Casey Askar (R)",
+        "dem_win_probability": 0.603331,
+        "dem_money_share": 0.887965,
+        "incumbency": 0,
+        "dem_pvi": -4,
+        "cook_rating": "Toss Up"
+      }
+    ],
+    "toss_ups": {
+      "n": 21,
+      "dem_called": 6,
+      "rep_called": 15,
+      "with_incumbent": 16,
+      "dem_incumbent": 4,
+      "rep_incumbent": 12,
+      "incumbent_party_favored": 16,
+      "open": 5,
+      "open_dem_called": [
+        "FL-22",
+        "NC-11"
+      ],
+      "open_rep_called": 3,
+      "below_015": [
+        {
+          "race_id": "TX-15",
+          "dem_win_probability": 0.039093
+        },
+        {
+          "race_id": "MI-04",
+          "dem_win_probability": 0.106288
+        },
+        {
+          "race_id": "VA-01",
+          "dem_win_probability": 0.121278
+        },
+        {
+          "race_id": "OH-07",
+          "dem_win_probability": 0.12498
+        },
+        {
+          "race_id": "PA-08",
+          "dem_win_probability": 0.127874
+        },
+        {
+          "race_id": "MI-07",
+          "dem_win_probability": 0.132458
+        }
+      ]
+    },
+    "model_vs_cook": [
+      {
+        "race_id": "FL-09",
+        "nominees": "Darren Soto (D) vs. Dan Green (R)",
+        "dem_win_probability": 0.658634,
+        "incumbency": 1,
+        "cook_rating": "Likely R"
+      },
+      {
+        "race_id": "IA-01",
+        "nominees": "Christina Bohannan (D) vs. Mariannette Miller-Meeks (R)",
+        "dem_win_probability": 0.102408,
+        "incumbency": -1,
+        "cook_rating": "Lean D"
+      },
+      {
+        "race_id": "IA-03",
+        "nominees": "Sarah Trone Garriott (D) vs. Zach Nunn (R)",
+        "dem_win_probability": 0.238995,
+        "incumbency": -1,
+        "cook_rating": "Lean D"
+      },
+      {
+        "race_id": "NJ-07",
+        "nominees": "Rebecca Bennett (D) vs. Thomas Kean Jr. (R)",
+        "dem_win_probability": 0.317876,
+        "incumbency": -1,
+        "cook_rating": "Lean D"
+      },
+      {
+        "race_id": "PA-07",
+        "nominees": "Bob Brooks (D) vs. Ryan Mackenzie (R)",
+        "dem_win_probability": 0.222605,
+        "incumbency": -1,
+        "cook_rating": "Lean D"
+      },
+      {
+        "race_id": "PA-10",
+        "nominees": "Janelle Stelson (D) vs. Scott Perry (R)",
+        "dem_win_probability": 0.150712,
+        "incumbency": -1,
+        "cook_rating": "Lean D"
+      }
+    ],
+    "model_vs_money_rule": 38,
+    "money_record_missing": 38
+  },
+  "cited": {
+    "money_date": "FEC data as of 2026-10-24",
+    "tag_simple": "`pre-election-simple` at commit `c18c0db`",
+    "tag_model": "`pre-election-model` at commit `eb42038`",
+    "simple_races": "435 races",
+    "simple_d_vs_r": "410 Democrat versus Republican",
+    "simple_toss_ups": "21 Toss Ups",
+    "simple_both_called": "389 races",
+    "simple_agree": "same party in 369",
+    "simple_disagree": "different parties in 20",
+    "simple_disagree_dem": "19 of the 20",
+    "simple_disagree_rep": "1 (NV-01)",
+    "overall_races": "688 held-out races",
+    "overall_model": "96.4%",
+    "overall_model_brier": "0.027",
+    "overall_money_rule": "92.4%",
+    "overall_cook": "99.7%",
+    "overall_cook_called": "631 of 688",
+    "overall_cook_coverage": "91.7%",
+    "competitive_races": "154 competitive races",
+    "competitive_model": "83.8% [77.9%, 89.6%]",
+    "competitive_model_brier": "0.119",
+    "competitive_without_money": "81.8%",
+    "competitive_without_money_brier": "0.131",
+    "competitive_money_rule": "73.4% [66.2%, 80.5%]",
+    "competitive_cook": "97.9% [94.8%, 100.0%]",
+    "competitive_cook_called": "97 of 154",
+    "competitive_cook_coverage": "63.0%",
+    "competitive_cook_abstained": "57 Toss Ups",
+    "shared_races": "97 competitive races where all three",
+    "shared_model": "93.8%",
+    "shared_money_rule": "79.4%",
+    "shared_cook": "97.9%",
+    "diff_money_rule": "+14.4 points",
+    "diff_money_rule_interval": "[+6.2, +23.7]",
+    "diff_cook": "-4.1 points",
+    "diff_cook_interval": "[-9.3, 0.0]",
+    "contrib_resamples": "1,000 draws",
+    "contrib_seed": "seed 2026",
+    "contrib_comp_brier": "0.011 [-0.002, 0.026]",
+    "contrib_comp_accuracy": "+1.9 points [-1.3, +5.2]",
+    "contrib_all_brier": "0.0036 [0.0003, 0.0071]",
+    "contrib_all_accuracy": "+0.4 points [-0.3, +1.3]",
+    "coef_n_train": "688 training races",
+    "coef_pvi_sd_ratio": "about 2.2 times",
+    "coef_pvi_odds": "about 1.29",
+    "coef_incumbency_odds": "about 3.4",
+    "coef_money_odds": "about 1.52",
+    "shift_open_even": "from 39.8% to 50.2%",
+    "shift_medians": "from 33.9% to 43.9%",
+    "pred_races": "400 races",
+    "pred_excluded": "10 races where a third-party",
+    "pred_dem_called": "Democrat in 191",
+    "pred_rep_called": "Republican in 209",
+    "pred_incumbency": "164 Democratic incumbents, 168 Republican incumbents, and 68 open seats",
+    "pred_near_even": "3 races",
+    "pred_toss_ups": "21 Toss Ups",
+    "pred_toss_up_calls": "Republican in 15 and the Democrat in 6",
+    "pred_toss_up_incumbents": "16 Toss Ups with an incumbent (12 Republican, 4 Democratic)",
+    "pred_toss_up_open": "5 open-seat Toss Ups",
+    "pred_toss_up_open_calls": "Democrat in 2 (FL-22 and NC-11) and the Republican in 3",
+    "pred_confident_toss_ups": "the 6 below 0.15",
+    "pred_vs_cook": "different parties in 6",
+    "pred_vs_money_rule": "38 races",
+    "pred_missing_money": "38 races",
+    "calibration_0.0-0.2": "| 0.0 to 0.2 | 37 | 0.10 | 0.05 |",
+    "calibration_0.2-0.4": "| 0.2 to 0.4 | 16 | 0.28 | 0.44 |",
+    "calibration_0.4-0.6": "| 0.4 to 0.6 | 14 | 0.48 | 0.50 |",
+    "calibration_0.6-0.8": "| 0.6 to 0.8 | 17 | 0.71 | 0.82 |",
+    "calibration_0.8-1.0": "| 0.8 to 1.0 | 70 | 0.91 | 0.89 |",
+    "disagree_AL-02": "| AL-02 | Shomari Figures (D) vs. Rhett Marques (R) | Democratic | 57.0% | Likely R |",
+    "disagree_CO-04": "| CO-04 | Eileen Laubacher (D) vs. Lauren Boebert (R) | Democratic | 92.2% | Solid R |",
+    "disagree_CO-05": "| CO-05 | Jessica Killin (D) vs. Jeff Crank (R) | Democratic | 67.4% | Lean R |",
+    "disagree_FL-07": "| FL-07 | Bale Dalton (D) vs. Ryan Elijah (R) | Democratic | 77.9% | Likely R |",
+    "disagree_FL-09": "| FL-09 | Darren Soto (D) vs. Dan Green (R) | Democratic | 89.2% | Likely R |",
+    "disagree_FL-27": "| FL-27 | Eliott Rodriguez (D) vs. María Elvira Salazar (R) | Democratic | 53.0% | Lean R |",
+    "disagree_GA-14": "| GA-14 | Shawn Harris (D) vs. Clay Fuller (R) | Democratic | 83.8% | Solid R |",
+    "disagree_KY-06": "| KY-06 | Zach Dembo (D) vs. Ralph Alvarado (R) | Democratic | 60.0% | Lean R |",
+    "disagree_ME-02": "| ME-02 | Matthew Dunlap (D) vs. Paul LePage (R) | Democratic | 56.0% | Lean R |",
+    "disagree_MN-01": "| MN-01 | Jake Johnson (D) vs. Brad Finstad (R) | Democratic | 59.0% | Lean R |",
+    "disagree_NV-01": "| NV-01 | Dina Titus (D) vs. Carrie Buck (R) | Republican | 49.3% | Likely D |",
+    "disagree_NV-02": "| NV-02 | Teresa Benitez-Thompson (D) vs. David Flippo (R) | Democratic | 51.9% | Likely R |",
+    "disagree_NY-21": "| NY-21 | Blake Gendebien (D) vs. Anthony Constantino (R) | Democratic | 100.0% | Lean R |",
+    "disagree_SC-01": "| SC-01 | Nancy Lacore (D) vs. Jenny Costa Honeycutt (R) | Democratic | 79.7% | Lean R |",
+    "disagree_TN-05": "| TN-05 | Chaz Molder (D) vs. Charlie Hatcher (R) | Democratic | 68.0% | Solid R |",
+    "disagree_TN-09": "| TN-09 | Justin Pearson (D) vs. Brent Taylor (R) | Democratic | 75.7% | Solid R |",
+    "disagree_TX-23": "| TX-23 | Katy Padilla Stout (D) vs. Brandon Herrera (R) | Democratic | 80.0% | Likely R |",
+    "disagree_TX-35": "| TX-35 | Johnny Garcia (D) vs. Carlos De La Cruz (R) | Democratic | 56.7% | Lean R |",
+    "disagree_VA-05": "| VA-05 | Tom Perriello (D) vs. John McGuire (R) | Democratic | 64.3% | Likely R |",
+    "disagree_VA-06": "| VA-06 | Beth Macy (D) vs. Ben Cline (R) | Democratic | 62.0% | Solid R |",
+    "closest_AZ-01": "AZ-01 (0.56",
+    "closest_FL-07": "FL-07 (0.43",
+    "closest_NC-11": "NC-11 (0.59",
+    "closest_FL-22": "FL-22 (0.60",
+    "vs_cook_FL-09": "| FL-09 | Darren Soto (D) vs. Dan Green (R) | 0.66 | Likely R |",
+    "vs_cook_IA-01": "| IA-01 | Christina Bohannan (D) vs. Mariannette Miller-Meeks (R) | 0.10 | Lean D |",
+    "vs_cook_IA-03": "| IA-03 | Sarah Trone Garriott (D) vs. Zach Nunn (R) | 0.24 | Lean D |",
+    "vs_cook_NJ-07": "| NJ-07 | Rebecca Bennett (D) vs. Thomas Kean Jr. (R) | 0.32 | Lean D |",
+    "vs_cook_PA-07": "| PA-07 | Bob Brooks (D) vs. Ryan Mackenzie (R) | 0.22 | Lean D |",
+    "vs_cook_PA-10": "| PA-10 | Janelle Stelson (D) vs. Scott Perry (R) | 0.15 | Lean D |",
+    "confident_toss_up_TX-15": "TX-15 (0.04)",
+    "confident_toss_up_MI-04": "MI-04 (0.11)",
+    "confident_toss_up_VA-01": "VA-01 (0.12)",
+    "confident_toss_up_OH-07": "OH-07 (0.12)",
+    "confident_toss_up_PA-08": "PA-08 (0.13)",
+    "confident_toss_up_MI-07": "MI-07 (0.13)"
+  }
+}

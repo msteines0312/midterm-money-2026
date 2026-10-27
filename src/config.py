@@ -17,6 +17,15 @@ RAW_DIR = DATA_DIR / "raw"
 # Hand-built CSVs (PAC industry labels, endorsements). Small, sourced, and committed.
 MANUAL_DIR = DATA_DIR / "manual"
 PAC_INDUSTRIES_CSV = MANUAL_DIR / "pac_industries.csv"
+NOMINEE_MATCHES_CSV = MANUAL_DIR / "nominee_matches.csv"
+# Billionaire money (section 2): who is on Forbes, which organizations are
+# theirs, and how every large organization donor was classified
+BILLIONAIRES_CSV = MANUAL_DIR / "billionaires.csv"
+DONOR_ENTITIES_CSV = MANUAL_DIR / "donor_entities.csv"
+ORG_DONORS_REVIEWED_CSV = MANUAL_DIR / "org_donors_reviewed.csv"
+NOT_ON_FORBES_CSV = MANUAL_DIR / "large_donors_not_on_forbes.csv"
+# Hand-checked FEC IDs for 2022 and 2024 results rows the automatic match misses
+HISTORY_MATCHES_CSV = MANUAL_DIR / "history_matches.csv"
 PROCESSED_DIR = DATA_DIR / "processed"
 DB_PATH = PROCESSED_DIR / "midterm_money.db"
 # --sample runs write here so a partial pull never looks like a real snapshot
@@ -32,6 +41,39 @@ CYCLE = 2026
 WIKIPEDIA_DIR = RAW_DIR / "wikipedia"
 COOK_RATINGS_PAGE = ("2026_United_States_House_of_Representatives_election_ratings", 1381240142)
 PVI_PAGE = ("2026_United_States_House_of_Representatives_elections", 1380949529)
+# Latest revision at fetch time (2026-10-24), pinned for the November nominees.
+# Separate from PVI_PAGE because nominees change as primaries and runoffs finish.
+NOMINEES_PAGE = ("2026_United_States_House_of_Representatives_elections", 1381568365)
+
+# Past cycles for training the money model. Each cycle's pages are pinned to
+# the last revision before election day (Nov 8, 2022 and Nov 5, 2024, at
+# 00:00 UTC), found with the MediaWiki API (prop=revisions, rvstart, rvdir=older),
+# so the PVI and ratings are what was known before any votes were counted.
+HISTORY_CYCLES = (2022, 2024)
+HISTORY_PVI_PAGES = {
+    2022: ("2022_United_States_House_of_Representatives_elections", 1120557329),
+    2024: ("2024_United_States_House_of_Representatives_elections", 1255162576),
+}
+HISTORY_RATINGS_PAGES = {
+    2022: ("2022_United_States_House_of_Representatives_election_ratings", 1120614900),
+    2024: ("2024_United_States_House_of_Representatives_election_ratings", 1255439657),
+}
+
+# Official House results, from the FEC's "Federal Elections" publication.
+# Its House sheet has an FEC candidate ID on every row. The FEC had not
+# published a 2024 edition as of October 2026.
+RESULTS_DIR = RAW_DIR / "results"
+FEC_RESULTS_URLS = {
+    2022: "https://www.fec.gov/documents/5676/federalelections2022.xlsx",
+}
+# Fallback for 2024: the elections page's per-state tables after certification,
+# pinned to the first revision on or after Jan 3, 2025 (found with the
+# MediaWiki API, rvdir=newer). They list each candidate's vote share, not
+# counts, and mark the winner with a check mark. The MIT Election Lab file
+# (doi:10.7910/DVN/IG0UN2) needs a personal sign-in form to download.
+WIKI_RESULTS_PAGES = {
+    2024: ("2024_United_States_House_of_Representatives_elections", 1267103610),
+}
 
 
 def load_api_key(env_path=None):

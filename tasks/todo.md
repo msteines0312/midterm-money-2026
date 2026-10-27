@@ -27,6 +27,18 @@ Design: `docs/superpowers/specs/2026-10-23-tech-money-page-design.md`
 - [ ] After Nov 3: add Senate spending for the same networks
 - [ ] After Nov 3: settle the billionaire rule and add the donor layer
 
+## Step 2b: Billionaire money (write-up section 2, before Nov 3)
+Design: `docs/superpowers/specs/2026-10-26-billionaire-money-design.md`. Plan: `docs/superpowers/plans/2026-10-26-billionaire-money.md`
+- [x] Task 1: Load Schedule A contributions and PAC committee totals
+- [x] Task 2: Research billionaires and entities (sourced CSVs, loaders, tests)
+- [x] Task 3: Giving, concentration, and the billionaire-backed PAC list (27 PACs backed, 6 near, 2 unreconciled, 1 could not be tested)
+- [x] Task 4: House share and lean
+- [x] Task 5: Primary outcomes for billionaire-backed PACs (7 candidates, no review items)
+- [x] Task 6: Charts, numbers JSON, write-up (`reports/billionaire-money.md`), and its number-matching test
+- [x] Added raw e-filing loader after finding that Schedule A lacked reports filed Oct 15 and 22
+- [ ] Optional: finish loading 314 Action Fund's small gifts so Bloomberg's share there can be tested
+- [ ] After Nov 3: add Senate spending and general election outcomes for billionaire-backed PACs
+
 ## Step 3: Endorsements (write-up section 2)
 - [ ] Decide which endorsers to track and document the sourcing method
 - [ ] Build the endorsement dataset (endorser, candidate, race, date, primary result)
@@ -35,17 +47,21 @@ Design: `docs/superpowers/specs/2026-10-23-tech-money-page-design.md`
 - [ ] Write section 2
 
 ## Step 4: Money and winning, pre-election (write-up section 3)
-- [ ] Compute fundraising share per race
-- [ ] Logistic regression on primary outcomes: money share, incumbency, PVI
-- [ ] Compare fundraising advantage against Cook ratings for the general
-- [ ] Write section 3 and commit the pre-election predictions before Nov 3
+- [x] Compute fundraising share per race
+- [x] Logistic regression on 2022 and 2024 general outcomes (money share, incumbency, PVI), evaluated by held-out cycle
+- [x] Commit model-based general election predictions (tag pre-election-model)
+- [x] Paired bootstrap check of what money adds to the model (supplementary-2026-10-26.json)
+- [x] Compare fundraising advantage against Cook ratings for the general
+- [x] Commit simple general election predictions (tag pre-election-simple)
+- [x] Write section 3 and commit the pre-election predictions before Nov 3 (pre-election version: `reports/money-and-winning.md`. Scoring is added after Nov 3)
 
 ## Step 4b: Full pre-election pull
 - [x] Run `python -m src.pipeline` on or after Oct 23, 2026 (pre-general reports are due Oct 22) and record the pull date in the README
 
 ## Step 5: Post-election update (after Nov 3)
 - [ ] Load general election results
-- [ ] Rerun the money and winning model on general outcomes
+- [ ] Score both tagged prediction sets against 2026 general results
+- [ ] Test whether adding outside spending (support and oppose, by candidate) improves the model on 2022 and 2024. Planned in the spec but not done before the pre-election-model tag
 - [ ] Add a before-and-after comparison to the README
 - [ ] Link the write-up from the README
 - [ ] Fill in How to Run, Key Features, and What I Learned
