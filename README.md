@@ -1,7 +1,7 @@
 # Midterm Money 2026
 An analysis of campaign finance and endorsements in the 2026 U.S. House midterms. It asks three questions: where industry super PAC money is going, whether endorsements predict primary wins, and whether a fundraising advantage predicts winning once incumbency and district partisanship are accounted for.
 
-> **Status:** In progress. The pre-election analysis is being built now. General election results will be added after November 3, 2026.
+> **Status:** In progress. The data pipeline is built. The pre-election analysis is next, and general election results will be added after November 3, 2026.
 
 ## Questions
 
@@ -10,16 +10,67 @@ An analysis of campaign finance and endorsements in the 2026 U.S. House midterms
 3. **Money and winning.** Does a fundraising advantage predict winning after controlling for incumbency and district partisanship (Cook PVI)?
 
 ## Tech Stack
-- Python (pandas, requests, scikit-learn, statsmodels)
+- Python (requests, pandas, BeautifulSoup, pytest)
 - SQLite
-- Power BI
-- Data: FEC OpenFEC API, Cook Political Report ratings, hand-collected endorsement data
+- matplotlib for the write-up charts
+- Data: FEC OpenFEC API, Cook Political Report ratings and PVI (via Wikipedia), hand-collected labels
 
 ## How to Run
-_Coming soon._
+1. Clone the repo and create a virtual environment:
+   ```bash
+   python -m venv .venv
+   .venv\Scripts\activate        # Windows
+   source .venv/bin/activate     # macOS / Linux
+   pip install -r requirements.txt
+   ```
+2. Get a free API key at https://api.data.gov/signup/, copy `.env.example` to `.env`, and paste the key in.
+3. Check that everything works with a small pull (one page per endpoint). This writes to a separate `midterm_money_sample.db` so test runs never mix with real snapshots:
+   ```bash
+   python -m src.pipeline --sample
+   ```
+4. Build the full database at `data/processed/midterm_money.db`:
+   ```bash
+   python -m src.pipeline
+   ```
+   Running it again on a later date adds a new snapshot of the money data without overwriting the old one.
+5. Run the tests:
+   ```bash
+   python -m pytest
+   ```
+
+## Data Sources
+
+| Table | Source | Notes |
+|---|---|---|
+| `candidates` | OpenFEC `/candidates/` | 2026 House candidates who have raised money |
+| `candidate_totals` | FEC bulk summary file (`webl26.zip`) | Cycle totals per campaign, with self-funding split out. One snapshot per pull date |
+| `committees` | OpenFEC `/committees/` | Super PACs (type O) and hybrid PACs (types V and W) |
+| `outside_spending` | OpenFEC `/schedules/schedule_e/by_candidate/` | Independent expenditures summed by committee, candidate, and support or oppose |
+| `races` | Wikipedia, pinned revisions | Cook ratings and Cook PVI for all 435 districts |
+| `pac_industries` | Hand-built, `data/manual/` | Industry label for each tracked super PAC, with a source for every row |
+
+### Snapshots
+| Pull date | Purpose | Notes |
+|---|---|---|
+| 2026-10-23 | Pre-election | Pulled the day after pre-general reports were due. 744 campaigns report through October 14 |
+
+## Data Caveats
+- FEC numbers keep changing as campaigns file new reports. Every snapshot is stamped with its pull date, and every chart says which date it uses.
+- Fundraising is measured as `external_contributions`: money from individuals (all donation sizes), PACs, and party committees, minus refunds. A candidate's own contributions and loans are tracked separately in `candidate_self_funding`, so someone who writes their campaign a $3M check doesn't look like a $3M fundraiser. In the October 23 snapshot, 329 active House candidates got more than half their money from themselves.
+- The FEC file lists every 2026 House campaign that raised money, including ones that dropped out, closed, or lost a primary. A campaign counts as active if its latest report covers through September 30, 2026 (the October quarterly). In the October 23 snapshot, that cuts 2,557 campaigns to 1,674. The exact set of candidates on the November ballot comes from primary results in the endorsements phase.
+- Negative cash on hand is real, not an error. It's how the FEC records a campaign that spent more than it raised and owes debts.
+- Cook ratings for safe seats are inferred. The Wikipedia ratings page only lists seats that at least one forecaster considers competitive (137 of them). The other 298 get Solid D or Solid R from the sign of their PVI, and `races.rating_source` says which is which.
+- Texas, California, and several other states redrew their maps for 2026, so PVI comes from the 2026 tables rather than older lists. Missouri's new map was struck down in September 2026, so its districts keep their 2025 PVI.
+- The schema has no foreign keys. FEC endpoints filter candidates differently, so some rows don't match across tables. The pipeline prints how many rows are unmatched on every run instead of dropping them.
+- Non-voting delegates (DC and the territories) file with the FEC but have no Cook rating. They stay in `candidates` and are left out of the analysis. Four other candidates also have no matching race because their FEC filings list a district that doesn't exist (GA-00, GA-23, NM-66, and one Maryland filing with no district).
+- A few FEC reports have coverage end dates after the pull date (November 3 and December 31, 2026). These look like filing errors, so don't trust `coverage_end_date` as a precise filing date for those rows.
 
 ## Key Features
-_Coming soon._
+- Rate-limit-aware API client that backs off on HTTP 429 and pauses when the remaining-requests header hits zero
+- Snapshot design so pre-election and post-election data can be compared side by side
+- Tests built on real saved API responses and real FEC file rows, which caught that cash on hand arrives from the API as text
+- Fundraising measure that separates money raised from others from candidates funding themselves
+- Ratings parser that combines two pinned Wikipedia pages and fails loudly if the pages disagree
 
 ## What I Learned
 _Coming soon._
