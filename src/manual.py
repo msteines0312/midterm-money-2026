@@ -6,10 +6,13 @@ a reader can check the call.
 """
 
 import csv
+from datetime import date
 
 from src.config import (
     BILLIONAIRES_CSV,
     DONOR_ENTITIES_CSV,
+    ENDORSEMENTS_CSV,
+    ENDORSERS_CSV,
     NOMINEE_MATCHES_CSV,
     ORG_DONORS_REVIEWED_CSV,
     PAC_INDUSTRIES_CSV,
@@ -245,4 +248,92 @@ def load_org_donors_reviewed(path=ORG_DONORS_REVIEWED_CSV):
         elif not row["note"]:
             raise ValueError(f"{entity} has no note on how it was classified")
         row["total"] = float(row["total"])
+    return rows
+
+
+ENDORSER_SIDES = {"R", "D"}
+# official: the endorser's own list page. tracker: a third party (Ballotpedia)
+# that compiles the endorser's announcements and links each one.
+LIST_KINDS = {"official", "tracker"}
+# How an endorsement_date was found. announced: the date of the endorser's own
+# post. listed_by: the earliest archived copy of the list that shows the
+# candidate, so the real endorsement came on or before that date.
+DATE_BASES = {"announced", "listed_by"}
+
+
+def load_endorsers(path=ENDORSERS_CSV):
+    """Read the endorsers tracked in the endorsements section.
+
+    Parameters
+    ----------
+    path : pathlib.Path, optional
+        CSV with columns endorser, side, list_url, list_kind, checked_on,
+        note.
+
+    Returns
+    -------
+    list of dict
+        One dict per endorser, with whitespace stripped.
+
+    Raises
+    ------
+    ValueError
+        If a row has no list_url, a side other than R or D, or a list_kind
+        not in LIST_KINDS.
+    """
+    rows = _read_stripped(path)
+    for row in rows:
+        endorser = row["endorser"] or "?"
+        if not row["list_url"]:
+            raise ValueError(f"{endorser} has no list_url")
+        if row["side"] not in ENDORSER_SIDES:
+            raise ValueError(f"{endorser} has side {row['side']!r}, expected R or D")
+        if row["list_kind"] not in LIST_KINDS:
+            raise ValueError(f"{endorser} has unknown list_kind {row['list_kind']!r}")
+    return rows
+
+
+def load_endorsements(path=ENDORSEMENTS_CSV, endorsers_path=ENDORSERS_CSV):
+    """Read the sourced House primary endorsements.
+
+    Parameters
+    ----------
+    path : pathlib.Path, optional
+        CSV with columns endorser, candidate_id, race_id, candidate_name,
+        endorsement_date, date_basis, source_url, source_outcome, note.
+        source_outcome is the source's own primary result where it gives
+        one (Ballotpedia's outcome column), and blank otherwise.
+    endorsers_path : pathlib.Path, optional
+        The endorsers CSV every row's endorser must appear in.
+
+    Returns
+    -------
+    list of dict
+        One dict per endorsement, with whitespace stripped. A blank
+        endorsement_date means the timing is unknown, and the analysis
+        keeps those rows out of the headline win rate.
+
+    Raises
+    ------
+    ValueError
+        If a row has no source_url or race_id, names an endorser missing
+        from endorsers_path, has a date that is not YYYY-MM-DD, or has a
+        date without a date_basis in DATE_BASES.
+    """
+    known = {row["endorser"] for row in load_endorsers(endorsers_path)}
+    rows = _read_stripped(path)
+    for row in rows:
+        label = f"{row['endorser']} / {row['candidate_name'] or '?'}"
+        for column in ("source_url", "race_id"):
+            if not row[column]:
+                raise ValueError(f"{label} has no {column}")
+        if row["endorser"] not in known:
+            raise ValueError(f"{label}: endorser is not in endorsers.csv")
+        if row["endorsement_date"]:
+            try:
+                date.fromisoformat(row["endorsement_date"])
+            except ValueError:
+                raise ValueError(f"{label} has endorsement_date {row['endorsement_date']!r}, expected YYYY-MM-DD")
+            if row["date_basis"] not in DATE_BASES:
+                raise ValueError(f"{label} has unknown date_basis {row['date_basis']!r}")
     return rows

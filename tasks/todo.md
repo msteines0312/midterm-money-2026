@@ -40,11 +40,13 @@ Design: `docs/superpowers/specs/2026-10-26-billionaire-money-design.md`. Plan: `
 - [ ] After Nov 3: add Senate spending and general election outcomes for billionaire-backed PACs
 
 ## Step 3: Endorsements (write-up section 2)
-- [ ] Decide which endorsers to track and document the sourcing method
-- [ ] Build the endorsement dataset (endorser, candidate, race, date, primary result)
-- [ ] Calculate win rates, split by incumbents, open seats, and contested primaries
-- [ ] Write up the selection-bias caveat (endorsers often pick favorites)
-- [ ] Write section 2
+- [x] Decide which endorsers to track and document the sourcing method
+- [x] Build the endorsement dataset (endorser, candidate, race, date, primary result)
+- [ ] Add Club for Growth PAC and Justice Democrats once the Wayback Machine allows downloads (rerun `scripts/build_endorsements.py` without `--only`)
+- [x] Calculate win rates, split by incumbents, open seats, and contested primaries
+- [x] Write up the selection-bias caveat (endorsers often pick favorites)
+- [x] Write section 2 (Trump only for now)
+- [ ] After Nov 3: score Louisiana's 3 pending endorsements
 
 ## Step 4: Money and winning, pre-election (write-up section 3)
 - [x] Compute fundraising share per race
