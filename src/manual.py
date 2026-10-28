@@ -300,7 +300,9 @@ def load_endorsements(path=ENDORSEMENTS_CSV, endorsers_path=ENDORSERS_CSV):
     ----------
     path : pathlib.Path, optional
         CSV with columns endorser, candidate_id, race_id, candidate_name,
-        endorsement_date, date_basis, source_url, note.
+        endorsement_date, date_basis, source_url, source_outcome, note.
+        source_outcome is the source's own primary result where it gives
+        one (Ballotpedia's outcome column), and blank otherwise.
     endorsers_path : pathlib.Path, optional
         The endorsers CSV every row's endorser must appear in.
 
