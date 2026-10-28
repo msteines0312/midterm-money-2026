@@ -1,0 +1,416 @@
+{
+  "data_dates": {
+    "endorsement_lists": "2026-10-27",
+    "fec_totals": "2026-10-24"
+  },
+  "endorsers": {
+    "Donald Trump": {
+      "side": "R",
+      "list_kind": "tracker",
+      "endorsements": 230,
+      "timing": {
+        "before": 227,
+        "after": 1,
+        "unknown": 1,
+        "runoff": 1
+      },
+      "outcome": {
+        "won": 210,
+        "withdrew": 11,
+        "lost": 6,
+        "pending": 3
+      },
+      "excluded": {
+        "after": 1,
+        "runoff": 1,
+        "unknown": 1,
+        "hedged": 2,
+        "pending": 3,
+        "withdrew": 11
+      },
+      "rates": [
+        {
+          "stratum": "all_contested",
+          "won": 76,
+          "lost": 5,
+          "review": 0,
+          "rate": 0.94,
+          "low": 0.86,
+          "high": 0.97
+        },
+        {
+          "stratum": "challenger",
+          "won": 20,
+          "lost": 1,
+          "review": 0,
+          "rate": 0.95,
+          "low": 0.77,
+          "high": 0.99
+        },
+        {
+          "stratum": "incumbent",
+          "won": 35,
+          "lost": 2,
+          "review": 0,
+          "rate": 0.95,
+          "low": 0.82,
+          "high": 0.99
+        },
+        {
+          "stratum": "open_seat",
+          "won": 21,
+          "lost": 2,
+          "review": 0,
+          "rate": 0.91,
+          "low": 0.73,
+          "high": 0.98
+        },
+        {
+          "stratum": "uncontested",
+          "won": 131,
+          "lost": 0,
+          "review": 0,
+          "rate": 1.0,
+          "low": 0.97,
+          "high": 1.0
+        }
+      ],
+      "nominee_rates": [
+        {
+          "stratum": "all_contested",
+          "won": 76,
+          "lost": 16,
+          "review": 0,
+          "rate": 0.83,
+          "low": 0.74,
+          "high": 0.89
+        },
+        {
+          "stratum": "challenger",
+          "won": 20,
+          "lost": 1,
+          "review": 0,
+          "rate": 0.95,
+          "low": 0.77,
+          "high": 0.99
+        },
+        {
+          "stratum": "incumbent",
+          "won": 35,
+          "lost": 13,
+          "review": 0,
+          "rate": 0.73,
+          "low": 0.59,
+          "high": 0.83
+        },
+        {
+          "stratum": "open_seat",
+          "won": 21,
+          "lost": 2,
+          "review": 0,
+          "rate": 0.91,
+          "low": 0.73,
+          "high": 0.98
+        },
+        {
+          "stratum": "uncontested",
+          "won": 131,
+          "lost": 0,
+          "review": 0,
+          "rate": 1.0,
+          "low": 0.97,
+          "high": 1.0
+        }
+      ],
+      "favorite": {
+        "n": 81,
+        "share_top_fundraiser": 0.88,
+        "win_rate_if_top": 0.96,
+        "win_rate_if_not_top": 0.8
+      }
+    },
+    "Club for Growth PAC": {
+      "side": "R",
+      "list_kind": "official",
+      "endorsements": 0,
+      "timing": {},
+      "outcome": {},
+      "excluded": {},
+      "rates": [],
+      "nominee_rates": [],
+      "favorite": {
+        "n": 0,
+        "share_top_fundraiser": null,
+        "win_rate_if_top": null,
+        "win_rate_if_not_top": null
+      }
+    },
+    "Justice Democrats": {
+      "side": "D",
+      "list_kind": "official",
+      "endorsements": 0,
+      "timing": {},
+      "outcome": {},
+      "excluded": {},
+      "rates": [],
+      "nominee_rates": [],
+      "favorite": {
+        "n": 0,
+        "share_top_fundraiser": null,
+        "win_rate_if_top": null,
+        "win_rate_if_not_top": null
+      }
+    }
+  },
+  "baseline": [
+    {
+      "party": "DEM",
+      "stratum": "all_contested",
+      "won": 243,
+      "lost": 572,
+      "review": 10,
+      "rate": 0.3,
+      "low": 0.27,
+      "high": 0.33
+    },
+    {
+      "party": "DEM",
+      "stratum": "challenger",
+      "won": 120,
+      "lost": 357,
+      "review": 2,
+      "rate": 0.25,
+      "low": 0.21,
+      "high": 0.29
+    },
+    {
+      "party": "DEM",
+      "stratum": "incumbent",
+      "won": 70,
+      "lost": 31,
+      "review": 2,
+      "rate": 0.69,
+      "low": 0.6,
+      "high": 0.77
+    },
+    {
+      "party": "DEM",
+      "stratum": "open_seat",
+      "won": 53,
+      "lost": 184,
+      "review": 6,
+      "rate": 0.22,
+      "low": 0.18,
+      "high": 0.28
+    },
+    {
+      "party": "DEM",
+      "stratum": "uncontested",
+      "won": 180,
+      "lost": 7,
+      "review": 1,
+      "rate": 0.96,
+      "low": 0.92,
+      "high": 0.98
+    },
+    {
+      "party": "REP",
+      "stratum": "all_contested",
+      "won": 157,
+      "lost": 364,
+      "review": 2,
+      "rate": 0.3,
+      "low": 0.26,
+      "high": 0.34
+    },
+    {
+      "party": "REP",
+      "stratum": "challenger",
+      "won": 78,
+      "lost": 199,
+      "review": 0,
+      "rate": 0.28,
+      "low": 0.23,
+      "high": 0.34
+    },
+    {
+      "party": "REP",
+      "stratum": "incumbent",
+      "won": 38,
+      "lost": 41,
+      "review": 1,
+      "rate": 0.48,
+      "low": 0.37,
+      "high": 0.59
+    },
+    {
+      "party": "REP",
+      "stratum": "open_seat",
+      "won": 41,
+      "lost": 124,
+      "review": 0,
+      "rate": 0.25,
+      "low": 0.19,
+      "high": 0.32
+    },
+    {
+      "party": "REP",
+      "stratum": "uncontested",
+      "won": 187,
+      "lost": 7,
+      "review": 4,
+      "rate": 0.96,
+      "low": 0.93,
+      "high": 0.98
+    }
+  ],
+  "source_check": {
+    "compared": 227,
+    "agreed": 227,
+    "disagree": []
+  },
+  "contested_proxy": {
+    "checked": 15,
+    "judged": 11,
+    "agreed": 9
+  },
+  "hedged": [
+    {
+      "endorser": "Donald Trump",
+      "race_id": "TX-23",
+      "name": "HERRERA, BRANDON",
+      "timing": "runoff",
+      "outcome": "won"
+    },
+    {
+      "endorser": "Donald Trump",
+      "race_id": "TX-23",
+      "name": "GONZALES, ERNEST ANTHONY TONY II",
+      "timing": "before",
+      "outcome": "lost"
+    }
+  ],
+  "withdrew": [
+    {
+      "endorser": "Donald Trump",
+      "race_id": "CA-48",
+      "name": "ISSA, DARRELL"
+    },
+    {
+      "endorser": "Donald Trump",
+      "race_id": "FL-02",
+      "name": "DUNN, NEAL PATRICK MD, FACS"
+    },
+    {
+      "endorser": "Donald Trump",
+      "race_id": "FL-11",
+      "name": "WEBSTER, DANIEL"
+    },
+    {
+      "endorser": "Donald Trump",
+      "race_id": "FL-16",
+      "name": "BUCHANAN, VERNON"
+    },
+    {
+      "endorser": "Donald Trump",
+      "race_id": "GA-11",
+      "name": "LOUDERMILK, BARRY"
+    },
+    {
+      "endorser": "Donald Trump",
+      "race_id": "MT-01",
+      "name": "ZINKE, RYAN K"
+    },
+    {
+      "endorser": "Donald Trump",
+      "race_id": "NV-02",
+      "name": "AMODEI, MARK EUGENE"
+    },
+    {
+      "endorser": "Donald Trump",
+      "race_id": "OK-01",
+      "name": "HERN, KEVIN"
+    },
+    {
+      "endorser": "Donald Trump",
+      "race_id": "TX-19",
+      "name": "ARRINGTON, JODEY"
+    },
+    {
+      "endorser": "Donald Trump",
+      "race_id": "TX-22",
+      "name": "NEHLS, TROY"
+    },
+    {
+      "endorser": "Donald Trump",
+      "race_id": "UT-04",
+      "name": "OWENS, BURGESS"
+    }
+  ],
+  "lost": [
+    {
+      "endorser": "Donald Trump",
+      "race_id": "FL-07",
+      "name": "MILLS, CORY",
+      "status": "incumbent",
+      "contested": true,
+      "top_fundraiser": true
+    },
+    {
+      "endorser": "Donald Trump",
+      "race_id": "FL-19",
+      "name": "LAUF, CATALINA",
+      "status": "open_seat",
+      "contested": true,
+      "top_fundraiser": true
+    },
+    {
+      "endorser": "Donald Trump",
+      "race_id": "MI-08",
+      "name": "HASSAN, AMIR",
+      "status": "challenger",
+      "contested": true,
+      "top_fundraiser": true
+    },
+    {
+      "endorser": "Donald Trump",
+      "race_id": "OK-01",
+      "name": "LAHMEYER, JACKSON",
+      "status": "open_seat",
+      "contested": true,
+      "top_fundraiser": false
+    },
+    {
+      "endorser": "Donald Trump",
+      "race_id": "TN-05",
+      "name": "OGLES, ANDY",
+      "status": "incumbent",
+      "contested": true,
+      "top_fundraiser": false
+    }
+  ],
+  "review": [],
+  "cited": {
+    "donald_trump_endorsements": "230",
+    "donald_trump_all_contested": "94% (76 of 81)",
+    "donald_trump_challenger": "95% (20 of 21)",
+    "donald_trump_incumbent": "95% (35 of 37)",
+    "donald_trump_open_seat": "91% (21 of 23)",
+    "donald_trump_uncontested": "100% (131 of 131)",
+    "donald_trump_challenger_as_nominee": "95% (20 of 21)",
+    "donald_trump_open_seat_as_nominee": "91% (21 of 23)",
+    "donald_trump_withdrew": "11",
+    "donald_trump_after": "1",
+    "donald_trump_hedged": "2",
+    "donald_trump_pending": "3",
+    "donald_trump_top_share": "88%",
+    "donald_trump_win_if_top": "96%",
+    "donald_trump_win_if_not_top": "80%",
+    "baseline_dem_challenger": "25% (120 of 477)",
+    "baseline_dem_open_seat": "22% (53 of 237)",
+    "baseline_rep_challenger": "28% (78 of 277)",
+    "baseline_rep_open_seat": "25% (41 of 165)",
+    "source_agreed": "227 of 227",
+    "proxy_agreed": "9 of 11"
+  }
+}
