@@ -364,6 +364,14 @@ def test_baseline_can_leave_out_the_endorsed():
     assert (row["won"], row["lost"]) == (0, 2)
 
 
+def test_baseline_counts_minnesota_dfl_as_democrats():
+    frame = pd.DataFrame([person("H1", "OMAR, ILHAN", 90_000.0, "incumbent", "MN-05", "DFL"),
+                          person("H2", "SMITH, ANN", 30_000.0, "incumbent", "MN-05", "DFL")])
+    nominees = [{"race_id": "MN-05", "name": "Ilhan Omar", "party": "dem"}]
+    rates = baseline_rates(frame, DATES, {"H1"}, nominees, as_of=AS_OF)
+    assert set(rates["party"]) == {"DEM"}
+
+
 def test_endorsing_the_winner_after_the_primary_does_not_hide_a_loss():
     # Backed H1 before the primary, H1 lost, then backed the nominee H2 for the runoff
     frame = classified(("H1", "TX-01", "incumbent", True, True), ("H2", "TX-01", "open_seat", True, False))

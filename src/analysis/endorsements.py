@@ -402,13 +402,15 @@ def baseline_rates(classified_all, primary_dates, nominee_ids, nominees, as_of, 
     pandas.DataFrame
         party, stratum, won, lost, review, rate, low, high.
     """
+    # Minnesota Democrats file as the Democratic-Farmer-Labor Party (DFL)
+    classified_all = classified_all.assign(party=classified_all["party"].replace("DFL", "DEM"))
     funded = classified_all[
         (classified_all["external"] >= min_external) & classified_all["party"].isin(["REP", "DEM"])
     ]
     # One person filed twice (same last name and same money) counts once,
     # keeping the filing that is the nominee's if either is
     funded = funded.assign(
-        person=funded.apply(_person_key, axis=1),
+        person=[_person_key(row) for _, row in funded.iterrows()],
         is_nominee=funded["candidate_id"].isin(nominee_ids),
     ).sort_values("is_nominee", ascending=False)
     excluded = funded[funded["candidate_id"].isin(set(exclude_ids))]
