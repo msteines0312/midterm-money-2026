@@ -11,6 +11,7 @@ import pandas as pd
 from src.endorsements_match import (
     _parse_office,
     house_only,
+    listing_date,
     match_candidates,
     parse_endorsement_list,
     truth_social_date,
@@ -156,3 +157,60 @@ def test_unmatched_goes_to_review():
     assert matched == []
     assert [row["name"] for row in review] == ["Nobody Here", "William Lawrence"]
     assert all(row["review_reason"] for row in review)
+
+
+# Real rows: Minnesota Democrats file as DFL, and Greg Casar's 2026 filing
+# is in TX-37 after Texas redrew its map, though Justice Democrats lists TX-35
+REDRAWN = pd.DataFrame(
+    [
+        ("H8MN05239", "OMAR, ILHAN", "DFL", "MN", "05", "MN-05", "I"),
+        ("H2TX35144", "CASAR, GREG", "DEM", "TX", "37", "TX-37", "O"),
+        ("H6TX35999", "CASAR, MARIA", "DEM", "TX", "35", "TX-35", "O"),
+    ],
+    columns=CANDIDATES.columns,
+)
+
+
+def test_dfl_counts_as_democratic():
+    matched, review = match_candidates([{"name": "Ilhan Omar", "state": "MN", "district": "05"}], REDRAWN, party="DEM")
+    assert [row["candidate_id"] for row in matched] == ["H8MN05239"]
+
+
+def test_redrawn_district_matches_on_full_name_in_the_state():
+    # No Greg Casar in TX-35, but exactly one Greg Casar in Texas
+    matched, review = match_candidates([{"name": "Greg Casar", "state": "TX", "district": "35"}], REDRAWN.iloc[:2], party="DEM")
+    assert [(row["candidate_id"], row["race_id"]) for row in matched] == [("H2TX35144", "TX-37")]
+    assert "TX-35" in matched[0]["match_note"]
+
+
+def test_statewide_fallback_needs_the_first_name():
+    # A different Casar in the listed race must not be swapped for Greg
+    matched, review = match_candidates([{"name": "Ana Casar", "state": "TX", "district": "36"}], REDRAWN, party="DEM")
+    assert matched == []
+    assert len(review) == 1
+
+
+# Club for Growth copies, in order. The list was cleared for the new cycle on
+# 2025-02-13, so the 2025-02-01 copy is the 2024 slate.
+COPIES = ["20250201", "20250213", "20250303", "20250815", "20251004", "20260416", "20260801", "20260825"]
+
+
+def test_listing_date_starts_the_run_before_the_primary():
+    # Nick Begich: 2024 slate, cleared, then listed from March 2025 on
+    present = {"20250201", "20250303", "20250815", "20251004", "20260416", "20260801", "20260825"}
+    assert listing_date(COPIES, present, "20260818") == ("20250303", "listed")
+
+
+def test_listing_date_drops_an_endorsement_removed_before_the_primary():
+    # Chip Roy: listed in 2025, then removed before his primary
+    assert listing_date(COPIES, {"20250303", "20250815"}, "20260303") == (None, "removed")
+
+
+def test_listing_date_uses_a_relisting_after_the_primary():
+    # Derek Merrin: 2024 slate, removed, listed again after his May primary
+    assert listing_date(COPIES, {"20250201", "20260801", "20260825"}, "20260505") == ("20260801", "listed")
+
+
+def test_listing_date_keeps_a_loser_removed_after_the_primary():
+    present = {"20251004", "20260416"}
+    assert listing_date(COPIES, present, "20260519") == ("20251004", "listed")

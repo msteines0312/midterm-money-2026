@@ -4,6 +4,8 @@ import pandas as pd
 import pytest
 
 from src.analysis.endorsements import (
+    backing_outcomes,
+    backing_rates_by_party,
     baseline_rates,
     classify_primary,
     endorsement_outcomes,
@@ -12,6 +14,7 @@ from src.analysis.endorsements import (
     favorite_check,
     load_primary_dates,
     primary_dates_for,
+    super_pac_backing,
     wilson_interval,
 )
 from src.db import connect, create_schema, upsert_rows
@@ -364,6 +367,14 @@ def test_baseline_can_leave_out_the_endorsed():
     assert (row["won"], row["lost"]) == (0, 2)
 
 
+def test_baseline_counts_minnesota_dfl_as_democrats():
+    frame = pd.DataFrame([person("H1", "OMAR, ILHAN", 90_000.0, "incumbent", "MN-05", "DFL"),
+                          person("H2", "SMITH, ANN", 30_000.0, "incumbent", "MN-05", "DFL")])
+    nominees = [{"race_id": "MN-05", "name": "Ilhan Omar", "party": "dem"}]
+    rates = baseline_rates(frame, DATES, {"H1"}, nominees, as_of=AS_OF)
+    assert set(rates["party"]) == {"DEM"}
+
+
 def test_endorsing_the_winner_after_the_primary_does_not_hide_a_loss():
     # Backed H1 before the primary, H1 lost, then backed the nominee H2 for the runoff
     frame = classified(("H1", "TX-01", "incumbent", True, True), ("H2", "TX-01", "open_seat", True, False))
@@ -379,3 +390,69 @@ def test_real_primary_dates_load():
     dates = load_primary_dates()
     assert primary_dates_for("AL-01", dates)["primary_date"] == "2026-08-11"
     assert primary_dates_for("CA-07", dates)["primary_date"] == "2026-06-02"
+
+
+# Super PAC primary spending treated as backing
+
+def spend(committee_id, candidate_id, race_id, total, support_oppose="S", election_type="P", name=None):
+    """One outside_spending row (a Schedule E total for one PAC and candidate)."""
+    return {"committee_id": committee_id, "candidate_key": candidate_id or name, "candidate_id": candidate_id,
+            "candidate_name": name or candidate_id, "party": "REP", "race_id": race_id,
+            "election_type": election_type, "support_oppose": support_oppose, "pulled_at": "2026-10-24",
+            "total": total, "count": 1}
+
+
+def test_super_pac_backing_keeps_primary_support_by_super_pacs(conn):
+    upsert_rows(conn, "committees", [
+        {"committee_id": "C1", "name": "PAC ONE", "committee_type": "O", "designation": "U"},
+        {"committee_id": "C2", "name": "PARTY CMTE", "committee_type": "Y", "designation": "U"},
+    ])
+    upsert_rows(conn, "outside_spending", [
+        spend("C1", "H1", "TX-01", 50_000),
+        spend("C1", "H2", "TX-02", 5_000),  # too small to count as backing
+        spend("C1", "H3", "TX-03", 50_000, support_oppose="O"),  # spending against is not backing
+        spend("C1", "H4", "TX-04", 50_000, election_type="G"),  # general election spending
+        spend("C1", None, "TX-05", 50_000, name="NO ID"),  # cannot be scored
+        spend("C2", "H1", "TX-01", 50_000),  # not a super PAC
+    ])
+    backing, no_id = super_pac_backing(conn, "2026-10-24")
+    assert list(zip(backing["committee_id"], backing["candidate_id"])) == [("C1", "H1")]
+    assert backing.loc[0, "pac"] == "PAC ONE"
+    assert no_id == 1
+
+
+def test_backing_outcomes_scores_like_endorsements():
+    frame = classified(("H1", "TX-01", "open_seat", True, True), ("H2", "TX-01", "open_seat", True, False),
+                       ("H3", "TX-02", "incumbent", False, True))
+    backing = pd.DataFrame([
+        {"committee_id": "C1", "pac": "PAC ONE", "candidate_id": "H1", "total": 50_000.0},
+        {"committee_id": "C1", "pac": "PAC ONE", "candidate_id": "H2", "total": 20_000.0},
+        {"committee_id": "C2", "pac": "PAC TWO", "candidate_id": "H1", "total": 90_000.0},
+        {"committee_id": "C2", "pac": "PAC TWO", "candidate_id": "H3", "total": 90_000.0},
+    ])
+    nominees = [{"race_id": "TX-01", "name": "Ann H1", "party": "rep"}, {"race_id": "TX-02", "name": "Ann H3", "party": "rep"}]
+    out = backing_outcomes(backing, frame, DATES, {"H1", "H3"}, nominees, AS_OF)
+    # PAC ONE backed both TX-01 candidates, so both of its rows are hedged
+    hedged = out[out["hedged"]]
+    assert set(zip(hedged["endorser"], hedged["candidate_id"])) == {("PAC ONE", "H1"), ("PAC ONE", "H2")}
+    assert (out["timing"] == "before").all()
+    rates = endorsement_win_rates(out).set_index(["endorser", "stratum"])
+    assert rates.loc[("PAC TWO", "open_seat"), "won"] == 1
+    assert rates.loc[("PAC TWO", "uncontested"), "won"] == 1
+
+
+def test_backing_rates_by_party_counts_each_candidate_once():
+    frame = classified(("H1", "TX-01", "open_seat", True, True), ("H2", "TX-01", "open_seat", True, False))
+    frame.loc[1, "party"] = "DFL"
+    frame.loc[1, "race_id"] = "MN-05"
+    backing = pd.DataFrame([
+        {"committee_id": "C1", "pac": "ONE", "candidate_id": "H1", "total": 50_000.0},
+        {"committee_id": "C2", "pac": "TWO", "candidate_id": "H1", "total": 50_000.0},
+        {"committee_id": "C2", "pac": "TWO", "candidate_id": "H2", "total": 50_000.0},
+    ])
+    nominees = [{"race_id": "TX-01", "name": "Ann H1", "party": "rep"}, {"race_id": "MN-05", "name": "Bo Jones", "party": "dem"}]
+    out = backing_outcomes(backing, frame, DATES, {"H1"}, nominees, AS_OF)
+    rates = backing_rates_by_party(out).set_index(["party", "stratum"])
+    # H1 is backed by two PACs but is one candidate; the DFL candidate counts as a Democrat
+    assert (rates.loc[("REP", "open_seat"), "won"], rates.loc[("REP", "open_seat"), "lost"]) == (1, 0)
+    assert rates.loc[("DEM", "open_seat"), "lost"] == 1

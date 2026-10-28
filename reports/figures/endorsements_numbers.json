@@ -132,33 +132,243 @@
     "Club for Growth PAC": {
       "side": "R",
       "list_kind": "official",
-      "endorsements": 0,
-      "timing": {},
-      "outcome": {},
-      "excluded": {},
-      "rates": [],
-      "nominee_rates": [],
+      "endorsements": 18,
+      "timing": {
+        "before": 16,
+        "after": 2
+      },
+      "outcome": {
+        "won": 16,
+        "pending": 1,
+        "lost": 1
+      },
+      "excluded": {
+        "after": 2,
+        "runoff": 0,
+        "unknown": 0,
+        "hedged": 0,
+        "pending": 1,
+        "withdrew": 0
+      },
+      "rates": [
+        {
+          "stratum": "all_contested",
+          "won": 9,
+          "lost": 1,
+          "review": 0,
+          "rate": 0.9,
+          "low": 0.6,
+          "high": 0.98
+        },
+        {
+          "stratum": "challenger",
+          "won": 2,
+          "lost": 0,
+          "review": 0,
+          "rate": 1.0,
+          "low": 0.34,
+          "high": 1.0
+        },
+        {
+          "stratum": "incumbent",
+          "won": 2,
+          "lost": 0,
+          "review": 0,
+          "rate": 1.0,
+          "low": 0.34,
+          "high": 1.0
+        },
+        {
+          "stratum": "open_seat",
+          "won": 5,
+          "lost": 1,
+          "review": 0,
+          "rate": 0.83,
+          "low": 0.44,
+          "high": 0.97
+        },
+        {
+          "stratum": "uncontested",
+          "won": 5,
+          "lost": 0,
+          "review": 0,
+          "rate": 1.0,
+          "low": 0.57,
+          "high": 1.0
+        }
+      ],
+      "nominee_rates": [
+        {
+          "stratum": "all_contested",
+          "won": 9,
+          "lost": 1,
+          "review": 0,
+          "rate": 0.9,
+          "low": 0.6,
+          "high": 0.98
+        },
+        {
+          "stratum": "challenger",
+          "won": 2,
+          "lost": 0,
+          "review": 0,
+          "rate": 1.0,
+          "low": 0.34,
+          "high": 1.0
+        },
+        {
+          "stratum": "incumbent",
+          "won": 2,
+          "lost": 0,
+          "review": 0,
+          "rate": 1.0,
+          "low": 0.34,
+          "high": 1.0
+        },
+        {
+          "stratum": "open_seat",
+          "won": 5,
+          "lost": 1,
+          "review": 0,
+          "rate": 0.83,
+          "low": 0.44,
+          "high": 0.97
+        },
+        {
+          "stratum": "uncontested",
+          "won": 5,
+          "lost": 0,
+          "review": 0,
+          "rate": 1.0,
+          "low": 0.57,
+          "high": 1.0
+        }
+      ],
       "favorite": {
-        "n": 0,
-        "share_top_fundraiser": null,
-        "win_rate_if_top": null,
-        "win_rate_if_not_top": null
+        "n": 10,
+        "share_top_fundraiser": 0.7,
+        "win_rate_if_top": 1.0,
+        "win_rate_if_not_top": 0.67
       }
     },
     "Justice Democrats": {
       "side": "D",
       "list_kind": "official",
-      "endorsements": 0,
-      "timing": {},
-      "outcome": {},
-      "excluded": {},
-      "rates": [],
-      "nominee_rates": [],
+      "endorsements": 23,
+      "timing": {
+        "before": 23
+      },
+      "outcome": {
+        "won": 19,
+        "lost": 4
+      },
+      "excluded": {
+        "after": 0,
+        "runoff": 0,
+        "unknown": 0,
+        "hedged": 0,
+        "pending": 0,
+        "withdrew": 0
+      },
+      "rates": [
+        {
+          "stratum": "all_contested",
+          "won": 15,
+          "lost": 4,
+          "review": 0,
+          "rate": 0.79,
+          "low": 0.57,
+          "high": 0.91
+        },
+        {
+          "stratum": "challenger",
+          "won": 6,
+          "lost": 2,
+          "review": 0,
+          "rate": 0.75,
+          "low": 0.41,
+          "high": 0.93
+        },
+        {
+          "stratum": "incumbent",
+          "won": 4,
+          "lost": 0,
+          "review": 0,
+          "rate": 1.0,
+          "low": 0.51,
+          "high": 1.0
+        },
+        {
+          "stratum": "open_seat",
+          "won": 5,
+          "lost": 2,
+          "review": 0,
+          "rate": 0.71,
+          "low": 0.36,
+          "high": 0.92
+        },
+        {
+          "stratum": "uncontested",
+          "won": 4,
+          "lost": 0,
+          "review": 0,
+          "rate": 1.0,
+          "low": 0.51,
+          "high": 1.0
+        }
+      ],
+      "nominee_rates": [
+        {
+          "stratum": "all_contested",
+          "won": 15,
+          "lost": 4,
+          "review": 0,
+          "rate": 0.79,
+          "low": 0.57,
+          "high": 0.91
+        },
+        {
+          "stratum": "challenger",
+          "won": 6,
+          "lost": 2,
+          "review": 0,
+          "rate": 0.75,
+          "low": 0.41,
+          "high": 0.93
+        },
+        {
+          "stratum": "incumbent",
+          "won": 4,
+          "lost": 0,
+          "review": 0,
+          "rate": 1.0,
+          "low": 0.51,
+          "high": 1.0
+        },
+        {
+          "stratum": "open_seat",
+          "won": 5,
+          "lost": 2,
+          "review": 0,
+          "rate": 0.71,
+          "low": 0.36,
+          "high": 0.92
+        },
+        {
+          "stratum": "uncontested",
+          "won": 4,
+          "lost": 0,
+          "review": 0,
+          "rate": 1.0,
+          "low": 0.51,
+          "high": 1.0
+        }
+      ],
       "favorite": {
-        "n": 0,
-        "share_top_fundraiser": null,
-        "win_rate_if_top": null,
-        "win_rate_if_not_top": null
+        "n": 19,
+        "share_top_fundraiser": 0.58,
+        "win_rate_if_top": 0.91,
+        "win_rate_if_not_top": 0.62
       }
     }
   },
@@ -166,47 +376,47 @@
     {
       "party": "DEM",
       "stratum": "all_contested",
-      "won": 240,
+      "won": 229,
       "lost": 570,
       "review": 10,
-      "rate": 0.3,
-      "low": 0.27,
-      "high": 0.33
+      "rate": 0.29,
+      "low": 0.26,
+      "high": 0.32
     },
     {
       "party": "DEM",
       "stratum": "challenger",
-      "won": 118,
-      "lost": 356,
+      "won": 115,
+      "lost": 357,
       "review": 2,
-      "rate": 0.25,
+      "rate": 0.24,
       "low": 0.21,
-      "high": 0.29
-    },
-    {
-      "party": "DEM",
-      "stratum": "incumbent",
-      "won": 69,
-      "lost": 32,
-      "review": 2,
-      "rate": 0.68,
-      "low": 0.59,
-      "high": 0.77
-    },
-    {
-      "party": "DEM",
-      "stratum": "open_seat",
-      "won": 53,
-      "lost": 182,
-      "review": 6,
-      "rate": 0.23,
-      "low": 0.18,
       "high": 0.28
     },
     {
       "party": "DEM",
+      "stratum": "incumbent",
+      "won": 65,
+      "lost": 32,
+      "review": 2,
+      "rate": 0.67,
+      "low": 0.57,
+      "high": 0.76
+    },
+    {
+      "party": "DEM",
+      "stratum": "open_seat",
+      "won": 49,
+      "lost": 181,
+      "review": 6,
+      "rate": 0.21,
+      "low": 0.17,
+      "high": 0.27
+    },
+    {
+      "party": "DEM",
       "stratum": "uncontested",
-      "won": 180,
+      "won": 179,
       "lost": 7,
       "review": 1,
       "rate": 0.96,
@@ -216,8 +426,8 @@
     {
       "party": "REP",
       "stratum": "all_contested",
-      "won": 77,
-      "lost": 345,
+      "won": 75,
+      "lost": 344,
       "review": 2,
       "rate": 0.18,
       "low": 0.15,
@@ -226,28 +436,28 @@
     {
       "party": "REP",
       "stratum": "challenger",
-      "won": 56,
+      "won": 55,
       "lost": 196,
       "review": 0,
       "rate": 0.22,
-      "low": 0.18,
-      "high": 0.28
+      "low": 0.17,
+      "high": 0.27
     },
     {
       "party": "REP",
       "stratum": "incumbent",
-      "won": 3,
+      "won": 2,
       "lost": 28,
       "review": 1,
-      "rate": 0.1,
-      "low": 0.03,
-      "high": 0.25
+      "rate": 0.07,
+      "low": 0.02,
+      "high": 0.21
     },
     {
       "party": "REP",
       "stratum": "open_seat",
       "won": 18,
-      "lost": 121,
+      "lost": 120,
       "review": 0,
       "rate": 0.13,
       "low": 0.08,
@@ -334,6 +544,14 @@
   ],
   "lost": [
     {
+      "endorser": "Club for Growth PAC",
+      "race_id": "WI-07",
+      "name": "EBBEN, JESSI",
+      "status": "open_seat",
+      "contested": true,
+      "top_fundraiser": false
+    },
+    {
       "endorser": "Donald Trump",
       "race_id": "FL-07",
       "name": "MILLS, CORY",
@@ -380,9 +598,391 @@
       "status": "incumbent",
       "contested": true,
       "top_fundraiser": true
+    },
+    {
+      "endorser": "Justice Democrats",
+      "race_id": "IL-08",
+      "name": "AHMED, JUNAID",
+      "status": "open_seat",
+      "contested": true,
+      "top_fundraiser": false
+    },
+    {
+      "endorser": "Justice Democrats",
+      "race_id": "IL-09",
+      "name": "ABUGHAZALEH, KATHERINE M.",
+      "status": "open_seat",
+      "contested": true,
+      "top_fundraiser": true
+    },
+    {
+      "endorser": "Justice Democrats",
+      "race_id": "MO-01",
+      "name": "BUSH, CORI",
+      "status": "challenger",
+      "contested": true,
+      "top_fundraiser": false
+    },
+    {
+      "endorser": "Justice Democrats",
+      "race_id": "NC-04",
+      "name": "ALLAM, NIDA",
+      "status": "challenger",
+      "contested": true,
+      "top_fundraiser": false
     }
   ],
   "review": [],
+  "super_pacs": {
+    "spending_date": "2026-10-24",
+    "pacs": 261,
+    "candidates": 324,
+    "pairs": 624,
+    "no_candidate_id": 7,
+    "not_in_candidates": 4,
+    "hedged": 6,
+    "pending": 4,
+    "rates": [
+      {
+        "party": "DEM",
+        "stratum": "all_contested",
+        "won": 92,
+        "lost": 76,
+        "review": 2,
+        "rate": 0.55,
+        "low": 0.47,
+        "high": 0.62
+      },
+      {
+        "party": "DEM",
+        "stratum": "challenger",
+        "won": 29,
+        "lost": 30,
+        "review": 0,
+        "rate": 0.49,
+        "low": 0.37,
+        "high": 0.62
+      },
+      {
+        "party": "DEM",
+        "stratum": "incumbent",
+        "won": 32,
+        "lost": 5,
+        "review": 0,
+        "rate": 0.86,
+        "low": 0.72,
+        "high": 0.94
+      },
+      {
+        "party": "DEM",
+        "stratum": "open_seat",
+        "won": 31,
+        "lost": 41,
+        "review": 2,
+        "rate": 0.43,
+        "low": 0.32,
+        "high": 0.55
+      },
+      {
+        "party": "DEM",
+        "stratum": "uncontested",
+        "won": 8,
+        "lost": 1,
+        "review": 0,
+        "rate": 0.89,
+        "low": 0.56,
+        "high": 0.98
+      },
+      {
+        "party": "REP",
+        "stratum": "all_contested",
+        "won": 67,
+        "lost": 48,
+        "review": 0,
+        "rate": 0.58,
+        "low": 0.49,
+        "high": 0.67
+      },
+      {
+        "party": "REP",
+        "stratum": "challenger",
+        "won": 19,
+        "lost": 16,
+        "review": 0,
+        "rate": 0.54,
+        "low": 0.38,
+        "high": 0.7
+      },
+      {
+        "party": "REP",
+        "stratum": "incumbent",
+        "won": 18,
+        "lost": 4,
+        "review": 0,
+        "rate": 0.82,
+        "low": 0.61,
+        "high": 0.93
+      },
+      {
+        "party": "REP",
+        "stratum": "open_seat",
+        "won": 30,
+        "lost": 28,
+        "review": 0,
+        "rate": 0.52,
+        "low": 0.39,
+        "high": 0.64
+      },
+      {
+        "party": "REP",
+        "stratum": "uncontested",
+        "won": 14,
+        "lost": 1,
+        "review": 0,
+        "rate": 0.93,
+        "low": 0.7,
+        "high": 0.99
+      }
+    ],
+    "baseline": [
+      {
+        "party": "DEM",
+        "stratum": "all_contested",
+        "won": 152,
+        "lost": 500,
+        "review": 8,
+        "rate": 0.23,
+        "low": 0.2,
+        "high": 0.27
+      },
+      {
+        "party": "DEM",
+        "stratum": "challenger",
+        "won": 92,
+        "lost": 329,
+        "review": 2,
+        "rate": 0.22,
+        "low": 0.18,
+        "high": 0.26
+      },
+      {
+        "party": "DEM",
+        "stratum": "incumbent",
+        "won": 37,
+        "lost": 27,
+        "review": 2,
+        "rate": 0.58,
+        "low": 0.46,
+        "high": 0.69
+      },
+      {
+        "party": "DEM",
+        "stratum": "open_seat",
+        "won": 23,
+        "lost": 144,
+        "review": 4,
+        "rate": 0.14,
+        "low": 0.09,
+        "high": 0.2
+      },
+      {
+        "party": "DEM",
+        "stratum": "uncontested",
+        "won": 175,
+        "lost": 6,
+        "review": 1,
+        "rate": 0.97,
+        "low": 0.93,
+        "high": 0.98
+      },
+      {
+        "party": "REP",
+        "stratum": "all_contested",
+        "won": 87,
+        "lost": 314,
+        "review": 2,
+        "rate": 0.22,
+        "low": 0.18,
+        "high": 0.26
+      },
+      {
+        "party": "REP",
+        "stratum": "challenger",
+        "won": 57,
+        "lost": 181,
+        "review": 0,
+        "rate": 0.24,
+        "low": 0.19,
+        "high": 0.3
+      },
+      {
+        "party": "REP",
+        "stratum": "incumbent",
+        "won": 19,
+        "lost": 38,
+        "review": 1,
+        "rate": 0.33,
+        "low": 0.22,
+        "high": 0.46
+      },
+      {
+        "party": "REP",
+        "stratum": "open_seat",
+        "won": 11,
+        "lost": 95,
+        "review": 0,
+        "rate": 0.1,
+        "low": 0.06,
+        "high": 0.18
+      },
+      {
+        "party": "REP",
+        "stratum": "uncontested",
+        "won": 170,
+        "lost": 7,
+        "review": 4,
+        "rate": 0.96,
+        "low": 0.92,
+        "high": 0.98
+      }
+    ],
+    "favorite": {
+      "n": 282,
+      "share_top_fundraiser": 0.5,
+      "win_rate_if_top": 0.91,
+      "win_rate_if_not_top": 0.21
+    },
+    "top_pacs": [
+      {
+        "endorser": "DEFEND AMERICAN JOBS",
+        "won": 19,
+        "lost": 0,
+        "rate": 1.0,
+        "low": 0.83,
+        "high": 1.0
+      },
+      {
+        "endorser": "PROTECT PROGRESS",
+        "won": 18,
+        "lost": 1,
+        "rate": 0.95,
+        "low": 0.75,
+        "high": 0.99
+      },
+      {
+        "endorser": "CONSERVATIVES FOR AMERICAN EXCELLENCE INC.",
+        "won": 16,
+        "lost": 1,
+        "rate": 0.94,
+        "low": 0.73,
+        "high": 0.99
+      },
+      {
+        "endorser": "PROJECT 218",
+        "won": 8,
+        "lost": 5,
+        "rate": 0.62,
+        "low": 0.36,
+        "high": 0.82
+      },
+      {
+        "endorser": "THINK BIG",
+        "won": 12,
+        "lost": 1,
+        "rate": 0.92,
+        "low": 0.67,
+        "high": 0.99
+      },
+      {
+        "endorser": "WORKING FAMILIES PARTY PAC",
+        "won": 8,
+        "lost": 4,
+        "rate": 0.67,
+        "low": 0.39,
+        "high": 0.86
+      },
+      {
+        "endorser": "PRO-CHOICE MAJORITY ACTION",
+        "won": 5,
+        "lost": 6,
+        "rate": 0.45,
+        "low": 0.21,
+        "high": 0.72
+      },
+      {
+        "endorser": "AMERICAN MISSION",
+        "won": 10,
+        "lost": 0,
+        "rate": 1.0,
+        "low": 0.72,
+        "high": 1.0
+      },
+      {
+        "endorser": "AMERICAN PRIORITIES (AP)",
+        "won": 9,
+        "lost": 1,
+        "rate": 0.9,
+        "low": 0.6,
+        "high": 0.98
+      },
+      {
+        "endorser": "JUSTICE DEMOCRATS PAC",
+        "won": 8,
+        "lost": 2,
+        "rate": 0.8,
+        "low": 0.49,
+        "high": 0.94
+      },
+      {
+        "endorser": "GOPAC ELECTION FUND",
+        "won": 5,
+        "lost": 4,
+        "rate": 0.56,
+        "low": 0.27,
+        "high": 0.81
+      },
+      {
+        "endorser": "SF SOLIDARITY PAC",
+        "won": 3,
+        "lost": 6,
+        "rate": 0.33,
+        "low": 0.12,
+        "high": 0.65
+      },
+      {
+        "endorser": "VOTEVETS",
+        "won": 6,
+        "lost": 3,
+        "rate": 0.67,
+        "low": 0.35,
+        "high": 0.88
+      },
+      {
+        "endorser": "CLUB FOR GROWTH ACTION",
+        "won": 6,
+        "lost": 2,
+        "rate": 0.75,
+        "low": 0.41,
+        "high": 0.93
+      },
+      {
+        "endorser": "FREEDOM CAUCUS FUND",
+        "won": 6,
+        "lost": 2,
+        "rate": 0.75,
+        "low": 0.41,
+        "high": 0.93
+      },
+      {
+        "endorser": "WFW ACTION FUND INC",
+        "won": 7,
+        "lost": 1,
+        "rate": 0.88,
+        "low": 0.53,
+        "high": 0.98
+      }
+    ]
+  },
   "cited": {
     "donald_trump_endorsements": "230",
     "donald_trump_all_contested": "93% (76 of 82)",
@@ -398,10 +998,66 @@
     "donald_trump_top_share": "88%",
     "donald_trump_win_if_top": "94%",
     "donald_trump_win_if_not_top": "80%",
-    "baseline_dem_challenger": "25% (118 of 474)",
-    "baseline_dem_open_seat": "23% (53 of 235)",
-    "baseline_rep_challenger": "22% (56 of 252)",
-    "baseline_rep_open_seat": "13% (18 of 139)",
+    "club_for_growth_pac_endorsements": "18",
+    "club_for_growth_pac_all_contested": "90% (9 of 10)",
+    "club_for_growth_pac_challenger": "100% (2 of 2)",
+    "club_for_growth_pac_incumbent": "100% (2 of 2)",
+    "club_for_growth_pac_open_seat": "83% (5 of 6)",
+    "club_for_growth_pac_uncontested": "100% (5 of 5)",
+    "club_for_growth_pac_challenger_as_nominee": "100% (2 of 2)",
+    "club_for_growth_pac_open_seat_as_nominee": "83% (5 of 6)",
+    "club_for_growth_pac_after": "2",
+    "club_for_growth_pac_pending": "1",
+    "club_for_growth_pac_top_share": "70%",
+    "club_for_growth_pac_win_if_top": "100%",
+    "club_for_growth_pac_win_if_not_top": "67%",
+    "justice_democrats_endorsements": "23",
+    "justice_democrats_all_contested": "79% (15 of 19)",
+    "justice_democrats_challenger": "75% (6 of 8)",
+    "justice_democrats_incumbent": "100% (4 of 4)",
+    "justice_democrats_open_seat": "71% (5 of 7)",
+    "justice_democrats_uncontested": "100% (4 of 4)",
+    "justice_democrats_challenger_as_nominee": "75% (6 of 8)",
+    "justice_democrats_open_seat_as_nominee": "71% (5 of 7)",
+    "justice_democrats_top_share": "58%",
+    "justice_democrats_win_if_top": "91%",
+    "justice_democrats_win_if_not_top": "62%",
+    "baseline_dem_challenger": "24% (115 of 472)",
+    "baseline_dem_open_seat": "21% (49 of 230)",
+    "baseline_rep_challenger": "22% (55 of 251)",
+    "baseline_rep_open_seat": "13% (18 of 138)",
+    "super_pac_pacs": "261",
+    "super_pac_candidates": "324",
+    "super_pac_pairs": "624",
+    "super_pac_dem_all_contested": "55% (92 of 168)",
+    "super_pac_dem_challenger": "49% (29 of 59)",
+    "super_pac_dem_open_seat": "43% (31 of 72)",
+    "super_pac_rep_all_contested": "58% (67 of 115)",
+    "super_pac_rep_challenger": "54% (19 of 35)",
+    "super_pac_rep_open_seat": "52% (30 of 58)",
+    "super_pac_baseline_dem_challenger": "22% (92 of 421)",
+    "super_pac_baseline_dem_open_seat": "14% (23 of 167)",
+    "super_pac_baseline_rep_challenger": "24% (57 of 238)",
+    "super_pac_baseline_rep_open_seat": "10% (11 of 106)",
+    "super_pac_top_share": "50%",
+    "super_pac_win_if_top": "91%",
+    "super_pac_win_if_not_top": "21%",
+    "super_pac_top_defend_american_jobs": "19 of 19",
+    "super_pac_top_protect_progress": "18 of 19",
+    "super_pac_top_conservatives_for_american_excellence_inc": "16 of 17",
+    "super_pac_top_project_218": "8 of 13",
+    "super_pac_top_think_big": "12 of 13",
+    "super_pac_top_working_families_party_pac": "8 of 12",
+    "super_pac_top_pro_choice_majority_action": "5 of 11",
+    "super_pac_top_american_mission": "10 of 10",
+    "super_pac_top_american_priorities_ap": "9 of 10",
+    "super_pac_top_justice_democrats_pac": "8 of 10",
+    "super_pac_top_gopac_election_fund": "5 of 9",
+    "super_pac_top_sf_solidarity_pac": "3 of 9",
+    "super_pac_top_votevets": "6 of 9",
+    "super_pac_top_club_for_growth_action": "6 of 8",
+    "super_pac_top_freedom_caucus_fund": "6 of 8",
+    "super_pac_top_wfw_action_fund_inc": "7 of 8",
     "source_agreed": "227 of 227",
     "proxy_agreed": "9 of 11"
   }

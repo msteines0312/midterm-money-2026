@@ -8,6 +8,7 @@ that `reports/endorsements.md` relies on:
     reports/figures/endorsements_win_rates.png
     reports/figures/endorsements_baseline.png
     reports/figures/endorsements_favorites.png
+    reports/figures/endorsements_super_pacs.png
     reports/figures/endorsements_numbers.json
 
 The prose in the report is written by hand. Every number in it should match
@@ -48,6 +49,8 @@ from build_tech_money_report import (  # noqa: E402
 )
 from src.analysis.endorsements import (  # noqa: E402
     NOT_ON_PRIMARY_BALLOT,
+    backing_outcomes,
+    backing_rates_by_party,
     baseline_rates,
     classify_primary,
     endorsement_outcomes,
@@ -55,6 +58,7 @@ from src.analysis.endorsements import (  # noqa: E402
     excluded_counts,
     favorite_check,
     load_primary_dates,
+    super_pac_backing,
 )
 from src.config import DB_PATH, PROJECT_ROOT  # noqa: E402
 from src.endorsements_match import SIDE_PARTY  # noqa: E402
@@ -67,6 +71,13 @@ BUILDER_PATH_NAME = Path(__file__).name
 
 # The day the endorsement lists were read. Primaries after it are pending.
 AS_OF = "2026-10-27"
+# The outside spending snapshot used for super PAC backing, the same one the
+# billionaire section uses
+SPENDING_DATE = "2026-10-24"
+# A super PAC is listed by name when it backed at least this many decided
+# candidates in contested primaries
+TOP_PAC_MIN = 8
+PARTY_LABELS = {"REP": "Republicans", "DEM": "Democrats"}
 # The contested-primary proxy's hand check (see classify_primary): of 15
 # random races checked against Wikipedia, 11 could be judged and 9 agreed
 PROXY_CHECK = {"checked": 15, "judged": 11, "agreed": 9}
@@ -197,10 +208,47 @@ def collect(conn):
             ["endorser", "race_id", "name", "status", "contested", "top_fundraiser"]].to_dict("records"),
         "review": outcomes[outcomes["outcome"] == "review"][["endorser", "race_id", "name"]].to_dict("records"),
     }
+    numbers["super_pacs"], pac_frames = super_pac_numbers(conn, classified_all, primary_dates, nominee_ids, nominees)
     numbers["cited"] = cited_strings(numbers)
     frames = {"rates": rates, "nominee_rates": as_nominee, "baseline": baseline, "side": side,
-              "outcomes": outcomes, "fec_date": fec_date}
+              "outcomes": outcomes, "fec_date": fec_date, **pac_frames}
     return round_floats(numbers), frames
+
+
+def super_pac_numbers(conn, classified_all, primary_dates, nominee_ids, nominees):
+    """Score super PAC primary spending as a form of endorsement.
+
+    Returns
+    -------
+    tuple of (dict, dict)
+        The numbers for the JSON, and the frames the super PAC chart and
+        the favorites chart draw.
+    """
+    backing, no_id = super_pac_backing(conn, SPENDING_DATE)
+    known = set(classified_all["candidate_id"])
+    outcomes = backing_outcomes(backing, classified_all, primary_dates, nominee_ids, nominees, AS_OF)
+    by_party = backing_rates_by_party(outcomes)
+    # Compared with funded candidates no super PAC spent $10,000 to support
+    baseline = baseline_rates(classified_all, primary_dates, nominee_ids, nominees, AS_OF,
+                              exclude_ids=set(outcomes["candidate_id"]))
+    by_pac = endorsement_win_rates(outcomes)
+    by_pac = by_pac[by_pac["stratum"] == "all_contested"].assign(decided=lambda f: f["won"] + f["lost"])
+    top = by_pac[by_pac["decided"] >= TOP_PAC_MIN].sort_values(["decided", "endorser"], ascending=[False, True])
+    numbers = {
+        "spending_date": SPENDING_DATE,
+        "pacs": int(backing["committee_id"].nunique()),
+        "candidates": int(backing["candidate_id"].nunique()),
+        "pairs": int(len(backing)),
+        "no_candidate_id": no_id,
+        "not_in_candidates": int((~backing["candidate_id"].isin(known)).sum()),
+        "hedged": int(outcomes["hedged"].sum()),
+        "pending": int((outcomes["outcome"] == "pending").sum()),
+        "rates": by_party.to_dict("records"),
+        "baseline": baseline.to_dict("records"),
+        "favorite": favorite_check(outcomes.drop_duplicates("candidate_id")),
+        "top_pacs": top[["endorser", "won", "lost", "rate", "low", "high"]].to_dict("records"),
+    }
+    return numbers, {"pac_rates": by_party, "pac_baseline": baseline, "pac_outcomes": outcomes}
 
 
 def rate_text(row):
@@ -245,6 +293,21 @@ def cited_strings(numbers):
     for row in numbers["baseline"]:
         if row["stratum"] in dict(BASELINE_STRATA) and row["rate"] is not None:
             cited[f"baseline_{row['party'].lower()}_{row['stratum']}"] = rate_text(row)
+    pacs = numbers["super_pacs"]
+    for key in ("pacs", "candidates", "pairs"):
+        cited[f"super_pac_{key}"] = str(pacs[key])
+    for row in pacs["rates"]:
+        if row["stratum"] in ("all_contested", *dict(BASELINE_STRATA)) and row["rate"] is not None:
+            cited[f"super_pac_{row['party'].lower()}_{row['stratum']}"] = rate_text(row)
+    for row in pacs["baseline"]:
+        if row["stratum"] in dict(BASELINE_STRATA) and row["rate"] is not None:
+            cited[f"super_pac_baseline_{row['party'].lower()}_{row['stratum']}"] = rate_text(row)
+    favorite = pacs["favorite"]
+    cited["super_pac_top_share"] = percent(favorite["share_top_fundraiser"])
+    cited["super_pac_win_if_top"] = percent(favorite["win_rate_if_top"])
+    cited["super_pac_win_if_not_top"] = percent(favorite["win_rate_if_not_top"])
+    for row in pacs["top_pacs"]:
+        cited[f"super_pac_top_{slug(row['endorser'])}"] = f"{row['won']} of {row['won'] + row['lost']}"
     check = numbers["source_check"]
     cited["source_agreed"] = f"{check['agreed']} of {check['compared']}"
     proxy = numbers["contested_proxy"]
@@ -321,6 +384,38 @@ def plot_baseline(frames):
     save(fig, "endorsements_baseline.png")
 
 
+def plot_super_pacs(frames):
+    """Candidates super PACs spent to support, against funded candidates with no such support."""
+    rates, baseline = frames["pac_rates"], frames["pac_baseline"]
+    base = {(row["party"], row["stratum"]): row for _, row in baseline.iterrows()}
+    rows = []
+    for party, party_label in PARTY_LABELS.items():
+        for stratum, label in BASELINE_STRATA:
+            match = rates[(rates["party"] == party) & (rates["stratum"] == stratum)]
+            if len(match) and match.iloc[0]["rate"] is not None:
+                rows.append((f"Backing {party_label}: {label.lower()}", match.iloc[0], base.get((party, stratum))))
+
+    categories = [("Super PAC spent $10,000+ to support them", VIOLET, SOLID),
+                  ("Funded same-party candidates with no such support", GRAY, SOLID)]
+    height = max(4.2, 2.2 + 0.6 * len(rows))
+    fig, ax = new_figure("Super PAC-backed candidates who became the nominee, contested primaries",
+                         frames["fec_date"], height)
+    fig.subplots_adjust(left=0.33, top=1 - 1.25 / height, bottom=0.6 / height)
+    add_legend(fig, categories, height)
+    positions = list(range(len(rows)))[::-1]
+    interval_rows(ax, [(pos, row) for pos, (_, row, _) in zip(positions, rows)], VIOLET, offset=0.15)
+    interval_rows(ax, [(pos, other) for pos, (_, _, other) in zip(positions, rows) if other is not None], GRAY,
+                  offset=-0.15)
+    for pos, (_, row, other) in zip(positions, rows):
+        ax.text(1.03, pos + 0.15, rate_text(row), va="center", fontsize=10.5, color=TEXT_PRIMARY)
+        if other is not None:
+            ax.text(1.03, pos - 0.15, rate_text(other), va="center", fontsize=10.5, color=TEXT_SECONDARY)
+    ax.set_yticks(positions, [label for label, _, _ in rows], fontsize=10.5, color=TEXT_PRIMARY)
+    percent_axis(ax, len(rows))
+    add_note(fig, f"Primary and runoff independent expenditures as of {SPENDING_DATE}. Lines are 95% intervals.")
+    save(fig, "endorsements_super_pacs.png")
+
+
 def plot_favorites(frames):
     """Win rate of endorsed contested candidates, split by whether they led their party in money."""
     outcomes, side = frames["outcomes"], frames["side"]
@@ -329,6 +424,10 @@ def plot_favorites(frames):
         check = favorite_check(outcomes[outcomes["endorser"] == endorser])
         if check["n"]:
             rows.append((endorser, check))
+    # Super PAC backing, pooled, each candidate once
+    pac_check = favorite_check(frames["pac_outcomes"].drop_duplicates("candidate_id"))
+    if pac_check["n"]:
+        rows.append(("Super PAC backing", pac_check))
 
     categories = [("Top fundraiser of their party in the race", VIOLET, SOLID),
                   ("Not the top fundraiser", VIOLET, HATCHED)]
@@ -379,6 +478,7 @@ def main():
     FIGURES_DIR.mkdir(parents=True, exist_ok=True)
     plot_win_rates(frames)
     plot_baseline(frames)
+    plot_super_pacs(frames)
     plot_favorites(frames)
     NUMBERS_PATH.write_text(json.dumps(numbers, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"Wrote {NUMBERS_PATH.relative_to(PROJECT_ROOT)}")

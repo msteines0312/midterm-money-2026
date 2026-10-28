@@ -17,6 +17,9 @@ from src.states import STATE_CODES
 
 # Endorser side to the party code in the candidates table
 SIDE_PARTY = {"R": "REP", "D": "DEM"}
+# FEC party codes that count as each party. Minnesota Democrats file as the
+# Democratic-Farmer-Labor Party (DFL).
+PARTY_CODES = {"REP": ("REP",), "DEM": ("DEM", "DFL")}
 
 TRUTH_SOCIAL_POST = re.compile(r"truthsocial\.com/@realDonaldTrump/posts/(\d+)")
 
@@ -188,6 +191,47 @@ def parse_endorsement_list(html, list_format):
     return PARSERS[list_format](html)
 
 
+def listing_date(copies, present, primary_date):
+    """Date an endorsement from the archived copies of an undated list.
+
+    A list page changes over time: Club for Growth cleared its list for the
+    2026 cycle in February 2025, dropped candidates who left for other
+    races, and re-listed some after their primary. So the date is not the
+    first copy that ever shows a name. It is the start of the unbroken run
+    of copies that includes the last copy before the primary.
+
+    Parameters
+    ----------
+    copies : list of str
+        Every copy's date (YYYYMMDD), oldest first.
+    present : collection of str
+        The copies that list this candidate.
+    primary_date : str or None
+        The candidate's primary (YYYYMMDD), or None if unknown.
+
+    Returns
+    -------
+    tuple of (str or None, str)
+        The date and "listed", or (None, "removed") when the candidate was
+        listed earlier but dropped from the list before the primary, which
+        reads as a withdrawn endorsement. A candidate removed after the
+        primary (a loser, for example) keeps their date.
+    """
+    before = [day for day in copies if primary_date is None or day <= primary_date]
+    after = [day for day in copies if day not in before and day in present]
+    if before and before[-1] in present:
+        anchor = copies.index(before[-1])
+    elif after:
+        # Listed (again) only after the primary. Date it there, so the timing
+        # rule leaves it out instead of crediting an old listing.
+        anchor = copies.index(after[-1])
+    else:
+        return None, "removed"
+    while anchor > 0 and copies[anchor - 1] in present:
+        anchor -= 1
+    return copies[anchor], "listed"
+
+
 def house_only(rows):
     """Keep the House rows and count the rest.
 
@@ -220,6 +264,26 @@ def _override_for(row, race_id, overrides):
     return None
 
 
+def _redrawn_match(row, same_party):
+    """Find a candidate whose district changed since the list was written.
+
+    Several states redrew their maps for 2026, so a list can name a
+    member's old district (Greg Casar, listed in TX-35, filed in TX-37).
+    Only an exact first and last name match within the state counts, and
+    only when exactly one candidate fits, so a namesake is never swapped in.
+
+    Returns
+    -------
+    pandas.Series or None
+        The candidate's row, or None when there is not exactly one match.
+    """
+    first_name = _normalize(row["name"])[:1]
+    in_state = same_party[same_party["race_id"].str[:2] == row["state"]]
+    fits = in_state[in_state["name"].map(
+        lambda fec_name: _last_name_matches(row["name"], fec_name) and [_fec_first_name(fec_name)] == first_name)]
+    return fits.iloc[0] if len(fits) == 1 else None
+
+
 def match_candidates(rows, candidates, party, overrides=()):
     """Attach an FEC candidate ID and race to each endorsed House candidate.
 
@@ -230,6 +294,9 @@ def match_candidates(rows, candidates, party, overrides=()):
     several share the last name, the first name decides (the Nehls twins).
     When that still leaves a tie or no match, a hand-checked override is
     used if one exists (the same person filed twice, or a reversed name).
+    With no one of that last name in the race, an exact name match
+    elsewhere in the state is used, for a district that was redrawn.
+    "DFL" (Minnesota) counts as "DEM".
 
     Parameters
     ----------
@@ -257,14 +324,20 @@ def match_candidates(rows, candidates, party, overrides=()):
             continue
 
         race_id = f"{row['state']}-{row['district']}"
-        in_race = candidates[(candidates["race_id"] == race_id) & (candidates["party"] == party)]
+        same_party = candidates[candidates["party"].isin(PARTY_CODES.get(party, (party,)))]
+        in_race = same_party[same_party["race_id"] == race_id]
         hits = in_race[in_race["name"].map(lambda fec_name: _last_name_matches(row["name"], fec_name))]
         if len(hits) > 1:
             first_name = _normalize(row["name"])[0]
             same_first = hits[hits["name"].map(_fec_first_name) == first_name]
             hits = same_first if len(same_first) == 1 else hits
         override = _override_for(row, race_id, overrides) if len(hits) != 1 else None
-        if override in by_id.index:
+        moved = _redrawn_match(row, same_party) if hits.empty and override is None else None
+        if moved is not None:
+            note = f"listed as {race_id}, FEC filing is in {moved['race_id']}"
+            matched.append({**row, "candidate_id": moved["candidate_id"], "race_id": moved["race_id"],
+                            "fec_name": moved["name"], "match_note": note})
+        elif override in by_id.index:
             matched.append({**row, "candidate_id": override, "race_id": race_id, "fec_name": by_id.loc[override, "name"]})
         elif len(hits) == 1:
             hit = hits.iloc[0]
