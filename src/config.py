@@ -28,6 +28,8 @@ NOT_ON_FORBES_CSV = MANUAL_DIR / "large_donors_not_on_forbes.csv"
 # House primary endorsement they made
 ENDORSERS_CSV = MANUAL_DIR / "endorsers.csv"
 ENDORSEMENTS_CSV = MANUAL_DIR / "endorsements.csv"
+# 2026 House primary and runoff dates from the FEC's primary dates document
+PRIMARY_DATES_CSV = MANUAL_DIR / "primary_dates.csv"
 # Hand-checked FEC IDs for 2022 and 2024 results rows the automatic match misses
 HISTORY_MATCHES_CSV = MANUAL_DIR / "history_matches.csv"
 PROCESSED_DIR = DATA_DIR / "processed"
