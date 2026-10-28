@@ -5,6 +5,8 @@ import pytest
 from src.manual import (
     load_billionaires,
     load_donor_entities,
+    load_endorsements,
+    load_endorsers,
     load_nominee_matches,
     load_org_donors_reviewed,
     load_pac_industries,
@@ -216,3 +218,75 @@ def test_real_billionaire_files_load():
     attributed = {row["entity_name"] for row in reviewed if row["category"] == "attributed"}
     # Every organization marked attributed in the review is also an entity row
     assert attributed <= {row["entity_name"] for row in entities}
+
+
+ENDORSER_HEADER = "endorser,side,list_url,list_kind,checked_on,note\n"
+ENDORSEMENT_HEADER = "endorser,candidate_id,race_id,candidate_name,endorsement_date,date_basis,source_url,note\n"
+ONE_ENDORSER = ENDORSER_HEADER + "Club for Growth PAC,R,https://cfg.example,official,2026-10-27,\n"
+
+
+def write_endorsement(tmp_path, row):
+    """Write a one-endorser list and a one-row endorsements file, returning both paths."""
+    endorsers = write_named_csv(tmp_path, "endorsers.csv", ONE_ENDORSER)
+    endorsements = write_named_csv(tmp_path, "endorsements.csv", ENDORSEMENT_HEADER + row + "\n")
+    return endorsements, endorsers
+
+
+def test_endorser_requires_list_url(tmp_path):
+    path = write_named_csv(tmp_path, "endorsers.csv", ENDORSER_HEADER + "Club for Growth PAC,R,,official,2026-10-27,\n")
+    with pytest.raises(ValueError, match="list_url"):
+        load_endorsers(path)
+
+
+def test_endorser_side_validated(tmp_path):
+    path = write_named_csv(tmp_path, "endorsers.csv", ENDORSER_HEADER + "Club for Growth PAC,GOP,https://a,official,2026-10-27,\n")
+    with pytest.raises(ValueError, match="side"):
+        load_endorsers(path)
+
+
+def test_endorser_list_kind_validated(tmp_path):
+    path = write_named_csv(tmp_path, "endorsers.csv", ENDORSER_HEADER + "Club for Growth PAC,R,https://a,blog,2026-10-27,\n")
+    with pytest.raises(ValueError, match="list_kind"):
+        load_endorsers(path)
+
+
+def test_endorsement_requires_source(tmp_path):
+    paths = write_endorsement(tmp_path, "Club for Growth PAC,H6MI07000,MI-07,Tom Barrett,2026-04-16,listed_by,,")
+    with pytest.raises(ValueError, match="source_url"):
+        load_endorsements(*paths)
+
+
+def test_endorsement_requires_race(tmp_path):
+    paths = write_endorsement(tmp_path, "Club for Growth PAC,H6MI07000,,Tom Barrett,2026-04-16,listed_by,https://a,")
+    with pytest.raises(ValueError, match="race_id"):
+        load_endorsements(*paths)
+
+
+def test_endorsement_endorser_must_be_listed(tmp_path):
+    paths = write_endorsement(tmp_path, "Some Other PAC,H6MI07000,MI-07,Tom Barrett,2026-04-16,listed_by,https://a,")
+    with pytest.raises(ValueError, match="not in endorsers"):
+        load_endorsements(*paths)
+
+
+def test_endorsement_date_must_be_iso(tmp_path):
+    paths = write_endorsement(tmp_path, "Club for Growth PAC,H6MI07000,MI-07,Tom Barrett,4/16/2026,listed_by,https://a,")
+    with pytest.raises(ValueError, match="endorsement_date"):
+        load_endorsements(*paths)
+
+
+def test_blank_endorsement_date_means_unknown(tmp_path):
+    paths = write_endorsement(tmp_path, "Club for Growth PAC,H6MI07000,MI-07,Tom Barrett,,,https://a,")
+    assert load_endorsements(*paths)[0]["endorsement_date"] == ""
+
+
+def test_dated_endorsement_needs_date_basis(tmp_path):
+    paths = write_endorsement(tmp_path, "Club for Growth PAC,H6MI07000,MI-07,Tom Barrett,2026-04-16,guessed,https://a,")
+    with pytest.raises(ValueError, match="date_basis"):
+        load_endorsements(*paths)
+
+
+def test_real_endorsement_files_load():
+    """The committed endorser and endorsement CSVs pass the same checks."""
+    endorsers = load_endorsers()
+    assert {row["side"] for row in endorsers} <= {"R", "D"}
+    assert {row["endorser"] for row in load_endorsements()} <= {row["endorser"] for row in endorsers}
