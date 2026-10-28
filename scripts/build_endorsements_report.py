@@ -170,13 +170,15 @@ def collect(conn):
     nominee_ids, nominees = load_nominees()
     fec_date = conn.execute("SELECT MAX(pulled_at) FROM candidate_totals").fetchone()[0][:10]
 
-    classified = classify_primary(conn, [row["candidate_id"] for row in endorsements])
+    # Every candidate, so a last-name match can be checked against the nominee's own filing
     classified_all = classify_primary(conn)
-    outcomes = endorsement_outcomes(endorsements, primary_dates, classified, nominee_ids, nominees, AS_OF)
+    outcomes = endorsement_outcomes(endorsements, primary_dates, classified_all, nominee_ids, nominees, AS_OF)
     rates = endorsement_win_rates(outcomes)
     as_nominee = nominee_rates(outcomes)
     excluded = excluded_counts(outcomes)
-    baseline = baseline_rates(classified_all, primary_dates, nominee_ids, nominees, AS_OF)
+    # The baseline leaves out every endorsed candidate, so it is the group they are compared with
+    endorsed_ids = {row["candidate_id"] for row in endorsements}
+    baseline = baseline_rates(classified_all, primary_dates, nominee_ids, nominees, AS_OF, exclude_ids=endorsed_ids)
 
     side = {row["endorser"]: row["side"] for row in endorsers}
     numbers = {
@@ -290,7 +292,7 @@ def plot_win_rates(frames):
 
 
 def plot_baseline(frames):
-    """Endorsed candidates against all funded same-party candidates, open seats and challengers."""
+    """Endorsed candidates against funded same-party candidates who were not endorsed."""
     as_nominee, baseline, side = frames["nominee_rates"], frames["baseline"], frames["side"]
     base = {(row["party"], row["stratum"]): row for _, row in baseline.iterrows()}
     rows = []
@@ -302,9 +304,9 @@ def plot_baseline(frames):
                 rows.append((f"{endorser}: {label.lower()}", match.iloc[0], other))
 
     categories = [("Endorsed before the primary", VIOLET, SOLID),
-                  ("All funded candidates of the same party", GRAY, SOLID)]
+                  ("Funded same-party candidates not endorsed", GRAY, SOLID)]
     height = max(4.2, 2.2 + 0.6 * len(rows))
-    fig, ax = new_figure("Endorsed candidates against everyone in the same kind of race", frames["fec_date"], height)
+    fig, ax = new_figure("Endorsed candidates against funded candidates who were not endorsed", frames["fec_date"], height)
     fig.subplots_adjust(left=0.33, top=1 - 1.25 / height, bottom=0.6 / height)
     add_legend(fig, categories, height)
     positions = list(range(len(rows)))[::-1]

@@ -320,6 +320,61 @@ def test_baseline_uses_funded_candidates_only():
     assert (row["won"], row["lost"]) == (1, 1)
 
 
+def person(candidate_id, name, external, status="open_seat", race_id="TX-34", party="REP"):
+    """One classify_primary row with a real-looking FEC name."""
+    return {"candidate_id": candidate_id, "name": name, "race_id": race_id, "party": party, "status": status,
+            "external": external, "contested": True, "top_fundraiser": False}
+
+
+def test_same_surname_nominee_is_not_a_win():
+    # Two different people named Flores in TX-34. Only Eric is the nominee.
+    frame = pd.DataFrame([person("H1", "FLORES, MAYRA", 40_000.0), person("H2", "FLORES, ERIC", 90_000.0)])
+    nominees = [{"race_id": "TX-34", "name": "Eric Flores", "party": "rep"}]
+    out = by_id(outcomes_for([endorsement("H1", "TX-34", "2026-01-01")], frame, {"H2"}, nominees))
+    assert out["H1"]["outcome"] == "lost"
+    rates = baseline_rates(frame, DATES, {"H2"}, nominees, as_of=AS_OF)
+    row = rates.set_index(["party", "stratum"]).loc[("REP", "open_seat")]
+    assert (row["won"], row["lost"]) == (1, 1)
+
+
+def test_duplicate_filing_of_the_nominee_still_wins():
+    # One person filed twice. The nominee file carries the other ID.
+    frame = pd.DataFrame([person("H1", "FLORES, ERIC", 90_000.0), person("H2", "FLORES, ERIC J", 90_000.0)])
+    nominees = [{"race_id": "TX-34", "name": "Eric Flores", "party": "rep"}]
+    out = by_id(outcomes_for([endorsement("H1", "TX-34", "2026-01-01")], frame, {"H2"}, nominees))
+    assert out["H1"]["outcome"] == "won"
+
+
+def test_baseline_counts_a_duplicate_filing_once():
+    frame = pd.DataFrame([person("H1", "FLORES, ERIC", 90_000.0), person("H2", "FLORES, ERIC J", 90_000.0),
+                          person("H3", "SMITH, ANN", 30_000.0)])
+    nominees = [{"race_id": "TX-34", "name": "Eric Flores", "party": "rep"}]
+    rates = baseline_rates(frame, DATES, {"H2"}, nominees, as_of=AS_OF)
+    row = rates.set_index(["party", "stratum"]).loc[("REP", "open_seat")]
+    assert (row["won"], row["lost"]) == (1, 1)
+
+
+def test_baseline_can_leave_out_the_endorsed():
+    # The endorsed nominee leaves the baseline, but still stops a same-surname rival scoring a win
+    frame = pd.DataFrame([person("H1", "FLORES, MAYRA", 40_000.0), person("H2", "FLORES, ERIC", 90_000.0),
+                          person("H3", "SMITH, ANN", 30_000.0)])
+    nominees = [{"race_id": "TX-34", "name": "Eric Flores", "party": "rep"}]
+    rates = baseline_rates(frame, DATES, {"H2"}, nominees, as_of=AS_OF, exclude_ids={"H2"})
+    row = rates.set_index(["party", "stratum"]).loc[("REP", "open_seat")]
+    assert (row["won"], row["lost"]) == (0, 2)
+
+
+def test_endorsing_the_winner_after_the_primary_does_not_hide_a_loss():
+    # Backed H1 before the primary, H1 lost, then backed the nominee H2 for the runoff
+    frame = classified(("H1", "TX-01", "incumbent", True, True), ("H2", "TX-01", "open_seat", True, False))
+    rows = [endorsement("H1", "TX-01", "2025-12-18"), endorsement("H2", "TX-01", "2026-03-11")]
+    nominees = [{"race_id": "TX-01", "name": "Ann H2", "party": "rep"}]
+    out = by_id(outcomes_for(rows, frame, {"H2"}, nominees))
+    assert not out["H1"]["hedged"]
+    rates = endorsement_win_rates(outcomes_for(rows, frame, {"H2"}, nominees)).set_index("stratum")
+    assert (rates.loc["incumbent", "won"], rates.loc["incumbent", "lost"]) == (0, 1)
+
+
 def test_real_primary_dates_load():
     dates = load_primary_dates()
     assert primary_dates_for("AL-01", dates)["primary_date"] == "2026-08-11"

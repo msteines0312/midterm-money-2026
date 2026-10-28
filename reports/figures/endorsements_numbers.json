@@ -24,7 +24,7 @@
         "after": 1,
         "runoff": 1,
         "unknown": 1,
-        "hedged": 2,
+        "hedged": 0,
         "pending": 3,
         "withdrew": 11
       },
@@ -32,10 +32,10 @@
         {
           "stratum": "all_contested",
           "won": 76,
-          "lost": 5,
+          "lost": 6,
           "review": 0,
-          "rate": 0.94,
-          "low": 0.86,
+          "rate": 0.93,
+          "low": 0.85,
           "high": 0.97
         },
         {
@@ -50,11 +50,11 @@
         {
           "stratum": "incumbent",
           "won": 35,
-          "lost": 2,
+          "lost": 3,
           "review": 0,
-          "rate": 0.95,
-          "low": 0.82,
-          "high": 0.99
+          "rate": 0.92,
+          "low": 0.79,
+          "high": 0.97
         },
         {
           "stratum": "open_seat",
@@ -79,11 +79,11 @@
         {
           "stratum": "all_contested",
           "won": 76,
-          "lost": 16,
+          "lost": 17,
           "review": 0,
-          "rate": 0.83,
-          "low": 0.74,
-          "high": 0.89
+          "rate": 0.82,
+          "low": 0.73,
+          "high": 0.88
         },
         {
           "stratum": "challenger",
@@ -97,11 +97,11 @@
         {
           "stratum": "incumbent",
           "won": 35,
-          "lost": 13,
+          "lost": 14,
           "review": 0,
-          "rate": 0.73,
-          "low": 0.59,
-          "high": 0.83
+          "rate": 0.71,
+          "low": 0.58,
+          "high": 0.82
         },
         {
           "stratum": "open_seat",
@@ -123,9 +123,9 @@
         }
       ],
       "favorite": {
-        "n": 81,
+        "n": 82,
         "share_top_fundraiser": 0.88,
-        "win_rate_if_top": 0.96,
+        "win_rate_if_top": 0.94,
         "win_rate_if_not_top": 0.8
       }
     },
@@ -166,8 +166,8 @@
     {
       "party": "DEM",
       "stratum": "all_contested",
-      "won": 243,
-      "lost": 572,
+      "won": 240,
+      "lost": 570,
       "review": 10,
       "rate": 0.3,
       "low": 0.27,
@@ -176,8 +176,8 @@
     {
       "party": "DEM",
       "stratum": "challenger",
-      "won": 120,
-      "lost": 357,
+      "won": 118,
+      "lost": 356,
       "review": 2,
       "rate": 0.25,
       "low": 0.21,
@@ -186,20 +186,20 @@
     {
       "party": "DEM",
       "stratum": "incumbent",
-      "won": 70,
-      "lost": 31,
+      "won": 69,
+      "lost": 32,
       "review": 2,
-      "rate": 0.69,
-      "low": 0.6,
+      "rate": 0.68,
+      "low": 0.59,
       "high": 0.77
     },
     {
       "party": "DEM",
       "stratum": "open_seat",
       "won": 53,
-      "lost": 184,
+      "lost": 182,
       "review": 6,
-      "rate": 0.22,
+      "rate": 0.23,
       "low": 0.18,
       "high": 0.28
     },
@@ -216,52 +216,52 @@
     {
       "party": "REP",
       "stratum": "all_contested",
-      "won": 157,
-      "lost": 364,
+      "won": 77,
+      "lost": 345,
       "review": 2,
-      "rate": 0.3,
-      "low": 0.26,
-      "high": 0.34
+      "rate": 0.18,
+      "low": 0.15,
+      "high": 0.22
     },
     {
       "party": "REP",
       "stratum": "challenger",
-      "won": 78,
-      "lost": 199,
+      "won": 56,
+      "lost": 196,
       "review": 0,
-      "rate": 0.28,
-      "low": 0.23,
-      "high": 0.34
+      "rate": 0.22,
+      "low": 0.18,
+      "high": 0.28
     },
     {
       "party": "REP",
       "stratum": "incumbent",
-      "won": 38,
-      "lost": 41,
+      "won": 3,
+      "lost": 28,
       "review": 1,
-      "rate": 0.48,
-      "low": 0.37,
-      "high": 0.59
+      "rate": 0.1,
+      "low": 0.03,
+      "high": 0.25
     },
     {
       "party": "REP",
       "stratum": "open_seat",
-      "won": 41,
-      "lost": 124,
+      "won": 18,
+      "lost": 121,
       "review": 0,
-      "rate": 0.25,
-      "low": 0.19,
-      "high": 0.32
+      "rate": 0.13,
+      "low": 0.08,
+      "high": 0.2
     },
     {
       "party": "REP",
       "stratum": "uncontested",
-      "won": 187,
+      "won": 53,
       "lost": 7,
       "review": 4,
-      "rate": 0.96,
-      "low": 0.93,
-      "high": 0.98
+      "rate": 0.88,
+      "low": 0.78,
+      "high": 0.94
     }
   ],
   "source_check": {
@@ -274,22 +274,7 @@
     "judged": 11,
     "agreed": 9
   },
-  "hedged": [
-    {
-      "endorser": "Donald Trump",
-      "race_id": "TX-23",
-      "name": "HERRERA, BRANDON",
-      "timing": "runoff",
-      "outcome": "won"
-    },
-    {
-      "endorser": "Donald Trump",
-      "race_id": "TX-23",
-      "name": "GONZALES, ERNEST ANTHONY TONY II",
-      "timing": "before",
-      "outcome": "lost"
-    }
-  ],
+  "hedged": [],
   "withdrew": [
     {
       "endorser": "Donald Trump",
@@ -387,29 +372,36 @@
       "status": "incumbent",
       "contested": true,
       "top_fundraiser": false
+    },
+    {
+      "endorser": "Donald Trump",
+      "race_id": "TX-23",
+      "name": "GONZALES, ERNEST ANTHONY TONY II",
+      "status": "incumbent",
+      "contested": true,
+      "top_fundraiser": true
     }
   ],
   "review": [],
   "cited": {
     "donald_trump_endorsements": "230",
-    "donald_trump_all_contested": "94% (76 of 81)",
+    "donald_trump_all_contested": "93% (76 of 82)",
     "donald_trump_challenger": "95% (20 of 21)",
-    "donald_trump_incumbent": "95% (35 of 37)",
+    "donald_trump_incumbent": "92% (35 of 38)",
     "donald_trump_open_seat": "91% (21 of 23)",
     "donald_trump_uncontested": "100% (131 of 131)",
     "donald_trump_challenger_as_nominee": "95% (20 of 21)",
     "donald_trump_open_seat_as_nominee": "91% (21 of 23)",
     "donald_trump_withdrew": "11",
     "donald_trump_after": "1",
-    "donald_trump_hedged": "2",
     "donald_trump_pending": "3",
     "donald_trump_top_share": "88%",
-    "donald_trump_win_if_top": "96%",
+    "donald_trump_win_if_top": "94%",
     "donald_trump_win_if_not_top": "80%",
-    "baseline_dem_challenger": "25% (120 of 477)",
-    "baseline_dem_open_seat": "22% (53 of 237)",
-    "baseline_rep_challenger": "28% (78 of 277)",
-    "baseline_rep_open_seat": "25% (41 of 165)",
+    "baseline_dem_challenger": "25% (118 of 474)",
+    "baseline_dem_open_seat": "23% (53 of 235)",
+    "baseline_rep_challenger": "22% (56 of 252)",
+    "baseline_rep_open_seat": "13% (18 of 139)",
     "source_agreed": "227 of 227",
     "proxy_agreed": "9 of 11"
   }

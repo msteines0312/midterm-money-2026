@@ -166,16 +166,38 @@ def _timing(endorsement_date, dates):
     return "after"
 
 
-def _score(frame, nominee_ids, nominees, primary_dates, as_of):
+def _someone_else_won(row, people, nominee_ids):
+    """Whether the race's nominee is a different person who shares this candidate's last name.
+
+    `primary_outcomes` falls back to a last-name match so a duplicate FEC
+    filing still counts. That fallback also credits Mayra Flores (TX-34)
+    with Eric Flores's nomination. When the nominee's own filing is in the
+    candidates table and is not the same person (same last name and same
+    money, as in `_person_key`), the name match is wrong.
+    """
+    rivals = people[(people["race_id"] == row["race_id"]) & (people["party"] == row["party"])
+                    & people["candidate_id"].isin(nominee_ids) & (people["candidate_id"] != row["candidate_id"])]
+    if rivals.empty:
+        return False
+    return all(_person_key(rival) != _person_key(row) for _, rival in rivals.iterrows())
+
+
+def _score(frame, nominee_ids, nominees, primary_dates, as_of, people=None):
     """Add an outcome column: won, lost, review, or pending.
 
     Outcomes come from `primary_outcomes` in the billionaire section, so a
     nominee means the same thing in both sections. A race whose primary is
     still to come (the Louisiana House primaries moved to Nov 3) is
-    pending, never a loss.
+    pending, never a loss. `people` (classify_primary rows, defaulting to
+    `frame`) is where a name match is checked against the nominee's own filing.
     """
+    people = frame if people is None else people
     support = frame.assign(candidate_name=frame["name"], support_oppose="S")
-    outcome = primary_outcomes(support, nominee_ids, nominees)["outcome"].tolist()
+    scored = primary_outcomes(support, nominee_ids, nominees)
+    outcome = scored["outcome"].tolist()
+    for i, (matched_by, (_, row)) in enumerate(zip(scored["matched_by"], frame.iterrows())):
+        if matched_by == "name" and _someone_else_won(row, people, nominee_ids):
+            outcome[i] = "lost"
     for i, race_id in enumerate(frame["race_id"]):
         dates = primary_dates_for(race_id, primary_dates)
         if dates and dates["primary_date"] > as_of:
@@ -210,7 +232,9 @@ def endorsement_outcomes(endorsements, primary_dates, classified, nominee_ids, n
     primary_dates : dict
         Output of `load_primary_dates`.
     classified : pandas.DataFrame
-        Output of `classify_primary` covering the endorsed candidates.
+        Output of `classify_primary`, covering at least the endorsed
+        candidates. Passing every candidate lets a name match be checked
+        against the nominee's own filing.
     nominee_ids : set of str
         FEC IDs of the November nominees.
     nominees : list of dict
@@ -236,13 +260,15 @@ def endorsement_outcomes(endorsements, primary_dates, classified, nominee_ids, n
         _timing(day, primary_dates_for(race_id, primary_dates))
         for day, race_id in zip(frame["endorsement_date"], frame["race_id"])
     ]
-    # Hedging means backing two candidates on the same primary ballot. An
-    # endorsee who was never on it (an incumbent who retired, replaced by a
-    # new endorsement) does not make the second endorsement a hedge.
-    on_ballot = frame[frame["source_outcome"] != NOT_ON_PRIMARY_BALLOT]
+    # Hedging means backing two candidates on the same primary ballot before
+    # the vote. An endorsee who was never on it (an incumbent who retired,
+    # replaced by a new endorsement) does not make the second endorsement a
+    # hedge. Neither does backing the winner after the primary, which would
+    # otherwise hide the earlier endorsee's loss.
+    on_ballot = frame[(frame["source_outcome"] != NOT_ON_PRIMARY_BALLOT) & (frame["timing"] == "before")]
     backed = on_ballot.groupby(["endorser", "race_id", "party"])["candidate_id"].transform("nunique")
     frame["hedged"] = (backed > 1).reindex(frame.index, fill_value=False)
-    frame = _score(frame, nominee_ids, nominees, primary_dates, as_of)
+    frame = _score(frame, nominee_ids, nominees, primary_dates, as_of, people=classified)
     frame["outcome"] = [_source_override(o, src) for o, src in zip(frame["outcome"], frame["source_outcome"])]
     columns = ["endorser", "candidate_id", "race_id", "name", "status", "contested", "top_fundraiser",
                "timing", "hedged", "outcome"]
@@ -349,13 +375,27 @@ def excluded_counts(outcomes):
     return frame.groupby("endorser", as_index=False).sum()
 
 
-def baseline_rates(classified_all, primary_dates, nominee_ids, nominees, as_of, min_external=10_000):
+def baseline_rates(classified_all, primary_dates, nominee_ids, nominees, as_of, min_external=10_000,
+                   exclude_ids=()):
     """Win rates of all funded candidates, by party and stratum.
 
     This is roughly what an endorser would score by backing a funded
     candidate at random in the same kind of primary. Candidates under
     `min_external` are left out. Most of them are paper filers who never
     ran, and counting them would make every endorser look good.
+
+    Parameters
+    ----------
+    classified_all : pandas.DataFrame
+        Output of `classify_primary` for every candidate.
+    primary_dates, nominee_ids, nominees, as_of
+        As in `endorsement_outcomes`.
+    min_external : float, optional
+        External contributions a candidate needs to be in the baseline.
+    exclude_ids : collection of str, optional
+        Candidates to leave out, such as the endorsed ones, so the baseline
+        does not contain the group it is compared with. Any other filing by
+        the same person is left out too.
 
     Returns
     -------
@@ -365,7 +405,17 @@ def baseline_rates(classified_all, primary_dates, nominee_ids, nominees, as_of, 
     funded = classified_all[
         (classified_all["external"] >= min_external) & classified_all["party"].isin(["REP", "DEM"])
     ]
-    scored = _score(funded, nominee_ids, nominees, primary_dates, as_of)
+    # One person filed twice (same last name and same money) counts once,
+    # keeping the filing that is the nominee's if either is
+    funded = funded.assign(
+        person=funded.apply(_person_key, axis=1),
+        is_nominee=funded["candidate_id"].isin(nominee_ids),
+    ).sort_values("is_nominee", ascending=False)
+    excluded = funded[funded["candidate_id"].isin(set(exclude_ids))]
+    left_out = set(zip(excluded["race_id"], excluded["party"], excluded["person"]))
+    funded = funded[[key not in left_out for key in zip(funded["race_id"], funded["party"], funded["person"])]]
+    funded = funded.drop_duplicates(["race_id", "party", "person"]).drop(columns=["person", "is_nominee"])
+    scored = _score(funded, nominee_ids, nominees, primary_dates, as_of, people=classified_all)
     return _rate_rows(scored[scored["outcome"] != "pending"], ["party"])
 
 

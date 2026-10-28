@@ -21,10 +21,10 @@ Two other Democratic-side groups were checked and dropped. The Working Families 
 
 ### The rules for counting
 
-- **Timing.** An endorsement counts only if it came on or before the candidate's primary. Primary and runoff dates come from the FEC's 2026 primary dates document, in [`data/manual/primary_dates.csv`](../data/manual/primary_dates.csv). One endorsement came after the primary, one came between the primary and the runoff, and one has no linked post to date it. All three are left out of the win rates.
-- **Winning** means becoming the November nominee, the same rule as the billionaire section. In California and Washington, every candidate who advances from the top-two primary counts as a win. Louisiana's House primaries were moved to November 3, so its 3 endorsements are pending.
+- **Timing.** An endorsement counts only if it came on or before the candidate's primary. Primary and runoff dates come from the FEC's 2026 primary dates document, in [`data/manual/primary_dates.csv`](../data/manual/primary_dates.csv). One endorsement came after the primary, one came between the primary and the runoff, and one has no linked post to date it. All three are left out of the win rates. The runoff one is Brandon Herrera in TX-23, endorsed after Trump's earlier pick there, incumbent Tony Gonzales, was forced into a runoff. Gonzales then left the runoff ballot, and his endorsement counts as a loss. Backing the winner afterward does not erase it.
+- **Winning** means becoming the November nominee, the same rule as the billionaire section. In California and Washington, every candidate who advances from the top-two primary counts as a win. A candidate whose FEC ID is not the nominee's still counts as the nominee when the names match and it is the same person filed twice, but not when it is a different person with the same last name (Mayra and Eric Flores in TX-34). Louisiana's House primaries were moved to November 3, so its 3 endorsements are pending.
 - **Never on the ballot.** 11 candidates Trump endorsed early, all of them sitting members, retired or left the race before their primary. Ballotpedia records them as not on the primary ballot. They did not lose a primary, so they are left out of the win rates rather than counted as losses.
-- **Two candidates in one primary.** If an endorser backs two people on the same ballot, one of them has to lose. That happened once: Trump endorsed Tony Gonzales in TX-23 and later endorsed Brandon Herrera for the runoff. Those 2 rows are left out.
+- **Two candidates in one primary.** If an endorser backs two people on the same ballot before the vote, one of them has to lose, so both would be left out. That did not happen in Trump's 2026 House list.
 - **Contested** means at least two candidates of the same party in the race each raised $10,000 or more from outside sources. Full primary ballots are not in the database, so this is a proxy. A hand check of 15 random races against Wikipedia's results agreed on 9 of 11 that could be judged. Both misses had a second name on the ballot who raised less than $10,000, so the proxy measures a funded contest, which is a stricter test than a contested ballot.
 
 As a check on the scoring, every outcome was compared with Ballotpedia's own result for that row. They agree on 227 of 227 decided endorsements.
@@ -35,38 +35,38 @@ As a check on the scoring, every outcome was compared with Ballotpedia's own res
 
 ![Endorsed candidates who won contested House primaries](figures/endorsements_win_rates.png)
 
-In contested primaries, Trump-endorsed candidates won 94% (76 of 81). By type of race:
+In contested primaries, Trump-endorsed candidates won 93% (76 of 82). By type of race:
 
 | Contested primary | Won |
 |---|---|
-| Incumbent | 95% (35 of 37) |
+| Incumbent | 92% (35 of 38) |
 | Open seat | 91% (21 of 23) |
 | Challenger | 95% (20 of 21) |
-| All contested | 94% (76 of 81) |
+| All contested | 93% (76 of 82) |
 
-The lines on the chart are 95% Wilson intervals. With 21 to 37 candidates per group, the intervals are wide and overlap, so the data do not show a difference between the three kinds of race.
+The lines on the chart are 95% Wilson intervals. With 21 to 38 candidates per group, the intervals are wide and overlap, so the data do not show a difference between the three kinds of race.
 
 "Challenger" is the FEC's label for a candidate running in a seat that already has an incumbent. Here it almost always means a Republican running in the primary for a seat a Democrat holds, not someone running against a Republican incumbent.
 
 Endorsed candidates in primaries with no second funded candidate won 100% (131 of 131). Those are reported but kept out of the headline, because an unopposed candidate wins whether or not anyone endorses them.
 
-Five endorsed candidates did not become the nominee: Cory Mills (FL-07) and Andy Ogles (TN-05), both incumbents; Catalina Lauf (FL-19) and Jackson Lahmeyer (OK-01) in open seats; and Amir Hassan (MI-08), a challenger.
+Six candidates in the headline count lost: Cory Mills (FL-07), Andy Ogles (TN-05), and Tony Gonzales (TX-23), all incumbents; Catalina Lauf (FL-19) and Jackson Lahmeyer (OK-01) in open seats; and Amir Hassan (MI-08), a challenger.
 
-### Against everyone in the same kind of race
+### Against candidates he did not endorse
 
-![Endorsed candidates against everyone in the same kind of race](figures/endorsements_baseline.png)
+![Endorsed candidates against funded candidates who were not endorsed](figures/endorsements_baseline.png)
 
-The baseline is every Republican in the same kind of contested primary who raised $10,000 or more. In open seats, 25% (41 of 165) of them became the nominee, against 91% (21 of 23) of Trump's endorsed candidates. Among challengers it was 28% (78 of 277) against 95% (20 of 21). For reference, the same rates for Democrats were 22% (53 of 237) and 25% (120 of 477).
+The baseline is every Republican in the same kind of contested primary who raised $10,000 or more and was not endorsed by Trump. A person with two FEC filings counts once. In open seats, 13% (18 of 139) of them became the nominee, against 91% (21 of 23) of Trump's endorsed candidates. Among challengers it was 22% (56 of 252) against 95% (20 of 21). For reference, the same rates for all funded Democrats were 23% (53 of 235) and 25% (118 of 474).
 
 The gap is large, but it is not an estimate of what an endorsement does. A contested open seat has several funded candidates and only one nominee, so the baseline rate is low by construction, and endorsers are choosing among those same candidates with knowledge of who is ahead.
 
-There is no incumbent baseline. The database cannot tell a member who lost a primary from one who retired or ran for Senate or governor. All three show up as an incumbent who did not become the nominee. Of the 41 contested Republican incumbents scored that way, 13 are on Trump's list, and Ballotpedia records only 2 of those as losing a primary. Many of the other 28 ran for statewide office or retired. A baseline built on these would mostly measure departures, not primary losses.
+There is no incumbent baseline. The database cannot tell a member who lost a primary from one who retired or ran for Senate or governor. All three show up as an incumbent who did not become the nominee. Of the 42 contested Republican incumbents scored that way, 14 are on Trump's list, and Ballotpedia records only 3 of those as primary losses (Mills, Ogles, and Gonzales). Many of the other 28 ran for statewide office or retired. A baseline built on these would mostly measure departures, not primary losses.
 
 ### Did endorsements go to the front-runners?
 
 ![Endorsed candidates' win rate, by whether they already led in money](figures/endorsements_favorites.png)
 
-In contested primaries, 88% of Trump's endorsed candidates were already the top fundraiser of their party in the race. Those candidates won 96% (68 of 71) of the time. The few who were not the money leader won 80% (8 of 10). Ten candidates is too few to say much, but the pattern fits the selection problem: most endorsements went to candidates who already looked like the favorite by the standard the rest of this project uses.
+In contested primaries, 88% of Trump's endorsed candidates were already the top fundraiser of their party in the race. Those candidates won 94% (68 of 72) of the time. The few who were not the money leader won 80% (8 of 10). Ten candidates is too few to say much, but the pattern fits the selection problem: most endorsements went to candidates who already looked like the favorite by the standard the rest of this project uses.
 
 ## Method and caveats
 
