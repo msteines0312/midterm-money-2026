@@ -6,7 +6,7 @@
 
 How often did candidates endorsed before their 2026 House primary go on to win it? The plan was to split that rate by incumbents, open seats, and challengers, and by whether the primary was contested. The hard part is selection. Endorsers tend to pick candidates who were already likely to win, so a high win rate on its own says little about what an endorsement did. This section reports the rates next to two checks on that problem. It does not claim to measure an endorsement's effect.
 
-Three endorsers are covered: Donald Trump and Club for Growth PAC on the Republican side, and Justice Democrats on the Democratic side. The Republican side is much larger, mostly because of Trump.
+Three endorsers are covered: Donald Trump and Club for Growth PAC on the Republican side, and Justice Democrats on the Democratic side. The Republican side is much larger, mostly because of Trump. Because so few groups publish a datable list, the section also treats super PAC primary spending as a kind of endorsement, which covers 261 super PACs from both parties.
 
 All figures come from `scripts/build_endorsements_report.py`, which reads the database and the research files and writes the charts and [`endorsements_numbers.json`](figures/endorsements_numbers.json). Every number below can be checked against that file.
 
@@ -79,9 +79,54 @@ In contested primaries, most endorsed candidates were already the top fundraiser
 
 Justice Democrats backed the fewest front-runners and had the lowest contested win rate. 15 of its 19 contested endorsements were challengers to sitting Democrats or newcomers in open seats, which is a harder set of races than Trump's, where incumbents make up nearly half. That does not show its endorsement mattered less.
 
+### Super PAC spending as a kind of endorsement
+
+Few groups publish a datable endorsement list, but many back primary candidates with money. A super PAC that spends heavily to support a candidate in their primary is placing a public bet on them, much like an endorsement. That spending is filed with the FEC for a specific election, so unlike an undated list it can never come after the primary it was meant for.
+
+Here, a super PAC backs a candidate when it spent $10,000 or more in independent expenditures supporting them in their primary or runoff, the same floor as the billionaire section. Spending against a candidate is not counted as backing their rivals. As of October 24, 2026, 261 super PACs backed 324 House candidates this way, in 624 PAC and candidate pairs. A candidate backed by several PACs counts once in the totals below, and a PAC that backed two candidates in one primary is left out for that race, as with the endorsers. Seven filings named no candidate ID and four named candidates outside this project's FEC data, so those could not be scored.
+
+![Super PAC-backed candidates who became the nominee, contested primaries](figures/endorsements_super_pacs.png)
+
+In contested primaries, 58% (67 of 115) of super PAC-backed Republicans and 55% (92 of 168) of super PAC-backed Democrats became the nominee. That is well below the three endorsers. Part of the difference is the kind of race: 59 of the 283 contested super PAC-backed candidates were incumbents, against 38 of Trump's 82.
+
+Compared with funded candidates that no super PAC backed in the same kind of race:
+
+| Contested primary | Super PAC-backed | Not backed |
+|---|---|---|
+| Republicans, open seat | 52% (30 of 58) | 10% (11 of 106) |
+| Republicans, challenger | 54% (19 of 35) | 24% (57 of 238) |
+| Democrats, open seat | 43% (31 of 72) | 14% (23 of 167) |
+| Democrats, challenger | 49% (29 of 59) | 22% (92 of 421) |
+
+The money-leader check is sharper here than for any endorser. Half of super PAC-backed contested candidates (50%) were already their party's top fundraiser in the race. Those won 91% of the time. The other half won 21% of the time, close to the rate for candidates with no super PAC backing at all. Super PAC money went mostly to candidates who were winning the fundraising race on their own, and when it backed someone who was not, it usually lost.
+
+The super PACs that backed the most decided candidates in contested primaries:
+
+| Super PAC | Backed candidates who won |
+|---|---|
+| Defend American Jobs | 19 of 19 |
+| Protect Progress | 18 of 19 |
+| Conservatives for American Excellence | 16 of 17 |
+| Project 218 | 8 of 13 |
+| Think Big | 12 of 13 |
+| Working Families Party PAC | 8 of 12 |
+| Pro-Choice Majority Action | 5 of 11 |
+| American Mission | 10 of 10 |
+| American Priorities (AP) | 9 of 10 |
+| Justice Democrats PAC | 8 of 10 |
+| GOPAC Election Fund | 5 of 9 |
+| SF Solidarity PAC | 3 of 9 |
+| VoteVets | 6 of 9 |
+| Club for Growth Action | 6 of 8 |
+| Freedom Caucus Fund | 6 of 8 |
+| WFW Action Fund | 7 of 8 |
+
+Defend American Jobs and Protect Progress belong to the Fairshake crypto network, and Think Big and American Mission to the Leading the Future AI industry network, as sourced in [`data/manual/pac_industries.csv`](../data/manual/pac_industries.csv). Their spending is covered from the money side in [Tech money in the 2026 House races](tech-money.md). Justice Democrats PAC and Club for Growth Action share their names with two of the endorsers above.
+
 ## Method and caveats
 
 - **Endorsers choose whom to back.** Nothing here separates the effect of an endorsement from an endorser's choice of who to endorse. Trump endorsed most Republican incumbents seeking reelection, often in batches long before any primary, and incumbents rarely lose primaries. The rates describe how each endorser's picks did. They do not say those picks would have done worse without the endorsement.
+- **Super PAC spending is not the same as an endorsement.** A super PAC can spend late, once its candidate is already ahead, and the money-leader check uses each candidate's own fundraising through October, after the primaries. Both lean toward making backed candidates look stronger than they were when the money was spent. Super PAC rates also count a withdrawal as not becoming the nominee, because the spending data cannot tell the two apart.
 - **Uneven sizes.** Trump accounts for 82 of the 111 contested endorsements. Club for Growth's 10 and Justice Democrats' 19 are too few for their rates to be compared with Trump's, or with each other, with any confidence.
 - **Archived dates.** The two organizations' dates come from a few archived copies, so a candidate endorsed shortly before their primary can look like they were first listed after it and be left out. Justice Democrats' earliest copy is from March 2, 2026, so every candidate already on the list then is dated March 2, even if the endorsement came in 2025.
 - **The contested proxy** agreed with a hand check on 9 of 11 races, and it misses primaries where the second candidate raised little money. Some primaries counted as uncontested here had more than one name on the ballot.

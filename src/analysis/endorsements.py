@@ -14,7 +14,7 @@ import math
 
 import pandas as pd
 
-from src.analysis.billionaires import primary_outcomes
+from src.analysis.billionaires import PRIMARY_SPENDING, primary_outcomes
 from src.config import PRIMARY_DATES_CSV
 from src.manual import _read_stripped, _split_list
 from src.predict.simple import _fec_last_name_words
@@ -448,3 +448,88 @@ def favorite_check(outcomes):
         "win_rate_if_top": rate(decided[top]),
         "win_rate_if_not_top": rate(decided[~top]),
     }
+
+
+# Super PAC primary spending, treated as backing
+
+def super_pac_backing(conn, pulled_at, min_spend=10_000):
+    """List the House primary candidates each super PAC spent to support.
+
+    A super PAC spending heavily for a candidate in their primary is a
+    public bet on that candidate, much like an endorsement, and it is filed
+    for a specific election, so it is never after the fact. This uses the
+    same query and $10,000 floor as the billionaire section. Spending
+    against a candidate is not counted as backing their rivals.
+
+    Parameters
+    ----------
+    conn : sqlite3.Connection
+        Database with `outside_spending` and `committees`.
+    pulled_at : str
+        Date of the outside spending snapshot.
+    min_spend : float, optional
+        Smallest primary and runoff support for one candidate that counts.
+
+    Returns
+    -------
+    tuple of (pandas.DataFrame, int)
+        One row per PAC and candidate with committee_id, pac (the
+        committee's name), candidate_id, and total, and the number of
+        qualifying rows left out because the filing named no candidate ID.
+    """
+    spending = pd.read_sql_query(PRIMARY_SPENDING, conn, params={"pulled_at": pulled_at, "min_spend": min_spend})
+    support = spending[spending["support_oppose"] == "S"]
+    has_id = support["candidate_id"].notna() & (support["candidate_id"] != "")
+    names = dict(conn.execute("SELECT committee_id, name FROM committees"))
+    backing = support[has_id].assign(pac=lambda frame: frame["committee_id"].map(names))
+    backing = backing[["committee_id", "pac", "candidate_id", "total"]].sort_values(["committee_id", "candidate_id"])
+    return backing.reset_index(drop=True), int((~has_id).sum())
+
+
+def backing_outcomes(backing, classified_all, primary_dates, nominee_ids, nominees, as_of):
+    """Score super PAC backing the same way as endorsements.
+
+    Parameters
+    ----------
+    backing : pandas.DataFrame
+        Output of `super_pac_backing`.
+    classified_all : pandas.DataFrame
+        Output of `classify_primary` for every candidate.
+    primary_dates, nominee_ids, nominees, as_of
+        As in `endorsement_outcomes`.
+
+    Returns
+    -------
+    pandas.DataFrame
+        The `endorsement_outcomes` columns, with the PAC's name as the
+        endorser, timing always "before" (the money was spent for the
+        primary), and hedged when a PAC backed two candidates in one
+        party's primary.
+    """
+    frame = backing.assign(endorser=backing["pac"].fillna(backing["committee_id"]))
+    frame = frame[["endorser", "committee_id", "candidate_id", "total"]].merge(classified_all, on="candidate_id")
+    frame["timing"] = "before"
+    backed = frame.groupby(["committee_id", "race_id", "party"])["candidate_id"].transform("nunique")
+    frame["hedged"] = backed > 1
+    frame = _score(frame, nominee_ids, nominees, primary_dates, as_of, people=classified_all)
+    columns = ["endorser", "committee_id", "candidate_id", "race_id", "name", "party", "status", "contested",
+               "top_fundraiser", "timing", "hedged", "outcome", "total"]
+    return frame[columns].reset_index(drop=True)
+
+
+def backing_rates_by_party(outcomes):
+    """Win rates of super PAC-backed candidates, pooled across PACs, by party.
+
+    A candidate backed by several PACs counts once. Only headline rows
+    count (see `_headline`), so a candidate a PAC backed alongside a rival
+    counts only if some other PAC backed them alone. Minnesota's DFL counts
+    as DEM, and candidates of other parties are left out.
+
+    Returns
+    -------
+    pandas.DataFrame
+        party, stratum, won, lost, review, rate, low, high.
+    """
+    headline = _headline(outcomes).drop_duplicates("candidate_id")
+    headline = headline.assign(party=headline["party"].replace("DFL", "DEM"))
+    return _rate_rows(headline[headline["party"].isin(["REP", "DEM"])], ["party"])
