@@ -1,7 +1,21 @@
 # Midterm Money 2026
 An analysis of campaign finance and endorsements in the 2026 U.S. House midterms. It asks three questions: where industry super PAC money is going, whether endorsements predict primary wins, and whether a fundraising advantage predicts winning once incumbency and district partisanship are accounted for.
 
-> **Status:** In progress. The data pipeline is built, and the House version of section 1 is written: [Tech money in the 2026 House races](reports/tech-money.md). The billionaire money section is written too: [Billionaire money in the 2026 House races](reports/billionaire-money.md). The pre-election version of section 3 is also written: [Money and winning in the 2026 House races](reports/money-and-winning.md). Its scoring against results will be added after November 3, 2026. The endorsements section is written too, covering Donald Trump, Club for Growth PAC, Justice Democrats, and super PAC primary spending: [Endorsements in the 2026 House primaries](reports/endorsements.md). Two sets of pre-election House predictions are committed and tagged in [reports/predictions](reports/predictions/README.md): simple predictions (money leader next to Cook rating, tag `pre-election-simple`) and a logistic regression model trained on the 2022 and 2024 generals (tag `pre-election-model`).
+> **Status:** All four pre-election sections are written. Next is scoring the frozen predictions against the November 3, 2026 results.
+>
+> - [Tech money in the 2026 House races](reports/tech-money.md)
+> - [Billionaire money in the 2026 House races](reports/billionaire-money.md)
+> - [Endorsements in the 2026 House primaries](reports/endorsements.md), covering Donald Trump, Club for Growth PAC, Justice Democrats, and super PAC primary spending
+> - [Money and winning in the 2026 House races](reports/money-and-winning.md), pre-election version
+>
+> Two sets of pre-election House predictions are committed and tagged in [reports/predictions](reports/predictions/README.md): simple predictions (money leader next to Cook rating, tag `pre-election-simple`) and a logistic regression model trained on the 2022 and 2024 generals (tag `pre-election-model`).
+
+## Key Findings
+
+- Three crypto and AI super PAC networks spent $102.99M on 2026 House races as of October 23. Each network's opposition spending went against one party only.
+- 68 billionaire households gave $1.17B to 2026 super PACs, and an estimated 12% of it reached House races.
+- Endorsed candidates mostly won, but mostly because endorsers pick favorites. Super PAC-backed candidates who already led their party in fundraising won 91% of contested primaries. Those who did not won 21%, about the same as candidates with no super PAC backing at all.
+- The money leader and Cook's rating both named a favorite in 389 races and agreed in 369. The 20 disagreements are the races to watch on November 3.
 
 ## Questions
 
@@ -132,7 +146,14 @@ The tagged prediction files (`pre-election-simple` at commit `c18c0db`, `pre-ele
 - Ratings parser that combines two pinned Wikipedia pages and fails loudly if the pages disagree
 
 ## What I Learned
-_Coming soon._
+
+- **Matching the source is not the same as being right.** Early on, 61 of the first 100 candidates showed less than $1 in cash on hand. The numbers matched the FEC exactly, but they didn't look right to me, so I pushed on it. The problem was the population (paper candidates and campaigns that had ended) and the measure ("receipts" counts a candidate's own money as fundraising). I switched to the FEC's bulk summary file and built a measure of money raised from others. I now check who is in the data and what a field actually measures before trusting a total.
+- **APIs can drop data without telling you.** The FEC's by-candidate spending endpoint silently left out filings with no candidate ID, so some committees came out millions short with no error. Rebuilding from the bulk file and checking each committee's sum against its own reported total is what caught it.
+- **I reframed the endorsements question around money.** The original plan tracked traditional endorsements. I changed it to "endorsement by money," which became the billionaire section. When the endorsements section came back covering only three endorsers, I questioned why super PACs weren't in it. Treating super PAC primary spending as a kind of endorsement took it from 3 groups to 261 and produced the section's clearest result.
+- **A high win rate is mostly a selection effect.** Trump-endorsed candidates won 93% of contested primaries, which sounds like influence until you check who was picked. Comparing against unendorsed candidates in the same kind of race and splitting by who already led in money showed the endorsements mostly went to favorites. I also learned that a baseline can be wrong in a quiet way: incumbents who retired or ran for another office look like primary losses in the data, so I left that comparison out instead of reporting a misleading number.
+- **I locked my predictions in before the votes were counted.** I chose to commit and tag the simple predictions first (October 24) so their timestamp would be safe, with the model following on October 26, and to train the model only on money each campaign had reported before its own past election. That way the November 3 scoring can't be adjusted after the fact.
+- **I made the work nonpartisan by rule.** I didn't want readers to be able to guess my politics, so the same rules apply to both parties: every billionaire on the Forbes list counts, whatever their party, the same 50% rule decides which super PACs count as billionaire-backed, and spending is split into support and opposition for each party instead of one net number.
+- **Getting data the right way takes judgment.** Ballotpedia blocks scrapers, so I saved its page by hand rather than working around the block. When the Internet Archive throttled downloads, the plan called for me to save 27 archived pages by hand. I pushed back, and working out which pages actually decided a date cut it to 5. Before merging, I also spot-checked the endorsement dates decoded from Truth Social post IDs against the posts themselves.
 
 ## Related Work
 - [midterm-polling-messaging](https://github.com/msteines0312/midterm-polling-messaging): 2018 and 2022 midterm polling error and campaign ad messaging analysis.
